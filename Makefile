@@ -275,6 +275,13 @@ build: ## Build the server, CLI, and migrate binaries into server/bin
 	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.date=$(DATE)" -o bin/multica ./cmd/multica
 	cd server && go build -o bin/migrate ./cmd/migrate
 
+release: ## Cross-compile multi-platform binaries and build the frontend into dist/release
+	@bash scripts/build.sh build
+
+run: ## Compile native binaries and start backend + frontend for the current checkout
+	$(REQUIRE_ENV)
+	@bash scripts/build.sh start
+
 test: ## Run Go tests after ensuring the target DB exists and migrations are applied
 	$(REQUIRE_ENV)
 	@bash scripts/ensure-postgres.sh "$(ENV_FILE)"
