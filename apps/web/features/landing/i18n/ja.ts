@@ -270,6 +270,20 @@ export function createJaDict(allowSignup: boolean): LandingDict {
       },
       entries: [
         {
+          version: "1.0.0",
+          date: "2026-08-06",
+          title: "Multica 1.0 — 最初の安定版",
+          changes: [],
+          features: [
+            "Multica が 1.0 に到達：本番環境でも安心して使える安定版です。",
+            "API が安定 — 今日つくった連携は 1.x 系全体で動き続けます。",
+          ],
+          improvements: [
+            "CLI・サーバー・Web・デスクトップ・モバイルのバージョンを統一しました。",
+          ],
+          fixes: [],
+        },
+        {
           version: "0.4.22",
           date: "2026-08-10",
           title: "保存できる Issue ビュー、Oh-My-Pi ランタイム、WeCom の音声メモ",

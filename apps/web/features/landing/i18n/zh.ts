@@ -294,6 +294,20 @@ export function createZhDict(allowSignup: boolean): LandingDict {
     },
     entries: [
       {
+        version: "1.0.0",
+        date: "2026-08-06",
+        title: "Multica 1.0 —— 首个稳定版本",
+        changes: [],
+        features: [
+          "Multica 迎来 1.0：稳定、可用于生产的正式版本。",
+          "API 趋于稳定 —— 今天做的集成在整个 1.x 系列都能继续可用。",
+        ],
+        improvements: [
+          "CLI、服务端、Web、桌面端和移动端的版本号现已统一。",
+        ],
+        fixes: [],
+      },
+      {
         version: "0.4.22",
         date: "2026-08-10",
         title: "可保存的 Issue 视图、Oh-My-Pi 运行时、企业微信语音留言",

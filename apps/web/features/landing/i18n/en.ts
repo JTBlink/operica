@@ -294,6 +294,20 @@ export function createEnDict(allowSignup: boolean): LandingDict {
     },
     entries: [
       {
+        version: "1.0.0",
+        date: "2026-08-06",
+        title: "Multica 1.0 — the first stable release",
+        changes: [],
+        features: [
+          "Multica reaches 1.0: a stable, production-ready release you can rely on.",
+          "Stable API surface — integrations built today keep working across the 1.x line.",
+        ],
+        improvements: [
+          "Versioning is now unified across the CLI, server, web, desktop, and mobile clients.",
+        ],
+        fixes: [],
+      },
+      {
         version: "0.4.22",
         date: "2026-08-10",
         title: "Saved Issue views, the Oh-My-Pi runtime, and WeCom voice notes",

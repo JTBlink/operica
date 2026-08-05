@@ -269,6 +269,20 @@ export function createKoDict(allowSignup: boolean): LandingDict {
       },
       entries: [
         {
+          version: "1.0.0",
+          date: "2026-08-06",
+          title: "Multica 1.0 — 첫 번째 안정 버전",
+          changes: [],
+          features: [
+            "Multica가 1.0에 도달했습니다: 프로덕션에서 믿고 쓸 수 있는 안정 버전입니다.",
+            "API가 안정화되어 — 오늘 만든 연동이 1.x 전반에서 계속 동작합니다.",
+          ],
+          improvements: [
+            "CLI, 서버, 웹, 데스크톱, 모바일의 버전을 하나로 통일했습니다.",
+          ],
+          fixes: [],
+        },
+        {
           version: "0.4.22",
           date: "2026-08-10",
           title: "저장하는 Issue 뷰, Oh-My-Pi 런타임, WeCom 음성 메모",
