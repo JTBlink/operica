@@ -1,14 +1,14 @@
 "use client";
 
-import type { TaskAttribution } from "@multica/core/types";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
+import type { TaskAttribution } from "@opercia/core/types";
+import { Badge } from "@opercia/ui/components/ui/badge";
+import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { cn } from "@multica/ui/lib/utils";
+} from "@opercia/ui/components/ui/tooltip";
+import { cn } from "@opercia/ui/lib/utils";
 import { useT } from "../../i18n";
 
 /** First + last initial, for the avatar fallback when there's no picture. */

@@ -55,7 +55,7 @@ export const useTranscriptViewStore = create<TranscriptViewState>()(
       setDensity: (density) => set({ density }),
     }),
     {
-      name: "multica_transcript_view",
+      name: "opercia_transcript_view",
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({
         sortDirection: state.sortDirection,

@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@opercia/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enOnboarding from "../../locales/en/onboarding.json";
 import enWorkspace from "../../locales/en/workspace.json";
-import type { Workspace } from "@multica/core/types";
+import type { Workspace } from "@opercia/core/types";
 
 const TEST_RESOURCES = {
   en: {
@@ -31,16 +31,16 @@ vi.mock("../../auth", () => ({
   useLogout: () => mockLogout,
 }));
 
-vi.mock("@multica/core/config", () => ({
+vi.mock("@opercia/core/config", () => ({
   useConfigStore: (selector: (state: MockConfigState) => unknown) =>
     mockUseConfigStore(selector),
 }));
 
-vi.mock("@multica/core/workspace/mutations", () => ({
+vi.mock("@opercia/core/workspace/mutations", () => ({
   useCreateWorkspace: () => ({ mutate: vi.fn(), isPending: false }),
 }));
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@opercia/core/api", () => ({
   api: { getBaseUrl: () => "http://127.0.0.1:8080" },
 }));
 
@@ -145,21 +145,21 @@ describe("StepWorkspace — DISABLE_WORKSPACE_CREATION gate", () => {
 });
 
 // #4263: the workspace URL prefix must reflect the deployment's own host on
-// self-hosted instances instead of the hardcoded `multica.ai`.
+// self-hosted instances instead of the hardcoded `opercia.ai`.
 describe("StepWorkspace — workspace URL prefix", () => {
   it("shows the brand host when no app URL is configured", () => {
     renderStep({ existing: null, disabled: false });
-    expect(screen.getByText("multica.ai/")).toBeInTheDocument();
+    expect(screen.getByText("opercia.ai/")).toBeInTheDocument();
   });
 
   it("shows the deployment host for self-hosted instances", () => {
     renderStep({
       existing: null,
       disabled: false,
-      daemonAppUrl: "https://multica.example.com",
+      daemonAppUrl: "https://opercia.example.com",
     });
-    expect(screen.getByText("multica.example.com/")).toBeInTheDocument();
-    expect(screen.queryByText("multica.ai/")).not.toBeInTheDocument();
+    expect(screen.getByText("opercia.example.com/")).toBeInTheDocument();
+    expect(screen.queryByText("opercia.ai/")).not.toBeInTheDocument();
   });
 });
 

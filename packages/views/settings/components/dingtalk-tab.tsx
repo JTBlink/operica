@@ -4,17 +4,17 @@ import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChevronRight, ExternalLink, Trash2 } from "lucide-react";
-import { cn } from "@multica/ui/lib/utils";
-import { Button } from "@multica/ui/components/ui/button";
-import { Card, CardContent } from "@multica/ui/components/ui/card";
+import { cn } from "@opercia/ui/lib/utils";
+import { Button } from "@opercia/ui/components/ui/button";
+import { Card, CardContent } from "@opercia/ui/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
+} from "@opercia/ui/components/ui/dialog";
+import { Input } from "@opercia/ui/components/ui/input";
+import { Label } from "@opercia/ui/components/ui/label";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,15 +24,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberListOptions } from "@multica/core/workspace/queries";
+} from "@opercia/ui/components/ui/alert-dialog";
+import { useAuthStore } from "@opercia/core/auth";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { memberListOptions } from "@opercia/core/workspace/queries";
 import { DingTalkMark } from "./dingtalk-mark";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { dingtalkInstallationsOptions, dingtalkKeys } from "@multica/core/dingtalk";
-import { api } from "@multica/core/api";
-import type { DingTalkInstallation } from "@multica/core/types";
+import { useActorName } from "@opercia/core/workspace/hooks";
+import { dingtalkInstallationsOptions, dingtalkKeys } from "@opercia/core/dingtalk";
+import { api } from "@opercia/core/api";
+import type { DingTalkInstallation } from "@opercia/core/types";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { openExternal } from "../../platform";
 import { useT } from "../../i18n";
@@ -52,7 +52,7 @@ function formatInstalledAt(value: string): string {
 // enforces it; the UI hides the button for non-admins to match).
 //
 // Adding a new installation flows through the Agent detail page: the install
-// path is per-agent (each Multica agent gets exactly one robot — the
+// path is per-agent (each Opercia agent gets exactly one robot — the
 // (workspace_id, agent_id, channel_type) UNIQUE in channel_installation), so
 // asking the user to pick an agent here would re-create that page's picker.
 export function DingTalkTab() {
@@ -107,7 +107,7 @@ export function DingTalkTab() {
             <p className="text-caption text-muted-foreground">
               {t(($) => $.dingtalk.not_enabled_description_prefix)}{" "}
               <code className="rounded bg-muted px-1 py-0.5 text-micro">
-                MULTICA_DINGTALK_SECRET_KEY
+                OPERCIA_DINGTALK_SECRET_KEY
               </code>{" "}
               {t(($) => $.dingtalk.not_enabled_description_suffix)}{" "}
               {t(($) => $.dingtalk.not_enabled_self_host_hint)}
@@ -243,7 +243,7 @@ function dingtalkDocsUrl(lang: string | undefined): string {
       : lang?.startsWith("ko")
         ? "/ko"
         : "";
-  return `https://multica.ai/docs${prefix}/dingtalk-bot-integration`;
+  return `https://opercia.ai/docs${prefix}/dingtalk-bot-integration`;
 }
 
 // DingTalkAgentBindButton is the per-agent CTA exposed from the agent detail

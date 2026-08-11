@@ -19,8 +19,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/metrics"
+	"github.com/opercia-ai/opercia/server/internal/analytics"
+	"github.com/opercia-ai/opercia/server/internal/metrics"
 )
 
 // frontendOnlyEvents are declared in events.go but emitted from the frontend,

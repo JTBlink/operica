@@ -3,14 +3,14 @@
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { Agent, SkillSummary } from "@multica/core/types";
-import { api } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
+import type { Agent, SkillSummary } from "@opercia/core/types";
+import { api } from "@opercia/core/api";
+import { useWorkspaceId } from "@opercia/core/hooks";
 import {
   skillListOptions,
   workspaceKeys,
-} from "@multica/core/workspace/queries";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@opercia/core/workspace/queries";
+import { Button } from "@opercia/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -18,7 +18,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@opercia/ui/components/ui/dialog";
 import { useT } from "../../i18n";
 import { SkillPickerList } from "./skill-picker-list";
 

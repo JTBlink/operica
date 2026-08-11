@@ -16,8 +16,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
 )
 
 // Frame commands the client sends.
@@ -525,7 +525,7 @@ func stripLeadingMentions(s, botName string) string {
 			return trimmed
 		}
 		// Our own name first, matched whole. A display name may contain
-		// spaces — "Multica Bot" is the obvious one — and cutting at the
+		// spaces — "Opercia Bot" is the obvious one — and cutting at the
 		// first space would leave "Bot /new 重新分析", which is not a command,
 		// so every slash command in that group would still be dropped.
 		//

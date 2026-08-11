@@ -1,50 +1,50 @@
 ---
 title: Using the CLI
-description: Install and log in to the Multica CLI, and manage workspaces, issues, agents, and runtimes from the terminal.
+description: Install and log in to the Opercia CLI, and manage workspaces, issues, agents, and runtimes from the terminal.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-The Multica CLI both connects local runtimes and manages workspaces, issues, agents, and automations from the terminal. This page covers the common paths; the flags your installed version supports are always defined by each command's own `--help`.
+The Opercia CLI both connects local runtimes and manages workspaces, issues, agents, and automations from the terminal. This page covers the common paths; the flags your installed version supports are always defined by each command's own `--help`.
 
 ## Installation
 
 **macOS / Linux**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash
 ```
 
 With Homebrew installed, you can also run:
 
 ```bash
-brew install multica-ai/tap/multica
+brew install opercia-ai/tap/opercia
 ```
 
 **Windows PowerShell**
 
 ```powershell
-irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.ps1 | iex
 ```
 
 Confirm the install:
 
 ```bash
-multica version
+opercia version
 ```
 
 ## First connection
 
-Connect to Multica Cloud:
+Connect to Opercia Cloud:
 
 ```bash
-multica setup
+opercia setup
 ```
 
 Connect to a self-hosted instance:
 
 ```bash
-multica setup self-host \
+opercia setup self-host \
   --server-url https://api.example.com \
   --app-url https://app.example.com
 ```
@@ -52,14 +52,14 @@ multica setup self-host \
 `setup` saves the server address, opens a browser to complete sign-in, and starts the daemon. When it finishes, check:
 
 ```bash
-multica auth status
-multica daemon status
+opercia auth status
+opercia daemon status
 ```
 
-If you only need to sign in again without overwriting other configuration, run `multica login`. On a machine without a browser, create a personal access token in the web settings first, then enter it with:
+If you only need to sign in again without overwriting other configuration, run `opercia login`. On a machine without a browser, create a personal access token in the web settings first, then enter it with:
 
 ```bash
-multica login --token
+opercia login --token
 ```
 
 The command prompts you to paste the token in the terminal, keeping the full value out of shell history.
@@ -69,72 +69,72 @@ The command prompts you to paste the token in the terminal, keeping the full val
 List workspaces and switch the default:
 
 ```bash
-multica workspace list
-multica workspace switch <slug>
+opercia workspace list
+opercia workspace switch <slug>
 ```
 
-Subsequent commands use this workspace. A single command can override it with `--workspace-id`, or you can set `MULTICA_WORKSPACE_ID`.
+Subsequent commands use this workspace. A single command can override it with `--workspace-id`, or you can set `OPERCIA_WORKSPACE_ID`.
 
 Invite members:
 
 ```bash
-multica workspace member invite teammate@example.com
-multica workspace member invite admin@example.com --role admin
+opercia workspace member invite teammate@example.com
+opercia workspace member invite admin@example.com --role admin
 ```
 
 ## Common issue operations
 
 ```bash
 # View and search
-multica issue list
-multica issue get MUL-123
-multica issue search "login failure"
+opercia issue list
+opercia issue get MUL-123
+opercia issue search "login failure"
 
 # Create and update
-multica issue create --title "Fix login failure"
-multica issue status MUL-123 in_progress
-multica issue assign MUL-123 --to "Backend Agent"
+opercia issue create --title "Fix login failure"
+opercia issue status MUL-123 in_progress
+opercia issue assign MUL-123 --to "Backend Agent"
 
 # Comments and runs
-multica issue comment list MUL-123
-multica issue comment add MUL-123 --content "Check the regression tests first"
-multica issue runs MUL-123
+opercia issue comment list MUL-123
+opercia issue comment add MUL-123 --content "Check the regression tests first"
+opercia issue runs MUL-123
 ```
 
 Read long descriptions or comments from stdin to avoid dealing with newlines and quoting:
 
 ```bash
-multica issue create --title "Upgrade notes" --description-stdin < notes.md
-multica issue comment add MUL-123 --content-stdin < review.md
+opercia issue create --title "Upgrade notes" --description-stdin < notes.md
+opercia issue comment add MUL-123 --content-stdin < review.md
 ```
 
 View the messages of a single run, or stop a task:
 
 ```bash
-multica issue run-messages <task-id> --issue MUL-123
-multica issue cancel-task <task-id> --issue MUL-123
+opercia issue run-messages <task-id> --issue MUL-123
+opercia issue cancel-task <task-id> --issue MUL-123
 ```
 
 ## Agents and skills
 
 ```bash
-multica agent list
-multica agent get <agent-id>
-multica agent create --help
-multica agent update <agent-id> --help
+opercia agent list
+opercia agent get <agent-id>
+opercia agent create --help
+opercia agent update <agent-id> --help
 
-multica skill list
-multica skill get <skill-id>
-multica skill import --url <skill-url>
-multica agent skills add <agent-id> --skill-ids <skill-id>
+opercia skill list
+opercia skill get <skill-id>
+opercia skill import --url <skill-url>
+opercia agent skills add <agent-id> --skill-ids <skill-id>
 ```
 
 When an import hits a skill with the same name, the default is to stop without modifying existing content. Pick by intent:
 
 ```bash
-multica skill import --url <skill-url> --on-conflict overwrite
-multica skill import --url <skill-url> --on-conflict rename
-multica skill import --url <skill-url> --on-conflict skip
+opercia skill import --url <skill-url> --on-conflict overwrite
+opercia skill import --url <skill-url> --on-conflict rename
+opercia skill import --url <skill-url> --on-conflict skip
 ```
 
 `overwrite` is only allowed for the skill's creator and preserves the original ID and agent bindings.
@@ -142,19 +142,19 @@ multica skill import --url <skill-url> --on-conflict skip
 ## Daemon and runtimes
 
 ```bash
-multica daemon start
-multica daemon stop
-multica daemon restart
-multica daemon status --output json
-multica daemon logs --follow
+opercia daemon start
+opercia daemon stop
+opercia daemon restart
+opercia daemon status --output json
+opercia daemon logs --follow
 
-multica runtime list
-multica runtime rename <runtime-id> "Office Mac"
-multica runtime usage <runtime-id>
-multica runtime activity <runtime-id>
+opercia runtime list
+opercia runtime rename <runtime-id> "Office Mac"
+opercia runtime usage <runtime-id>
+opercia runtime activity <runtime-id>
 ```
 
-Deleting a runtime that still has active agents bound to it is refused by default. `multica runtime delete <id> --cascade` unbinds those agents, preserves their configuration and history, and cancels their active tasks.
+Deleting a runtime that still has active agents bound to it is refused by default. `opercia runtime delete <id> --cascade` unbinds those agents, preserves their configuration and history, and cancels their active tasks.
 
 See [Daemon and runtimes](/daemon-runtimes) for how it works and for custom profiles.
 
@@ -176,7 +176,7 @@ See [Daemon and runtimes](/daemon-runtimes) for how it works and for custom prof
 | `config` | View or edit the current CLI profile's local configuration |
 | `update`, `version` | Update the CLI or print the version |
 
-`multica chat` reads **the external chat session an agent is currently handling**; it is mainly for agents in chat integrations, not a general command for browsing arbitrary workspace conversations.
+`opercia chat` reads **the external chat session an agent is currently handling**; it is mainly for agents in chat integrations, not a general command for browsing arbitrary workspace conversations.
 
 ## IDs and output formats
 
@@ -187,44 +187,44 @@ Issues use keys like `MUL-123` or full UUIDs; short UUID prefixes are not accept
 Many commands support structured output:
 
 ```bash
-multica issue list --output json
-multica agent list --output json
+opercia issue list --output json
+opercia agent list --output json
 ```
 
-Scripts should use JSON output rather than parsing the terminal-oriented tables. The output formats and pagination flags each command supports are defined by `multica <command> --help`.
+Scripts should use JSON output rather than parsing the terminal-oriented tables. The output formats and pagination flags each command supports are defined by `opercia <command> --help`.
 
 ## Profiles and configuration
 
-The default configuration lives in `~/.multica/config.json`. Use `--profile <name>` to isolate a separate set of server address, token, default workspace, and daemon state:
+The default configuration lives in `~/.opercia/config.json`. Use `--profile <name>` to isolate a separate set of server address, token, default workspace, and daemon state:
 
 ```bash
-multica setup self-host --profile staging \
+opercia setup self-host --profile staging \
   --server-url https://api.staging.example.com \
   --app-url https://app.staging.example.com
 
-multica issue list --profile staging
+opercia issue list --profile staging
 ```
 
-Named profiles live in `~/.multica/profiles/<name>/config.json`. Inspect the current values:
+Named profiles live in `~/.opercia/profiles/<name>/config.json`. Inspect the current values:
 
 ```bash
-multica config show
-multica config show --profile staging
+opercia config show
+opercia config show --profile staging
 ```
 
-When the CLI runs inside a daemon-managed agent task, it does not load or modify these human-owned profile files. Multica API commands authenticate with the task-scoped credential injected by the daemon. `config show` and `config set` use private task-local state; human/local commands such as `login`, `logout`, `setup`, `workspace switch`, local runtime profile path changes, `daemon start` / `stop` / `restart`, `daemon logs`, and `daemon probe-runtimes` are unavailable. `auth status` does not print token material in this context.
+When the CLI runs inside a daemon-managed agent task, it does not load or modify these human-owned profile files. Opercia API commands authenticate with the task-scoped credential injected by the daemon. `config show` and `config set` use private task-local state; human/local commands such as `login`, `logout`, `setup`, `workspace switch`, local runtime profile path changes, `daemon start` / `stop` / `restart`, `daemon logs`, and `daemon probe-runtimes` are unavailable. `auth status` does not print token material in this context.
 
 `daemon status` and `daemon disk-usage` stay available so an agent can inspect the runtime hosting it, scoped to that runtime: `status` probes the health port the daemon injected, and `disk-usage` scans the workspaces root the daemon injected. Neither accepts `--profile`, `disk-usage` also rejects `--all-profiles` and `--workspaces-root`, and its STATUS column is blank because resolving it would require the human's stored token. Use `du` and `df` for anything outside that scope.
 
-This protects implicit Multica CLI profile resolution while preserving the normal `HOME` and XDG variables used by other provider tools. It is not an OS filesystem boundary: processes running as the same system user may still open an explicitly known path. Use a dedicated user, container, VM, or equivalent isolation when that stronger guarantee is required.
+This protects implicit Opercia CLI profile resolution while preserving the normal `HOME` and XDG variables used by other provider tools. It is not an OS filesystem boundary: processes running as the same system user may still open an explicitly known path. Use a dedicated user, container, VM, or equivalent isolation when that stronger guarantee is required.
 
 <Callout type="warning">
-CLI configuration files contain tokens that can access Multica as you. Don't commit them to a repository, upload them to logs, or share them with others.
+CLI configuration files contain tokens that can access Opercia as you. Don't commit them to a repository, upload them to logs, or share them with others.
 </Callout>
 
 ## Command reference
 
-The tables below cover every current top-level command, grouped the way the CLI itself groups them. All commands accept the global flags `--server-url`, `--workspace-id`, `--profile`, and `--debug`. `--output` is registered per command, and the default format varies: `list` commands default to a table, while `get` and `create` commands mostly default to JSON. Full flags are defined by `multica <command> --help`.
+The tables below cover every current top-level command, grouped the way the CLI itself groups them. All commands accept the global flags `--server-url`, `--workspace-id`, `--profile`, and `--debug`. `--output` is registered per command, and the default format varies: `list` commands default to a table, while `get` and `create` commands mostly default to JSON. Full flags are defined by `opercia <command> --help`.
 
 ### Core
 
@@ -281,7 +281,7 @@ The tables below cover every current top-level command, grouped the way the CLI 
 
 | Command | Subcommand | Purpose | Key flags |
 | --- | --- | --- | --- |
-| `daemon` | `start` | Start the local daemon | `--foreground`, `--device-name`, `--runtime-name`, `--poll-interval`, `--heartbeat-interval`, `--agent-timeout` (`0` means no limit), `--max-concurrent-tasks`, `--no-auto-update`; each has a matching `MULTICA_*` environment variable |
+| `daemon` | `start` | Start the local daemon | `--foreground`, `--device-name`, `--runtime-name`, `--poll-interval`, `--heartbeat-interval`, `--agent-timeout` (`0` means no limit), `--max-concurrent-tasks`, `--no-auto-update`; each has a matching `OPERCIA_*` environment variable |
 | | `stop` / `status` / `restart` | Stop, check status, restart (`restart` takes the same flags as `start`) | |
 | | `logs` | View daemon logs | `--follow`, `--lines` |
 | | `disk-usage` | View local disk usage | `--by-workspace`, `--by-task`, `--top` |

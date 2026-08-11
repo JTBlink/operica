@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { FolderKanban } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import type { UpdateIssueRequest } from "@multica/core/types";
+import { projectListOptions } from "@opercia/core/projects/queries";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import type { UpdateIssueRequest } from "@opercia/core/types";
 import { ProjectIcon } from "./project-icon";
 import {
   PropertyPicker,

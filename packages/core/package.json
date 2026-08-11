@@ -1,5 +1,5 @@
 {
-  "name": "@multica/core",
+  "name": "@opercia/core",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -163,8 +163,8 @@
     "react": "catalog:"
   },
   "devDependencies": {
-    "@multica/eslint-config": "workspace:*",
-    "@multica/tsconfig": "workspace:*",
+    "@opercia/eslint-config": "workspace:*",
+    "@opercia/tsconfig": "workspace:*",
     "@testing-library/react": "catalog:",
     "@types/react": "catalog:",
     "jsdom": "catalog:",

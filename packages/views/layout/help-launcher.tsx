@@ -9,14 +9,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useModalStore } from "@multica/core/modals";
-import { useConfigStore } from "@multica/core/config";
+} from "@opercia/ui/components/ui/dropdown-menu";
+import { useModalStore } from "@opercia/core/modals";
+import { useConfigStore } from "@opercia/core/config";
 import { DISCORD_URL, DiscordIcon } from "./discord";
 import { useT } from "../i18n";
 
-const DOCS_URL = "https://multica.ai/docs";
-const CHANGELOG_URL = "https://multica.ai/changelog";
+const DOCS_URL = "https://opercia.ai/docs";
+const CHANGELOG_URL = "https://opercia.ai/changelog";
 
 export function HelpLauncher() {
   const { t } = useT("layout");

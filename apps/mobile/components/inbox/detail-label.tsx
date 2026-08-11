@@ -16,8 +16,8 @@ import type {
   InboxItemType,
   IssueStatus,
   IssuePriority,
-} from "@multica/core/types";
-import { formatDateOnly } from "@multica/core/issues/date";
+} from "@opercia/core/types";
+import { formatDateOnly } from "@opercia/core/issues/date";
 import { Text } from "@/components/ui/text";
 import { StatusIcon } from "@/components/ui/status-icon";
 import { PriorityIcon } from "@/components/ui/priority-icon";

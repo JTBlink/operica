@@ -6,8 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"github.com/opercia-ai/opercia/server/internal/events"
+	"github.com/opercia-ai/opercia/server/pkg/protocol"
 )
 
 // TestSetAgentRuntimeSkillEnabledBroadcastsAgentStatus guards the realtime

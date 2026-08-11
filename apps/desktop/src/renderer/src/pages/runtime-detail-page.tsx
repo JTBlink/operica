@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import {
   RuntimeDetailPage as SharedRuntimeDetailPage,
   RuntimeSettingsPage as SharedRuntimeSettingsPage,
-} from "@multica/views/runtimes";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { runtimeDisplayLabel } from "@multica/core/runtimes";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
+} from "@opercia/views/runtimes";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { runtimeDisplayLabel } from "@opercia/core/runtimes";
+import { runtimeListOptions } from "@opercia/core/runtimes/queries";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 import { DaemonRuntimeActions } from "../components/daemon-runtime-card";
 import { useDesktopRuntimeContext } from "../components/use-desktop-runtime-context";

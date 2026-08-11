@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"github.com/opercia-ai/opercia/server/pkg/protocol"
 )
 
 // requestError is returned by postJSON/getJSON when the server responds with an error status.
@@ -87,7 +87,7 @@ func isRuntimeNotFoundError(err error) bool {
 	return strings.Contains(strings.ToLower(reqErr.Body), "runtime not found")
 }
 
-// Client handles HTTP communication with the Multica server daemon API.
+// Client handles HTTP communication with the Opercia server daemon API.
 type Client struct {
 	baseURL string
 	token   string

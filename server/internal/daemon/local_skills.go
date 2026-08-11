@@ -8,8 +8,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/multica-ai/multica/server/internal/skill"
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"github.com/opercia-ai/opercia/server/internal/skill"
+	"github.com/opercia-ai/opercia/server/pkg/agent"
 )
 
 const (

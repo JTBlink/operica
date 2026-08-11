@@ -32,7 +32,7 @@ import type {
   IssueStatus,
   SearchIssueResult,
   SearchProjectResult,
-} from "@multica/core/types";
+} from "@opercia/core/types";
 import { Text } from "@/components/ui/text";
 import { StatusIcon } from "@/components/ui/status-icon";
 import { PriorityIcon } from "@/components/ui/priority-icon";

@@ -14,19 +14,19 @@ import {
 } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { Agent, SkillSummary } from "@multica/core/types";
-import { api } from "@multica/core/api";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { Button } from "@multica/ui/components/ui/button";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
-import { Input } from "@multica/ui/components/ui/input";
+import type { Agent, SkillSummary } from "@opercia/core/types";
+import { api } from "@opercia/core/api";
+import { workspaceKeys } from "@opercia/core/workspace/queries";
+import { useWorkspacePaths } from "@opercia/core/paths";
+import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
+import { Button } from "@opercia/ui/components/ui/button";
+import { Checkbox } from "@opercia/ui/components/ui/checkbox";
+import { Input } from "@opercia/ui/components/ui/input";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@multica/ui/components/ui/collapsible";
+} from "@opercia/ui/components/ui/collapsible";
 import {
   Dialog,
   DialogContent,
@@ -34,21 +34,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@opercia/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@opercia/ui/components/ui/dropdown-menu";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { cn } from "@multica/ui/lib/utils";
+} from "@opercia/ui/components/ui/tooltip";
+import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
+import { cn } from "@opercia/ui/lib/utils";
 import { useT } from "../../i18n";
 import { useIntentNavigate } from "../../navigation";
 import type { SkillRow } from "./skills-page";

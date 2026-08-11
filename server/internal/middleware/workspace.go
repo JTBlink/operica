@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/internal/util"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
 )
 
 // Context keys for workspace-scoped request data.

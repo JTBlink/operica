@@ -2,21 +2,21 @@
 
 import { MessageCircle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { cn } from "@multica/ui/lib/utils";
-import { useChatStore } from "@multica/core/chat";
+import { cn } from "@opercia/ui/lib/utils";
+import { useChatStore } from "@opercia/core/chat";
 import {
   chatSessionsOptions,
   countUnreadChatSessions,
   hasPendingChatTasksOptions,
-} from "@multica/core/chat/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { createLogger } from "@multica/core/logger";
-import { useShortcut } from "@multica/core/shortcuts";
+} from "@opercia/core/chat/queries";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { createLogger } from "@opercia/core/logger";
+import { useShortcut } from "@opercia/core/shortcuts";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@multica/ui/components/ui/tooltip";
+} from "@opercia/ui/components/ui/tooltip";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { useT } from "../../i18n";
 

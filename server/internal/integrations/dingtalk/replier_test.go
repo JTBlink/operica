@@ -5,8 +5,8 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
 )
 
 func TestIssueCreatedText(t *testing.T) {

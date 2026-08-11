@@ -3,17 +3,17 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useDefaultLayout } from "react-resizable-panels";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useModalStore } from "@multica/core/modals";
-import { useIssueDraftStore } from "@multica/core/issues/stores/draft-store";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { useWorkspacePaths } from "@opercia/core/paths";
+import { useModalStore } from "@opercia/core/modals";
+import { useIssueDraftStore } from "@opercia/core/issues/stores/draft-store";
 import {
   inboxListOptions,
   archivedInboxListOptions,
   deduplicateInboxItems,
   deduplicateArchivedInboxItems,
   useInboxUnreadCount,
-} from "@multica/core/inbox/queries";
+} from "@opercia/core/inbox/queries";
 import {
   useMarkInboxRead,
   useMarkInboxUnread,
@@ -23,11 +23,11 @@ import {
   useArchiveAllInbox,
   useArchiveAllReadInbox,
   useArchiveCompletedInbox,
-} from "@multica/core/inbox/mutations";
+} from "@opercia/core/inbox/mutations";
 
 import { IssueDetail, issueHighlightMementoKey } from "../../issues/components";
 import { useViewStateWriter } from "../../platform";
-import { ErrorBoundary } from "@multica/ui/components/common/error-boundary";
+import { ErrorBoundary } from "@opercia/ui/components/common/error-boundary";
 import { useNavigation } from "../../navigation";
 import { toast } from "sonner";
 import {
@@ -41,23 +41,23 @@ import {
   ListChecks,
   ArrowLeft,
 } from "lucide-react";
-import type { InboxItem } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+import type { InboxItem } from "@opercia/core/types";
+import { Button } from "@opercia/ui/components/ui/button";
 import {
   ResizablePanelGroup,
   ResizablePanel,
   ResizableHandle,
-} from "@multica/ui/components/ui/resizable";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { NumberFlow } from "@multica/ui/components/ui/number-flow";
+} from "@opercia/ui/components/ui/resizable";
+import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import { NumberFlow } from "@opercia/ui/components/ui/number-flow";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useIsCompact } from "@multica/ui/hooks/use-mobile";
+} from "@opercia/ui/components/ui/dropdown-menu";
+import { useIsCompact } from "@opercia/ui/hooks/use-mobile";
 import { PageHeader } from "../../layout/page-header";
 import { useTimeAgo } from "./inbox-list-item";
 import { InboxList } from "./inbox-list";
@@ -200,7 +200,7 @@ export function InboxPage() {
   ]);
 
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({
-    id: "multica_inbox_layout",
+    id: "opercia_inbox_layout",
   });
 
   const isCompact = useIsCompact();
@@ -550,7 +550,7 @@ export function InboxPage() {
         key={selected.issue_id}
         issueId={selected.issue_id}
         defaultSidebarOpen={false}
-        layoutId="multica_inbox_issue_detail_layout"
+        layoutId="opercia_inbox_issue_detail_layout"
         highlightCommentId={selected.details?.comment_id ?? undefined}
         highlightRequestToken={highlightRequestToken}
         leadingAction={compactBackAction}

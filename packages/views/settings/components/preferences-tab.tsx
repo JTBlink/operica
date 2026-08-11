@@ -8,18 +8,18 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { useTheme } from "@multica/ui/components/common/theme-provider";
+} from "@opercia/ui/components/ui/select";
+import { Switch } from "@opercia/ui/components/ui/switch";
+import { useTheme } from "@opercia/ui/components/common/theme-provider";
 import {
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
   type SupportedLocale,
-} from "@multica/core/i18n";
-import { useLocaleAdapter } from "@multica/core/i18n/react";
-import { useAuthStore } from "@multica/core/auth";
-import { useCommentComposerStore } from "@multica/core/issues/stores";
-import { api } from "@multica/core/api";
+} from "@opercia/core/i18n";
+import { useLocaleAdapter } from "@opercia/core/i18n/react";
+import { useAuthStore } from "@opercia/core/auth";
+import { useCommentComposerStore } from "@opercia/core/issues/stores";
+import { api } from "@opercia/core/api";
 import { browserTimezone, timezoneOptions } from "../../common/timezone-select";
 import { useT } from "../../i18n";
 import {

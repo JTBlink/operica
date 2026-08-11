@@ -25,28 +25,28 @@ import type {
   Skill,
   SkillFile,
   UpdateSkillRequest,
-} from "@multica/core/types";
+} from "@opercia/core/types";
 import { toast } from "sonner";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
+import { api } from "@opercia/core/api";
+import { useAuthStore } from "@opercia/core/auth";
 import { useTimeAgo } from "../../i18n";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { useWorkspacePaths } from "@opercia/core/paths";
 import {
   agentListOptions,
   memberListOptions,
   selectSkillAssignments,
   skillDetailOptions,
   workspaceKeys,
-} from "@multica/core/workspace/queries";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
+} from "@opercia/core/workspace/queries";
+import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
 import {
   runtimeDisplayLabel,
   runtimeListOptions,
-} from "@multica/core/runtimes";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
+} from "@opercia/core/runtimes";
+import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
+import { Button, buttonVariants } from "@opercia/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -54,21 +54,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+} from "@opercia/ui/components/ui/dialog";
+import { Input } from "@opercia/ui/components/ui/input";
+import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import { Textarea } from "@opercia/ui/components/ui/textarea";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { cn } from "@multica/ui/lib/utils";
+} from "@opercia/ui/components/ui/tooltip";
+import { cn } from "@opercia/ui/lib/utils";
 import { AppLink, useNavigation } from "../../navigation";
 import { BreadcrumbHeader } from "../../layout/breadcrumb-header";
 import { useCanEditSkill } from "../hooks/use-can-edit-skill";
-import { useSkillPermissions } from "@multica/core/permissions";
-import { CapabilityBanner } from "@multica/ui/components/common/capability-banner";
+import { useSkillPermissions } from "@opercia/core/permissions";
+import { CapabilityBanner } from "@opercia/ui/components/common/capability-banner";
 import { readOrigin, totalFileCount, type OriginInfo } from "../lib/origin";
 import { FileTree } from "./file-tree";
 import { FileViewer, isMarkdownPath, type FileMode } from "./file-viewer";

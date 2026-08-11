@@ -11,13 +11,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/cli"
+	"github.com/opercia-ai/opercia/server/internal/cli"
 )
 
 // Background
 //
 // Hermes keeps its long-term memory (MEMORY.md / USER.md and whatever else the
-// agent writes back) in `<HERMES_HOME>/memories/`. Multica has to take over
+// agent writes back) in `<HERMES_HOME>/memories/`. Opercia has to take over
 // HERMES_HOME to inject an agent's bound skills — Hermes discovers skills only
 // from its own home, never from the workspace (see hermes_home.go) — so the
 // overlay inherited the decision of where memory lives and made it task-local.
@@ -31,9 +31,9 @@ import (
 //     user's real ~/.hermes, and therefore shared one memories/ with every
 //     other skill-less agent, task, and issue on the runtime.
 //
-// This file makes memory an agent-scoped store Multica owns:
+// This file makes memory an agent-scoped store Opercia owns:
 //
-//	<multica profile dir>/hermes-state/<agent>/<hermes profile>/memories
+//	<opercia profile dir>/hermes-state/<agent>/<hermes profile>/memories
 //
 // linked into the per-task overlay. Memory then survives across tasks and issues
 // for the same agent, never touches the user's home, and is invisible to other
@@ -61,7 +61,7 @@ import (
 // agent's concurrent tasks write the same files and Hermes rewrites them whole,
 // so concurrent memory updates are last-writer-wins.
 
-// hermesMemoryStoreRoot is the directory under the daemon's Multica profile dir
+// hermesMemoryStoreRoot is the directory under the daemon's Opercia profile dir
 // that holds every agent's persistent Hermes state. `hermes-state` (not
 // `hermes-memories`) because state.db joins it when the session half is solved.
 const hermesMemoryStoreRoot = "hermes-state"
@@ -70,16 +70,16 @@ const hermesMemoryStoreRoot = "hermes-state"
 // and the overlay home — Hermes resolves it relative to HERMES_HOME.
 const hermesMemoriesEntry = "memories"
 
-// MulticaHermesTaskMemoryEnv is the rollback switch. Anything truthy (1, true,
+// OperciaHermesTaskMemoryEnv is the rollback switch. Anything truthy (1, true,
 // yes, on; case-insensitive) restores the pre-MUL-5932 behaviour of a fresh
 // task-local memories/ dir per task, for an operator who needs to revert without
 // waiting for a release. Everything else (including unset) keeps memory
 // agent-scoped and persistent.
-const MulticaHermesTaskMemoryEnv = "MULTICA_HERMES_TASK_MEMORY"
+const OperciaHermesTaskMemoryEnv = "OPERCIA_HERMES_TASK_MEMORY"
 
 // hermesTaskLocalMemoryForced reports whether the rollback switch is engaged.
 func hermesTaskLocalMemoryForced() bool {
-	switch strings.ToLower(strings.TrimSpace(os.Getenv(MulticaHermesTaskMemoryEnv))) {
+	switch strings.ToLower(strings.TrimSpace(os.Getenv(OperciaHermesTaskMemoryEnv))) {
 	case "1", "true", "yes", "on":
 		return true
 	}
@@ -88,11 +88,11 @@ func hermesTaskLocalMemoryForced() bool {
 
 // HermesMemoryStorePath returns the persistent memory store for (daemonProfile,
 // agentID, sourceHome), or "" when memory must stay task-local — the rollback
-// switch is engaged, there is no agent to key on, or the Multica profile dir
+// switch is engaged, there is no agent to key on, or the Opercia profile dir
 // cannot be resolved. The daemon marks the returned path in-use for the task's
 // duration so PruneHermesMemoryStores never reclaims it mid-mount.
 //
-// daemonProfile namespaces by Multica profile for free: profile dirs are already
+// daemonProfile namespaces by Opercia profile for free: profile dirs are already
 // disjoint, so a staging daemon's GC can never see a production daemon's stores
 // and no hashed namespace segment is needed (unlike the Codex store, which lives
 // in the shared ~/.codex).
@@ -212,7 +212,7 @@ func mountHermesMemories(hermesHome, storeDir string, logger *slog.Logger) error
 // rules follow from that:
 //
 //   - It copies rather than moves. A move is faster but fails across
-//     filesystems — the workspaces root and the Multica profile dir can be on
+//     filesystems — the workspaces root and the Opercia profile dir can be on
 //     different volumes — and a partial move leaves data in neither place.
 //   - It never reports success for anything it did not carry over. An I/O
 //     error reading either directory, or an entry it will not copy (symlink,
@@ -364,7 +364,7 @@ func copyHermesMemoryTree(src, dst string) error {
 }
 
 // detachHermesMemories gives the overlay a real, task-local memories dir. It is
-// the rollback path (MULTICA_HERMES_TASK_MEMORY), so it must actively replace a
+// the rollback path (OPERCIA_HERMES_TASK_MEMORY), so it must actively replace a
 // link left by a previous run against the persistent store: a reused overlay
 // still carries that link, and MkdirAll would follow it and silently succeed,
 // leaving the task writing to a store the daemon no longer guards from the GC.

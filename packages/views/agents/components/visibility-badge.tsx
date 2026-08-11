@@ -1,8 +1,8 @@
 "use client";
 
 import { Globe, Lock } from "lucide-react";
-import type { AgentVisibility } from "@multica/core/types";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
+import type { AgentVisibility } from "@opercia/core/types";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
 import { useT } from "../../i18n";
 
 /**

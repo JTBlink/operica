@@ -2,14 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Archive, ArchiveRestore, MoreHorizontal, Pencil, Trash2, UserRound } from "lucide-react";
-import { Button } from "@multica/ui/components/ui/button";
+import { Button } from "@opercia/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@opercia/ui/components/ui/dropdown-menu";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,15 +19,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { useWorkspacePaths } from "@multica/core/paths";
+} from "@opercia/ui/components/ui/alert-dialog";
+import { useWorkspacePaths } from "@opercia/core/paths";
 import {
   useUpdateChatSession,
   useDeleteChatSession,
   useSetChatSessionArchived,
-} from "@multica/core/chat/mutations";
-import { useChatStore } from "@multica/core/chat";
-import type { Agent, ChatSession } from "@multica/core/types";
+} from "@opercia/core/chat/mutations";
+import { useChatStore } from "@opercia/core/chat";
+import type { Agent, ChatSession } from "@opercia/core/types";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AppLink } from "../../navigation";
 import { useT } from "../../i18n";

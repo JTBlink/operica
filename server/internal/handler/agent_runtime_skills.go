@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/multica-ai/multica/server/internal/logger"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"github.com/opercia-ai/opercia/server/internal/logger"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/pkg/protocol"
 )
 
 const maxRuntimeSkillKeyLength = 512

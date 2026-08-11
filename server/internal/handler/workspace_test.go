@@ -207,7 +207,7 @@ INSERT INTO github_pending_check_suite (
 	workspace_id, installation_id, repo_owner, repo_name, pr_number,
 	suite_id, head_sha, app_id, status, suite_updated_at
 )
-VALUES ($1, 123456789, 'multica-ai', 'multica', 3366, 987654321, 'abc123', 15368, 'completed', now())
+VALUES ($1, 123456789, 'opercia-ai', 'opercia', 3366, 987654321, 'abc123', 15368, 'completed', now())
 `, wsID); err != nil {
 		t.Fatalf("create pending check suite: %v", err)
 	}
@@ -217,8 +217,8 @@ INSERT INTO github_pull_request (
 	workspace_id, installation_id, repo_owner, repo_name, pr_number,
 	title, state, html_url, pr_created_at, pr_updated_at, head_sha
 )
-VALUES ($1, 123456789, 'multica-ai', 'multica', 5265,
-	'Workspace cleanup snapshot', 'open', 'https://github.com/multica-ai/multica/pull/5265',
+VALUES ($1, 123456789, 'opercia-ai', 'opercia', 5265,
+	'Workspace cleanup snapshot', 'open', 'https://github.com/opercia-ai/opercia/pull/5265',
 	now(), now(), 'head-a')
 RETURNING id
 `, wsID).Scan(&githubPRID); err != nil {
@@ -468,7 +468,7 @@ WHERE tgname = $1
 `, triggerName).Scan(&definition); err != nil {
 			t.Fatalf("read trigger %s: %v", triggerName, err)
 		}
-		if !strings.Contains(definition, "multica.workspace_teardown") {
+		if !strings.Contains(definition, "opercia.workspace_teardown") {
 			t.Fatalf("trigger %s does not guard workspace teardown: %s", triggerName, definition)
 		}
 	}
@@ -486,7 +486,7 @@ func TestWorkspaceTeardownModeDoesNotLeakIntoOrdinaryDeletes(t *testing.T) {
 	if err != nil {
 		t.Fatalf("begin teardown marker transaction: %v", err)
 	}
-	if _, err := tx.Exec(ctx, `SELECT set_config('multica.workspace_teardown', 'on', true)`); err != nil {
+	if _, err := tx.Exec(ctx, `SELECT set_config('opercia.workspace_teardown', 'on', true)`); err != nil {
 		_ = tx.Rollback(ctx)
 		t.Fatalf("set transaction-local teardown mode: %v", err)
 	}
@@ -495,7 +495,7 @@ func TestWorkspaceTeardownModeDoesNotLeakIntoOrdinaryDeletes(t *testing.T) {
 	}
 
 	var teardownMode string
-	if err := conn.QueryRow(ctx, `SELECT current_setting('multica.workspace_teardown', true)`).Scan(&teardownMode); err != nil {
+	if err := conn.QueryRow(ctx, `SELECT current_setting('opercia.workspace_teardown', true)`).Scan(&teardownMode); err != nil {
 		t.Fatalf("read teardown mode after commit: %v", err)
 	}
 	if teardownMode != "" {
@@ -863,14 +863,14 @@ VALUES ($1, $2, 'owner')
 		req := newRequest("PATCH", "/api/workspaces/"+wsID, map[string]any{
 			"repos": []map[string]any{
 				{
-					"url":         "  https://github.com/multica-ai/multica.git  ",
+					"url":         "  https://github.com/opercia-ai/opercia.git  ",
 					"description": "  main monorepo  ",
 				},
 				{
-					"url": "https://github.com/multica-ai/multica.git",
+					"url": "https://github.com/opercia-ai/opercia.git",
 				},
 				{
-					"url": "git@github.com:multica-ai/multica-cloud.git",
+					"url": "git@github.com:opercia-ai/opercia-cloud.git",
 				},
 			},
 		})
@@ -892,10 +892,10 @@ VALUES ($1, $2, 'owner')
 		if len(repos) != 2 {
 			t.Fatalf("expected duplicate URL to be deduped, got %d repos: %s", len(repos), raw)
 		}
-		if repos[0].URL != "https://github.com/multica-ai/multica.git" || repos[0].Description != "main monorepo" {
+		if repos[0].URL != "https://github.com/opercia-ai/opercia.git" || repos[0].Description != "main monorepo" {
 			t.Fatalf("first repo not normalized: %+v", repos[0])
 		}
-		if repos[1].URL != "git@github.com:multica-ai/multica-cloud.git" {
+		if repos[1].URL != "git@github.com:opercia-ai/opercia-cloud.git" {
 			t.Fatalf("second repo not preserved: %+v", repos[1])
 		}
 	})
@@ -940,7 +940,7 @@ INSERT INTO member (workspace_id, user_id, role) VALUES ($1, $2, 'owner')
 		t.Fatalf("create requester member: %v", err)
 	}
 
-	targetEmail := fmt.Sprintf("revocation-%s@multica.ai", slug)
+	targetEmail := fmt.Sprintf("revocation-%s@opercia.ai", slug)
 	var targetUserID string
 	if err := testPool.QueryRow(ctx, `
 INSERT INTO "user" (name, email) VALUES ($1, $2) RETURNING id
@@ -969,7 +969,7 @@ INSERT INTO agent_runtime (
     workspace_id, daemon_id, name, runtime_mode, provider, status,
     device_info, metadata, owner_id, last_seen_at
 )
-VALUES ($1, $2, 'Target Runtime', 'local', 'multica_daemon', 'online', '', '{}'::jsonb, $3, now())
+VALUES ($1, $2, 'Target Runtime', 'local', 'opercia_daemon', 'online', '', '{}'::jsonb, $3, now())
 RETURNING id
 `, wsID, daemonID, targetUserID).Scan(&runtimeID); err != nil {
 		t.Fatalf("insert runtime: %v", err)
@@ -1122,7 +1122,7 @@ RETURNING id
 
 	// Binding for the member being removed — must be pruned.
 	if _, err := testPool.Exec(ctx, `
-INSERT INTO channel_user_binding (workspace_id, multica_user_id, installation_id, channel_type, channel_user_id)
+INSERT INTO channel_user_binding (workspace_id, opercia_user_id, installation_id, channel_type, channel_user_id)
 VALUES ($1, $2, $3, 'feishu', $4)
 `, fx.WorkspaceID, fx.TargetUserID, installID, removedOpenID); err != nil {
 		t.Fatalf("insert removed-member binding: %v", err)
@@ -1131,7 +1131,7 @@ VALUES ($1, $2, $3, 'feishu', $4)
 	// Binding for the requester (an owner who stays) — must survive, proving
 	// the prune is scoped to the removed user, not the whole workspace.
 	if _, err := testPool.Exec(ctx, `
-INSERT INTO channel_user_binding (workspace_id, multica_user_id, installation_id, channel_type, channel_user_id)
+INSERT INTO channel_user_binding (workspace_id, opercia_user_id, installation_id, channel_type, channel_user_id)
 VALUES ($1, $2, $3, 'feishu', $4)
 `, fx.WorkspaceID, testUserID, installID, keepOpenID); err != nil {
 		t.Fatalf("insert remaining-member binding: %v", err)
@@ -1209,7 +1209,7 @@ INSERT INTO agent_runtime (
     workspace_id, daemon_id, name, runtime_mode, provider, status,
     device_info, metadata, owner_id, last_seen_at
 )
-VALUES ($1, $2, 'Other Runtime', 'local', 'multica_daemon', 'online', '', '{}'::jsonb, $3, now())
+VALUES ($1, $2, 'Other Runtime', 'local', 'opercia_daemon', 'online', '', '{}'::jsonb, $3, now())
 RETURNING id
 `, fx.WorkspaceID, "daemon-revoke-reassign-other", testUserID).Scan(&otherRuntimeID); err != nil {
 		t.Fatalf("insert other runtime: %v", err)
@@ -1330,7 +1330,7 @@ INSERT INTO member (workspace_id, user_id, role) VALUES ($1, $2, 'owner')
 	var targetUserID string
 	if err := testPool.QueryRow(ctx, `
 INSERT INTO "user" (name, email) VALUES ($1, $2) RETURNING id
-`, "Revocation No Runtimes Target", "revocation-no-runtimes@multica.ai").Scan(&targetUserID); err != nil {
+`, "Revocation No Runtimes Target", "revocation-no-runtimes@opercia.ai").Scan(&targetUserID); err != nil {
 		t.Fatalf("create target user: %v", err)
 	}
 	t.Cleanup(func() {

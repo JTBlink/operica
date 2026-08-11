@@ -11,12 +11,12 @@ import {
   Trash2,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import type { Agent, AgentRuntime } from "@multica/core/types";
-import { ApiError } from "@multica/core/api";
+import type { Agent, AgentRuntime } from "@opercia/core/types";
+import { ApiError } from "@opercia/core/api";
 import {
   runtimeCapabilitiesOptions,
   runtimeDisplayLabel,
-} from "@multica/core/runtimes";
+} from "@opercia/core/runtimes";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,9 +26,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@opercia/ui/components/ui/alert-dialog";
+import { Badge } from "@opercia/ui/components/ui/badge";
+import { Button } from "@opercia/ui/components/ui/button";
 import { toast } from "sonner";
 import { useT } from "../../../i18n";
 import {

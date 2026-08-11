@@ -204,7 +204,7 @@ func (d *Daemon) refreshAgentAvailability() []string {
 // This is the agent-CLI counterpart to trySelfReload, and it deliberately does
 // NOT restart. What a user needs when codex or claude upgrades is that
 // subsequent tasks run the new CLI under the new version's rules — not that
-// Multica's availability tracks a third party's release cadence. An in-place
+// Opercia's availability tracks a third party's release cadence. An in-place
 // upgrade leaves the pinned path valid, so the new binary is already what
 // launches; the two things left stale are the cached version (which keys
 // version-sensitive policy such as the Codex sandbox, read back through

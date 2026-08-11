@@ -29,25 +29,25 @@ import {
   type ProjectListFilters,
   type ProjectSortField,
   type ProjectViewMode,
-} from "@multica/core/projects";
+} from "@opercia/core/projects";
 import {
   pinListOptions,
   useCreatePin,
   useDeletePin,
-} from "@multica/core/pins";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useAuthStore } from "@multica/core/auth";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import { useModalStore } from "@multica/core/modals";
+} from "@opercia/core/pins";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { useWorkspacePaths } from "@opercia/core/paths";
+import { useAuthStore } from "@opercia/core/auth";
+import { useActorName } from "@opercia/core/workspace/hooks";
+import { memberListOptions } from "@opercia/core/workspace/queries";
+import { useModalStore } from "@opercia/core/modals";
 import { AppLink, useIntentNavigate, useRowLink } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Button } from "@multica/ui/components/ui/button";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
-import { Input } from "@multica/ui/components/ui/input";
+import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import { Button } from "@opercia/ui/components/ui/button";
+import { Checkbox } from "@opercia/ui/components/ui/checkbox";
+import { Input } from "@opercia/ui/components/ui/input";
 import {
   Dialog,
   DialogContent,
@@ -55,7 +55,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@opercia/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -70,7 +70,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@opercia/ui/components/ui/dropdown-menu";
 import {
   ListGrid,
   ListGridCell,
@@ -79,25 +79,25 @@ import {
   ListGridRow,
   LIST_GRID_BOTTOM_CLEARANCE,
   type ListGridSortDirection,
-} from "@multica/ui/components/ui/list-grid";
+} from "@opercia/ui/components/ui/list-grid";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { Switch } from "@multica/ui/components/ui/switch";
+} from "@opercia/ui/components/ui/popover";
+import { Switch } from "@opercia/ui/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
+} from "@opercia/ui/components/ui/tooltip";
 import type {
   MemberWithUser,
   Project,
   ProjectPriority,
   ProjectStatus,
   UpdateProjectRequest,
-} from "@multica/core/types";
+} from "@opercia/core/types";
 import {
   CollectionPageHeader,
   CollectionPageHeaderAction,

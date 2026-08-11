@@ -12,11 +12,11 @@
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@multica/ui/components",
-    "ui": "@multica/ui/components/ui",
-    "hooks": "@multica/ui/hooks",
-    "lib": "@multica/ui/lib",
-    "utils": "@multica/ui/lib/utils"
+    "components": "@opercia/ui/components",
+    "ui": "@opercia/ui/components/ui",
+    "hooks": "@opercia/ui/hooks",
+    "lib": "@opercia/ui/lib",
+    "utils": "@opercia/ui/lib/utils"
   },
   "registries": {
     "@reui": {

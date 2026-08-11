@@ -22,14 +22,14 @@ import (
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/sync/singleflight"
 
-	"github.com/multica-ai/multica/server/internal/cli"
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/internal/daemon/repocache"
-	"github.com/multica-ai/multica/server/internal/selfexec"
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/redact"
-	"github.com/multica-ai/multica/server/pkg/skillbundle"
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"github.com/opercia-ai/opercia/server/internal/cli"
+	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
+	"github.com/opercia-ai/opercia/server/internal/daemon/repocache"
+	"github.com/opercia-ai/opercia/server/internal/selfexec"
+	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/opercia-ai/opercia/server/pkg/redact"
+	"github.com/opercia-ai/opercia/server/pkg/skillbundle"
+	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
 )
 
 // ErrRepoNotConfigured is returned by ensureRepoReady when the requested repo
@@ -67,7 +67,7 @@ var errSkillBundleUnavailable = errors.New("skill bundle unavailable")
 const (
 	taskSlotWaitTimeout      = 2 * time.Second
 	taskSlotCapacityBackoff  = 5 * time.Second
-	repoCheckoutModeEnv      = "MULTICA_REPO_CHECKOUT_MODE"
+	repoCheckoutModeEnv      = "OPERCIA_REPO_CHECKOUT_MODE"
 	repoCheckoutModeIsolated = "isolated"
 	// defaultTaskPrepareTimeout is a hard liveness bound for everything after
 	// claim and before StartTask succeeds: runtime resolution, skill bundles,
@@ -92,12 +92,12 @@ const (
 var pendingWorkHintMinInterval = time.Second
 
 // repoCheckoutModeFor picks the Git metadata layout for a task's
-// `multica repo checkout`. Under Codex's workspace-write sandbox a linked
+// `opercia repo checkout`. Under Codex's workspace-write sandbox a linked
 // worktree's gitdir resolves into the shared cache and stays read-only even
 // when the task workdir is an explicit writable root, so `git add` /
 // `git commit` fail from inside the checkout — Linux hit this in
-// multica-ai/multica#2925, Codex's native Windows sandbox in
-// multica-ai/multica#6449.
+// opercia-ai/opercia#2925, Codex's native Windows sandbox in
+// opercia-ai/opercia#6449.
 //
 // Both platforms now default to danger-full-access (execenv's
 // codexSandboxPolicyFor), so in practice only a user who opted into
@@ -133,18 +133,18 @@ func taskScopedAuthToken(task Task) (string, error) {
 	return token, nil
 }
 
-func taskMulticaEnvironment(task Task, agentName, token, configRoot, workspacesRoot, serverURL string, healthPort, slot int, tempDir string) map[string]string {
+func taskOperciaEnvironment(task Task, agentName, token, configRoot, workspacesRoot, serverURL string, healthPort, slot int, tempDir string) map[string]string {
 	return map[string]string{
-		"MULTICA_TOKEN":        token,
+		"OPERCIA_TOKEN":        token,
 		cli.TaskConfigRootEnv:  configRoot,
 		TaskWorkspacesRootEnv:  workspacesRoot,
-		"MULTICA_SERVER_URL":   serverURL,
-		"MULTICA_DAEMON_PORT":  strconv.Itoa(healthPort),
-		"MULTICA_WORKSPACE_ID": task.WorkspaceID,
-		"MULTICA_AGENT_NAME":   agentName,
-		"MULTICA_AGENT_ID":     task.AgentID,
-		"MULTICA_TASK_ID":      task.ID,
-		"MULTICA_TASK_SLOT":    strconv.Itoa(slot),
+		"OPERCIA_SERVER_URL":   serverURL,
+		"OPERCIA_DAEMON_PORT":  strconv.Itoa(healthPort),
+		"OPERCIA_WORKSPACE_ID": task.WorkspaceID,
+		"OPERCIA_AGENT_NAME":   agentName,
+		"OPERCIA_AGENT_ID":     task.AgentID,
+		"OPERCIA_TASK_ID":      task.ID,
+		"OPERCIA_TASK_SLOT":    strconv.Itoa(slot),
 		"TMPDIR":               tempDir,
 		"TMP":                  tempDir,
 		"TEMP":                 tempDir,
@@ -471,7 +471,7 @@ type Daemon struct {
 	// the cache that is up to two uncached `brew --prefix` forks per tick.
 	brewTargetOnce sync.Once
 	brewInstall    bool        // resolved once: was this binary installed via brew?
-	brewTarget     string      // "<prefix>/bin/multica" when brewInstall and the prefix resolved
+	brewTarget     string      // "<prefix>/bin/opercia" when brewInstall and the prefix resolved
 	updating       atomic.Bool // prevents concurrent update attempts
 	// activeTasks is the ownership-safe count of tasks currently in handleTask.
 	// It deliberately includes preparation and local-directory waiters because
@@ -485,7 +485,7 @@ type Daemon struct {
 	runningTasks      atomic.Int64
 	resourceWaitTasks atomic.Int64
 	ready             atomic.Bool // false until preflight completes; gates /health status (starting -> running)
-	// reloadPendingReason explains why a confirmed multica version change hasn't
+	// reloadPendingReason explains why a confirmed opercia version change hasn't
 	// restarted the daemon yet (a task was running at the barrier check). Set
 	// and cleared by trySelfReload, read by /health. Diagnostic only.
 	reloadPendingReason atomic.Pointer[string]
@@ -817,7 +817,7 @@ type healedAgent struct {
 //     the normal (never-healed) case: a live pinned binary is never
 //     second-guessed even if PATH now points elsewhere.
 //   - Pinned Path gone and no live heal -> re-resolve entry.Command once
-//     (preserving the ~/.multica/hooks exclusion and the login-shell fallback).
+//     (preserving the ~/.opercia/hooks exclusion and the login-shell fallback).
 //     Before adopting the re-resolved binary it is version-detected and run
 //     through the same minimum-version gate registration applies. This
 //     reproduces exactly what a daemon restart would resolve, so it is no less
@@ -1692,7 +1692,7 @@ func (d *Daemon) Run(ctx context.Context) error {
 	)
 
 	// Mark the daemon-owned workspaces tree before any task runs. A sandbox
-	// fault can strip every MULTICA_* env var from an agent subprocess; the
+	// fault can strip every OPERCIA_* env var from an agent subprocess; the
 	// per-workdir marker then only protects cwds inside the workdir, and a
 	// subprocess that escaped to the workdir's parent would fall back to the
 	// user's config PAT. The root marker makes the CLI fail closed anywhere
@@ -1790,9 +1790,9 @@ func (d *Daemon) resolveAuth() error {
 		return fmt.Errorf("load CLI config: %w", err)
 	}
 	if cfg.Token == "" {
-		loginHint := "'multica login'"
+		loginHint := "'opercia login'"
 		if d.cfg.Profile != "" {
-			loginHint = fmt.Sprintf("'multica login --profile %s'", d.cfg.Profile)
+			loginHint = fmt.Sprintf("'opercia login --profile %s'", d.cfg.Profile)
 		}
 		d.logger.Warn("not authenticated — run " + loginHint + " to authenticate, then restart the daemon")
 		return fmt.Errorf("not authenticated: run %s first", loginHint)
@@ -2429,7 +2429,7 @@ func (d *Daemon) appendProfileRuntimes(ctx context.Context, workspaceID string, 
 			continue
 		}
 		// Resolve the executable to launch for this profile. A per-machine
-		// path override (MUL-3284, `multica runtime profile set-path`) wins
+		// path override (MUL-3284, `opercia runtime profile set-path`) wins
 		// over the PATH lookup when it is set AND points at a real
 		// executable — this is how an operator pins a profile to a binary
 		// that isn't on the daemon's PATH, or selects between multiple
@@ -2668,7 +2668,7 @@ func (d *Daemon) workspaceCoAuthoredByEnabled(workspaceID string) bool {
 //
 // It's safe to call with the workspace's own repos — duplicates are
 // idempotent. Called from runTask before the agent spawns so
-// `multica repo checkout` accepts project-only URLs without an extra round
+// `opercia repo checkout` accepts project-only URLs without an extra round
 // trip back to GetWorkspaceRepos (which doesn't carry project resources).
 func (d *Daemon) registerTaskRepos(workspaceID, taskID string, repos []RepoData) {
 	if len(repos) == 0 {
@@ -3069,7 +3069,7 @@ const DefaultTokenRenewalInterval = 3 * 24 * time.Hour
 // preflightAuth runs the two auth-sensitive startup steps in their
 // required order: a synchronous PAT renewal first, then the initial
 // workspace sync. The order matters — running tryRenewToken before any
-// other API call is what surfaces a user-actionable "run multica login"
+// other API call is what surfaces a user-actionable "run opercia login"
 // WARN when the PAT is already revoked or expired. If we let the
 // workspace sync go first, its 401 would short-circuit Run before the
 // renewal loop's first tick ever fires, and the operator would see only
@@ -3125,9 +3125,9 @@ func (d *Daemon) tryRenewToken(ctx context.Context) {
 	resp, err := d.client.RenewToken(reqCtx)
 	if err != nil {
 		if isUnauthorizedError(err) {
-			loginHint := "'multica login'"
+			loginHint := "'opercia login'"
 			if d.cfg.Profile != "" {
-				loginHint = fmt.Sprintf("'multica login --profile %s'", d.cfg.Profile)
+				loginHint = fmt.Sprintf("'opercia login --profile %s'", d.cfg.Profile)
 			}
 			d.logger.Warn("auth token rejected by server — run "+loginHint+" to re-authenticate, then restart the daemon", "error", err)
 			return
@@ -3958,7 +3958,7 @@ func (d *Daemon) handleUpdate(ctx context.Context, runtimeID string, update *Pen
 		d.logger.Info("refusing CLI self-update: daemon is managed by Desktop", "runtime_id", runtimeID, "update_id", update.ID)
 		d.reportUpdateResult(ctx, runtimeID, update.ID, map[string]any{
 			"status": "failed",
-			"error":  "CLI is managed by Multica Desktop — update the Desktop app to upgrade the CLI",
+			"error":  "CLI is managed by Opercia Desktop — update the Desktop app to upgrade the CLI",
 		})
 		return
 	}
@@ -4235,7 +4235,7 @@ func (d *Daemon) triggerRestart() bool {
 // restartTargetBinary resolves the path a restart would re-exec.
 //
 // For brew installs it keeps the stable symlink path (e.g.
-// /opt/homebrew/bin/multica) so the restarted daemon picks up the new Cellar
+// /opt/homebrew/bin/opercia) so the restarted daemon picks up the new Cellar
 // version automatically: on Linux os.Executable() reads /proc/self/exe, which
 // the kernel resolves to the Cellar path, and brew cleanup deletes that path
 // after an upgrade. For non-brew installs it resolves to the absolute path of
@@ -4258,9 +4258,9 @@ func (d *Daemon) restartTargetBinary() (string, error) {
 			return
 		}
 		if brewPrefix := getBrewPrefix(); brewPrefix != "" {
-			d.brewTarget = filepath.Join(brewPrefix, "bin", "multica")
+			d.brewTarget = filepath.Join(brewPrefix, "bin", "opercia")
 		} else if prefix := matchKnownBrewPrefix(newBin); prefix != "" {
-			d.brewTarget = filepath.Join(prefix, "bin", "multica")
+			d.brewTarget = filepath.Join(prefix, "bin", "opercia")
 		}
 	})
 	if d.brewInstall {
@@ -4517,7 +4517,7 @@ func waitForTaskSlot(ctx context.Context, sem chan int, wakeup <-chan struct{}, 
 
 // newTaskSlotSemaphore returns a buffered channel pre-populated with stable
 // slot indices [0, n). Receive to acquire a slot, send the same slot back to
-// release. Used by pollLoop to expose MULTICA_TASK_SLOT to spawned tasks.
+// release. Used by pollLoop to expose OPERCIA_TASK_SLOT to spawned tasks.
 func newTaskSlotSemaphore(maxConcurrentTasks int) chan int {
 	sem := make(chan int, maxConcurrentTasks)
 	for i := 0; i < maxConcurrentTasks; i++ {
@@ -5608,7 +5608,7 @@ func skillRefFromBundle(bundle SkillData) SkillRefData {
 
 func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot int, taskLog *slog.Logger) (taskResult TaskResult, returnErr error) {
 	// Refuse to spawn an agent without a workspace. An empty workspace_id
-	// here would make MULTICA_WORKSPACE_ID empty in the agent env, and the
+	// here would make OPERCIA_WORKSPACE_ID empty in the agent env, and the
 	// CLI would otherwise silently fall back to the user-global config — a
 	// path that can leak operations into an unrelated workspace when
 	// multiple workspaces share a host.
@@ -5635,7 +5635,7 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 	// claimed task belongs to a project with github_repo resources the server
 	// has already narrowed it to project repos only. Make sure those URLs are
 	// in the per-workspace allowlist and the local cache, otherwise
-	// `multica repo checkout` would reject project-only URLs that aren't also
+	// `opercia repo checkout` would reject project-only URLs that aren't also
 	// bound at the workspace level.
 	d.registerTaskRepos(task.WorkspaceID, task.ID, task.Repos)
 	defer d.clearTaskRepoRefs(task.WorkspaceID, task.ID)
@@ -5699,7 +5699,7 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 
 	// Prepare isolated execution environment.
 	// Repos are passed as metadata only — the agent checks them out on demand
-	// via `multica repo checkout <url>`.
+	// via `opercia repo checkout <url>`.
 	taskCtx := execenv.TaskContextForEnv{
 		IssueID:             task.IssueID,
 		TriggerCommentID:    task.TriggerCommentID,
@@ -5955,7 +5955,7 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 	// server-side state machine dispatched (or waiting_local_directory) →
 	// running. Calling StartTask before Prepare/Reuse let any consumer
 	// that read status==running and resolved
-	// /multica_workspaces/{ws}/{short-id}/workdir hit FileNotFoundError in
+	// /opercia_workspaces/{ws}/{short-id}/workdir hit FileNotFoundError in
 	// the microsecond window before os.MkdirAll ran.
 	//
 	// On error we return early so handleTask's existing FailTask +
@@ -5995,7 +5995,7 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 	// already disabled above (see localAssignment == nil), and the brief
 	// would otherwise live on inside the user's repository — a subsequent
 	// manual `claude` / `codex` run in that directory would pick
-	// up stale Multica instructions (issue id, trigger comment id, reply
+	// up stale Opercia instructions (issue id, trigger comment id, reply
 	// rules) and start acting on the previous task's context. Excise the
 	// marker block on the way out instead.
 	if env.LocalDirectory {
@@ -6003,7 +6003,7 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 			if cerr := execenv.CleanupRuntimeConfig(env.WorkDir, provider); cerr != nil {
 				d.logger.Warn("execenv: cleanup runtime config failed (non-fatal)", "error", cerr)
 			}
-			// Excise the sidecar tree (.agent_context/, .multica/,
+			// Excise the sidecar tree (.agent_context/, .opercia/,
 			// provider-specific .claude/skills/ etc.) that Prepare wrote
 			// into the user's repo. Without this pass the user's tree
 			// accumulates one directory layer per task — see MUL-2784.
@@ -6020,11 +6020,11 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 	prompt := BuildPrompt(task, provider)
 
 	// Pass task-scoped auth credentials and context so the spawned agent CLI
-	// can call the Multica API and the local daemon (e.g. `multica repo checkout`).
-	// MULTICA_TASK_SLOT is allocated from the daemon-wide concurrency pool, not
+	// can call the Opercia API and the local daemon (e.g. `opercia repo checkout`).
+	// OPERCIA_TASK_SLOT is allocated from the daemon-wide concurrency pool, not
 	// per-agent. When one daemon hosts multiple agents, slots index shared
 	// daemon-level resources such as GPUs.
-	// MULTICA_TOKEN is bound to (agent, task) by the server. Never fall back
+	// OPERCIA_TOKEN is bound to (agent, task) by the server. Never fall back
 	// to the daemon's own credential here: doing so lets agent CLI writes land
 	// as the runtime owner's member actor and can retrigger the same agent.
 	agentToken, err := taskScopedAuthToken(task)
@@ -6032,34 +6032,34 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 		taskLog.Error("task auth token invalid; refusing to start agent", "error", err)
 		return TaskResult{}, err
 	}
-	agentEnv := taskMulticaEnvironment(task, agentName, agentToken, env.MulticaConfigRoot, d.cfg.WorkspacesRoot, d.cfg.ServerBaseURL, d.cfg.HealthPort, slot, taskTempDir)
+	agentEnv := taskOperciaEnvironment(task, agentName, agentToken, env.OperciaConfigRoot, d.cfg.WorkspacesRoot, d.cfg.ServerBaseURL, d.cfg.HealthPort, slot, taskTempDir)
 	if checkoutMode := repoCheckoutModeFor(provider, runtime.GOOS); checkoutMode != "" {
 		agentEnv[repoCheckoutModeEnv] = checkoutMode
 	}
 	if task.AutopilotRunID != "" {
-		agentEnv["MULTICA_AUTOPILOT_RUN_ID"] = task.AutopilotRunID
+		agentEnv["OPERCIA_AUTOPILOT_RUN_ID"] = task.AutopilotRunID
 	}
 	if task.AutopilotID != "" {
-		agentEnv["MULTICA_AUTOPILOT_ID"] = task.AutopilotID
+		agentEnv["OPERCIA_AUTOPILOT_ID"] = task.AutopilotID
 	}
-	// Quick-create marker — when set, the multica CLI's `issue create`
+	// Quick-create marker — when set, the opercia CLI's `issue create`
 	// command stamps the new issue with origin_type=quick_create +
 	// origin_id=<task_id> so the completion handler can find it
 	// deterministically (see GetIssueByOrigin).
 	if task.QuickCreatePrompt != "" {
-		agentEnv["MULTICA_QUICK_CREATE_TASK_ID"] = task.ID
+		agentEnv["OPERCIA_QUICK_CREATE_TASK_ID"] = task.ID
 		if len(task.QuickCreateAttachmentIDs) > 0 {
 			if raw, err := json.Marshal(task.QuickCreateAttachmentIDs); err == nil {
-				agentEnv["MULTICA_QUICK_CREATE_ATTACHMENT_IDS"] = string(raw)
+				agentEnv["OPERCIA_QUICK_CREATE_ATTACHMENT_IDS"] = string(raw)
 			} else {
 				taskLog.Warn("quick-create attachment ids: marshal failed; skipping env injection", "error", err)
 			}
 		}
 	}
-	// Ensure the multica CLI is on PATH inside the agent's environment.
+	// Ensure the opercia CLI is on PATH inside the agent's environment.
 	// Some runtimes (e.g. Codex) run in an isolated sandbox that may not
 	// inherit the daemon's PATH. Prepend the directory of the running
-	// multica binary so that `multica` commands in the agent always resolve.
+	// opercia binary so that `opercia` commands in the agent always resolve.
 	if selfBin, err := resolveSelfExecutable(); err == nil {
 		binDir := filepath.Dir(selfBin)
 		agentEnv["PATH"] = binDir + string(os.PathListSeparator) + os.Getenv("PATH")
@@ -6071,8 +6071,8 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 	}
 	// HOME and the XDG base dirs are deliberately not touched here: provider
 	// tools such as gh, aws, kubectl, and npm continue resolving the daemon
-	// user's existing state (MUL-5578). The Multica CLI is the exception:
-	// MULTICA_TASK_CONFIG_ROOT above redirects its implicit profile lookup to
+	// user's existing state (MUL-5578). The Opercia CLI is the exception:
+	// OPERCIA_TASK_CONFIG_ROOT above redirects its implicit profile lookup to
 	// private task-local state and prevents Owner-profile fallback.
 	// (Hermes HERMES_HOME is applied after custom_env below so the per-task
 	// overlay can win over a user-set HERMES_HOME; see
@@ -6166,7 +6166,7 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 		customArgs = hermesLaunchArgs(customArgs, env != nil && env.HermesHome != "")
 	}
 	// Two-tier model resolution: an explicit agent.model wins,
-	// then the daemon-wide MULTICA_<PROVIDER>_MODEL env var. If
+	// then the daemon-wide OPERCIA_<PROVIDER>_MODEL env var. If
 	// both are empty we deliberately pass "" through — each
 	// backend omits `--model` from the CLI invocation, so the
 	// provider picks its own default (Claude Code's shipped
@@ -6288,7 +6288,7 @@ func (d *Daemon) runTask(ctx context.Context, task Task, provider string, slot i
 	// identity/persona + skills + project context) so the backend prepends the
 	// same payload that file-based runtimes pick up from disk. Without this,
 	// these providers silently miss the workflow section and never call
-	// `multica issue status` / `multica issue comment add`, leaving issues
+	// `opercia issue status` / `opercia issue comment add`, leaving issues
 	// stuck in `todo`.
 	//
 	// Hermes and Kiro are intentionally excluded: their ACP sessions start in
@@ -6856,7 +6856,7 @@ func (d *Daemon) executeAndDrain(ctx context.Context, backend agent.Backend, pro
 	// window — so the failure message reports the real duration.
 	idleWindow := d.cfg.AgentIdleWatchdog
 	// A provider may opt into a shorter per-run no-message budget. The global
-	// zero remains authoritative so MULTICA_AGENT_IDLE_WATCHDOG=0 still disables
+	// zero remains authoritative so OPERCIA_AGENT_IDLE_WATCHDOG=0 still disables
 	// the entire watchdog suite. Tool calls continue to use AgentToolWatchdog.
 	if idleWindow > 0 && opts.IdleWatchdogTimeout > 0 && opts.IdleWatchdogTimeout < idleWindow {
 		idleWindow = opts.IdleWatchdogTimeout
@@ -7524,7 +7524,7 @@ func ensureTaskTempDir(envRoot string, workspaceID string, taskID string) (strin
 	if taskID == "" {
 		return "", errors.New("task id is empty")
 	}
-	dir, err := os.MkdirTemp(socketSafeTempBaseDir(), "multica-task-")
+	dir, err := os.MkdirTemp(socketSafeTempBaseDir(), "opercia-task-")
 	if err != nil {
 		return "", err
 	}
@@ -7548,7 +7548,7 @@ func socketSafeTempBaseDir() string {
 // daemon-internal variables and critical system paths.
 func isBlockedEnvKey(key string) bool {
 	upper := strings.ToUpper(key)
-	if strings.HasPrefix(upper, "MULTICA_") {
+	if strings.HasPrefix(upper, "OPERCIA_") {
 		return true
 	}
 	switch upper {
@@ -7619,7 +7619,7 @@ func layerCustomEnvAndHermesHome(agentEnv, customEnv map[string]string, overlayH
 // (runtime, agent) while leaving REASONIX_HOME untouched. Current Reasonix
 // reads credentials/config from REASONIX_HOME and state from
 // REASONIX_STATE_HOME, so `reasonix setup` remains the sole credential owner
-// and Multica never copies API keys into task-managed files.
+// and Opercia never copies API keys into task-managed files.
 func prepareReasonixTaskStateHome(profile, runtimeID, agentID string) (string, error) {
 	profileDir, err := cli.ProfileDir(profile)
 	if err != nil {

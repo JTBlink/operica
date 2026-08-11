@@ -7,13 +7,13 @@ import {
   Loader2,
   RefreshCw,
 } from "lucide-react";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { runtimeKeys } from "@multica/core/runtimes/queries";
+import { Button } from "@opercia/ui/components/ui/button";
+import { cn } from "@opercia/ui/lib/utils";
+import { runtimeKeys } from "@opercia/core/runtimes/queries";
 import {
   runtimeDisplayLabel,
-} from "@multica/core/runtimes";
-import type { AgentRuntime } from "@multica/core/types";
+} from "@opercia/core/runtimes";
+import type { AgentRuntime } from "@opercia/core/types";
 import { MikaIntro } from "../components/mika-intro";
 import {
   StepFooter,

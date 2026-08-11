@@ -1,14 +1,14 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { Issue } from "@multica/core/types";
+import type { Issue } from "@opercia/core/types";
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@opercia/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
 const mockOpenModal = vi.fn();
-vi.mock("@multica/core/modals", () => ({
+vi.mock("@opercia/core/modals", () => ({
   useModalStore: Object.assign(
     (selector?: any) => {
       const state = { open: mockOpenModal };
@@ -19,7 +19,7 @@ vi.mock("@multica/core/modals", () => ({
 }));
 
 const mockAuthState = { user: { id: "user-1" }, isAuthenticated: true };
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@opercia/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: any) => (selector ? selector(mockAuthState) : mockAuthState),
     { getState: () => mockAuthState },
@@ -33,7 +33,7 @@ const pinListRef: { value: Array<{ item_type: string; item_id: string }> } = {
 };
 const mockCreatePinMutate = vi.fn();
 const mockDeletePinMutate = vi.fn();
-vi.mock("@multica/core/pins", () => ({
+vi.mock("@opercia/core/pins", () => ({
   pinListOptions: () => ({
     queryKey: ["pins", "ws-1", "user-1"],
     queryFn: () => Promise.resolve(pinListRef.value),
@@ -43,13 +43,13 @@ vi.mock("@multica/core/pins", () => ({
 }));
 
 const mockUpdateMutate = vi.fn();
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@opercia/core/issues/mutations", () => ({
   useUpdateIssue: () => ({ mutate: mockUpdateMutate }),
 }));
 
-vi.mock("@multica/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@multica/core/paths")>(
-    "@multica/core/paths",
+vi.mock("@opercia/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
+    "@opercia/core/paths",
   );
   return {
     ...actual,
@@ -65,7 +65,7 @@ vi.mock("../../../navigation", () => ({
     searchParams: new URLSearchParams(),
     back: vi.fn(),
     replace: vi.fn(),
-    getShareableUrl: (p: string) => `https://app.multica.com${p}`,
+    getShareableUrl: (p: string) => `https://app.opercia.com${p}`,
   }),
 }));
 
@@ -196,7 +196,7 @@ describe("useIssueActions", () => {
     });
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      "https://app.multica.com/test/issues/TES-1",
+      "https://app.opercia.com/test/issues/TES-1",
     );
   });
 
@@ -211,7 +211,7 @@ describe("useIssueActions", () => {
     });
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      "https://app.multica.com/test/issues/issue-1",
+      "https://app.opercia.com/test/issues/issue-1",
     );
   });
 

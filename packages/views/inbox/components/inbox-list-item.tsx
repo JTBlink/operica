@@ -6,13 +6,13 @@ import {
 } from "../../issues/components/issue-agent-activity-indicator";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { Archive, ArchiveRestore } from "lucide-react";
-import type { InboxItem } from "@multica/core/types";
+import type { InboxItem } from "@opercia/core/types";
 import type { InboxView } from "./inbox-view";
 import { InboxDetailLabel } from "./inbox-detail-label";
 import { getInboxDisplayTitle } from "./inbox-display";
 import { useInboxContextMenu } from "./inbox-context-menu";
 import { useT } from "../../i18n";
-import { paths, useWorkspaceSlug } from "@multica/core/paths";
+import { paths, useWorkspaceSlug } from "@opercia/core/paths";
 import { resolveClickIntent, useIntentNavigate } from "../../navigation";
 
 // Hook returning a localized relative-time formatter — the i18n equivalent

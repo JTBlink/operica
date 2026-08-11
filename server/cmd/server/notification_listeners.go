@@ -6,11 +6,11 @@ import (
 	"log/slog"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"github.com/opercia-ai/opercia/server/internal/events"
+	"github.com/opercia-ai/opercia/server/internal/handler"
+	"github.com/opercia-ai/opercia/server/internal/util"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/pkg/protocol"
 )
 
 // mention represents a parsed @mention from markdown content (local alias).
@@ -88,7 +88,7 @@ var delegatedAlwaysNotifTypes = map[string]bool{
 // for a delegated subscriber — someone whose agent filed this issue on their
 // behalf.
 //
-// in_review is the important one: in Multica's agent flow an agent parks
+// in_review is the important one: in Opercia's agent flow an agent parks
 // completed work in in_review, so that is the dominant "this needs you now"
 // transition, not done.
 //
@@ -198,7 +198,7 @@ func loadUserPrefs(
 // the issue as "the user no longer needs to triage past failures." When a
 // status change lands on one of these, any pre-existing task_failed inbox
 // rows for the issue are archived so the inbox stays a fresh-signal surface.
-// `in_review` is included because in Multica's agent flow that's the most
+// `in_review` is included because in Opercia's agent flow that's the most
 // reliable "work delivered" handoff — and a status flip back to in_progress
 // will simply produce new task_failed rows that surface normally.
 var terminalStatusForTaskFailedDismiss = map[string]bool{

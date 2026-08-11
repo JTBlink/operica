@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { hashKey, keepPreviousData, useQuery } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
+import { api } from "@opercia/core/api";
 import type {
   Issue,
   IssueStatus,
@@ -12,25 +12,25 @@ import type {
   IssueTableQuerySpec,
   Project,
   WorkingAgentSummary,
-} from "@multica/core/types";
-import { workspaceWorkingAgentsOptions } from "@multica/core/agents";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { ALL_STATUSES } from "@multica/core/issues/config";
-import { dateOnlyToLocalDate } from "@multica/core/issues/date";
-import type { IssueSortParam } from "@multica/core/issues/queries";
-import { issueTableFacetsOptions } from "@multica/core/issues/queries";
+} from "@opercia/core/types";
+import { workspaceWorkingAgentsOptions } from "@opercia/core/agents";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { ALL_STATUSES } from "@opercia/core/issues/config";
+import { dateOnlyToLocalDate } from "@opercia/core/issues/date";
+import type { IssueSortParam } from "@opercia/core/issues/queries";
+import { issueTableFacetsOptions } from "@opercia/core/issues/queries";
 import {
   buildIssueSurfaceQueryPlan,
   type IssueSurfaceQueryPlan,
-} from "@multica/core/issues/surface/query-plan";
+} from "@opercia/core/issues/surface/query-plan";
 import {
   assigneeTypesForActorKind,
   type IssueScope,
-} from "@multica/core/issues/surface/scope";
-import type { IssueDateFilter, SortField } from "@multica/core/issues/stores/view-store";
-import { propertyListOptions } from "@multica/core/properties";
-import { propertyIdFromViewKey } from "@multica/core/issues/stores/view-store";
-import { useViewStore } from "@multica/core/issues/stores/view-store-context";
+} from "@opercia/core/issues/surface/scope";
+import type { IssueDateFilter, SortField } from "@opercia/core/issues/stores/view-store";
+import { propertyListOptions } from "@opercia/core/properties";
+import { propertyIdFromViewKey } from "@opercia/core/issues/stores/view-store";
+import { useViewStore } from "@opercia/core/issues/stores/view-store-context";
 import type { IssueFilters } from "../utils/filter";
 import type { ChildProgress } from "../components/list-row";
 import { IssueTableExportIntegrityError } from "../components/table-view-model";

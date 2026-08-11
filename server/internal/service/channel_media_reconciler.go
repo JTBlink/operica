@@ -10,8 +10,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/metrics"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/internal/metrics"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
 )
 
 // The channel-media intent ledger's reconciler settings are fixed constants,

@@ -11,39 +11,39 @@ import {
   type ReactNode,
 } from "react";
 import type { QueryClient } from "@tanstack/react-query";
-import { getCurrentWsId } from "@multica/core/platform";
-import { flattenIssueBuckets, issueKeys } from "@multica/core/issues/queries";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { useAuthStore } from "@multica/core/auth";
-import { canAssignAgentToIssue } from "@multica/core/permissions";
-import { isAgentRuntimeBound } from "@multica/core/agents";
-import { api } from "@multica/core/api";
+import { getCurrentWsId } from "@opercia/core/platform";
+import { flattenIssueBuckets, issueKeys } from "@opercia/core/issues/queries";
+import { workspaceKeys } from "@opercia/core/workspace/queries";
+import { useAuthStore } from "@opercia/core/auth";
+import { canAssignAgentToIssue } from "@opercia/core/permissions";
+import { isAgentRuntimeBound } from "@opercia/core/agents";
+import { api } from "@opercia/core/api";
 import {
   isIssueDirectHit,
   isProjectDirectHit,
-} from "@multica/core/search/cancelled-rank";
-import { isImeComposing } from "@multica/core/utils";
+} from "@opercia/core/search/cancelled-rank";
+import { isImeComposing } from "@opercia/core/utils";
 import type {
   Issue,
   ListIssuesCache,
   MemberWithUser,
   Agent,
   Squad,
-} from "@multica/core/types";
+} from "@opercia/core/types";
 import { ListTodo } from "lucide-react";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { StatusIcon } from "../../issues/components/status-icon";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { useT } from "../../i18n";
-import { Badge } from "@multica/ui/components/ui/badge";
+import { Badge } from "@opercia/ui/components/ui/badge";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { cn } from "@multica/ui/lib/utils";
-import type { IssueStatus, ProjectStatus } from "@multica/core/types";
-import { PROJECT_STATUS_CONFIG } from "@multica/core/projects/config";
+} from "@opercia/ui/components/ui/tooltip";
+import { cn } from "@opercia/ui/lib/utils";
+import type { IssueStatus, ProjectStatus } from "@opercia/core/types";
+import { PROJECT_STATUS_CONFIG } from "@opercia/core/projects/config";
 import type { SuggestionOptions } from "@tiptap/suggestion";
 import { PluginKey } from "@tiptap/pm/state";
 import {

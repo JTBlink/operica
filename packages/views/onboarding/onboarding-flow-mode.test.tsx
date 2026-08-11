@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@opercia/core/i18n/react";
 import enCommon from "../locales/en/common.json";
 import enOnboarding from "../locales/en/onboarding.json";
 import enWorkspace from "../locales/en/workspace.json";
@@ -11,21 +11,21 @@ const TEST_RESOURCES = {
 
 vi.mock("../auth", () => ({ useLogout: () => vi.fn() }));
 
-vi.mock("@multica/core/config", () => ({
+vi.mock("@opercia/core/config", () => ({
   useConfigStore: (
     selector: (s: { workspaceCreationDisabled: boolean; daemonAppUrl: string }) => unknown,
   ) => selector({ workspaceCreationDisabled: false, daemonAppUrl: "" }),
 }));
 
-vi.mock("@multica/core/api", () => ({
-  api: { getBaseUrl: () => "https://multica.ai" },
+vi.mock("@opercia/core/api", () => ({
+  api: { getBaseUrl: () => "https://opercia.ai" },
 }));
 
-vi.mock("@multica/core/workspace/mutations", () => ({
+vi.mock("@opercia/core/workspace/mutations", () => ({
   useCreateWorkspace: () => ({ mutate: vi.fn(), isPending: false }),
 }));
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@opercia/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector: (s: { user: unknown }) => unknown) =>
       selector({ user: { id: "u-1", onboarding_questionnaire: {} } }),
@@ -48,9 +48,9 @@ vi.mock("@tanstack/react-query", async () => {
   };
 });
 
-vi.mock("@multica/core/onboarding", async () => {
+vi.mock("@opercia/core/onboarding", async () => {
   const actual = await vi.importActual<Record<string, unknown>>(
-    "@multica/core/onboarding",
+    "@opercia/core/onboarding",
   );
   return { ...actual, useBootstrapMika: () => ({ mutateAsync: vi.fn() }) };
 });
@@ -69,7 +69,7 @@ describe("OnboardingFlow — new-workspace mode", () => {
   it("starts at the workspace step instead of the product intro", () => {
     renderFlow({ mode: "new_workspace", onCancel: vi.fn() });
 
-    // The welcome screen teaches what Multica is; someone creating a second
+    // The welcome screen teaches what Opercia is; someone creating a second
     // workspace already knows, so the flow opens on naming it.
     expect(
       screen.getByRole("heading", { name: /Name your workspace/i }),

@@ -11,7 +11,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@opercia/core/i18n/react";
 import enCommon from "../locales/en/common.json";
 import enModals from "../locales/en/modals.json";
 import enEditor from "../locales/en/editor.json";
@@ -153,7 +153,7 @@ vi.mock("../navigation/context", () => ({
   useNavigation: () => ({ push: mockPush }),
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@opercia/core/paths", () => ({
   useCurrentWorkspace: () => ({ name: "Test Workspace" }),
   useWorkspacePaths: () => ({
     issueDetail: (id: string) => `/ws-test/issues/${id}`,
@@ -161,11 +161,11 @@ vi.mock("@multica/core/paths", () => ({
   }),
 }));
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@opercia/core/hooks", () => ({
   useWorkspaceId: () => "ws-test",
 }));
 
-vi.mock("@multica/core/issues/queries", () => ({
+vi.mock("@opercia/core/issues/queries", () => ({
   issueDetailOptions: (wsId: string, id: string) => ({
     queryKey: ["issues", wsId, "detail", id],
     queryFn: () => Promise.resolve(null),
@@ -188,7 +188,7 @@ vi.mock("../issues/hooks/use-issue-trigger-preview", () => ({
   }),
 }));
 
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@opercia/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Agent" }),
 }));
 
@@ -199,7 +199,7 @@ vi.mock("../common/actor-avatar", () => ({
   ActorAvatar: () => null,
 }));
 
-vi.mock("@multica/core/issues/stores/draft-store", () => ({
+vi.mock("@opercia/core/issues/stores/draft-store", () => ({
   useIssueDraftStore: Object.assign(
     (selector?: (state: typeof mockDraftStore) => unknown) =>
       (selector ? selector(mockDraftStore) : mockDraftStore),
@@ -207,28 +207,28 @@ vi.mock("@multica/core/issues/stores/draft-store", () => ({
   ),
 }));
 
-vi.mock("@multica/core/issues/stores/quick-create-store", () => ({
+vi.mock("@opercia/core/issues/stores/quick-create-store", () => ({
   useQuickCreateStore: (selector?: (state: typeof mockQuickCreateStore) => unknown) =>
     (selector ? selector(mockQuickCreateStore) : mockQuickCreateStore),
 }));
 
-vi.mock("@multica/core/issues/stores/issue-create-settings-store", () => ({
+vi.mock("@opercia/core/issues/stores/issue-create-settings-store", () => ({
   useIssueCreateSettingsStore: (
     selector?: (state: typeof mockCreateSettingsStore) => unknown,
   ) => (selector ? selector(mockCreateSettingsStore) : mockCreateSettingsStore),
 }));
 
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@opercia/core/issues/mutations", () => ({
   useCreateIssue: () => ({ mutateAsync: mockCreateIssue }),
   useUpdateIssue: () => ({ mutate: vi.fn() }),
 }));
 
-vi.mock("@multica/core/labels", () => ({
+vi.mock("@opercia/core/labels", () => ({
   useAttachLabelToIssue: () => ({ mutateAsync: mockAttachLabel }),
 }));
 
-vi.mock("@multica/core/properties", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/properties")>();
+vi.mock("@opercia/core/properties", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@opercia/core/properties")>();
   return {
     ...actual,
     useSetIssueProperty: () => ({
@@ -262,18 +262,18 @@ const { ApiError } = vi.hoisted(() => {
   return { ApiError: ApiErrorImpl };
 });
 
-vi.mock("@multica/core/api", async () => {
+vi.mock("@opercia/core/api", async () => {
   // Pull real `parseWithFallback` + `DuplicateIssueErrorBodySchema` from the
   // schema modules so the drift-fallback branch in create-issue.tsx runs the
   // actual validation logic (not a stub). Only `ApiError` is local — the
   // component imports it from this module and the cross-realm `instanceof`
   // check requires a single class identity.
-  const { parseWithFallback } = await vi.importActual<typeof import("@multica/core/api/schema")>(
-    "@multica/core/api/schema",
+  const { parseWithFallback } = await vi.importActual<typeof import("@opercia/core/api/schema")>(
+    "@opercia/core/api/schema",
   );
   const { DuplicateIssueErrorBodySchema } = await vi.importActual<
-    typeof import("@multica/core/api/schemas")
-  >("@multica/core/api/schemas");
+    typeof import("@opercia/core/api/schemas")
+  >("@opercia/core/api/schemas");
   return {
     api: {
       listProperties: mockListProperties,
@@ -450,7 +450,7 @@ vi.mock("../projects/components/project-picker", () => ({
   ),
 }));
 
-vi.mock("@multica/ui/components/ui/dialog", () => ({
+vi.mock("@opercia/ui/components/ui/dialog", () => ({
   Dialog: ({ children }: { children: React.ReactNode }) => <div data-testid="dialog-root">{children}</div>,
   DialogContent: ({ children, className }: { children: React.ReactNode; className?: string }) => (
     <div className={className}>{children}</div>
@@ -460,7 +460,7 @@ vi.mock("@multica/ui/components/ui/dialog", () => ({
   ),
 }));
 
-vi.mock("@multica/ui/components/ui/dropdown-menu", () => ({
+vi.mock("@opercia/ui/components/ui/dropdown-menu", () => ({
   DropdownMenu: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   DropdownMenuTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   DropdownMenuContent: ({ children }: { children: React.ReactNode }) => <>{children}</>,
@@ -491,14 +491,14 @@ vi.mock("./issue-picker-modal", () => ({
   IssuePickerModal: () => null,
 }));
 
-vi.mock("@multica/ui/components/ui/tooltip", () => ({
+vi.mock("@opercia/ui/components/ui/tooltip", () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   TooltipTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   TooltipContent: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   TooltipProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
-vi.mock("@multica/ui/components/ui/button", () => ({
+vi.mock("@opercia/ui/components/ui/button", () => ({
   Button: ({
     children,
     disabled,
@@ -520,7 +520,7 @@ vi.mock("@multica/ui/components/ui/button", () => ({
   ),
 }));
 
-vi.mock("@multica/ui/components/ui/switch", () => ({
+vi.mock("@opercia/ui/components/ui/switch", () => ({
   Switch: ({
     checked,
     onCheckedChange,
@@ -537,7 +537,7 @@ vi.mock("@multica/ui/components/ui/switch", () => ({
   ),
 }));
 
-vi.mock("@multica/ui/components/common/file-upload-button", () => ({
+vi.mock("@opercia/ui/components/common/file-upload-button", () => ({
   FileUploadButton: ({ onSelect }: { onSelect: (file: File) => void }) => (
     <button type="button" onClick={() => onSelect(new File(["test"], "test.txt"))}>
       Upload file
@@ -545,7 +545,7 @@ vi.mock("@multica/ui/components/common/file-upload-button", () => ({
   ),
 }));
 
-vi.mock("@multica/ui/lib/utils", () => ({
+vi.mock("@opercia/ui/lib/utils", () => ({
   cn: (...values: Array<string | false | null | undefined>) => values.filter(Boolean).join(" "),
 }));
 
@@ -608,7 +608,7 @@ describe("CreateIssueModal", () => {
       filename: "shot.png",
       url: "https://cdn.example.test/shot.png",
       download_url: "https://cdn.example.test/shot.png?Signature=fresh",
-      markdown_url: "https://multica-api.copilothub.ai/api/attachments/11111111-2222-3333-4444-555555555555/download",
+      markdown_url: "https://opercia-api.copilothub.ai/api/attachments/11111111-2222-3333-4444-555555555555/download",
       content_type: "image/png",
       size_bytes: 123,
       created_at: "2026-06-12T00:00:00Z",
@@ -865,7 +865,7 @@ describe("CreateIssueModal", () => {
       filename: "shot.png",
       url: "https://cdn.example.test/shot.png",
       download_url: "",
-      markdown_url: "https://multica-api.copilothub.ai/api/attachments/11111111-2222-3333-4444-555555555555/download",
+      markdown_url: "https://opercia-api.copilothub.ai/api/attachments/11111111-2222-3333-4444-555555555555/download",
       content_type: "image/png",
       size_bytes: 123,
       created_at: "2026-06-12T00:00:00Z",
@@ -915,7 +915,7 @@ describe("CreateIssueModal", () => {
       filename: "kept.png",
       url: "https://cdn.example.test/kept.png",
       download_url: "",
-      markdown_url: "https://multica-api.copilothub.ai/api/attachments/11111111-2222-3333-4444-555555555555/download",
+      markdown_url: "https://opercia-api.copilothub.ai/api/attachments/11111111-2222-3333-4444-555555555555/download",
       content_type: "image/png",
       size_bytes: 123,
       created_at: "2026-06-12T00:00:00Z",
@@ -925,7 +925,7 @@ describe("CreateIssueModal", () => {
       id: "99999999-8888-7777-6666-555555555555",
       filename: "deleted.png",
       url: "https://cdn.example.test/deleted.png",
-      markdown_url: "https://multica-api.copilothub.ai/api/attachments/99999999-8888-7777-6666-555555555555/download",
+      markdown_url: "https://opercia-api.copilothub.ai/api/attachments/99999999-8888-7777-6666-555555555555/download",
     };
     const wrap = (att: typeof referenced): DraftUploadEntry => ({
       clientUploadId: att.id,
@@ -965,7 +965,7 @@ describe("CreateIssueModal", () => {
       filename: "orphan.png",
       url: "https://cdn.example.test/orphan.png",
       download_url: "",
-      markdown_url: "https://multica-api.copilothub.ai/api/attachments/99999999-8888-7777-6666-555555555555/download",
+      markdown_url: "https://opercia-api.copilothub.ai/api/attachments/99999999-8888-7777-6666-555555555555/download",
       content_type: "image/png",
       size_bytes: 5,
       created_at: "2026-06-12T00:00:00Z",

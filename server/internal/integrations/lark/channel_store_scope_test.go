@@ -10,8 +10,8 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/internal/util"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
 )
 
 // channelScopeTestDB connects to the test Postgres (DATABASE_URL or the default
@@ -22,7 +22,7 @@ func channelScopeTestDB(t *testing.T) *pgxpool.Pool {
 	t.Helper()
 	dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
-		dsn = "postgres://multica:multica@localhost:5432/multica?sslmode=disable"
+		dsn = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
 	}
 	ctx := context.Background()
 	pool, err := pgxpool.New(ctx, dsn)

@@ -11,19 +11,19 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
+import { setApiInstance } from "@opercia/core/api";
+import type { ApiClient } from "@opercia/core/api/client";
 import {
   getIssueSurfaceViewStore,
   pruneIssueSurfaceViewStates,
-} from "@multica/core/issues/stores/surface-view-store";
+} from "@opercia/core/issues/stores/surface-view-store";
 import type {
   AgentTask,
   Issue,
   IssueTableRowsRequest,
   ListIssuesParams,
   ListIssuesResponse,
-} from "@multica/core/types";
+} from "@opercia/core/types";
 import { IssueSurface } from "./issue-surface";
 import { statusTableMethodsFromLegacy } from "./status-table-test-api";
 
@@ -32,7 +32,7 @@ import { statusTableMethodsFromLegacy } from "./status-table-test-api";
 // wsId change itself.
 const mockWsId = vi.hoisted(() => ({ current: "ws-1" }));
 const mockTranslate = vi.hoisted(() => vi.fn(() => "translated"));
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@opercia/core/hooks", () => ({
   useWorkspaceId: () => mockWsId.current,
 }));
 
@@ -64,7 +64,7 @@ vi.mock("@tanstack/react-virtual", () => ({
 }));
 
 const mockAuthUser = { id: "user-1", email: "test@test.com", name: "Test User" };
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@opercia/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: (state: unknown) => unknown) => {
       const state = { user: mockAuthUser, isAuthenticated: true };
@@ -93,9 +93,9 @@ vi.mock("../../navigation", () => ({
   useIntentNavigate: () => () => {},
 }));
 
-vi.mock("@multica/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@multica/core/paths")>(
-    "@multica/core/paths",
+vi.mock("@opercia/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
+    "@opercia/core/paths",
   );
   return {
     ...actual,
@@ -311,7 +311,7 @@ describe("IssueSurface — table pagination ownership", () => {
 
   it("does not materialize the legacy offset window and starts one cursor root branch", async () => {
     const { getIssueSurfaceViewStore } = await import(
-      "@multica/core/issues/stores/surface-view-store"
+      "@opercia/core/issues/stores/surface-view-store"
     );
     const store = getIssueSurfaceViewStore("project:pt");
     store.getState().setViewMode("table");
@@ -392,7 +392,7 @@ describe("IssueSurface — table pagination ownership", () => {
 
   it("keeps loaded rows when a continuation page reports zero", async () => {
     const { getIssueSurfaceViewStore } = await import(
-      "@multica/core/issues/stores/surface-view-store"
+      "@opercia/core/issues/stores/surface-view-store"
     );
     const store = getIssueSurfaceViewStore("project:pt-pages");
     store.getState().setViewMode("table");
@@ -483,7 +483,7 @@ describe("IssueSurface — table pagination ownership", () => {
 
   it("feeds loaded Table rows to the shared batch toolbar", async () => {
     const { getIssueSurfaceViewStore } = await import(
-      "@multica/core/issues/stores/surface-view-store"
+      "@opercia/core/issues/stores/surface-view-store"
     );
     const store = getIssueSurfaceViewStore("project:pt-batch");
     store.getState().setViewMode("table");
@@ -535,7 +535,7 @@ describe("IssueSurface — table pagination ownership", () => {
 
   it("keeps the previous Table rows painted while a new sort is loading", async () => {
     const { getIssueSurfaceViewStore } = await import(
-      "@multica/core/issues/stores/surface-view-store"
+      "@opercia/core/issues/stores/surface-view-store"
     );
     const store = getIssueSurfaceViewStore("project:pt-sort-transition");
     store.getState().setViewMode("table");
@@ -590,7 +590,7 @@ describe("IssueSurface — table pagination ownership", () => {
 
   it("keeps selected Table rows in the batch universe after their group collapses", async () => {
     const { getIssueSurfaceViewStore } = await import(
-      "@multica/core/issues/stores/surface-view-store"
+      "@opercia/core/issues/stores/surface-view-store"
     );
     const store = getIssueSurfaceViewStore("project:pt-collapsed-batch");
     store.getState().setViewMode("table");

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CHART_DIR="$ROOT_DIR/deploy/helm/multica"
+CHART_DIR="$ROOT_DIR/deploy/helm/opercia"
 
 require_rendered_value() {
   local rendered=$1
@@ -18,16 +18,16 @@ require_rendered_value() {
 helm lint "$CHART_DIR"
 
 default_config="$(
-  helm template multica "$CHART_DIR" \
+  helm template opercia "$CHART_DIR" \
     --show-only templates/configmap.yaml
 )"
-require_rendered_value "$default_config" 'MULTICA_VCS_INTEGRATION_ENABLED: "true"'
+require_rendered_value "$default_config" 'OPERCIA_VCS_INTEGRATION_ENABLED: "true"'
 
 disabled_config="$(
-  helm template multica "$CHART_DIR" \
+  helm template opercia "$CHART_DIR" \
     --show-only templates/configmap.yaml \
     --set backend.config.vcsIntegrationEnabled=false
 )"
-require_rendered_value "$disabled_config" 'MULTICA_VCS_INTEGRATION_ENABLED: "false"'
+require_rendered_value "$disabled_config" 'OPERCIA_VCS_INTEGRATION_ENABLED: "false"'
 
 echo "helm config rendering ok"

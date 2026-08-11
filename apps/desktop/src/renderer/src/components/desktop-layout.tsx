@@ -1,7 +1,7 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@opercia/ui/lib/utils";
 import {
   useNavigationInputBindings,
   useTabHistory,
@@ -10,18 +10,18 @@ import {
   SidebarProvider,
   SidebarTrigger,
   useSidebar,
-} from "@multica/ui/components/ui/sidebar";
-import { ModalRegistry } from "@multica/views/modals/registry";
-import { AppSidebar, GlobalShortcuts } from "@multica/views/layout";
-import { SearchCommand, SearchTrigger } from "@multica/views/search";
-import { FloatingChat } from "@multica/views/chat";
-import { WorkspaceSlugProvider, paths, useCurrentWorkspace } from "@multica/core/paths";
+} from "@opercia/ui/components/ui/sidebar";
+import { ModalRegistry } from "@opercia/views/modals/registry";
+import { AppSidebar, GlobalShortcuts } from "@opercia/views/layout";
+import { SearchCommand, SearchTrigger } from "@opercia/views/search";
+import { FloatingChat } from "@opercia/views/chat";
+import { WorkspaceSlugProvider, paths, useCurrentWorkspace } from "@opercia/core/paths";
 import {
   useNavigation,
   type LinkClickIntent,
-} from "@multica/views/navigation";
-import { getCurrentSlug, subscribeToCurrentSlug } from "@multica/core/platform";
-import { useDesktopUnreadBadge } from "@multica/views/platform";
+} from "@opercia/views/navigation";
+import { getCurrentSlug, subscribeToCurrentSlug } from "@opercia/core/platform";
+import { useDesktopUnreadBadge } from "@opercia/views/platform";
 import {
   DesktopNavigationProvider,
   routeContentLinkPath,
@@ -165,8 +165,8 @@ function useInternalLinkHandler() {
       if (!detail?.path) return;
       routeContentLinkPath(detail.path, detail.disposition);
     };
-    window.addEventListener("multica:navigate", handler);
-    return () => window.removeEventListener("multica:navigate", handler);
+    window.addEventListener("opercia:navigate", handler);
+    return () => window.removeEventListener("opercia:navigate", handler);
   }, []);
 }
 
@@ -186,7 +186,7 @@ function useInternalLinkHandler() {
  *      covers both click-to-select and URL-param-select paths.
  *
  * The click routes through `useNavigation().push` — NOT the
- * `multica:navigate` event, whose handler `openTab`s into the ACTIVE
+ * `opercia:navigate` event, whose handler `openTab`s into the ACTIVE
  * workspace's tab group. The navigation adapter detects a cross-workspace
  * path and translates it into `switchWorkspace(slug, path)`, so clicking a
  * workspace-A notification while B is active performs a real workspace

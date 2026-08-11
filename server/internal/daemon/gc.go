@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/internal/daemon/repocache"
+	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
+	"github.com/opercia-ai/opercia/server/internal/daemon/repocache"
 )
 
 // reposDirName is the bare-repo cache directory inside the workspaces root.

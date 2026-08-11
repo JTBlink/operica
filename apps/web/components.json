@@ -13,11 +13,11 @@
   "iconLibrary": "lucide",
   "rtl": false,
   "aliases": {
-    "components": "@multica/ui/components",
-    "utils": "@multica/ui/lib/utils",
-    "ui": "@multica/ui/components/ui",
-    "lib": "@multica/ui/lib",
-    "hooks": "@multica/ui/hooks"
+    "components": "@opercia/ui/components",
+    "utils": "@opercia/ui/lib/utils",
+    "ui": "@opercia/ui/components/ui",
+    "lib": "@opercia/ui/lib",
+    "hooks": "@opercia/ui/hooks"
   },
   "menuColor": "default",
   "menuAccent": "subtle",

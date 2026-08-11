@@ -5,10 +5,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/realtime"
+	"github.com/opercia-ai/opercia/server/internal/analytics"
+	"github.com/opercia-ai/opercia/server/internal/events"
+	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
+	"github.com/opercia-ai/opercia/server/internal/realtime"
 )
 
 func TestMainRouterDoesNotExposePrometheusMetrics(t *testing.T) {

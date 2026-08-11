@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { isRouteErrorResponse, useLocation, useRouteError } from "react-router-dom";
 import { AlertTriangle, Compass, RotateCw, Send, X } from "lucide-react";
-import { Button } from "@multica/ui/components/ui/button";
-import { useModalStore } from "@multica/core/modals";
+import { Button } from "@opercia/ui/components/ui/button";
+import { useModalStore } from "@opercia/core/modals";
 import { useTabStore } from "@/stores/tab-store";
 
 type DesktopAppInfo = {
@@ -91,7 +91,7 @@ function DesktopNotFoundPage() {
       <div className="space-y-2">
         <h2 className="text-title font-semibold">This page doesn&apos;t exist</h2>
         <p className="max-w-lg text-body text-muted-foreground">
-          Nothing in Multica matches this address. If you got here from a link,
+          Nothing in Opercia matches this address. If you got here from a link,
           it probably points at a file on someone else&apos;s computer rather
           than a page.
         </p>

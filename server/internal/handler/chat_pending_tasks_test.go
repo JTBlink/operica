@@ -9,11 +9,11 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"github.com/opercia-ai/opercia/server/internal/events"
+	"github.com/opercia-ai/opercia/server/internal/middleware"
+	"github.com/opercia-ai/opercia/server/internal/util"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/pkg/protocol"
 )
 
 // chatPendingCtxAs injects the workspace + member context that the chi

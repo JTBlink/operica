@@ -8,9 +8,9 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
+	"github.com/opercia-ai/opercia/server/internal/util"
 )
 
 // The classic robot API we send through (oToMessages/batchSend) exposes no

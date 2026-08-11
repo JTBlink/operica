@@ -1,6 +1,6 @@
 import { Cloud, Monitor, Wifi, WifiHigh, WifiOff } from "lucide-react";
-import { Badge } from "@multica/ui/components/ui/badge";
-import type { RuntimeHealth } from "@multica/core/runtimes";
+import { Badge } from "@opercia/ui/components/ui/badge";
+import type { RuntimeHealth } from "@opercia/core/runtimes";
 import { ProviderLogo } from "./provider-logo";
 import { useT } from "../../i18n";
 

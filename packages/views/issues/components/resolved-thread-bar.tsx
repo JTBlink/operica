@@ -1,7 +1,7 @@
 import { CheckCircle2, ChevronRight } from "lucide-react";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { Card } from "@multica/ui/components/ui/card";
-import type { TimelineEntry } from "@multica/core/types";
+import { useActorName } from "@opercia/core/workspace/hooks";
+import { Card } from "@opercia/ui/components/ui/card";
+import type { TimelineEntry } from "@opercia/core/types";
 import { useT } from "../../i18n";
 
 interface ResolvedThreadBarProps {

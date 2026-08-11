@@ -10,16 +10,16 @@ import type {
   IssueAssigneeType,
   IssueStatus,
   Project,
-} from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@opercia/core/types";
+import { Button } from "@opercia/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { STATUS_CONFIG } from "@multica/core/issues/config";
-import { useViewStoreApi } from "@multica/core/issues/stores/view-store-context";
+} from "@opercia/ui/components/ui/dropdown-menu";
+import { STATUS_CONFIG } from "@opercia/core/issues/config";
+import { useViewStoreApi } from "@opercia/core/issues/stores/view-store-context";
 import { useViewBaseline } from "../surface/view-baseline-context";
 import { StatusHeading } from "./status-heading";
 import { DraggableBoardCard } from "./board-card";

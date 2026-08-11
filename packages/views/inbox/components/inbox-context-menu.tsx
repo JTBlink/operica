@@ -11,15 +11,15 @@ import {
   type ReactNode,
 } from "react";
 import { Archive, ArchiveRestore, Check, CircleDot, ExternalLink } from "lucide-react";
-import { paths, useWorkspaceSlug } from "@multica/core/paths";
-import type { InboxItem } from "@multica/core/types";
+import { paths, useWorkspaceSlug } from "@opercia/core/paths";
+import type { InboxItem } from "@opercia/core/types";
 import { useIntentNavigate } from "../../navigation";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
-} from "@multica/ui/components/ui/context-menu";
+} from "@opercia/ui/components/ui/context-menu";
 import type { InboxView } from "./inbox-view";
 import { useT } from "../../i18n";
 

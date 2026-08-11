@@ -17,10 +17,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/auth"
-	"github.com/multica-ai/multica/server/internal/storage"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/internal/auth"
+	"github.com/opercia-ai/opercia/server/internal/storage"
+	"github.com/opercia-ai/opercia/server/internal/util"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
 )
 
 // ---------------------------------------------------------------------------
@@ -362,7 +362,7 @@ func (h *Handler) avatarObjectLoadsUnauthenticated(rawURL string) bool {
 	return h.storageURLIsPubliclyReadable(rawURL)
 }
 
-// absolutizeAvatarPath anchors the served path on MULTICA_PUBLIC_URL when it
+// absolutizeAvatarPath anchors the served path on OPERCIA_PUBLIC_URL when it
 // is configured, so clients that don't share the API's document origin
 // (Desktop, mobile webview) can load it. Same policy as buildMarkdownURL;
 // falling back to the site-relative path is safe because every client

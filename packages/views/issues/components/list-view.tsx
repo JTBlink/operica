@@ -16,9 +16,9 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 import { Virtuoso } from "react-virtuoso";
-import { Button } from "@multica/ui/components/ui/button";
-import type { Issue, IssueStatus, Project } from "@multica/core/types";
-import { useViewStore } from "@multica/core/issues/stores/view-store-context";
+import { Button } from "@opercia/ui/components/ui/button";
+import type { Issue, IssueStatus, Project } from "@opercia/core/types";
+import { useViewStore } from "@opercia/core/issues/stores/view-store-context";
 import { StatusHeading } from "./status-heading";
 import { ListRow, DraggableListRow, type ChildProgress } from "./list-row";
 import { useDragSettle } from "./use-drag-settle";

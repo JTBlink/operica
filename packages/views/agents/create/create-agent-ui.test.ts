@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { ApiError } from "@multica/core/api";
+import { ApiError } from "@opercia/core/api";
 import { AgentNameField } from "./agent-configuration-panel";
 import { CreateMethodChooser } from "./choose-create-method-page";
 import { CreateAgentFooter } from "./create-agent-footer";
@@ -179,7 +179,7 @@ describe("Unfinished draft preview", () => {
       draftPreview({
         last_message_role: "user",
         last_message_content:
-          'MULTICA_AGENT_BUILDER_INPUT\n{"user_request":"Create a release manager","current_draft":{"name":"X"}}',
+          'OPERCIA_AGENT_BUILDER_INPUT\n{"user_request":"Create a release manager","current_draft":{"name":"X"}}',
       }),
     ).toBe("Create a release manager");
   });

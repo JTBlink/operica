@@ -45,7 +45,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   PreviewTooLargeError,
   PreviewUnsupportedError,
-} from "@multica/core/api";
+} from "@opercia/core/api";
 import {
   ChevronLeft,
   ChevronRight,
@@ -55,14 +55,14 @@ import {
   Loader2,
   X,
 } from "lucide-react";
-import type { Attachment } from "@multica/core/types";
-import { paths, useWorkspaceSlug } from "@multica/core/paths";
-import { cn } from "@multica/ui/lib/utils";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
+import type { Attachment } from "@opercia/core/types";
+import { paths, useWorkspaceSlug } from "@opercia/core/paths";
+import { cn } from "@opercia/ui/lib/utils";
+import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
 import {
   UI_EASE_OUT,
   UI_MOTION_DURATION,
-} from "@multica/ui/lib/motion";
+} from "@opercia/ui/lib/motion";
 import { useT } from "../i18n";
 import { useNavigation } from "../navigation";
 import { openExternal } from "../platform";

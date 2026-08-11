@@ -7,17 +7,17 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useAuthStore } from "@multica/core/auth";
-import { agentListOptions, memberListOptions } from "@multica/core/workspace/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { canAssignAgent } from "@multica/views/issues/components";
-import { api, dispatchReasonCode } from "@multica/core/api";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { useAuthStore } from "@opercia/core/auth";
+import { agentListOptions, memberListOptions } from "@opercia/core/workspace/queries";
+import { projectListOptions } from "@opercia/core/projects/queries";
+import { canAssignAgent } from "@opercia/views/issues/components";
+import { api, dispatchReasonCode } from "@opercia/core/api";
 import {
   isAgentRuntimeBound as hasAgentRuntime,
   useAgentPresenceDetail,
   useWorkspaceAgentAvailability,
-} from "@multica/core/agents";
+} from "@opercia/core/agents";
 import {
   chatSessionsOptions,
   chatMessagesPageOptions,
@@ -25,29 +25,29 @@ import {
   chatKeys,
   isTaskMessageTaskId,
   sortChatSessions,
-} from "@multica/core/chat/queries";
+} from "@opercia/core/chat/queries";
 import {
   useCreateChatSession,
   useMarkChatSessionRead,
   useSetChatSessionProject,
   useSetChatSessionArchived,
-} from "@multica/core/chat/mutations";
-import { useChatStore } from "@multica/core/chat";
-import { upsertChatMessageToCaches } from "@multica/core/chat/message-cache";
+} from "@opercia/core/chat/mutations";
+import { useChatStore } from "@opercia/core/chat";
+import { upsertChatMessageToCaches } from "@opercia/core/chat/message-cache";
 import {
   enqueuePendingChatTask,
   hideQueuedChatMessages,
-} from "@multica/core/chat/pending";
+} from "@opercia/core/chat/pending";
 import { useChatDraftRestore } from "./use-chat-draft-restore";
 import { useChatTaskActions } from "./use-chat-task-actions";
 import { useChatProjectContextSupport } from "./use-chat-project-context-support";
-import { createLogger } from "@multica/core/logger";
+import { createLogger } from "@opercia/core/logger";
 import type {
   Agent,
   Attachment,
   ChatMessage,
   ChatPendingTask,
-} from "@multica/core/types";
+} from "@opercia/core/types";
 import { useT } from "../../i18n";
 import { useAppForeground } from "../../common/use-app-foreground";
 

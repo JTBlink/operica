@@ -1,4 +1,4 @@
-import { AiCreateAgentPage } from "@multica/views/agents";
+import { AiCreateAgentPage } from "@opercia/views/agents";
 
 export default function NewAgentAiRoute() {
   return <AiCreateAgentPage />;

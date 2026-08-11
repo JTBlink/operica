@@ -11,19 +11,19 @@ import {
 } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberNeedsMikaSetup, useBootstrapMika } from "@multica/core/onboarding";
+import { useAuthStore } from "@opercia/core/auth";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { memberNeedsMikaSetup, useBootstrapMika } from "@opercia/core/onboarding";
 import { MIKA_PLACEHOLDER_EMOJI } from "../../onboarding/components/mika-intro";
-import { useRequiredWorkspaceSlug, useWorkspacePaths } from "@multica/core/paths";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { runtimeProfileListOptions } from "@multica/core/runtimes";
-import { runtimeListOptions, runtimeKeys } from "@multica/core/runtimes/queries";
-import { useWSEvent } from "@multica/core/realtime";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import type { AgentRuntime } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+import { useRequiredWorkspaceSlug, useWorkspacePaths } from "@opercia/core/paths";
+import { agentTaskSnapshotOptions } from "@opercia/core/agents";
+import { chatSessionsOptions } from "@opercia/core/chat/queries";
+import { runtimeProfileListOptions } from "@opercia/core/runtimes";
+import { runtimeListOptions, runtimeKeys } from "@opercia/core/runtimes/queries";
+import { useWSEvent } from "@opercia/core/realtime";
+import { agentListOptions } from "@opercia/core/workspace/queries";
+import type { AgentRuntime } from "@opercia/core/types";
+import { Button } from "@opercia/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -31,12 +31,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@opercia/ui/components/ui/dialog";
 import {
   MikaRuntimeChoice,
   type MikaRuntimeSelection,
 } from "./mika-runtime-choice";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
+import { Skeleton } from "@opercia/ui/components/ui/skeleton";
 import {
   CollectionPageHeader,
   CollectionPageHeaderAction,

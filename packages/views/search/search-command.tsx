@@ -25,42 +25,42 @@ import type {
   MemberWithUser,
   SearchIssueResult,
   SearchProjectResult,
-} from "@multica/core/types";
-import { api } from "@multica/core/api";
-import { partitionAggregatedSearchResults } from "@multica/core/search/cancelled-rank";
+} from "@opercia/core/types";
+import { api } from "@opercia/core/api";
+import { partitionAggregatedSearchResults } from "@opercia/core/search/cancelled-rank";
 import {
   openCreateIssueWithPreference,
   selectRecentIssues,
   useCommentCollapseStore,
   useRecentIssuesStore,
   useResolvedExpandStore,
-} from "@multica/core/issues/stores";
-import { issueDetailOptions, issueTimelineOptions } from "@multica/core/issues/queries";
-import { useWorkspaceId } from "@multica/core";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { WorkspacePaths } from "@multica/core/paths";
-import { useModalStore } from "@multica/core/modals";
-import { createShortcutChord } from "@multica/core/shortcuts";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
+} from "@opercia/core/issues/stores";
+import { issueDetailOptions, issueTimelineOptions } from "@opercia/core/issues/queries";
+import { useWorkspaceId } from "@opercia/core";
+import { useWorkspacePaths } from "@opercia/core/paths";
+import type { WorkspacePaths } from "@opercia/core/paths";
+import { useModalStore } from "@opercia/core/modals";
+import { createShortcutChord } from "@opercia/core/shortcuts";
+import { memberListOptions } from "@opercia/core/workspace/queries";
+import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
 import { StatusIcon } from "../issues/components";
 import { resolvedThreadRootIds, rootCommentIds } from "../issues/components/thread-utils";
 import { ProjectIcon } from "../projects/components/project-icon";
 import { routeIconForPath } from "../layout/route-icon-components";
-import { PROJECT_STATUS_CONFIG } from "@multica/core/projects/config";
-import type { ProjectStatus } from "@multica/core/types";
+import { PROJECT_STATUS_CONFIG } from "@opercia/core/projects/config";
+import type { ProjectStatus } from "@opercia/core/types";
 import { ActorAvatar } from "../common/actor-avatar";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
-import { ActorAvatar as ActorAvatarBase } from "@multica/ui/components/common/actor-avatar";
+import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@multica/ui/components/ui/dialog";
-import { useTheme } from "@multica/ui/components/common/theme-provider";
-import { copyText } from "@multica/ui/lib/clipboard";
+} from "@opercia/ui/components/ui/dialog";
+import { useTheme } from "@opercia/ui/components/common/theme-provider";
+import { copyText } from "@opercia/ui/lib/clipboard";
 import {
   resolveClickIntent,
   useIntentNavigate,

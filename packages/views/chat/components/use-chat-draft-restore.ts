@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { chatDraftRestoresOptions } from "@multica/core/chat/queries";
-import { useConsumeChatDraftRestore } from "@multica/core/chat/mutations";
-import { useChatStore } from "@multica/core/chat";
-import { removeChatMessageFromCaches } from "@multica/core/realtime";
-import type { Attachment } from "@multica/core/types";
+import { chatDraftRestoresOptions } from "@opercia/core/chat/queries";
+import { useConsumeChatDraftRestore } from "@opercia/core/chat/mutations";
+import { useChatStore } from "@opercia/core/chat";
+import { removeChatMessageFromCaches } from "@opercia/core/realtime";
+import type { Attachment } from "@opercia/core/types";
 
 /**
  * A draft the composer is asked to adopt. Two sources feed it:

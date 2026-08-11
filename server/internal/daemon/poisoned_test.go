@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"github.com/opercia-ai/opercia/server/internal/service"
+	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
 )
 
 func TestClassifyPoisonedOutput(t *testing.T) {

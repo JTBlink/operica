@@ -1,8 +1,8 @@
 "use client";
 
 import { AlertCircle, WifiOff } from "lucide-react";
-import { cn } from "@multica/ui/lib/utils";
-import type { AgentAvailability } from "@multica/core/agents";
+import { cn } from "@opercia/ui/lib/utils";
+import type { AgentAvailability } from "@opercia/core/agents";
 import { CHAT_COLUMN, CHAT_GUTTER } from "./chat-column";
 import { useT } from "../../i18n";
 

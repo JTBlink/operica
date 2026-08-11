@@ -9,7 +9,7 @@ import (
 
 	"github.com/slack-go/slack"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
 )
 
 func TestChunkMessage(t *testing.T) {

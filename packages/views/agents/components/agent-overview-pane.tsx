@@ -6,15 +6,15 @@ import type {
   Agent,
   AgentRuntime,
   MemberWithUser,
-} from "@multica/core/types";
-import { providerSupportsMcpConfig } from "@multica/core/agents";
-import { useFeatureEnabled } from "@multica/core/config";
-import { COMPOSIO_MCP_APPS_FLAG } from "@multica/core/feature-flags";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { larkInstallationsOptions } from "@multica/core/lark";
-import { slackInstallationsOptions } from "@multica/core/slack";
-import { dingtalkInstallationsOptions } from "@multica/core/dingtalk";
-import { wecomInstallationsOptions } from "@multica/core/wecom";
+} from "@opercia/core/types";
+import { providerSupportsMcpConfig } from "@opercia/core/agents";
+import { useFeatureEnabled } from "@opercia/core/config";
+import { COMPOSIO_MCP_APPS_FLAG } from "@opercia/core/feature-flags";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { larkInstallationsOptions } from "@opercia/core/lark";
+import { slackInstallationsOptions } from "@opercia/core/slack";
+import { dingtalkInstallationsOptions } from "@opercia/core/dingtalk";
+import { wecomInstallationsOptions } from "@opercia/core/wecom";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,8 +24,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@opercia/ui/components/ui/alert-dialog";
+import { cn } from "@opercia/ui/lib/utils";
 import { ActivityTab } from "./tabs/activity-tab";
 import { InstructionsTab } from "./tabs/instructions-tab";
 import { SkillsTab } from "./tabs/skills-tab";

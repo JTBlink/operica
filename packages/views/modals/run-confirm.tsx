@@ -10,18 +10,18 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Button } from "@multica/ui/components/ui/button";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import type { IssueAssigneeType, UpdateIssueRequest } from "@multica/core/types";
-import { useUpdateIssue, useBatchUpdateIssues } from "@multica/core/issues/mutations";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { agentListOptions, squadListOptions } from "@multica/core/workspace/queries";
-import { runtimeListOptions, readRuntimeCliVersion, handoffSupported } from "@multica/core/runtimes";
-import { useShortcut, shortcutMatchesEvent, isPlainShortcut } from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
+} from "@opercia/ui/components/ui/dialog";
+import { Button } from "@opercia/ui/components/ui/button";
+import { Textarea } from "@opercia/ui/components/ui/textarea";
+import { Spinner } from "@opercia/ui/components/ui/spinner";
+import type { IssueAssigneeType, UpdateIssueRequest } from "@opercia/core/types";
+import { useUpdateIssue, useBatchUpdateIssues } from "@opercia/core/issues/mutations";
+import { useActorName } from "@opercia/core/workspace/hooks";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { agentListOptions, squadListOptions } from "@opercia/core/workspace/queries";
+import { runtimeListOptions, readRuntimeCliVersion, handoffSupported } from "@opercia/core/runtimes";
+import { useShortcut, shortcutMatchesEvent, isPlainShortcut } from "@opercia/core/shortcuts";
+import { isImeComposing } from "@opercia/core/utils";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useT } from "../i18n";
 

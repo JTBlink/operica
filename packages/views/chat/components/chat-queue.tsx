@@ -9,16 +9,16 @@ import {
   Pencil,
   Trash2,
 } from "lucide-react";
-import type { ChatQueuedTask } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+import type { ChatQueuedTask } from "@opercia/core/types";
+import { Button } from "@opercia/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { cn } from "@multica/ui/lib/utils";
+} from "@opercia/ui/components/ui/dropdown-menu";
+import { cn } from "@opercia/ui/lib/utils";
 import { useT } from "../../i18n";
 import { CHAT_COLUMN, CHAT_GUTTER } from "./chat-column";
 

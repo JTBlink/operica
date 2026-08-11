@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
 )
 
 // TaskDiskUsage describes one task workdir's footprint on disk.

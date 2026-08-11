@@ -2,23 +2,23 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 import { CheckCircle2, MessageSquare, MessagesSquare, Search } from "lucide-react";
-import type { TimelineEntry } from "@multica/core/types";
-import { useActorName } from "@multica/core/workspace/hooks";
+import type { TimelineEntry } from "@opercia/core/types";
+import { useActorName } from "@opercia/core/workspace/hooks";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { createShortcutChord, useShortcut } from "@multica/core/shortcuts";
-import { preprocessMentionShortcodes } from "@multica/core/markdown";
-import { isImeComposing } from "@multica/core/utils";
+} from "@opercia/ui/components/ui/popover";
+import { Button } from "@opercia/ui/components/ui/button";
+import { cn } from "@opercia/ui/lib/utils";
+import { createShortcutChord, useShortcut } from "@opercia/core/shortcuts";
+import { preprocessMentionShortcodes } from "@opercia/core/markdown";
+import { isImeComposing } from "@opercia/core/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
+} from "@opercia/ui/components/ui/tooltip";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { pickerNavigationDirection } from "../../common/picker-keys";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";

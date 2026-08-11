@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
 )
 
 // TestBuildQuickCreatePromptRules locks in the rules that govern how the
@@ -26,7 +26,7 @@ func TestBuildQuickCreatePromptRules(t *testing.T) {
 		"verbal routing wrappers about creating the issue",
 		"pure conversational fillers",
 		// cc routing must survive: mention link stays in description so the
-		// auto-subscribe path fires (multica issue create has no --subscriber flag)
+		// auto-subscribe path fires (opercia issue create has no --subscriber flag)
 		"CC exception",
 		"auto-subscribes members",
 		// context section is conditional and must not be an apology log
@@ -36,7 +36,7 @@ func TestBuildQuickCreatePromptRules(t *testing.T) {
 		// use custom issue prefixes, so a successful issue creation should
 		// not look failed merely because the identifier does not match one
 		// fixed prefix.
-		"multica issue create --output json",
+		"opercia issue create --output json",
 		"JSON response",
 		"identifier",
 		"Do not scrape human output",
@@ -71,7 +71,7 @@ func TestBuildQuickCreatePromptRules(t *testing.T) {
 func TestBuildQuickCreatePromptAssigneeIncludesSquads(t *testing.T) {
 	out := buildQuickCreatePrompt(Task{QuickCreatePrompt: "fix the login button color"})
 	mustContain := []string{
-		"multica squad list",
+		"opercia squad list",
 		"Squads are first-class assignees",
 		"Treat bare @-routing as an assignee directive",
 		"让 @独立团 review 这个 PR",
@@ -397,7 +397,7 @@ func TestBuildPromptProtocolHeadingInInstructionsIsNotALeader(t *testing.T) {
 
 	for _, banned := range []string{
 		"Squad leader no_action rule",
-		"multica squad activity",
+		"opercia squad activity",
 		"DO NOT post any comment",
 		"Unless your outcome is `no_action`",
 	} {
@@ -435,7 +435,7 @@ func TestBuildPromptLegacyServerKeepsBriefingBasedLeaderRole(t *testing.T) {
 
 	for _, want := range []string{
 		"Squad leader no_action rule",
-		"multica squad activity",
+		"opercia squad activity",
 		"DO NOT post any comment",
 	} {
 		if !strings.Contains(out, want) {
@@ -456,7 +456,7 @@ func TestBuildChatPromptAttachmentIDsCanBeBoundToCreatedIssues(t *testing.T) {
 	for _, want := range []string{
 		"Attachments on this message:",
 		"id=019ec09d-6222-722b-bdfa-427b105d80be",
-		"multica attachment download <id>",
+		"opercia attachment download <id>",
 		"--attachment-id <id>",
 	} {
 		if !strings.Contains(out, want) {
@@ -472,7 +472,7 @@ func TestBuildChatPromptChannelAwareness(t *testing.T) {
 			ChatChannelType: "slack",
 			ChatMessage:     "你刚刚和 xxx 聊了什么",
 		})
-		for _, want := range []string{"Slack", "NOT in Multica", "multica chat history", "multica chat thread", "Do NOT narrate"} {
+		for _, want := range []string{"Slack", "NOT in Opercia", "opercia chat history", "opercia chat thread", "Do NOT narrate"} {
 			if !strings.Contains(out, want) {
 				t.Fatalf("slack-backed prompt missing %q\n--- output ---\n%s", want, out)
 			}
@@ -481,14 +481,14 @@ func TestBuildChatPromptChannelAwareness(t *testing.T) {
 
 	t.Run("top-level mention starts with history", func(t *testing.T) {
 		out := buildChatPrompt(Task{ChatSessionID: "s", ChatChannelType: "slack", ChatInThread: false, ChatMessage: "hi"})
-		if !strings.Contains(out, "top level: start with `multica chat history`") {
+		if !strings.Contains(out, "top level: start with `opercia chat history`") {
 			t.Fatalf("expected top-level guidance, got:\n%s", out)
 		}
 	})
 
 	t.Run("in-thread mention starts with thread", func(t *testing.T) {
 		out := buildChatPrompt(Task{ChatSessionID: "s", ChatChannelType: "slack", ChatInThread: true, ChatMessage: "hi"})
-		if !strings.Contains(out, "inside a thread: start with `multica chat thread`") {
+		if !strings.Contains(out, "inside a thread: start with `opercia chat thread`") {
 			t.Fatalf("expected in-thread guidance, got:\n%s", out)
 		}
 	})
@@ -498,7 +498,7 @@ func TestBuildChatPromptChannelAwareness(t *testing.T) {
 			ChatSessionID: "sess-1",
 			ChatMessage:   "hi",
 		})
-		if strings.Contains(out, "multica chat history") {
+		if strings.Contains(out, "opercia chat history") {
 			t.Fatalf("web-only chat prompt should not mention channel history, got:\n%s", out)
 		}
 	})
@@ -562,7 +562,7 @@ func TestBuildChatPromptNoNarrationOnEveryChannel(t *testing.T) {
 // the bug this matrix exists to catch:
 //
 //   - delivery: `attachment upload` guidance is injected iff there is NO channel.
-//     Any IM reply leaves Multica, where the upload has nothing to bind to.
+//     Any IM reply leaves Opercia, where the upload has nothing to bind to.
 //   - history: the `chat history` / `chat thread` commands are injected iff the
 //     channel is Slack. Those endpoints are hardwired to h.SlackHistory
 //     (handler/chat_history.go) — on Feishu they answer "no channel
@@ -572,12 +572,12 @@ func TestBuildChatPromptNoNarrationOnEveryChannel(t *testing.T) {
 // history. A single `ChatChannelType != ""` gate cannot express it.
 func TestBuildChatPromptTwoLayerChannelPolicy(t *testing.T) {
 	// Match the IMPERATIVE, not the bare command name. An IM prompt names
-	// `multica attachment upload` on purpose — to state that it does not apply
+	// `opercia attachment upload` on purpose — to state that it does not apply
 	// here. That negation is the useful copy (the agent knows the command exists
 	// from the brief's Available Commands; silence would leave it guessing), so
 	// asserting on the bare name would forbid the very sentence we want.
-	const uploadGuidance = "run `multica attachment upload <local-path>`"
-	const historyGuidance = "multica chat history"
+	const uploadGuidance = "run `opercia attachment upload <local-path>`"
+	const historyGuidance = "opercia chat history"
 
 	cases := []struct {
 		name        string
@@ -645,7 +645,7 @@ func TestBuildChatPromptFeishuIgnoresChatInThread(t *testing.T) {
 		ChatInThread:    true,
 		ChatMessage:     "hi",
 	})
-	for _, unwanted := range []string{"multica chat thread", "multica chat history"} {
+	for _, unwanted := range []string{"opercia chat thread", "opercia chat history"} {
 		if strings.Contains(out, unwanted) {
 			t.Errorf("feishu prompt must not teach %q (no Feishu history reader exists)\n--- output ---\n%s", unwanted, out)
 		}
@@ -847,7 +847,7 @@ func TestBuildChatPromptSlashSkills(t *testing.T) {
 func TestBuildPromptDefaultScansRootsFirst(t *testing.T) {
 	out := BuildPrompt(Task{IssueID: "issue-default-1"}, "claude")
 	for _, s := range []string{
-		"multica issue comment list issue-default-1 --roots-only --summary --compact --output json",
+		"opercia issue comment list issue-default-1 --roots-only --summary --compact --output json",
 		"--since",
 	} {
 		if !strings.Contains(out, s) {
@@ -880,7 +880,7 @@ func TestBuildPromptDefaultScansRootsFirst(t *testing.T) {
 	if strings.Contains(out, "If you need comment history") {
 		t.Errorf("default BuildPrompt still carries the legacy 'If you need' soft phrasing that conflicts with the mandatory workflow\n--- output ---\n%s", out)
 	}
-	if strings.Contains(out, "multica issue comment list issue-default-1 --output json") {
+	if strings.Contains(out, "opercia issue comment list issue-default-1 --output json") {
 		t.Errorf("default BuildPrompt still presents the unbounded flat read as the assignment catch-up command\n--- output ---\n%s", out)
 	}
 }
@@ -934,7 +934,7 @@ func TestBuildPromptNewCommentsHint(t *testing.T) {
 		t.Errorf("hint must discourage blindly reading every new comment, got:\n%s", out)
 	}
 	// Parent thread first: the --thread <trigger> read is the prioritized action.
-	if !strings.Contains(out, "multica issue comment list "+issueID+" --thread thread-root-1 --since "+since+" --compact --output json") {
+	if !strings.Contains(out, "opercia issue comment list "+issueID+" --thread thread-root-1 --since "+since+" --compact --output json") {
 		t.Errorf("hint must point at the triggering (parent) thread --since read first, got:\n%s", out)
 	}
 	if !strings.Contains(out, "--tail 30") {
@@ -946,7 +946,7 @@ func TestBuildPromptNewCommentsHint(t *testing.T) {
 	if !strings.Contains(out, "rerun it without `--thread` for the issue-wide catch-up") {
 		t.Errorf("hint must keep the issue-wide catch-up fallback, got:\n%s", out)
 	}
-	if strings.Contains(out, "multica issue comment list "+issueID+" --since "+since+" --output json") {
+	if strings.Contains(out, "opercia issue comment list "+issueID+" --since "+since+" --output json") {
 		t.Errorf("warm hint must not render a second full issue-wide command (MUL-5721 OPT-1), got:\n%s", out)
 	}
 	// The old cursor-heavy paragraph must be gone.
@@ -974,7 +974,7 @@ func TestBuildPromptColdStartThreadRead(t *testing.T) {
 	if strings.Contains(out, "new comment(s) since your last run") {
 		t.Errorf("no since-delta hint should render on cold start, got:\n%s", out)
 	}
-	if !strings.Contains(out, "multica issue comment list "+issueID+" --thread thread-root-1 --tail 30 --compact --output json") {
+	if !strings.Contains(out, "opercia issue comment list "+issueID+" --thread thread-root-1 --tail 30 --compact --output json") {
 		t.Errorf("cold start must point at the triggering thread read, got:\n%s", out)
 	}
 	// MUL-5372: cross-thread background is a cheap roots scan. The hint names
@@ -986,7 +986,7 @@ func TestBuildPromptColdStartThreadRead(t *testing.T) {
 	if !strings.Contains(out, "Rerun with `--roots-only --summary` replacing `--thread ... --tail 30`") {
 		t.Errorf("cold start should offer the cheap roots scan for cross-thread background, got:\n%s", out)
 	}
-	if strings.Contains(out, "multica issue comment list "+issueID+" --roots-only --summary --output json") {
+	if strings.Contains(out, "opercia issue comment list "+issueID+" --roots-only --summary --output json") {
 		t.Errorf("cold hint must not render a second full command for the roots scan (MUL-5721 OPT-1), got:\n%s", out)
 	}
 	if strings.Contains(out, "--recent") {
@@ -1017,7 +1017,7 @@ func TestBuildPromptResumedNoDeltaDoesNotForceThreadRead(t *testing.T) {
 		"No other new comments on this issue since your last run",
 		"If your reply depends on thread context",
 		"do not rely only on resumed session memory",
-		"multica issue comment list " + issueID + " --thread thread-root-1 --tail 30 --compact --output json",
+		"opercia issue comment list " + issueID + " --thread thread-root-1 --tail 30 --compact --output json",
 	} {
 		if !strings.Contains(out, want) {
 			t.Errorf("resumed/no-delta prompt missing %q\n--- output ---\n%s", want, out)
@@ -1109,7 +1109,7 @@ func TestBuildCommentPromptCoalescedIDsOnlyFallback(t *testing.T) {
 		task.NewCommentsSince = "2026-08-03T06:00:00Z"
 		out := BuildPrompt(task, "claude")
 
-		want := "multica issue comment list issue-fallback-1 --since 2026-08-03T06:00:00Z --compact --output json"
+		want := "opercia issue comment list issue-fallback-1 --since 2026-08-03T06:00:00Z --compact --output json"
 		if !strings.Contains(out, want) {
 			t.Errorf("id-only fallback should prefetch the window with %q, got:\n%s", want, out)
 		}
@@ -1162,7 +1162,7 @@ func assertBoundedIDOnlyFallback(t *testing.T, out string) {
 	// id is reachable without knowing its thread; paging keeps it reachable even
 	// when it is older than the tail window.
 	for _, want := range []string{
-		"multica issue comment list issue-fallback-1 --thread <comment-id> --tail 30 --compact --output json",
+		"opercia issue comment list issue-fallback-1 --thread <comment-id> --tail 30 --compact --output json",
 		"accepts a reply id",
 		"Next reply cursor",
 		"--before-id",
@@ -1323,7 +1323,7 @@ func TestBuildCommentPromptCrossThreadFansOutReplies(t *testing.T) {
 	// Formatting` for the posting mechanism instead of restating it, so the
 	// assembled cross-thread prompt carries no `comment add` example commands
 	// at all — the `--parent` targets plus the pointer are the whole recipe.
-	if strings.Contains(out, "multica issue comment add") {
+	if strings.Contains(out, "opercia issue comment add") {
 		t.Errorf("cross-thread prompt re-grew embedded comment-add commands (mechanism lives in ## Comment Formatting — MUL-5825), got:\n%s", out)
 	}
 	if !strings.Contains(out, "`## Comment Formatting`") {

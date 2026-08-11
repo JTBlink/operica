@@ -2,29 +2,29 @@
 
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { FilterX, ListTodo, Plus } from "lucide-react";
-import { Button } from "@multica/ui/components/ui/button";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { Button } from "@opercia/ui/components/ui/button";
+import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import { cn } from "@opercia/ui/lib/utils";
+import { useWorkspaceId } from "@opercia/core/hooks";
 import {
   useViewStore,
   ViewStoreProvider,
-} from "@multica/core/issues/stores/view-store-context";
+} from "@opercia/core/issues/stores/view-store-context";
 import {
   getIssueSurfaceViewStore,
   seedIssueSurfaceViewState,
-} from "@multica/core/issues/stores/surface-view-store";
-import { useActiveIssueView } from "@multica/core/issue-views/use-active-view";
-import { baselineFromQuery } from "@multica/core/issue-views/baseline";
+} from "@opercia/core/issues/stores/surface-view-store";
+import { useActiveIssueView } from "@opercia/core/issue-views/use-active-view";
+import { baselineFromQuery } from "@opercia/core/issue-views/baseline";
 import { ViewBaselineProvider, useViewBaseline } from "./view-baseline-context";
-import type { IssueViewScope } from "@multica/core/issue-views/queries";
+import type { IssueViewScope } from "@opercia/core/issue-views/queries";
 import {
   actorKindForViewVariant,
   issueScopeKey,
   myRelationForViewVariant,
   type IssueScope,
-} from "@multica/core/issues/surface/scope";
-import type { Issue } from "@multica/core/types";
+} from "@opercia/core/issues/surface/scope";
+import type { Issue } from "@opercia/core/types";
 import { BoardView } from "../components/board-view";
 import { BatchActionToolbar } from "../components/batch-action-toolbar";
 import { GanttView } from "../components/gantt-view";

@@ -9,9 +9,9 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
+	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
 )
 
 // originDingTalkChat is the issue.origin_type label for issues created through
@@ -180,7 +180,7 @@ func (r *identityResolver) ResolveSender(ctx context.Context, inst engine.Resolv
 	}
 	// Binding existence no longer proves membership (no FK); re-check.
 	if _, err := r.q.GetMemberByUserAndWorkspace(ctx, db.GetMemberByUserAndWorkspaceParams{
-		UserID:      binding.MulticaUserID,
+		UserID:      binding.OperciaUserID,
 		WorkspaceID: inst.WorkspaceID,
 	}); err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -188,7 +188,7 @@ func (r *identityResolver) ResolveSender(ctx context.Context, inst engine.Resolv
 		}
 		return engine.ResolvedIdentity{}, err
 	}
-	return engine.ResolvedIdentity{UserID: binding.MulticaUserID}, nil
+	return engine.ResolvedIdentity{UserID: binding.OperciaUserID}, nil
 }
 
 // ---- dedup ----

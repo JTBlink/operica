@@ -2,13 +2,13 @@
 
 import { useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import type { Issue, Project } from "@multica/core/types";
-import { ALL_STATUSES } from "@multica/core/issues/config";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { childIssueProgressOptions } from "@multica/core/issues/queries";
-import { issueSurfaceGanttOptions } from "@multica/core/issues/surface/repository";
-import type { IssueSurfaceQueryPlan } from "@multica/core/issues/surface/query-plan";
-import type { IssueStatus } from "@multica/core/types";
+import type { Issue, Project } from "@opercia/core/types";
+import { ALL_STATUSES } from "@opercia/core/issues/config";
+import { projectListOptions } from "@opercia/core/projects/queries";
+import { childIssueProgressOptions } from "@opercia/core/issues/queries";
+import { issueSurfaceGanttOptions } from "@opercia/core/issues/surface/repository";
+import type { IssueSurfaceQueryPlan } from "@opercia/core/issues/surface/query-plan";
+import type { IssueStatus } from "@opercia/core/types";
 import {
   applyIssueFilters,
   type IssueFilterState,

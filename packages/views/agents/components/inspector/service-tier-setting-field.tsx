@@ -6,8 +6,8 @@ import { ChevronDown, Gauge } from "lucide-react";
 import type {
   RuntimeModel,
   RuntimeModelServiceTier,
-} from "@multica/core/types";
-import { runtimeModelsOptions } from "@multica/core/runtimes";
+} from "@opercia/core/types";
+import { runtimeModelsOptions } from "@opercia/core/runtimes";
 import {
   PickerItem,
   PropertyPicker,

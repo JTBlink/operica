@@ -519,7 +519,7 @@ export class ApiClient {
     if (typeof document === "undefined") return null;
     const match = document.cookie
       .split("; ")
-      .find((c) => c.startsWith("multica_csrf="));
+      .find((c) => c.startsWith("opercia_csrf="));
     return match ? match.split("=")[1] ?? null : null;
   }
 
@@ -1458,8 +1458,8 @@ export class ApiClient {
   }
 
   // ---------------------------------------------------------------------
-  // Cloud Billing — proxies to multica-cloud /api/v1/billing/*. The
-  // multica-api server stamps X-User-ID and forwards bytes; everything
+  // Cloud Billing — proxies to opercia-cloud /api/v1/billing/*. The
+  // opercia-api server stamps X-User-ID and forwards bytes; everything
   // here is upstream-shaped. See packages/core/types/billing.ts for the
   // response field documentation.
   // ---------------------------------------------------------------------
@@ -3662,7 +3662,7 @@ export class ApiClient {
 
   // registerWecomBYO performs a bring-your-own-app install: the admin pastes
   // the bot id and long-connection secret from the WeCom admin console,
-  // and the backend seals the secret with MULTICA_WECOM_SECRET_KEY before
+  // and the backend seals the secret with OPERCIA_WECOM_SECRET_KEY before
   // persisting, returning the new installation.
   async registerWecomBYO(
     workspaceId: string,
@@ -3689,8 +3689,8 @@ export class ApiClient {
   }
 
   // redeemWecomBindingToken binds the WeCom aibot userid carried by the
-  // token to the logged-in Multica user. Called by the /wecom/bind redeem
-  // page after the user clicks through the "link your Multica account"
+  // token to the logged-in Opercia user. Called by the /wecom/bind redeem
+  // page after the user clicks through the "link your Opercia account"
   // prompt the bot sent in WeCom. Status codes:
   //   410 Gone      → invalid / expired / already consumed
   //   409 Conflict  → the WeCom user is already bound to a different user

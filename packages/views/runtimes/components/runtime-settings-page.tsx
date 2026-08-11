@@ -2,11 +2,11 @@
 
 import { Server } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import type { AgentRuntime } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
+import type { AgentRuntime } from "@opercia/core/types";
+import { useWorkspaceId } from "@opercia/core/hooks";
+import { useWorkspacePaths } from "@opercia/core/paths";
+import { runtimeListOptions } from "@opercia/core/runtimes/queries";
+import { Skeleton } from "@opercia/ui/components/ui/skeleton";
 import { RuntimeDetail } from "./runtime-detail";
 import { buildRuntimeMachines } from "./runtime-machines";
 import { useT } from "../../i18n";

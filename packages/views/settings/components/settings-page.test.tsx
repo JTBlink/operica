@@ -1,7 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { SidebarProvider, useSidebar } from "@multica/ui/components/ui/sidebar";
+import { SidebarProvider, useSidebar } from "@opercia/ui/components/ui/sidebar";
 import { renderWithI18n } from "../../test/i18n";
 
 // This file tests the settings SHELL — the chrome around the tabs — so every
@@ -26,7 +26,7 @@ vi.mock("./properties-tab", stub("PropertiesTab"));
 vi.mock("./quick-actions-tab", stub("QuickActionsTab"));
 vi.mock("./keyboard-shortcuts-tab", stub("KeyboardShortcutsTab"));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@opercia/core/paths", () => ({
   useCurrentWorkspace: () => ({ name: "Acme" }),
 }));
 
@@ -42,7 +42,7 @@ vi.mock("../../navigation", () => ({
 // Compact by default: that is the width where the nav is a sheet and this
 // trigger is the only way to reach it.
 const layout = { compact: true };
-vi.mock("@multica/ui/hooks/use-mobile", () => ({
+vi.mock("@opercia/ui/hooks/use-mobile", () => ({
   useIsMobile: () => layout.compact,
   useIsCompact: () => layout.compact,
 }));
