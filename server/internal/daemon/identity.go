@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/opercia-ai/opercia/server/internal/cli"
+	"github.com/JTBlink/operica/server/internal/cli"
 )
 
 // daemonIDFileName is the file that stores this machine's stable daemon

@@ -10,7 +10,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
 )
 
 // dingtalkChannel is ONE installation's DingTalk Stream connection. Every

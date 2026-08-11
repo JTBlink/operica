@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // TestProbeAgentCLIs_DiscoversPiAndOmpSeparately covers discovery only: it

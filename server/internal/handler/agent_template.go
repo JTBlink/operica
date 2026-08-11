@@ -15,13 +15,13 @@ import (
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/agenttmpl"
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/agenttmpl"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/logger"
+	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
+	"github.com/JTBlink/operica/server/internal/util"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // agentTemplates is the in-memory catalog loaded once at package init. We

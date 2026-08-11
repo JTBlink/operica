@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/util"
+	"github.com/JTBlink/operica/server/internal/util"
 	"gopkg.in/yaml.v3"
 )
 
@@ -531,7 +531,7 @@ func TestRuntimesAndReposSkillCoversClaimAndCheckoutChain(t *testing.T) {
 		"references/runtimes-and-repos-source-map.md",
 		// An agent reads this to know whether its checkout can be committed to.
 		// Codex on Linux and Windows gets task-local Git metadata; every other
-		// runtime gets a linked worktree (opercia-ai/opercia#2925, #6449).
+		// runtime gets a linked worktree (JTBlink/operica#2925, #6449).
 		"Linux and Windows Codex",
 		"task-local Git metadata",
 	}

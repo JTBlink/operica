@@ -28,7 +28,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
 )
 
 // sealMedia builds ciphertext the way WeCom does: PKCS#7 to a 32-byte block,

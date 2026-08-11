@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/opercia-ai/opercia/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/auth"
 	"github.com/redis/go-redis/v9"
 )
 

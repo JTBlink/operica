@@ -171,7 +171,7 @@ export function DaemonSettingsTab() {
               size="sm"
               onClick={() =>
                 window.desktopAPI.openExternal(
-                  "https://github.com/opercia-ai/opercia#cli-installation",
+                  "https://github.com/JTBlink/operica#cli-installation",
                 )
               }
             >

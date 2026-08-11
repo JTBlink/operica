@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 func TestValidateBindingTokenChannel(t *testing.T) {

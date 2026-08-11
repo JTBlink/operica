@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/middleware"
+	"github.com/JTBlink/operica/server/internal/middleware"
 )
 
 func ptrInt32(value int32) *int32 { return &value }

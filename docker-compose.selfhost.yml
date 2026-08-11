@@ -53,7 +53,7 @@ services:
       retries: 5
 
   backend:
-    image: ${OPERCIA_BACKEND_IMAGE:-ghcr.io/opercia-ai/opercia-backend}:${OPERCIA_IMAGE_TAG:-latest}
+    image: ${OPERCIA_BACKEND_IMAGE:-ghcr.io/JTBlink/operica-backend}:${OPERCIA_IMAGE_TAG:-latest}
     depends_on:
       postgres:
         condition: service_healthy
@@ -160,7 +160,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: ${OPERCIA_WEB_IMAGE:-ghcr.io/opercia-ai/opercia-web}:${OPERCIA_IMAGE_TAG:-latest}
+    image: ${OPERCIA_WEB_IMAGE:-ghcr.io/JTBlink/operica-web}:${OPERCIA_IMAGE_TAG:-latest}
     depends_on:
       - backend
     ports:

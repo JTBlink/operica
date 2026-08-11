@@ -9,7 +9,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/opercia-ai/opercia/server/pkg/skillbundle"
+	"github.com/JTBlink/operica/server/pkg/skillbundle"
 )
 
 type SkillBundleCache struct {

@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/cli"
+	"github.com/JTBlink/operica/server/internal/cli"
 )
 
 func TestPatternsFromEnv_DefaultsWhenUnset(t *testing.T) {

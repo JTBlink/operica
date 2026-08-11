@@ -10,10 +10,10 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
+	"github.com/JTBlink/operica/server/internal/util"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // This file is the DingTalk OutboundReplier — the engine seam that delivers a

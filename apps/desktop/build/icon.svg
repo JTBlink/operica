@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Opercia">
+  <defs>
+    <filter id="surfaceShadow" x="-18%" y="-14%" width="136%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="28" stdDeviation="34" flood-color="#050814" flood-opacity=".36"/>
+    </filter>
+  </defs>
+  <rect x="72" y="56" width="880" height="880" rx="218" fill="#11172a" filter="url(#surfaceShadow)"/>
+  <rect x="84" y="68" width="856" height="856" rx="206" fill="none" stroke="#fff" stroke-opacity=".09" stroke-width="2"/>
+  <g transform="translate(208 208) scale(9.5)">
+    <path fill="#f7f5ef" d="M22 8h12c12.15 0 22 9.85 22 22v12L44 54V31c0-6.075-4.925-11-11-11H10L22 8Z"/>
+    <path fill="#929cff" d="M42 56H30C17.85 56 8 46.15 8 34V22l12-12v23c0 6.075 4.925 11 11 11h23L42 56Z"/>
+    <rect x="25" y="25" width="14" height="14" rx="3" fill="#ffae57" transform="rotate(45 32 32)"/>
+  </g>
+</svg>

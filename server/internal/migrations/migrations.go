@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/selfexec"
+	"github.com/JTBlink/operica/server/internal/selfexec"
 )
 
 const maxSearchDepth = 4

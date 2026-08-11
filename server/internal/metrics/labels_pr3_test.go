@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/metrics"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/metrics"
 )
 
 func TestNormalizePR3LabelsCollapseUnknownValues(t *testing.T) {

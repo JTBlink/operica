@@ -13,9 +13,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/logger"
+	"github.com/JTBlink/operica/server/internal/util"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 type issueTableGroupValueResponse struct {

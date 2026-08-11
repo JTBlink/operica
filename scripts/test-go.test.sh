@@ -26,10 +26,10 @@ case "${1:-}" in
       exit 2
     fi
     printf '%s\n' \
-      github.com/opercia-ai/opercia/server \
-      github.com/opercia-ai/opercia/server/internal/daemon \
-      github.com/opercia-ai/opercia/server/pkg/agent \
-      github.com/opercia-ai/opercia/server/pkg/agent/internal/testutil
+      github.com/JTBlink/operica/server \
+      github.com/JTBlink/operica/server/internal/daemon \
+      github.com/JTBlink/operica/server/pkg/agent \
+      github.com/JTBlink/operica/server/pkg/agent/internal/testutil
     ;;
   test)
     printf '%s\n' "$*" >>"$OPERCIA_TEST_GO_CALLS"
@@ -44,7 +44,7 @@ chmod 755 "$BIN_DIR/go"
 
 PATH="$BIN_DIR:$PATH" bash "$SCRIPT_DIR/test-go.sh" --race
 
-expected_calls='test -race github.com/opercia-ai/opercia/server github.com/opercia-ai/opercia/server/internal/daemon
+expected_calls='test -race github.com/JTBlink/operica/server github.com/JTBlink/operica/server/internal/daemon
 test -race -p 2 -parallel 2 ./pkg/agent/...'
 actual_calls=$(cat "$CALLS_FILE")
 if [ "$actual_calls" != "$expected_calls" ]; then

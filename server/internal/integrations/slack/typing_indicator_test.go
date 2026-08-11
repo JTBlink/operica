@@ -8,10 +8,10 @@ import (
 
 	"github.com/slack-go/slack"
 
-	"github.com/opercia-ai/opercia/server/internal/events"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/events"
+	"github.com/JTBlink/operica/server/internal/util"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // fakeReactor records reaction add/remove calls so a test can assert the

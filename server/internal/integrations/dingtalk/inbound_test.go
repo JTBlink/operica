@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
 )
 
 func textCallback(convType string, inAtList bool) *botCallbackData {

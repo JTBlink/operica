@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/util"
+	"github.com/JTBlink/operica/server/internal/util"
 
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // TestLockSubscriberWrites_KeyedOnUUIDValueNotSpelling covers MUL-5483 review

@@ -11,9 +11,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/events"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/events"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 type fakePatcherQueries struct {

@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/dispatch"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/dispatch"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // TestDispatchFailReasonCode is the regression for Elon must-fix 2, case 1: a

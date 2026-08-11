@@ -4,13 +4,13 @@ import { fetchLatestRelease } from "./github-release";
 const SAMPLE_LATEST_ASSET = {
   name: "opercia-desktop-0.2.14-mac-arm64.dmg",
   browser_download_url:
-    "https://github.com/opercia-ai/opercia/releases/download/v0.2.14/opercia-desktop-0.2.14-mac-arm64.dmg",
+    "https://github.com/JTBlink/operica/releases/download/v0.2.14/opercia-desktop-0.2.14-mac-arm64.dmg",
 };
 
 const SAMPLE_PREV_ASSET = {
   name: "opercia-desktop-0.2.13-mac-arm64.dmg",
   browser_download_url:
-    "https://github.com/opercia-ai/opercia/releases/download/v0.2.13/opercia-desktop-0.2.13-mac-arm64.dmg",
+    "https://github.com/JTBlink/operica/releases/download/v0.2.13/opercia-desktop-0.2.13-mac-arm64.dmg",
 };
 
 function releasePayload(overrides: {
@@ -26,7 +26,7 @@ function releasePayload(overrides: {
   return {
     tag_name: overrides.tag,
     published_at: published,
-    html_url: `https://github.com/opercia-ai/opercia/releases/tag/${overrides.tag}`,
+    html_url: `https://github.com/JTBlink/operica/releases/tag/${overrides.tag}`,
     prerelease: overrides.prerelease ?? false,
     draft: overrides.draft ?? false,
     assets: overrides.asset ? [overrides.asset] : [],

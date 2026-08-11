@@ -8,8 +8,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/testutil"
 
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 )
 
 func TestBusinessMetricsLifecycleCountersAndGauge(t *testing.T) {

@@ -10,9 +10,9 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/runtimeapps"
-	sdk "github.com/opercia-ai/opercia/server/pkg/composio"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/runtimeapps"
+	sdk "github.com/JTBlink/operica/server/pkg/composio"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // seedActiveConnection writes a single active row for the user/toolkit pair

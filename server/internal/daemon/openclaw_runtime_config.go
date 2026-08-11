@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log/slog"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
 )
 
 // openclawRuntimeConfig is the schema the daemon expects under an openclaw

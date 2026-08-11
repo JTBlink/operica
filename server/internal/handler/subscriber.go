@@ -9,8 +9,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // SubscriberResponse is the JSON shape returned for each issue subscriber.

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 func insertChatVisibilityMessage(t *testing.T, sessionID, content, messageKind string, channelIngested bool, createdAt time.Time) {

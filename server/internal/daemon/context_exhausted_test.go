@@ -3,8 +3,8 @@ package daemon
 import (
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 )
 
 // TestContextExhaustionNeverReplaysTheTask pins the boundary between the two

@@ -11,8 +11,8 @@ import (
 	"net/url"
 
 	chimw "github.com/go-chi/chi/v5/middleware"
-	"github.com/opercia-ai/opercia/server/internal/cloudruntime"
-	"github.com/opercia-ai/opercia/server/internal/logger"
+	"github.com/JTBlink/operica/server/internal/cloudruntime"
+	"github.com/JTBlink/operica/server/internal/logger"
 )
 
 const maxCloudRuntimeRequestBodySize = 1 << 20

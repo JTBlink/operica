@@ -14,9 +14,9 @@ Opercia is an open-source workspace where you assign work to AI coding agents th
 assign it to a teammate — they pick up the issue, report progress, raise blockers, and hand it
 back for review. Self-hostable, works with 20 agent CLIs, no lock-in.
 
-[![CI](https://github.com/opercia-ai/opercia/actions/workflows/ci.yml/badge.svg)](https://github.com/opercia-ai/opercia/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/opercia-ai/opercia?style=flat)](https://github.com/opercia-ai/opercia/releases)
-[![GitHub stars](https://img.shields.io/github/stars/opercia-ai/opercia?style=flat)](https://github.com/opercia-ai/opercia/stargazers)
+[![CI](https://github.com/JTBlink/operica/actions/workflows/ci.yml/badge.svg)](https://github.com/JTBlink/operica/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/JTBlink/operica?style=flat)](https://github.com/JTBlink/operica/releases)
+[![GitHub stars](https://img.shields.io/github/stars/JTBlink/operica?style=flat)](https://github.com/JTBlink/operica/stargazers)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white)](https://discord.gg/W8gYBn226t)
 
 [Website](https://opercia.ai) · [Docs](https://opercia.ai/docs) · [Quickstart](https://opercia.ai/docs/cloud-quickstart) · [Download](https://opercia.ai/download) · [Vision](VISION.md) · [Self-Hosting](SELF_HOSTING.md) · [Discord](https://discord.gg/W8gYBn226t) · [X](https://x.com/OperciaAI)
@@ -108,12 +108,12 @@ friends. Opercia drives them; it doesn't ship them.
 <br/>
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash -s -- --with-server
+curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --with-server
 opercia setup self-host
 ```
 
 On Windows, set `$env:OPERCIA_MODE="with-server"`, then run the PowerShell installer:
-`irm https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.ps1 | iex`.
+`irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex`.
 
 This pulls the official images from GHCR and requires Docker. See the
 [Self-Hosting Guide](SELF_HOSTING.md); if the selected GHCR tag has not been published yet,

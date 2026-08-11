@@ -9,14 +9,14 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/events"
-	"github.com/opercia-ai/opercia/server/internal/issueguard"
-	"github.com/opercia-ai/opercia/server/internal/issueposition"
-	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/events"
+	"github.com/JTBlink/operica/server/internal/issueguard"
+	"github.com/JTBlink/operica/server/internal/issueposition"
+	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
+	"github.com/JTBlink/operica/server/internal/util"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // IssueService is the single service-layer entry point for creating issues.

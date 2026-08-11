@@ -18,16 +18,16 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/channelmedia"
-	"github.com/opercia-ai/opercia/server/internal/dispatch"
-	"github.com/opercia-ai/opercia/server/internal/issueguard"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
-	"github.com/opercia-ai/opercia/server/internal/service"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	agentpkg "github.com/opercia-ai/opercia/server/pkg/agent"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/channelmedia"
+	"github.com/JTBlink/operica/server/internal/dispatch"
+	"github.com/JTBlink/operica/server/internal/issueguard"
+	"github.com/JTBlink/operica/server/internal/logger"
+	"github.com/JTBlink/operica/server/internal/middleware"
+	"github.com/JTBlink/operica/server/internal/service"
+	"github.com/JTBlink/operica/server/internal/util"
+	agentpkg "github.com/JTBlink/operica/server/pkg/agent"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // IssueResponse is the JSON response for an issue.
@@ -3446,7 +3446,7 @@ func (h *Handler) BatchUpdateIssues(w http.ResponseWriter, r *http.Request) {
 	// real-world cases that hit this path are caller mistakes (status placed
 	// at the top level, "update" misspelled as singular). Telling the truth
 	// here — `{"updated": 0}` — keeps the wire shape stable while making the
-	// count match reality. See opercia-ai/opercia#1660.
+	// count match reality. See JTBlink/operica#1660.
 	hasMutation := req.Updates.Title != nil ||
 		req.Updates.Description != nil ||
 		req.Updates.Status != nil ||

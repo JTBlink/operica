@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/composio"
+	"github.com/JTBlink/operica/server/pkg/composio"
 )
 
 // newTestServer wires up a httptest.Server with the provided handler and

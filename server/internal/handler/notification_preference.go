@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/logger"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // validNotifGroups is the set of notification preference group keys that the

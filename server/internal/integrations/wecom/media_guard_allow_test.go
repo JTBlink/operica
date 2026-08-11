@@ -17,7 +17,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
 )
 
 func withAllowed(t *testing.T, cidrs ...string) {

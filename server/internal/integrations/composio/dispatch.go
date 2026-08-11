@@ -7,10 +7,10 @@ import (
 	"sort"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/runtimeapps"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	sdk "github.com/opercia-ai/opercia/server/pkg/composio"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/runtimeapps"
+	"github.com/JTBlink/operica/server/internal/util"
+	sdk "github.com/JTBlink/operica/server/pkg/composio"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // mcpOverlayServerName is the deterministic key under `mcpServers` used to

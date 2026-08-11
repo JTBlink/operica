@@ -31,7 +31,7 @@ export interface LatestRelease {
 }
 
 const GITHUB_RELEASES_URL =
-  "https://api.github.com/repos/opercia-ai/opercia/releases?per_page=2";
+  "https://api.github.com/repos/JTBlink/operica/releases?per_page=2";
 
 const REVALIDATE_SECONDS = 300;
 

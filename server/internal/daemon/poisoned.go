@@ -3,8 +3,8 @@ package daemon
 import (
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 )
 
 // FailureReason values for tasks whose session is "poisoned" — i.e.

@@ -3,7 +3,7 @@ package metrics
 import (
 	"sync"
 
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

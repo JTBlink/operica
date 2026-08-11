@@ -13,7 +13,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 func makePropertyDef(propType string, options []PropertyOption) db.IssueProperty {

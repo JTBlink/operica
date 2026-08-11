@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/lark"
-	"github.com/opercia-ai/opercia/server/internal/util/secretbox"
+	"github.com/JTBlink/operica/server/internal/integrations/lark"
+	"github.com/JTBlink/operica/server/internal/util/secretbox"
 )
 
 // Lark-handler unit tests focus on the no-config short-circuits —

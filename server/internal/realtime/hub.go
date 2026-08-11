@@ -17,7 +17,7 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/gorilla/websocket"
-	"github.com/opercia-ai/opercia/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/auth"
 )
 
 // MembershipChecker verifies a user belongs to a workspace.

@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"github.com/opercia-ai/opercia/server/internal/dispatch"
+	"github.com/JTBlink/operica/server/internal/dispatch"
 )
 
 // Unified execution-admission contract (MUL-4525).

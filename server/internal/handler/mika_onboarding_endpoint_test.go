@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/service"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/service"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // startMikaOnboarding drives the endpoint the way the router does: session id

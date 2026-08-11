@@ -22,9 +22,9 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
+	"github.com/JTBlink/operica/server/internal/middleware"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // maxWebhookBodyBytes is the request body size cap for webhook ingress.

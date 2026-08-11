@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/runtimeapps"
+	"github.com/JTBlink/operica/server/internal/runtimeapps"
 )
 
 // RepoContextForEnv describes a workspace repo available for checkout.

@@ -5,7 +5,7 @@ import (
 
 	"github.com/oklog/ulid/v2"
 
-	"github.com/opercia-ai/opercia/server/internal/realtime"
+	"github.com/JTBlink/operica/server/internal/realtime"
 )
 
 // RelayNotifier sends daemon wakeup hints to the local daemon hub and, when

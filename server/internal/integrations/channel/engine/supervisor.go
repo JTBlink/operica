@@ -15,8 +15,8 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
-	"github.com/opercia-ai/opercia/server/internal/util"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/util"
 )
 
 // Installation is the channel-agnostic view of one channel_installation

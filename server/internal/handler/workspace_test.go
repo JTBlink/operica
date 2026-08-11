@@ -218,7 +218,7 @@ INSERT INTO github_pull_request (
 	title, state, html_url, pr_created_at, pr_updated_at, head_sha
 )
 VALUES ($1, 123456789, 'opercia-ai', 'opercia', 5265,
-	'Workspace cleanup snapshot', 'open', 'https://github.com/opercia-ai/opercia/pull/5265',
+	'Workspace cleanup snapshot', 'open', 'https://github.com/JTBlink/operica/pull/5265',
 	now(), now(), 'head-a')
 RETURNING id
 `, wsID).Scan(&githubPRID); err != nil {
@@ -863,14 +863,14 @@ VALUES ($1, $2, 'owner')
 		req := newRequest("PATCH", "/api/workspaces/"+wsID, map[string]any{
 			"repos": []map[string]any{
 				{
-					"url":         "  https://github.com/opercia-ai/opercia.git  ",
+					"url":         "  https://github.com/JTBlink/operica.git  ",
 					"description": "  main monorepo  ",
 				},
 				{
-					"url": "https://github.com/opercia-ai/opercia.git",
+					"url": "https://github.com/JTBlink/operica.git",
 				},
 				{
-					"url": "git@github.com:opercia-ai/opercia-cloud.git",
+					"url": "git@github.com:JTBlink/operica-cloud.git",
 				},
 			},
 		})
@@ -892,10 +892,10 @@ VALUES ($1, $2, 'owner')
 		if len(repos) != 2 {
 			t.Fatalf("expected duplicate URL to be deduped, got %d repos: %s", len(repos), raw)
 		}
-		if repos[0].URL != "https://github.com/opercia-ai/opercia.git" || repos[0].Description != "main monorepo" {
+		if repos[0].URL != "https://github.com/JTBlink/operica.git" || repos[0].Description != "main monorepo" {
 			t.Fatalf("first repo not normalized: %+v", repos[0])
 		}
-		if repos[1].URL != "git@github.com:opercia-ai/opercia-cloud.git" {
+		if repos[1].URL != "git@github.com:JTBlink/operica-cloud.git" {
 			t.Fatalf("second repo not preserved: %+v", repos[1])
 		}
 	})

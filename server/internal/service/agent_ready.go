@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // AgentReadiness reports whether an agent can accept new work right now.

@@ -735,7 +735,7 @@ func TestLocalCloneArgsOnlyDisablesHardlinksOnWindows(t *testing.T) {
 }
 
 // TestIsolatedCheckoutCloneWithoutHardlinksIsIndependent runs the exact clone
-// invocation Windows Codex tasks now use (opercia-ai/opercia#6449) and proves
+// invocation Windows Codex tasks now use (JTBlink/operica#6449) and proves
 // it still yields a usable checkout whose object files are private copies
 // rather than links back into the daemon-owned cache. Kept platform-agnostic
 // so Linux/macOS CI guards the Windows-only flag.

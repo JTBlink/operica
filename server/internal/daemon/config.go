@@ -13,8 +13,8 @@ import (
 
 	"github.com/mattn/go-shellwords"
 
-	"github.com/opercia-ai/opercia/server/internal/cli"
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/internal/cli"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 const (

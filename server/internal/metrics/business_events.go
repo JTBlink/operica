@@ -1,7 +1,7 @@
 package metrics
 
 import (
-	"github.com/opercia-ai/opercia/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/analytics"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

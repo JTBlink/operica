@@ -10,8 +10,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/auth"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/auth"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // PATRenewThreshold is the remaining-lifetime window at which a PAT becomes

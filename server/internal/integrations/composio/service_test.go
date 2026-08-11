@@ -11,9 +11,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	sdk "github.com/opercia-ai/opercia/server/pkg/composio"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/util"
+	sdk "github.com/JTBlink/operica/server/pkg/composio"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // ---- fakes ---------------------------------------------------------------

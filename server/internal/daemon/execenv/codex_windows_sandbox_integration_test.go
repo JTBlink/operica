@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // TestWindowsSandboxHonorsShellQuotedCustomArg is the MUL-4957 round-3 must-fix

@@ -14,7 +14,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/wecom"
+	"github.com/JTBlink/operica/server/internal/integrations/wecom"
 )
 
 // fakeRedeemer records whether the handler ever got as far as the service.

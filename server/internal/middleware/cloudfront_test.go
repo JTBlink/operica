@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/auth"
 )
 
 // testSigner sets up env vars and creates a CloudFrontSigner with a throwaway RSA key.

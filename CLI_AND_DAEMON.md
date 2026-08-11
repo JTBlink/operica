@@ -13,7 +13,7 @@ brew install opercia-ai/tap/opercia
 ### Build from Source
 
 ```bash
-git clone https://github.com/opercia-ai/opercia.git
+git clone https://github.com/JTBlink/operica.git
 cd opercia
 make build
 cp server/bin/opercia /usr/local/bin/opercia

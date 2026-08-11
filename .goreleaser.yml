@@ -74,7 +74,7 @@ brews:
       branch: main
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     directory: Formula
-    homepage: "https://github.com/opercia-ai/opercia"
+    homepage: "https://github.com/JTBlink/operica"
     description: "Opercia CLI — local agent runtime and management tool for the Opercia platform"
     # No license stanza: Opercia ships under the Opercia License (Apache 2.0
     # terms with additional conditions, see LICENSE), which has no SPDX

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // TestWSRPCClient_CallRoundTrip: a request is framed and sent, and a matching

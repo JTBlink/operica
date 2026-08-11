@@ -32,7 +32,7 @@ import (
     "context"
     "os"
 
-    "github.com/opercia-ai/opercia/server/pkg/composio"
+    "github.com/JTBlink/operica/server/pkg/composio"
 )
 
 client, err := composio.NewClient(composio.Options{

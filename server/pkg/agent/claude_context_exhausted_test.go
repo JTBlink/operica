@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 )
 
 // TestClaudeTerminalReasonFailure covers the mapping in isolation: only the one

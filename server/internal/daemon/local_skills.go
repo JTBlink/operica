@@ -8,8 +8,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/skill"
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/internal/skill"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 const (

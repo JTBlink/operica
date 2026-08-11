@@ -6,7 +6,7 @@ import { copyText } from "@opercia/ui/lib/clipboard";
 import { useLocale } from "../../i18n";
 
 const INSTALL_CMD =
-  "curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash";
+  "curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash";
 const SETUP_CMD = "opercia setup";
 
 /**

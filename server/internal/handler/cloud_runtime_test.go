@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/cloudruntime"
+	"github.com/JTBlink/operica/server/internal/cloudruntime"
 )
 
 type fakeCloudRuntimeProxy struct {

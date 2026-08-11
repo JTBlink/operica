@@ -1,6 +1,6 @@
 import { cn } from "@opercia/ui/lib/utils";
 
-export const githubUrl = "https://github.com/opercia-ai/opercia";
+export const githubUrl = "https://github.com/JTBlink/operica";
 export const twitterUrl = "https://x.com/OperciaAI";
 export const discordUrl = "https://discord.gg/W8gYBn226t";
 

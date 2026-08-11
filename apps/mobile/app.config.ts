@@ -26,9 +26,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     orientation: "portrait",
     userInterfaceStyle: "automatic",
     scheme: "opercia",
-    // 1024x1024 source shared with the desktop client
-    // (apps/desktop/build/icon.png). Expo prebuild generates every required
-    // iOS icon size from this single PNG.
+    // Expo prebuild generates every required iOS icon size from this
+    // full-bleed 1024x1024 PNG. The editable source is assets/icon.svg.
     icon: "./assets/icon.png",
     ios: {
       supportsTablet: false,

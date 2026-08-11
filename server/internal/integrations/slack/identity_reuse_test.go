@@ -8,9 +8,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // fakeIdentityQueries implements identityQueries so the cross-installation

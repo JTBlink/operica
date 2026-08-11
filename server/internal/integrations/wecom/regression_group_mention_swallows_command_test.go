@@ -23,8 +23,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
 )
 
 // groupCallbackFrame is a real group delivery: WeCom only forwards a group

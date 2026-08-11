@@ -13,9 +13,9 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/opercia-ai/opercia/server/internal/channelmedia"
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/channelmedia"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 func sessionPersistenceTestDB(t *testing.T) *pgxpool.Pool {

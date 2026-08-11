@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 func TestBuildMikaOnboardingKickoffSelectsSkillWithKnownContext(t *testing.T) {

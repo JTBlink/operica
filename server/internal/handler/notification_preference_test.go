@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/middleware"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/middleware"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 func notificationPreferenceRequest(

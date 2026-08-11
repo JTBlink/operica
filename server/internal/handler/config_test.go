@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/auth"
 )
 
 func TestGetConfigReportsCdnSignedMode(t *testing.T) {

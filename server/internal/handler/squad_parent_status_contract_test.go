@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
 )
 
 // The two tests below are composition tests, not text-presence tests. The

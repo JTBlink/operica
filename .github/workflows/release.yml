@@ -18,17 +18,37 @@ permissions:
   contents: write
   packages: write
 
+# Releases are based on dev. Manual runs must not accidentally use a
+# different branch selected in the Actions UI; tag-triggered runs keep using
+# the exact tagged commit.
+env:
+  RELEASE_REF: ${{ github.event_name == 'workflow_dispatch' && 'refs/heads/dev' || github.ref }}
+
 jobs:
   verify:
     runs-on: ubuntu-latest
     outputs:
       tag_name: ${{ steps.release_meta.outputs.tag_name }}
       is_stable: ${{ steps.release_meta.outputs.is_stable }}
+      source_commit: ${{ steps.release_meta.outputs.source_commit }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: ${{ env.RELEASE_REF }}
           fetch-depth: 0
+
+      - name: Verify release tag is on dev
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          git fetch origin refs/heads/dev:refs/remotes/origin/dev --force
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" refs/remotes/origin/dev; then
+            echo "::error::Release tags must point to a commit on dev."
+            echo "Tag commit: $GITHUB_SHA"
+            echo "dev tip: $(git rev-parse refs/remotes/origin/dev)"
+            exit 1
+          fi
 
       - name: Validate release version
         id: release_meta
@@ -56,6 +76,7 @@ jobs:
           else
             echo "is_stable=true" >> "$GITHUB_OUTPUT"
           fi
+          echo "source_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -73,15 +94,16 @@ jobs:
     needs: verify
     # Only run on the canonical upstream repo. Forks don't have the
     # HOMEBREW_TAP_GITHUB_TOKEN secret and should not be publishing to
-    # `opercia-ai/homebrew-tap` anyway. Without this guard, every fork's
+    # `JTBlink/homebrew-tap` anyway. Without this guard, every fork's
     # tag push fails this job (401 against the upstream tap), which makes
     # downstream CI go red without affecting the actual artifact pipeline.
-    if: github.repository_owner == 'opercia-ai'
+    if: github.repository_owner == 'JTBlink'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: ${{ env.RELEASE_REF }}
           fetch-depth: 0
 
       - name: Setup Go
@@ -94,6 +116,10 @@ jobs:
         env:
           RELEASE_TAG: ${{ needs.verify.outputs.tag_name }}
         run: |
+          if [[ -z "$RELEASE_TAG" ]]; then
+            echo "::error::Release tag is empty; verify job did not provide tag_name."
+            exit 1
+          fi
           if existing_commit=$(git rev-list -n 1 "refs/tags/$RELEASE_TAG" 2>/dev/null); then
             if [[ "$existing_commit" != "$(git rev-parse HEAD)" ]]; then
               echo "::error::Release tag '$RELEASE_TAG' already points to a different commit."
@@ -135,15 +161,17 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_REF }}
 
       - name: Compute backend image labels
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/opercia-backend
+          images: ghcr.io/jtblink/operica-backend
           labels: |
-            org.opencontainers.image.title=Opercia Backend
-            org.opencontainers.image.description=Opercia self-hosted backend
+            org.opencontainers.image.title=Operica Backend
+            org.opencontainers.image.description=Operica self-hosted backend
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -168,8 +196,8 @@ jobs:
           cache-to: type=gha,mode=max,scope=release-backend-${{ env.PLATFORM_PAIR }}
           build-args: |
             VERSION=${{ needs.verify.outputs.tag_name }}
-            COMMIT=${{ github.sha }}
-          outputs: type=image,name=ghcr.io/${{ github.repository_owner }}/opercia-backend,push-by-digest=true,name-canonical=true,push=true
+            COMMIT=${{ needs.verify.outputs.source_commit }}
+          outputs: type=image,name=ghcr.io/jtblink/operica-backend,push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
         run: |
@@ -206,7 +234,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/opercia-backend
+          images: ghcr.io/jtblink/operica-backend
           flavor: |
             latest=false
           tags: |
@@ -226,12 +254,12 @@ jobs:
         run: |
           docker buildx imagetools create \
             $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf 'ghcr.io/${{ github.repository_owner }}/opercia-backend@sha256:%s ' *)
+            $(printf 'ghcr.io/jtblink/operica-backend@sha256:%s ' *)
 
       - name: Inspect image
         run: |
           docker buildx imagetools inspect \
-            ghcr.io/${{ github.repository_owner }}/opercia-backend:${{ steps.meta.outputs.version }}
+            ghcr.io/jtblink/operica-backend:${{ steps.meta.outputs.version }}
 
   docker-web-build:
     needs: verify
@@ -252,15 +280,17 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_REF }}
 
       - name: Compute web image labels
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/opercia-web
+          images: ghcr.io/jtblink/operica-web
           labels: |
-            org.opencontainers.image.title=Opercia Web
-            org.opencontainers.image.description=Opercia self-hosted web frontend
+            org.opencontainers.image.title=Operica Web
+            org.opencontainers.image.description=Operica self-hosted web frontend
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -286,7 +316,7 @@ jobs:
           build-args: |
             REMOTE_API_URL=http://backend:8080
             NEXT_PUBLIC_APP_VERSION=${{ needs.verify.outputs.tag_name }}
-          outputs: type=image,name=ghcr.io/${{ github.repository_owner }}/opercia-web,push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,name=ghcr.io/jtblink/operica-web,push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
         run: |
@@ -323,7 +353,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/opercia-web
+          images: ghcr.io/jtblink/operica-web
           flavor: |
             latest=false
           tags: |
@@ -343,26 +373,31 @@ jobs:
         run: |
           docker buildx imagetools create \
             $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf 'ghcr.io/${{ github.repository_owner }}/opercia-web@sha256:%s ' *)
+            $(printf 'ghcr.io/jtblink/operica-web@sha256:%s ' *)
 
       - name: Inspect image
         run: |
           docker buildx imagetools inspect \
-            ghcr.io/${{ github.repository_owner }}/opercia-web:${{ steps.meta.outputs.version }}
+            ghcr.io/jtblink/operica-web:${{ steps.meta.outputs.version }}
 
   helm-chart:
     needs: [verify, docker-backend-merge, docker-web-merge]
-    if: github.repository_owner == 'opercia-ai'
+    if: github.repository_owner == 'JTBlink'
     runs-on: ubuntu-latest
     concurrency:
       group: release-helm-chart-${{ github.ref }}
       cancel-in-progress: true
     env:
-      CHART_DIR: deploy/helm/opercia
-      OCI_REGISTRY: oci://ghcr.io/${{ github.repository_owner }}/charts
+      CHART_DIR: deploy/helm/operica
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      - name: Set chart registry
+        shell: bash
+        run: echo "OCI_REGISTRY=oci://ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/charts" >> "$GITHUB_ENV"
 
       - name: Setup Helm
         uses: azure/setup-helm@v4
@@ -386,10 +421,10 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io --username "${{ github.actor }}" --password-stdin
 
       - name: Push chart to GHCR
-        run: helm push ".chart-packages/opercia-${CHART_VERSION}.tgz" "$OCI_REGISTRY"
+        run: helm push ".chart-packages/operica-${CHART_VERSION}.tgz" "$OCI_REGISTRY"
 
       - name: Verify published chart
-        run: helm show chart "$OCI_REGISTRY/opercia" --version "$CHART_VERSION"
+        run: helm show chart "$OCI_REGISTRY/operica" --version "$CHART_VERSION"
 
   # Build the Desktop installers for Linux and Windows and upload them to
   # the GitHub Release that the `release` job above just published. macOS
@@ -397,7 +432,7 @@ jobs:
   # can be signed + notarized with Apple Developer credentials that are
   # not (yet) wired into CI.
   desktop:
-    needs: release
+    needs: [release, verify]
     strategy:
       fail-fast: false
       matrix:
@@ -411,6 +446,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: ${{ env.RELEASE_REF }}
           fetch-depth: 0
 
       - name: Prepare local release tag
@@ -418,6 +454,10 @@ jobs:
           RELEASE_TAG: ${{ needs.verify.outputs.tag_name }}
         shell: bash
         run: |
+          if [[ -z "$RELEASE_TAG" ]]; then
+            echo "::error::Release tag is empty; verify job did not provide tag_name."
+            exit 1
+          fi
           if existing_commit=$(git rev-list -n 1 "refs/tags/$RELEASE_TAG" 2>/dev/null); then
             if [[ "$existing_commit" != "$(git rev-parse HEAD)" ]]; then
               echo "::error::Release tag '$RELEASE_TAG' already points to a different commit."

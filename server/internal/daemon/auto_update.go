@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/cli"
+	"github.com/JTBlink/operica/server/internal/cli"
 )
 
 // Indirections over the real release / version helpers so tests can run the

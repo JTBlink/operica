@@ -35,11 +35,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/events"
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
-	"github.com/opercia-ai/opercia/server/internal/integrations/slack"
-	"github.com/opercia-ai/opercia/server/internal/service"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/events"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/slack"
+	"github.com/JTBlink/operica/server/internal/service"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 func TestArchivingAChannelBoundChatSessionCancelsItsQueuedTasks(t *testing.T) {

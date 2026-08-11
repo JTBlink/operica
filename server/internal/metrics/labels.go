@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 )
 
 const (

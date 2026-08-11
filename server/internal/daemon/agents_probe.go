@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // shellResolveTTL bounds how long one login-shell PATH resolution is reused

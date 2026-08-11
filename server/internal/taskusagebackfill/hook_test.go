@@ -15,8 +15,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/opercia-ai/opercia/server/internal/migrations"
-	"github.com/opercia-ai/opercia/server/internal/taskusagebackfill"
+	"github.com/JTBlink/operica/server/internal/migrations"
+	"github.com/JTBlink/operica/server/internal/taskusagebackfill"
 )
 
 // TestHook_DirectV034Upgrade simulates the path described in

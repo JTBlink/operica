@@ -17,7 +17,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // batchFixture wires a Daemon against a fake server that serves a configurable

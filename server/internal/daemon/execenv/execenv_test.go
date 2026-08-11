@@ -189,7 +189,7 @@ func TestPrepareWithProjectResources(t *testing.T) {
 			{
 				ID:           "33333333-4444-5555-6666-777777777777",
 				ResourceType: "github_repo",
-				ResourceRef:  json.RawMessage(`{"url":"https://github.com/opercia-ai/opercia","ref":"release/v2","default_branch_hint":"main"}`),
+				ResourceRef:  json.RawMessage(`{"url":"https://github.com/JTBlink/operica","ref":"release/v2","default_branch_hint":"main"}`),
 			},
 		},
 	}
@@ -252,7 +252,7 @@ func TestPrepareWithProjectResources(t *testing.T) {
 		"Agent UX 2026",
 		"Always write copy in British English. Ship behind a feature flag.",
 		"GitHub repo",
-		"https://github.com/opercia-ai/opercia",
+		"https://github.com/JTBlink/operica",
 		"checkout ref: `release/v2`",
 		"default branch hint: `main`",
 		".opercia/project/resources.json",

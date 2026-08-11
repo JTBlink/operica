@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/daemonws"
-	"github.com/opercia-ai/opercia/server/internal/realtime"
+	"github.com/JTBlink/operica/server/internal/daemonws"
+	"github.com/JTBlink/operica/server/internal/realtime"
 )
 
 // realtimeMetricsHandler returns the HTTP handler for /health/realtime.

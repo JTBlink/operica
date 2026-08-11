@@ -15,7 +15,7 @@ import { selectPlatformReleaseAssetName } from "./cli-release-asset";
 // userData on first launch when the bundled binary is missing or unusable.
 
 const GITHUB_LATEST_BASE =
-  "https://github.com/opercia-ai/opercia/releases/latest/download";
+  "https://github.com/JTBlink/operica/releases/latest/download";
 
 function binaryName(): string {
   return process.platform === "win32" ? "opercia.exe" : "opercia";

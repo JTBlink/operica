@@ -3,9 +3,9 @@ package main
 import (
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
-	"github.com/opercia-ai/opercia/server/internal/integrations/lark"
-	"github.com/opercia-ai/opercia/server/internal/service"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
+	"github.com/JTBlink/operica/server/internal/integrations/lark"
+	"github.com/JTBlink/operica/server/internal/service"
 )
 
 // The reconciler's settle delay carries NO correctness weight (the ledger

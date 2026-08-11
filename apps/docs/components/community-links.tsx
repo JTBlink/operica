@@ -18,7 +18,7 @@ export function CommunityLinks({
     },
     {
       label: "GitHub",
-      href: "https://github.com/opercia-ai/opercia",
+      href: "https://github.com/JTBlink/operica",
       description: githubDescription,
       Icon: GitHubMark,
     },

@@ -11,7 +11,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
-	"github.com/opercia-ai/opercia/server/internal/storage"
+	"github.com/JTBlink/operica/server/internal/storage"
 )
 
 // withAvatarStorage swaps the handler's storage/config for one test and

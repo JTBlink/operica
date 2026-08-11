@@ -33,7 +33,7 @@ func TestProjectResourceLifecycle(t *testing.T) {
 	req = newRequest("POST", "/api/projects/"+project.ID+"/resources", map[string]any{
 		"resource_type": "github_repo",
 		"resource_ref": map[string]any{
-			"url": "https://github.com/opercia-ai/opercia",
+			"url": "https://github.com/JTBlink/operica",
 			"ref": "release/v2",
 		},
 	})
@@ -56,7 +56,7 @@ func TestProjectResourceLifecycle(t *testing.T) {
 	if err := json.Unmarshal(created.ResourceRef, &ref); err != nil {
 		t.Fatalf("decode resource_ref: %v", err)
 	}
-	if ref.URL != "https://github.com/opercia-ai/opercia" {
+	if ref.URL != "https://github.com/JTBlink/operica" {
 		t.Errorf("created.ResourceRef.url = %q", ref.URL)
 	}
 	if ref.Ref != "release/v2" {
@@ -90,7 +90,7 @@ func TestProjectResourceLifecycle(t *testing.T) {
 	req = newRequest("POST", "/api/projects/"+project.ID+"/resources", map[string]any{
 		"resource_type": "github_repo",
 		"resource_ref": map[string]any{
-			"url": "https://github.com/opercia-ai/opercia",
+			"url": "https://github.com/JTBlink/operica",
 			"ref": "release/v2",
 		},
 	})
@@ -173,8 +173,8 @@ func TestProjectResourceAcceptsSSHRepoURLs(t *testing.T) {
 		name string
 		url  string
 	}{
-		{"scp-like", "git@github.com:opercia-ai/opercia.git"},
-		{"ssh-scheme", "ssh://git@github.com/opercia-ai/opercia.git"},
+		{"scp-like", "git@github.com:JTBlink/operica.git"},
+		{"ssh-scheme", "ssh://git@github.com/JTBlink/operica.git"},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -207,18 +207,18 @@ func TestProjectResourceAcceptsSSHRepoURLs(t *testing.T) {
 
 func TestIsValidGitRepoURL(t *testing.T) {
 	good := []string{
-		"https://github.com/opercia-ai/opercia",
-		"https://github.com/opercia-ai/opercia.git",
+		"https://github.com/JTBlink/operica",
+		"https://github.com/JTBlink/operica.git",
 		"http://github.example.com/x/y",
-		"ssh://git@github.com/opercia-ai/opercia.git",
-		"ssh://git@github.com:22/opercia-ai/opercia.git",
-		"git@github.com:opercia-ai/opercia.git",
+		"ssh://git@github.com/JTBlink/operica.git",
+		"ssh://git@github.com:22/JTBlink/operica.git",
+		"git@github.com:JTBlink/operica.git",
 		"git@gitlab.example.com:group/sub/repo.git",
 	}
 	bad := []string{
 		"",
 		"not-a-url",
-		"github.com/opercia-ai/opercia", // no scheme, no scp-style colon
+		"github.com/JTBlink/operica", // no scheme, no scp-style colon
 		"https://",                      // empty host
 		"git@github.com",                // missing :path
 		"git@:foo/bar",                  // missing host
@@ -470,7 +470,7 @@ func TestCreateProjectAttachesResources(t *testing.T) {
 		"resources": []map[string]any{
 			{
 				"resource_type": "github_repo",
-				"resource_ref":  map[string]any{"url": "https://github.com/opercia-ai/opercia"},
+				"resource_ref":  map[string]any{"url": "https://github.com/JTBlink/operica"},
 			},
 		},
 	})

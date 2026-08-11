@@ -23,9 +23,9 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/opercia-ai/opercia/server/internal/auth"
-	"github.com/opercia-ai/opercia/server/internal/storage"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/storage"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // createHandlerTestChatSession seeds a chat_session row owned by testUserID

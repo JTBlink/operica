@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/cli"
+	"github.com/JTBlink/operica/server/internal/cli"
 )
 
 // newSelfReloadTestDaemon returns a Daemon wired for trySelfReload: a stubbed

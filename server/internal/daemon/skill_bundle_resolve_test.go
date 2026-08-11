@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 )
 
 func TestSkillBundleResolveTimeout(t *testing.T) {

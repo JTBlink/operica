@@ -7,7 +7,7 @@
   "homepage": "https://opercia.ai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/opercia-ai/opercia.git",
+    "url": "https://github.com/JTBlink/operica.git",
     "directory": "apps/desktop"
   },
   "author": {

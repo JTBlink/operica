@@ -7,8 +7,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	skillpkg "github.com/opercia-ai/opercia/server/internal/skill"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	skillpkg "github.com/JTBlink/operica/server/internal/skill"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 type skillCreateInput struct {

@@ -14,8 +14,8 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/slack-go/slack"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // ErrNoSlackSession reports that the chat session has no Slack channel binding —

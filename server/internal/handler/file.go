@@ -16,8 +16,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/storage"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/storage"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // extContentTypes overrides http.DetectContentType for extensions it gets wrong.
@@ -872,7 +872,7 @@ func shouldProxyAttachmentURL(rawURL string) bool {
 		return addr.IsLoopback() ||
 			addr.IsPrivate() ||
 			addr.IsLinkLocalUnicast() ||
-			addr.IsLinkLocalOperciast() ||
+			addr.IsLinkLocalMulticast() ||
 			addr.IsUnspecified()
 	}
 	return false

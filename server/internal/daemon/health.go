@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/repocache"
+	"github.com/JTBlink/operica/server/internal/daemon/repocache"
 )
 
 // HealthResponse is returned by the daemon's local health endpoint.

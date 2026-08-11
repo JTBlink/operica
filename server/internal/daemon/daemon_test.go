@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
-	"github.com/opercia-ai/opercia/server/internal/daemon/repocache"
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/repocache"
+	"github.com/JTBlink/operica/server/pkg/agent"
 	"github.com/pelletier/go-toml/v2"
 )
 

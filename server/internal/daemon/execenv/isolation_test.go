@@ -64,7 +64,7 @@ func TestPreparationHelperRoundTripsReuse(t *testing.T) {
 				{
 					ID:           "resource-helper-reuse",
 					ResourceType: "github_repo",
-					ResourceRef:  json.RawMessage(`{"url":"https://github.com/opercia-ai/opercia"}`),
+					ResourceRef:  json.RawMessage(`{"url":"https://github.com/JTBlink/operica"}`),
 				},
 			},
 		},
@@ -93,7 +93,7 @@ func TestPreparationHelperRoundTripsProjectResources(t *testing.T) {
 				{
 					ID:           "resource-helper-project-resource",
 					ResourceType: "github_repo",
-					ResourceRef:  json.RawMessage(`{"url":"https://github.com/opercia-ai/opercia"}`),
+					ResourceRef:  json.RawMessage(`{"url":"https://github.com/JTBlink/operica"}`),
 					Label:        "Opercia",
 				},
 			},
@@ -126,7 +126,7 @@ func TestPreparationHelperRoundTripsProjectResources(t *testing.T) {
 	}
 	if resource.ID != "resource-helper-project-resource" ||
 		resource.ResourceType != "github_repo" ||
-		ref.URL != "https://github.com/opercia-ai/opercia" ||
+		ref.URL != "https://github.com/JTBlink/operica" ||
 		resource.Label != "Opercia" {
 		t.Fatalf("project resource = %#v, want all fields preserved", resource)
 	}

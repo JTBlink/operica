@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
 )
 
 // larkMsgTypeMergeForward is the msg_type of a "merged & forwarded"

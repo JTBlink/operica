@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="surface" cx="0" cy="0" r="1" gradientTransform="translate(78 54) rotate(49) scale(244)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset=".52" stop-color="#f0f4fc"/>
+      <stop offset="1" stop-color="#dce4f2"/>
+    </radialGradient>
+    <linearGradient id="long" x1="75" y1="74" x2="184" y2="187" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#785ef5"/>
+      <stop offset=".45" stop-color="#4b7df6"/>
+      <stop offset="1" stop-color="#24c8c8"/>
+    </linearGradient>
+    <linearGradient id="short" x1="76" y1="173" x2="101" y2="69" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5a61e9"/>
+      <stop offset=".55" stop-color="#7869f6"/>
+      <stop offset="1" stop-color="#9a82ff"/>
+    </linearGradient>
+    <linearGradient id="task" x1="111" y1="107" x2="148" y2="150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffc46d"/>
+      <stop offset=".52" stop-color="#ff9d54"/>
+      <stop offset="1" stop-color="#f47843"/>
+    </linearGradient>
+    <filter id="surfaceShadow" x="-20%" y="-15%" width="140%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#26335f" flood-opacity=".2"/>
+    </filter>
+    <filter id="markShadow" x="-25%" y="-25%" width="150%" height="170%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="9" stdDeviation="9" flood-color="#26326e" flood-opacity=".3"/>
+    </filter>
+    <filter id="taskShadow" x="-50%" y="-50%" width="200%" height="220%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#813f36" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect x="12" y="8" width="232" height="232" rx="58" fill="url(#surface)" filter="url(#surfaceShadow)"/>
+  <rect x="14" y="10" width="228" height="228" rx="56" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+  <g filter="url(#markShadow)">
+    <path d="M80 88A62 62 0 1 1 117 190" fill="none" stroke="#273985" stroke-width="35" stroke-linecap="round" transform="translate(0 5)"/>
+    <path d="M80 88A62 62 0 1 1 117 190" fill="none" stroke="url(#long)" stroke-width="34" stroke-linecap="round"/>
+    <path d="M117 190A62 62 0 0 1 80 88" fill="none" stroke="#343b9d" stroke-width="35" stroke-linecap="round" transform="translate(0 5)"/>
+    <path d="M117 190A62 62 0 0 1 80 88" fill="none" stroke="url(#short)" stroke-width="34" stroke-linecap="round"/>
+    <path d="M88 77c12-9 27-13 42-12" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="4" stroke-linecap="round"/>
+    <path d="M66 137c1 16 8 29 20 39" fill="none" stroke="#fff" stroke-opacity=".24" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#taskShadow)">
+    <rect x="112" y="115" width="32" height="32" rx="8" fill="#c95b38" transform="rotate(45 128 131)"/>
+    <rect x="112" y="111" width="32" height="32" rx="8" fill="url(#task)" transform="rotate(45 128 127)"/>
+    <path d="m119 115 18 18" stroke="#fff" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/opercia-ai/opercia/server/internal/daemonws"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
+	"github.com/JTBlink/operica/server/internal/daemonws"
+	"github.com/JTBlink/operica/server/internal/middleware"
 )
 
 // rpcResponseCapture is a minimal in-memory http.ResponseWriter so a WS RPC can

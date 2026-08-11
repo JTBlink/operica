@@ -8,11 +8,11 @@ import (
 	"strings"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/logger"
+	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
+	"github.com/JTBlink/operica/server/internal/middleware"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // feedbackImageRegex is a coarse check for markdown image syntax ![alt](url).

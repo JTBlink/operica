@@ -14,8 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
-	"github.com/opercia-ai/opercia/server/internal/daemon/repocache"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/repocache"
 )
 
 // newGCTestDaemon creates a minimal Daemon for GC testing with a mock HTTP server.

@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/opercia-ai/opercia/server/internal/service"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/service"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 type startMikaOnboardingRequest struct {

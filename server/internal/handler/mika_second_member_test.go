@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/service"
+	"github.com/JTBlink/operica/server/internal/service"
 )
 
 // addSecondWorkspaceMember creates another member of the handler test

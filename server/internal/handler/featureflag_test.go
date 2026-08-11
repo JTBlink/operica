@@ -3,8 +3,8 @@ package handler
 import (
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/featureflags"
-	"github.com/opercia-ai/opercia/server/pkg/featureflag"
+	"github.com/JTBlink/operica/server/internal/featureflags"
+	"github.com/JTBlink/operica/server/pkg/featureflag"
 )
 
 func withComposioMCPAppsFlag(t *testing.T, h *Handler, enabled bool) {

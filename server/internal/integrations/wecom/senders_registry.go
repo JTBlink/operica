@@ -20,7 +20,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/util"
+	"github.com/JTBlink/operica/server/internal/util"
 )
 
 // sendersRegistry is a goroutine-safe installation_id → wsSender map.

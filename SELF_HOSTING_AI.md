@@ -12,7 +12,7 @@ This document is designed for AI agents to execute. Follow these steps exactly t
 
 ```bash
 # Install CLI + provision self-host server
-curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash -s -- --with-server
+curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --with-server
 
 # Configure CLI for localhost, authenticate, and start daemon
 opercia setup self-host
@@ -28,7 +28,7 @@ Wait for the server output `✓ Opercia server is running and CLI is ready!` bef
 ## Alternative: Manual Setup
 
 ```bash
-git clone https://github.com/opercia-ai/opercia.git
+git clone https://github.com/JTBlink/operica.git
 cd opercia
 make selfhost
 brew install opercia-ai/tap/opercia

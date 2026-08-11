@@ -6,10 +6,10 @@ import (
 	"log/slog"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/events"
-	"github.com/opercia-ai/opercia/server/internal/handler"
-	"github.com/opercia-ai/opercia/server/internal/realtime"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/events"
+	"github.com/JTBlink/operica/server/internal/handler"
+	"github.com/JTBlink/operica/server/internal/realtime"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // internalOnlyPayloadKeys lists payload keys that exist purely for in-process

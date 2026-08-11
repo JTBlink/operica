@@ -20,7 +20,7 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/opercia-ai/opercia/server/internal/logger"
+	"github.com/JTBlink/operica/server/internal/logger"
 )
 
 const rollupAdvisoryLockID = 4246

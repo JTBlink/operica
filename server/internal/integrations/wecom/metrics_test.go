@@ -18,7 +18,7 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
 )
 
 // countingMetrics records every call so a test can assert on the shape of what

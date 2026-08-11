@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // errWSRPCUnavailable is returned by wsRPCClient.Call when there is no live WS

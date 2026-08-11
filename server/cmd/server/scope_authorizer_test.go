@@ -8,8 +8,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/realtime"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/realtime"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // fakeScopeQuerier implements scopeAuthQuerier with in-memory maps.

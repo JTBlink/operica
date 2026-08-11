@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/util"
+	"github.com/JTBlink/operica/server/internal/util"
 )
 
 // TestCreateComment_StripsNullBytesInsteadOf500 pins the fix for GH #5388.

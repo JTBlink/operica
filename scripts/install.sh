@@ -2,10 +2,10 @@
 # Opercia installer — installs the CLI and optionally provisions a self-host server.
 #
 # Install / upgrade CLI only:
-#   curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash
 #
 # Install CLI + provision self-host server:
-#   curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash -s -- --with-server
+#   curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --with-server
 #
 # After installation, run `opercia setup` to configure your environment.
 #
@@ -14,8 +14,8 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-REPO_URL="https://github.com/opercia-ai/opercia.git"
-REPO_WEB_URL="https://github.com/opercia-ai/opercia"  # without .git, for GitHub web APIs
+REPO_URL="https://github.com/JTBlink/operica.git"
+REPO_WEB_URL="https://github.com/JTBlink/operica"  # without .git, for GitHub web APIs
 INSTALL_DIR="${OPERCIA_INSTALL_DIR:-$HOME/.opercia/server}"
 BREW_PACKAGE="opercia-ai/tap/opercia"
 
@@ -93,7 +93,7 @@ detect_os() {
     Linux)  OS="linux" ;;
     MINGW*|MSYS*|CYGWIN*)
             fail "This script does not support Windows. Use the PowerShell installer instead:
-  irm https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.ps1 | iex" ;;
+  irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex" ;;
     *)      fail "Unsupported operating system: $(uname -s). Opercia supports macOS, Linux, and Windows." ;;
   esac
 
@@ -155,7 +155,7 @@ install_cli_binary() {
   fi
 
   local version="${latest#v}"
-  local url="https://github.com/opercia-ai/opercia/releases/download/${latest}/opercia-cli-${version}-${OS}-${ARCH}.tar.gz"
+  local url="https://github.com/JTBlink/operica/releases/download/${latest}/opercia-cli-${version}-${OS}-${ARCH}.tar.gz"
   local tmp_dir
   tmp_dir=$(mktemp -d)
 
@@ -443,7 +443,7 @@ run_default() {
   printf "\n"
   print_remote_server_token_hint
   printf "  ${BOLD}Self-hosting?${RESET} Install the server first:\n"
-  printf "     curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash -s -- --with-server\n"
+  printf "     curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --with-server\n"
   printf "\n"
 }
 
@@ -478,7 +478,7 @@ run_with_server() {
   printf "  or read the generated code from backend logs when Resend is unset.\n"
   printf "\n"
   printf "  ${BOLD}To stop all services:${RESET}\n"
-  printf "     curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash -s -- --stop\n"
+  printf "     curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --stop\n"
   printf "\n"
 }
 

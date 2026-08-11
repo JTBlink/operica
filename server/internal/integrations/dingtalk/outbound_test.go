@@ -3,8 +3,8 @@ package dingtalk
 import (
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/events"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/events"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 func TestEventContent(t *testing.T) {

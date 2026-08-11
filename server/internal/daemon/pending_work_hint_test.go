@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // pendingWorkHintDaemon builds a Daemon that knows exactly one runtime and

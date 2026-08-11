@@ -13,10 +13,10 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	composio "github.com/opercia-ai/opercia/server/internal/integrations/composio"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	sdk "github.com/opercia-ai/opercia/server/pkg/composio"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	composio "github.com/JTBlink/operica/server/internal/integrations/composio"
+	"github.com/JTBlink/operica/server/internal/util"
+	sdk "github.com/JTBlink/operica/server/pkg/composio"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 const composioTestUserID = "22222222-2222-2222-2222-222222222222"

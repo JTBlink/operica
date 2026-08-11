@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/daemonws"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
+	"github.com/JTBlink/operica/server/internal/daemonws"
+	"github.com/JTBlink/operica/server/internal/middleware"
 )
 
 func (h *Handler) DaemonWebSocket(w http.ResponseWriter, r *http.Request) {

@@ -18,9 +18,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	skillpkg "github.com/opercia-ai/opercia/server/internal/skill"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	skillpkg "github.com/JTBlink/operica/server/internal/skill"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -55,7 +55,7 @@ type SkillResponse struct {
 // SkillSummaryResponse is the list-endpoint shape: everything SkillResponse
 // has except `content`. SKILL.md bodies routinely run 50–200KB and shipping
 // them in list payloads bloats responses past CLI timeouts on high-latency
-// links (GH opercia-ai/opercia#2174). Detail endpoints still return the full
+// links (GH JTBlink/operica#2174). Detail endpoints still return the full
 // SkillResponse with content.
 type SkillSummaryResponse struct {
 	ID          string  `json:"id"`

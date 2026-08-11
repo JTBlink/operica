@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/opercia-ai/opercia/server/internal/auth"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/auth"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // Daemon context keys.

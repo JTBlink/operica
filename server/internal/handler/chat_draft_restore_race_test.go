@@ -10,8 +10,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/opercia-ai/opercia/server/internal/middleware"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/middleware"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // chat_draft_restore has no FK to chat_session (MUL-3515), so an INSERT into it

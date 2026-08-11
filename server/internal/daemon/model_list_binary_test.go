@@ -10,7 +10,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // modelListFixture stands up a Daemon whose model-list report is captured and

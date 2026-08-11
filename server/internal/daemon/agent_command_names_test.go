@@ -12,7 +12,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // TestDefaultAgentCommandNamesCoversAllProbes guards the invariant documented

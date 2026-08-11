@@ -10,7 +10,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // runtimeMarkerBegin and runtimeMarkerEnd delimit the Opercia-managed brief

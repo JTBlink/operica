@@ -32,7 +32,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
 )
 
 // TypeDingTalk is the channel discriminator for the DingTalk adapter. It is

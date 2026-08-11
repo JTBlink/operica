@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
 )
 
 // sessionContinuityNoticeFor picks the notice matching what this surface

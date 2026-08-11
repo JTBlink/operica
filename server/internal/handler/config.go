@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/featureflags"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/featureflags"
 )
 
 type AppConfig struct {

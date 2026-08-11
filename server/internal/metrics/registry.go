@@ -7,8 +7,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/collectors"
 
-	"github.com/opercia-ai/opercia/server/internal/daemonws"
-	"github.com/opercia-ai/opercia/server/internal/realtime"
+	"github.com/JTBlink/operica/server/internal/daemonws"
+	"github.com/JTBlink/operica/server/internal/realtime"
 )
 
 type RegistryOptions struct {

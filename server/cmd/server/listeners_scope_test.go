@@ -4,8 +4,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/events"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/events"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // fakeBroadcaster records every fanout call so tests can assert which scope a

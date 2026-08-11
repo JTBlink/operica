@@ -3,7 +3,7 @@ package metrics
 import (
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/opercia-ai/opercia/server/internal/realtime"
+	"github.com/JTBlink/operica/server/internal/realtime"
 )
 
 type RealtimeCollector struct {

@@ -1,4 +1,4 @@
-module github.com/opercia-ai/opercia/server
+module github.com/JTBlink/operica/server
 
 go 1.26.1
 

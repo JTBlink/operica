@@ -10,10 +10,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/logger"
+	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // Public, unauthenticated endpoint for the landing-page "Contact Sales"

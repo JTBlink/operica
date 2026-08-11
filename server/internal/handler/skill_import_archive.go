@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	skillpkg "github.com/opercia-ai/opercia/server/internal/skill"
+	skillpkg "github.com/JTBlink/operica/server/internal/skill"
 )
 
 // maxImportArchiveUploadSize bounds the compressed upload accepted by the

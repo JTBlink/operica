@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/agent"
 )
 
 // newVersionRefreshFixture brings up a daemon with one registered codex runtime

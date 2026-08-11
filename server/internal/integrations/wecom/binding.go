@@ -26,8 +26,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel/engine"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // BindingTokenTTL bounds a token's life. The channel_binding_token CHECK

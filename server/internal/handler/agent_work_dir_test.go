@@ -3,7 +3,7 @@ package handler
 import (
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
 )
 
 // TestRelativeWorkDir covers the privacy-safe display derivation that

@@ -1,28 +1,35 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { ArrowUpRight } from "lucide-react";
 
-// Docs-local stateless Opercia mark — matches @opercia/ui's OperciaIcon
-// visually (same 8-pointed-asterisk clip-path), but without useState/
-// useEffect so it's safe to render from Server Components such as
-// layout.config.tsx / layout.tsx. Keep in sync with
+// Docs-local stateless Opercia mark — matches @opercia/ui's OperciaIcon,
+// while staying safe to render from Server Components. Keep in sync with
 // packages/ui/components/common/opercia-icon.tsx if the mark changes.
-const OPERCIA_CLIP = `polygon(
-  45% 62.1%, 45% 100%, 55% 100%, 55% 62.1%,
-  81.8% 88.9%, 88.9% 81.8%, 62.1% 55%, 100% 55%,
-  100% 45%, 62.1% 45%, 88.9% 18.2%, 81.8% 11.1%,
-  55% 37.9%, 55% 0%, 45% 0%, 45% 37.9%,
-  18.2% 11.1%, 11.1% 18.2%, 37.9% 45%, 0% 45%,
-  0% 55%, 37.9% 55%, 11.1% 81.8%, 18.2% 88.9%
-)`;
-
 function OperciaMark() {
   return (
-    <span className="inline-block size-[1em]" aria-hidden="true">
-      <span
-        className="block size-full bg-current"
-        style={{ clipPath: OPERCIA_CLIP }}
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      aria-hidden="true"
+      className="size-[1em]"
+    >
+      <path
+        d="M14 25C16.7 14.4 26.3 7 38 7c13.8 0 25 11.2 25 25 0 10.4-6.4 19.4-15.5 23.1 5.2-5.1 7.5-11.5 6.1-18.2-2-9.6-10.5-16.7-20.4-16.7-7.7 0-14.7 4.2-18.3 10.6L14 25Z"
+        fill="currentColor"
       />
-    </span>
+      <path
+        d="M50 39c-2.9 10.4-12.4 18-23.7 18C12.9 57 2 46.1 2 32.7c0-10 6.1-18.6 14.7-22.3-4.7 5-6.8 11.2-5.4 17.6 2 9.3 10.2 16.1 19.8 16.1 7.5 0 14.3-4.1 17.9-10.3L50 39Z"
+        fill="currentColor"
+      />
+      <rect
+        x="26"
+        y="26"
+        width="12"
+        height="12"
+        rx="3"
+        fill="currentColor"
+        transform="rotate(45 32 32)"
+      />
+    </svg>
   );
 }
 
@@ -43,7 +50,7 @@ function GitHubMark() {
 }
 
 // External links shown at the top of the sidebar (and in the top nav on
-// desktop). Leading icon = brand identity (GitHub mark / Opercia asterisk);
+// desktop). Leading icon = brand identity (GitHub mark / Opercia mark);
 // trailing ArrowUpRight = "opens externally" glyph, same pattern as
 // `packages/views/layout/help-launcher.tsx` from PR #1560.
 const externalLinkText = (label: string) => (
@@ -63,7 +70,7 @@ export const baseOptions: BaseLayoutProps = {
     {
       icon: <GitHubMark />,
       text: externalLinkText("GitHub"),
-      url: "https://github.com/opercia-ai/opercia",
+      url: "https://github.com/JTBlink/operica",
       external: true,
     },
     {

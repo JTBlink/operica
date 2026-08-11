@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/opercia-ai/opercia/server/internal/cloudruntime"
+	"github.com/JTBlink/operica/server/internal/cloudruntime"
 )
 
 // Cloud billing endpoints proxy to the same opercia-cloud HTTP service

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
 )
 
 // TestBuildQuickCreatePromptRules locks in the rules that govern how the

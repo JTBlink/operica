@@ -22,14 +22,14 @@ import (
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/sync/singleflight"
 
-	"github.com/opercia-ai/opercia/server/internal/cli"
-	"github.com/opercia-ai/opercia/server/internal/daemon/execenv"
-	"github.com/opercia-ai/opercia/server/internal/daemon/repocache"
-	"github.com/opercia-ai/opercia/server/internal/selfexec"
-	"github.com/opercia-ai/opercia/server/pkg/agent"
-	"github.com/opercia-ai/opercia/server/pkg/redact"
-	"github.com/opercia-ai/opercia/server/pkg/skillbundle"
-	"github.com/opercia-ai/opercia/server/pkg/taskfailure"
+	"github.com/JTBlink/operica/server/internal/cli"
+	"github.com/JTBlink/operica/server/internal/daemon/execenv"
+	"github.com/JTBlink/operica/server/internal/daemon/repocache"
+	"github.com/JTBlink/operica/server/internal/selfexec"
+	"github.com/JTBlink/operica/server/pkg/agent"
+	"github.com/JTBlink/operica/server/pkg/redact"
+	"github.com/JTBlink/operica/server/pkg/skillbundle"
+	"github.com/JTBlink/operica/server/pkg/taskfailure"
 )
 
 // ErrRepoNotConfigured is returned by ensureRepoReady when the requested repo
@@ -96,8 +96,8 @@ var pendingWorkHintMinInterval = time.Second
 // worktree's gitdir resolves into the shared cache and stays read-only even
 // when the task workdir is an explicit writable root, so `git add` /
 // `git commit` fail from inside the checkout — Linux hit this in
-// opercia-ai/opercia#2925, Codex's native Windows sandbox in
-// opercia-ai/opercia#6449.
+// JTBlink/operica#2925, Codex's native Windows sandbox in
+// JTBlink/operica#6449.
 //
 // Both platforms now default to danger-full-access (execenv's
 // codexSandboxPolicyFor), so in practice only a user who opted into

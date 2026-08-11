@@ -4,10 +4,10 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/opercia-ai/opercia/server/internal/events"
-	"github.com/opercia-ai/opercia/server/internal/handler"
-	"github.com/opercia-ai/opercia/server/internal/service"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/events"
+	"github.com/JTBlink/operica/server/internal/handler"
+	"github.com/JTBlink/operica/server/internal/service"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // registerAutopilotListeners hooks into issue and task events to keep

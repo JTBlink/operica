@@ -6,10 +6,10 @@ import (
 	"net/http"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/service"
-	"github.com/opercia-ai/opercia/server/internal/util"
-	agentver "github.com/opercia-ai/opercia/server/pkg/agent"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/service"
+	"github.com/JTBlink/operica/server/internal/util"
+	agentver "github.com/JTBlink/operica/server/pkg/agent"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // maxPreviewTriggerIssues caps a single preview request so a pathological

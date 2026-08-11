@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/opercia-ai/opercia/server/internal/realtime"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/realtime"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 func TestNotifyTaskAvailable(t *testing.T) {

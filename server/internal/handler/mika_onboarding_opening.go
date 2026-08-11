@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/opercia-ai/opercia/server/internal/service"
+	"github.com/JTBlink/operica/server/internal/service"
 )
 
 // mikaOnboardingOpenings is Mika's first reply, written by the product rather

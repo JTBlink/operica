@@ -28,14 +28,14 @@
 | `go-test-with-agent-cli-guard.sh -- <cmd...>` | `test-go.sh` | 运行命令时用桩二进制（来自 `agent-cli-command-names.txt`）在 `PATH` 中遮蔽所有真实 agent CLI。若测试调用了真实 agent CLI，桩会记录并使运行失败 —— 防止测试启动外部 agent。 |
 | `agent-cli-command-names.txt` | `go-test-with-agent-cli-guard.sh` | 数据文件：需守卫的 agent CLI 名称（claude、codex、copilot、cursor-agent、opencode 等）。 |
 | `test-go.test.sh` | `check.sh` | `test-go.sh` 的单元测试 —— 打桩 `go` 并断言精确的 `go test` 参数序列与 usage/退出码行为。 |
-| `helm-config.test.sh` | CI | 对 `deploy/helm/multica` 的 chart 执行 `helm lint`，并断言 `templates/configmap.yaml` 渲染出预期的配置值（默认值与覆盖值）。 |
+| `helm-config.test.sh` | CI | 对 `deploy/helm/opercia` 的 chart 执行 `helm lint`，并断言 `templates/configmap.yaml` 渲染出预期的配置值（默认值与覆盖值）。 |
 | `selfhost-config.test.sh` | CI | 断言自托管栈的 `docker compose config` 渲染出预期的配置值。 |
 
 ## 安装与自托管
 
 | 脚本 | 调用方 | 用途 |
 | --- | --- | --- |
-| `install.sh` | `curl … \| bash` | Unix 安装器。安装/升级 `multica` CLI（Homebrew 或回退到发布二进制），加 `--with-server` 时还会配置自托管服务器。 |
+| `install.sh` | `curl … \| bash` | Unix 安装器。安装/升级 `opercia` CLI（Homebrew 或回退到发布二进制），加 `--with-server` 时还会配置自托管服务器。 |
 | `install.ps1` | `irm … \| iex` | Windows 安装器。默认安装 CLI，或在 `MULTICA_MODE=local` 时启动本地服务器 + 安装 + 配置。 |
 | `install.test.sh` | CI | `install.sh` 的沙盒测试，用桩 `curl`/`brew` 模拟各种 Homebrew 失败模式与发布二进制回退路径。 |
 | `install.ps1.test.ps1` | CI | `install.ps1` 的 PowerShell 测试。 |

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/opercia-ai/opercia/server/internal/agentconfig"
+	"github.com/JTBlink/operica/server/internal/agentconfig"
 )
 
 func validateAgentMaxConcurrentTasks(value int32) error {

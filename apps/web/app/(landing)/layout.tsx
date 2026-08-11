@@ -21,7 +21,7 @@ const jsonLd = {
       "@type": "Organization",
       name: "Opercia",
       url: "https://www.opercia.ai",
-      sameAs: ["https://github.com/opercia-ai/opercia"],
+      sameAs: ["https://github.com/JTBlink/operica"],
     },
     {
       "@type": "SoftwareApplication",

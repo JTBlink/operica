@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
 )
 
 func noopHandler(_ context.Context, _ channel.InboundMessage) error { return nil }

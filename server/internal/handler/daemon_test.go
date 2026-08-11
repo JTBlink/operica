@@ -16,12 +16,12 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
-	"github.com/opercia-ai/opercia/server/internal/auth"
-	"github.com/opercia-ai/opercia/server/internal/daemonws"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
-	"github.com/opercia-ai/opercia/server/internal/service"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/daemonws"
+	"github.com/JTBlink/operica/server/internal/middleware"
+	"github.com/JTBlink/operica/server/internal/service"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 func TestLogClaimEndpointSlowIncludesPayloadFields(t *testing.T) {

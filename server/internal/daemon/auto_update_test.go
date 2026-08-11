@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/cli"
+	"github.com/JTBlink/operica/server/internal/cli"
 )
 
 // newAutoUpdateTestDaemon returns a Daemon stripped to just the pieces

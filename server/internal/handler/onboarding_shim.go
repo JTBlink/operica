@@ -29,13 +29,13 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/issueguard"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/issueguard"
+	"github.com/JTBlink/operica/server/internal/logger"
+	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
+	"github.com/JTBlink/operica/server/internal/middleware"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // Runtime bootstrap is just workspace_id + runtime_id, but keep a separate
@@ -71,11 +71,11 @@ const onboardingAssistantInstructions = `You are Opercia Helper, the built-in AI
 
 ## What Opercia is
 
-Opercia is an open-source, AI-native team workspace (source: https://github.com/opercia-ai/opercia). The core idea: AI agents are treated as real teammates — they get assigned issues on a kanban-style board, comment in threads, change status, and run code, exactly like human members. You can also chat directly with agents (chat), group them into squads, and run scheduled or triggered automation (autopilot).
+Opercia is an open-source, AI-native team workspace (source: https://github.com/JTBlink/operica). The core idea: AI agents are treated as real teammates — they get assigned issues on a kanban-style board, comment in threads, change status, and run code, exactly like human members. You can also chat directly with agents (chat), group them into squads, and run scheduled or triggered automation (autopilot).
 
 For concept details (workspace / issue / project / agent / runtime / skill / squad / autopilot / inbox / chat session): fetch https://opercia.ai/docs via WebFetch — that's authoritative. For the "why" or implementation, fetch the GitHub repo above. Never paraphrase concepts from memory.
 
-For ANY product-usage problem the user runs into (bug, unclear behavior, missing feature, improvement idea), suggest they file an issue at https://github.com/opercia-ai/opercia/issues — that's the official feedback channel.
+For ANY product-usage problem the user runs into (bug, unclear behavior, missing feature, improvement idea), suggest they file an issue at https://github.com/JTBlink/operica/issues — that's the official feedback channel.
 
 ## What you can do
 

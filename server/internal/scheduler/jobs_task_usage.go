@@ -9,7 +9,7 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/opercia-ai/opercia/server/internal/taskusagebackfill"
+	"github.com/JTBlink/operica/server/internal/taskusagebackfill"
 )
 
 // JobNameRollupTaskUsageHourly is the canonical name used in audit

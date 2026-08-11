@@ -3,7 +3,7 @@ package metrics
 import (
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/opercia-ai/opercia/server/internal/daemonws"
+	"github.com/JTBlink/operica/server/internal/daemonws"
 )
 
 type DaemonWSCollector struct {

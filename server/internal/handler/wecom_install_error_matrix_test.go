@@ -25,7 +25,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/wecom"
+	"github.com/JTBlink/operica/server/internal/integrations/wecom"
 )
 
 // TestWecomInstallErrorMatrix pins status + error + code for every error class

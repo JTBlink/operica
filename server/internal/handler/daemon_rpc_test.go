@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/daemonws"
+	"github.com/JTBlink/operica/server/internal/daemonws"
 )
 
 // TestDaemonRPCHandler_TasksClaim pins the WS-first claim binding (MUL-4257):

@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/opercia-ai/opercia/server/internal/selfexec"
+	"github.com/JTBlink/operica/server/internal/selfexec"
 )
 
 // oldBinarySuffix is appended to the previous executable while a new one is

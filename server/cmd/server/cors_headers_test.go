@@ -4,8 +4,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/opercia-ai/opercia/server/internal/handler"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/internal/handler"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // The app advertises its capabilities on the cancel request (#5219). Browsers

@@ -490,8 +490,8 @@ type WorktreeParams struct {
 	// inside WorkDir instead of a linked worktree whose gitdir lives under the
 	// shared cache. Codex tasks need this because workspace-write keeps a
 	// resolved external worktree gitdir read-only even when it is explicitly
-	// listed as a writable root — on Linux (opercia-ai/opercia#2925) and on the
-	// Windows native sandbox (opercia-ai/opercia#6449).
+	// listed as a writable root — on Linux (JTBlink/operica#2925) and on the
+	// Windows native sandbox (JTBlink/operica#6449).
 	IsolatedGitMetadata bool
 }
 

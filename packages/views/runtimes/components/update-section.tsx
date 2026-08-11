@@ -13,7 +13,7 @@ import type { RuntimeUpdateStatus } from "@opercia/core/types";
 import { useT } from "../../i18n";
 
 const GITHUB_RELEASES_URL =
-  "https://api.github.com/repos/opercia-ai/opercia/releases/latest";
+  "https://api.github.com/repos/JTBlink/operica/releases/latest";
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
 let cachedLatestVersion: string | null = null;

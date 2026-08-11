@@ -6,7 +6,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/opercia-ai/opercia/server/pkg/redact"
+	"github.com/JTBlink/operica/server/pkg/redact"
 )
 
 // agentStderrTailBytes bounds the stderr tail captured for inclusion in

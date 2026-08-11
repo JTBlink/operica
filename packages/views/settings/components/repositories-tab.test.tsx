@@ -16,7 +16,7 @@ const workspaceRef = vi.hoisted(() => ({
     id: "workspace-1",
     name: "Test Workspace",
     slug: "test-workspace",
-    repos: [{ url: "https://github.com/opercia-ai/opercia" }] as {
+    repos: [{ url: "https://github.com/JTBlink/operica" }] as {
       url: string;
       description?: string;
     }[],
@@ -149,7 +149,7 @@ describe("RepositoriesTab — automatic updates", () => {
       id: "workspace-1",
       name: "Test Workspace",
       slug: "test-workspace",
-      repos: [{ url: "https://github.com/opercia-ai/opercia" }],
+      repos: [{ url: "https://github.com/JTBlink/operica" }],
     };
     membersRef.current = [{ user_id: "user-1", role: "owner" }];
     githubRef.current = {
@@ -188,7 +188,7 @@ describe("RepositoriesTab — automatic updates", () => {
 
     const inputs = screen.getAllByRole("textbox") as HTMLInputElement[];
     expect(inputs).toHaveLength(2);
-    expect(inputs[0]!.value).toBe("https://github.com/opercia-ai/opercia");
+    expect(inputs[0]!.value).toBe("https://github.com/JTBlink/operica");
     expect(screen.queryByRole("button", { name: /^Save$/ })).toBeNull();
   });
 
@@ -239,7 +239,7 @@ describe("RepositoriesTab — automatic updates", () => {
     await waitFor(() => {
       expect(mockUpdateWorkspace).toHaveBeenCalledWith("workspace-1", {
         repos: [
-          { url: "https://github.com/opercia-ai/opercia" },
+          { url: "https://github.com/JTBlink/operica" },
           { url: "git@github.com:opercia-ai/second.git" },
         ],
       });
@@ -268,14 +268,14 @@ describe("RepositoriesTab — automatic updates", () => {
 
     const urlInput = screen.getAllByRole("textbox")[0] as HTMLInputElement;
     await user.clear(urlInput);
-    await user.type(urlInput, "git@github.com:opercia-ai/opercia.git");
+    await user.type(urlInput, "git@github.com:JTBlink/operica.git");
     expect(urlInput.type).toBe("text");
     expect(urlInput.validity.valid).toBe(true);
     await user.tab();
 
     await waitFor(() => {
       expect(mockUpdateWorkspace).toHaveBeenCalledWith("workspace-1", {
-        repos: [{ url: "git@github.com:opercia-ai/opercia.git" }],
+        repos: [{ url: "git@github.com:JTBlink/operica.git" }],
       });
     });
   });
@@ -283,7 +283,7 @@ describe("RepositoriesTab — automatic updates", () => {
   it("includes the description in the automatic update payload", async () => {
     workspaceRef.current = {
       ...workspaceRef.current,
-      repos: [{ url: "https://github.com/opercia-ai/opercia", description: "Main app" }],
+      repos: [{ url: "https://github.com/JTBlink/operica", description: "Main app" }],
     };
     const user = setupUser();
     render(<RepositoriesTab />, { wrapper: I18nWrapper });
@@ -298,7 +298,7 @@ describe("RepositoriesTab — automatic updates", () => {
       expect(mockUpdateWorkspace).toHaveBeenCalledWith("workspace-1", {
         repos: [
           {
-            url: "https://github.com/opercia-ai/opercia",
+            url: "https://github.com/JTBlink/operica",
             description: "Updated description",
           },
         ],
@@ -359,7 +359,7 @@ describe("RepositoriesTab — automatic updates", () => {
   it("imports selected GitHub repositories and deduplicates HTTPS against SSH", async () => {
     workspaceRef.current = {
       ...workspaceRef.current,
-      repos: [{ url: "git@github.com:opercia-ai/opercia.git" }],
+      repos: [{ url: "git@github.com:JTBlink/operica.git" }],
     };
     githubRef.current = {
       installations: [{ id: "installation-row-1", account_login: "opercia-ai" }],
@@ -370,9 +370,9 @@ describe("RepositoriesTab — automatic updates", () => {
     githubRepositoriesRef.current = [
       {
         id: 1,
-        full_name: "opercia-ai/opercia",
-        html_url: "https://github.com/opercia-ai/opercia",
-        clone_url: "https://github.com/opercia-ai/opercia.git",
+        full_name: "JTBlink/operica",
+        html_url: "https://github.com/JTBlink/operica",
+        clone_url: "https://github.com/JTBlink/operica.git",
         description: "Existing repository",
         private: false,
         archived: false,
@@ -408,7 +408,7 @@ describe("RepositoriesTab — automatic updates", () => {
     await waitFor(() => {
       expect(mockUpdateWorkspace).toHaveBeenCalledWith("workspace-1", {
         repos: [
-          { url: "git@github.com:opercia-ai/opercia.git" },
+          { url: "git@github.com:JTBlink/operica.git" },
           {
             url: "https://github.com/opercia-ai/console.git",
             description: "Console app",

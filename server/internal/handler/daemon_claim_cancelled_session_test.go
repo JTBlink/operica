@@ -12,8 +12,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/opercia-ai/opercia/server/internal/service"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/service"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // GH #6340: a user stops a chat turn the agent had already started answering,

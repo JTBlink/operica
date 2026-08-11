@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/middleware"
+	"github.com/JTBlink/operica/server/internal/middleware"
 )
 
 type DaemonWorkspaceResponse struct {

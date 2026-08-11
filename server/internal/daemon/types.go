@@ -3,7 +3,7 @@ package daemon
 import (
 	"encoding/json"
 
-	"github.com/opercia-ai/opercia/server/internal/runtimeapps"
+	"github.com/JTBlink/operica/server/internal/runtimeapps"
 )
 
 // AgentEntry describes a single available agent CLI.

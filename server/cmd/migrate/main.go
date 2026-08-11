@@ -10,10 +10,10 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/opercia-ai/opercia/server/internal/attributionbackfill"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	"github.com/opercia-ai/opercia/server/internal/migrations"
-	"github.com/opercia-ai/opercia/server/internal/taskusagebackfill"
+	"github.com/JTBlink/operica/server/internal/attributionbackfill"
+	"github.com/JTBlink/operica/server/internal/logger"
+	"github.com/JTBlink/operica/server/internal/migrations"
+	"github.com/JTBlink/operica/server/internal/taskusagebackfill"
 )
 
 // preMigrationHook runs work that must happen before a specific
@@ -144,7 +144,7 @@ func runAttributionStrictHook(ctx context.Context, pool *pgxpool.Pool) error {
 // runners (multi-replica backend Deployment, scale-up, or a manual
 // `migrate up` overlapping with pod startup). The exact value is
 // arbitrary — it just needs to be stable across every process that runs
-// migrations against the same database. See GitHub opercia-ai/opercia#3647.
+// migrations against the same database. See GitHub JTBlink/operica#3647.
 const migrationAdvisoryLockKey int64 = 7244554146635925501
 
 // defaultSchemaMigrationsTable is the unqualified name of the bookkeeping
@@ -242,7 +242,7 @@ func main() {
 // processes against the same database with the same options: every
 // caller blocks on pg_advisory_lock, and once it is their turn the
 // already-applied EXISTS check turns each finished migration into a
-// no-op skip. See GitHub opercia-ai/opercia#3647 / MUL-2923.
+// no-op skip. See GitHub JTBlink/operica#3647 / MUL-2923.
 func runMigrations(ctx context.Context, pool *pgxpool.Pool, opts runOptions) error {
 	switch opts.Direction {
 	case "up", "down":

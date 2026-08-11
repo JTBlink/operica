@@ -23,7 +23,7 @@ STUB
   cat >"$stub_bin/curl" <<'STUB'
 #!/usr/bin/env bash
 if [[ "$*" == *"-sI"* ]]; then
-  printf 'HTTP/2 302\r\nlocation: https://github.com/opercia-ai/opercia/releases/tag/v0.3.2\r\n'
+  printf 'HTTP/2 302\r\nlocation: https://github.com/JTBlink/operica/releases/tag/v0.3.2\r\n'
   exit 0
 fi
 

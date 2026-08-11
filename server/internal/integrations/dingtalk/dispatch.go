@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/integrations/channel"
+	"github.com/JTBlink/operica/server/internal/integrations/channel"
 )
 
 // Tunables for the inbound dispatcher. Remote media resolution is detached by

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/internal/service"
+	"github.com/JTBlink/operica/server/internal/service"
 )
 
 // Rejection codes let the editor say which input is at fault: a timezone the

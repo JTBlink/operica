@@ -7,7 +7,7 @@
 Give this instruction to your AI agent:
 
 ```
-Fetch https://github.com/opercia-ai/opercia/blob/main/CLI_INSTALL.md and follow the instructions to install Opercia CLI, log in, and start the daemon on this machine.
+Fetch https://github.com/JTBlink/operica/blob/main/CLI_INSTALL.md and follow the instructions to install Opercia CLI, log in, and start the daemon on this machine.
 ```
 
 ---
@@ -73,11 +73,11 @@ if [ "$ARCH" = "x86_64" ]; then
 fi
 
 # Get the latest release tag from GitHub
-LATEST=$(curl -sI https://github.com/opercia-ai/opercia/releases/latest | grep -i '^location:' | sed 's/.*tag\///' | tr -d '\r\n')
+LATEST=$(curl -sI https://github.com/JTBlink/operica/releases/latest | grep -i '^location:' | sed 's/.*tag\///' | tr -d '\r\n')
 
 # Download and extract
 VERSION="${LATEST#v}"
-curl -sL "https://github.com/opercia-ai/opercia/releases/download/${LATEST}/opercia-cli-${VERSION}-${OS}-${ARCH}.tar.gz" -o /tmp/opercia.tar.gz
+curl -sL "https://github.com/JTBlink/operica/releases/download/${LATEST}/opercia-cli-${VERSION}-${OS}-${ARCH}.tar.gz" -o /tmp/opercia.tar.gz
 tar -xzf /tmp/opercia.tar.gz -C /tmp opercia
 sudo mv /tmp/opercia /usr/local/bin/opercia
 rm /tmp/opercia.tar.gz
@@ -99,7 +99,7 @@ opercia version
 Run in PowerShell (no admin required):
 
 ```powershell
-irm https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex
 ```
 
 This downloads the latest Windows binary from GitHub Releases, installs it to `%USERPROFILE%\.opercia\bin\`, and adds it to your user PATH.

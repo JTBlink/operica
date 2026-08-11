@@ -9,8 +9,8 @@ import (
 	"regexp"
 	"strings"
 
-	skillpkg "github.com/opercia-ai/opercia/server/internal/skill"
-	"github.com/opercia-ai/opercia/server/pkg/agent"
+	skillpkg "github.com/JTBlink/operica/server/internal/skill"
+	"github.com/JTBlink/operica/server/pkg/agent"
 	"gopkg.in/yaml.v3"
 )
 

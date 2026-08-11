@@ -31,7 +31,7 @@ import { useT } from "../../i18n";
 type Step = "instructions" | "success";
 
 const INSTALL_CMD =
-  "curl -fsSL https://raw.githubusercontent.com/opercia-ai/opercia/main/scripts/install.sh | bash";
+  "curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash";
 const CLOUD_SERVER_URL = "https://api.opercia.ai";
 const CLOUD_APP_URL = "https://opercia.ai";
 

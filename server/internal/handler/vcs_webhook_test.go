@@ -15,8 +15,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/util/secretbox"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/util/secretbox"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 func withVCSBox(t *testing.T) *secretbox.Box {

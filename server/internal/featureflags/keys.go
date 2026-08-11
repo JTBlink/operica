@@ -3,7 +3,7 @@ package featureflags
 import (
 	"context"
 
-	"github.com/opercia-ai/opercia/server/pkg/featureflag"
+	"github.com/JTBlink/operica/server/pkg/featureflag"
 )
 
 const (

@@ -19,11 +19,11 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/opercia-ai/opercia/server/internal/analytics"
-	"github.com/opercia-ai/opercia/server/internal/auth"
-	"github.com/opercia-ai/opercia/server/internal/logger"
-	obsmetrics "github.com/opercia-ai/opercia/server/internal/metrics"
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	"github.com/JTBlink/operica/server/internal/analytics"
+	"github.com/JTBlink/operica/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/logger"
+	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // SignupError represents signup restriction errors

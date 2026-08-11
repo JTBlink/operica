@@ -29,7 +29,7 @@ COMMIT="${COMMIT:-$(git rev-parse --short HEAD 2>/dev/null || echo unknown)}"
 DATE="${DATE:-$(date -u '+%Y-%m-%dT%H:%M:%SZ')}"
 LDFLAGS="-s -w -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.date=${DATE}"
 
-GO_TARGETS=(server multica migrate)
+GO_TARGETS=(server opercia migrate)
 
 usage() {
   cat <<'EOF'
@@ -46,7 +46,7 @@ cmd_build() {
   local platforms="${PLATFORMS:-$(go env GOOS)/$(go env GOARCH)}"
   local out_dir="${OUT_DIR:-dist/release}"
 
-  echo "==> 打包 Multica ${VERSION} (commit ${COMMIT})"
+  echo "==> 打包 Opercia ${VERSION} (commit ${COMMIT})"
   echo "    输出目录: ${out_dir}"
   rm -rf "$out_dir"
   mkdir -p "$out_dir"
@@ -54,7 +54,7 @@ cmd_build() {
   if [ "${SKIP_GO:-0}" != "1" ]; then
     for platform in $platforms; do
       local goos="${platform%%/*}" goarch="${platform##*/}"
-      local stage="$out_dir/multica_${VERSION}_${goos}_${goarch}"
+      local stage="$out_dir/opercia_${VERSION}_${goos}_${goarch}"
       mkdir -p "$stage"
 
       echo ""
@@ -68,7 +68,7 @@ cmd_build() {
         echo "    ✓ ${target}${ext}"
       done
 
-      local archive="multica_${VERSION}_${goos}_${goarch}.tar.gz"
+      local archive="opercia_${VERSION}_${goos}_${goarch}.tar.gz"
       tar -czf "$out_dir/$archive" -C "$out_dir" "$(basename "$stage")"
       rm -rf "$stage"
       echo "    → $archive"
@@ -92,7 +92,7 @@ cmd_build() {
       [ -d "$web_static" ] && cp -R "$web_static" "$stage/apps/web/.next/static"
       [ -d "apps/web/public" ] && cp -R "apps/web/public" "$stage/apps/web/public"
 
-      local archive="multica-web_${VERSION}.tar.gz"
+      local archive="opercia-web_${VERSION}.tar.gz"
       tar -czf "$out_dir/$archive" -C "$out_dir" web
       rm -rf "$stage"
       echo "    → $archive"

@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/opercia-ai/opercia/server/pkg/composio"
+	"github.com/JTBlink/operica/server/pkg/composio"
 )
 
 // helper: produce a valid signature for the given inputs.

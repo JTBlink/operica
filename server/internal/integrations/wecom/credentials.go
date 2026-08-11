@@ -10,7 +10,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/opercia-ai/opercia/server/internal/util/secretbox"
+	"github.com/JTBlink/operica/server/internal/util/secretbox"
 )
 
 // CredentialsResolver mints per-call InstallationCredentials with plaintext

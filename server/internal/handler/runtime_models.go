@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/opercia-ai/opercia/server/pkg/protocol"
+	"github.com/JTBlink/operica/server/pkg/protocol"
 )
 
 // ---------------------------------------------------------------------------
@@ -29,7 +29,7 @@ import (
 // (Opercia Cloud) MUST use the Redis-backed implementation, otherwise the
 // pending request is invisible to whichever replica receives the next call
 // and the picker shows "No models available" (regression: see issue
-// review on opercia-ai/opercia#2009).
+// review on JTBlink/operica#2009).
 
 // ModelListStatus represents the lifecycle of a model list request.
 type ModelListStatus string

@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/opercia-ai/opercia/server/internal/auth"
+	"github.com/JTBlink/operica/server/internal/auth"
 )
 
 // Attachment download capabilities — MUL-5292.

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	db "github.com/opercia-ai/opercia/server/pkg/db/generated"
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // TestSubtreeUnsubscribe_LosesToConcurrentRevoke covers MUL-5483 review round 8,

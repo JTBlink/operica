@@ -10,7 +10,7 @@ import (
 	chimw "github.com/go-chi/chi/v5/middleware"
 	"github.com/lmittmann/tint"
 
-	"github.com/opercia-ai/opercia/server/internal/middleware"
+	"github.com/JTBlink/operica/server/internal/middleware"
 )
 
 // isTerminal reports whether the given file descriptor is connected to a
