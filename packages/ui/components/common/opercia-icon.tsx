@@ -22,7 +22,7 @@ interface OperciaIconProps extends React.ComponentProps<"span"> {
 const borderedSizes = {
   sm: { wrapper: "p-1.5", icon: "size-3.5" },
   md: { wrapper: "p-2", icon: "size-4" },
-  lg: { wrapper: "p-2.5", icon: "size-5" },
+  lg: { wrapper: "p-1.5", icon: "size-8" },
 };
 
 export function OperciaIcon({
@@ -33,9 +33,10 @@ export function OperciaIcon({
   size = "sm",
   ...props
 }: OperciaIconProps) {
+  const viewBox = bordered && size === "lg" ? "40 40 176 176" : "0 0 256 256";
   const mark = (
     <svg
-      viewBox="0 0 256 256"
+      viewBox={viewBox}
       fill="none"
       aria-hidden="true"
       className="block size-full"
