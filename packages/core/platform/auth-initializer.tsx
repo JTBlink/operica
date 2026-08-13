@@ -116,15 +116,11 @@ export function AuthInitializer({
       return;
     }
 
-    // Token mode: read from localStorage (Electron / legacy).
+    // Token mode: read from localStorage (Electron / legacy). Even without a
+    // stored token, probe the server: local development may authenticate the
+    // request through AUTO_LOGIN_EMAIL.
     const token = storage.getItem("opercia_token");
-    if (!token) {
-      onLogout?.();
-      useAuthStore.setState({ isLoading: false });
-      return;
-    }
-
-    api.setToken(token);
+    if (token) api.setToken(token);
 
     Promise.all([api.getMe(), api.listWorkspaces()])
       .then(([user, wsList]) => {
