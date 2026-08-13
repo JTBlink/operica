@@ -67,7 +67,16 @@ is_local() {
 }
 
 if is_local; then
-  # ---------- Local: use Docker ----------
+  # ---------- Local: skip Docker if PG is already reachable ----------
+  if pg_isready -h localhost -p "${db_port:-5432}" > /dev/null 2>&1; then
+    echo "✓ PostgreSQL already running on localhost:${db_port:-5432}. Skipping Docker."
+    # Ensure database exists
+    db_exists="$(psql -h localhost -p "${db_port:-5432}" -U "$POSTGRES_USER" -d postgres -Atqc "SELECT 1 FROM pg_database WHERE datname = '$POSTGRES_DB'" 2>/dev/null)"
+    if [ "$db_exists" != "1" ]; then
+      psql -h localhost -p "${db_port:-5432}" -U "$POSTGRES_USER" -d postgres -v ON_ERROR_STOP=1 \
+        -c "CREATE DATABASE \"$POSTGRES_DB\"" > /dev/null 2>/dev/null || true
+    fi
+  else
   echo "==> Ensuring shared PostgreSQL container is running on localhost:5432..."
   docker compose up -d postgres
 
@@ -88,6 +97,7 @@ if is_local; then
   fi
 
   echo "✓ PostgreSQL ready (local Docker). Database: $POSTGRES_DB"
+  fi
 else
   # ---------- Remote: skip Docker, verify connectivity ----------
   echo "==> Remote database detected (host: $db_host). Skipping Docker."

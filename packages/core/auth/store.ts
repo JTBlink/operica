@@ -50,7 +50,14 @@ export function createAuthStore(options: AuthStoreOptions) {
       // Token mode: read from localStorage (Electron / legacy).
       const token = storage.getItem("opercia_token");
       if (!token) {
-        set({ isLoading: false });
+        // No stored token — try getMe() anyway in case the server has
+        // AUTO_LOGIN_EMAIL configured (auto-login bypass for local dev).
+        try {
+          const user = await api.getMe();
+          set({ user, isLoading: false });
+        } catch {
+          set({ isLoading: false });
+        }
         return;
       }
 
