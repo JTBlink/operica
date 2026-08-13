@@ -570,8 +570,8 @@ function createIssueWindow(context: IssueWindowContext): void {
 // lock file. Default (no env var) keeps behavior unchanged — the common
 // single-worktree case still lands at "Opercia Canary".
 const DEV_APP_NAME = process.env.DESKTOP_APP_SUFFIX
-  ? `Opercia Canary ${process.env.DESKTOP_APP_SUFFIX}`
-  : "Opercia Canary";
+  ? `Opercia ${process.env.DESKTOP_APP_SUFFIX}`
+  : "Opercia";
 
 if (is.dev) {
   app.setName(DEV_APP_NAME);
