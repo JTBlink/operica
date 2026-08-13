@@ -18,7 +18,7 @@ import { basename, join } from "node:path";
 
 // Worktree renderer ports start at 5174 so they never reuse 5173 — the primary
 // checkout's default — even when a worktree's offset is 0 (e.g. POSIX cksum of
-// "/tmp/opercia-3494" is 1189739000, and 1189739000 % 1000 === 0). Range 5174–6173.
+// "/tmp/opercia-171" is 542803000, and 542803000 % 1000 === 0). Range 5174–6173.
 const RENDERER_PORT_BASE = 5174;
 const OFFSET_MODULO = 1000;
 
