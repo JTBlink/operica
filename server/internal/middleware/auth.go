@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log/slog"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -48,6 +49,17 @@ func Auth(queries *db.Queries, patCache *auth.PATCache, cloudPAT *auth.CloudPATV
 
 			tokenString, fromCookie := extractToken(r)
 			if tokenString == "" {
+				// AUTO_LOGIN_EMAIL bypass: when set, unauthenticated requests
+				// are silently attributed to the configured user.
+				if autoEmail := strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL")); autoEmail != "" && queries != nil {
+					user, err := queries.GetUserByEmail(r.Context(), autoEmail)
+					if err == nil {
+						r.Header.Set("X-User-ID", uuidToString(user.ID))
+						r.Header.Set("X-User-Email", user.Email)
+						next.ServeHTTP(w, r)
+						return
+					}
+				}
 				slog.Debug("auth: no token found", "path", r.URL.Path)
 				http.Error(w, `{"error":"missing authorization"}`, http.StatusUnauthorized)
 				return

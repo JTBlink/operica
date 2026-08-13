@@ -329,6 +329,27 @@ func main() {
 	defer analyticsClient.Close()
 
 	queries := db.New(pool)
+
+	// AUTO_LOGIN_EMAIL: ensure the default user exists so the auth middleware
+	// can auto-inject their identity on unauthenticated requests.
+	if autoEmail := strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL")); autoEmail != "" {
+		_, err := queries.GetUserByEmail(ctx, autoEmail)
+		if err != nil {
+			name := autoEmail
+			if at := strings.Index(autoEmail, "@"); at > 0 {
+				name = autoEmail[:at]
+			}
+			_, err = queries.CreateUser(ctx, db.CreateUserParams{Name: name, Email: autoEmail})
+			if err != nil {
+				slog.Error("AUTO_LOGIN_EMAIL: failed to create user", "email", autoEmail, "error", err)
+			} else {
+				slog.Info("AUTO_LOGIN_EMAIL: created default user", "email", autoEmail)
+			}
+		} else {
+			slog.Info("AUTO_LOGIN_EMAIL: auto-login enabled", "email", autoEmail)
+		}
+	}
+
 	hub.SetAuthorizer(newScopeAuthorizer(queries))
 	// Order matters: subscriber listeners must register BEFORE notification listeners.
 	// The notification listener queries the subscriber table to determine recipients,
