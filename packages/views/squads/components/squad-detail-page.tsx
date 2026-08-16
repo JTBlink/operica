@@ -2,34 +2,34 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
-import { useCurrentWorkspace, useWorkspacePaths } from "@opercia/core/paths";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { isImeComposing } from "@opercia/core/utils";
-import { getShortcut, shortcutMatchesEvent } from "@opercia/core/shortcuts";
+import { api } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
+import { useCurrentWorkspace, useWorkspacePaths } from "@operica/core/paths";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { isImeComposing } from "@operica/core/utils";
+import { getShortcut, shortcutMatchesEvent } from "@operica/core/shortcuts";
 import { useTimeAgo } from "../../i18n";
-import { agentListOptions, memberListOptions, squadMemberStatusOptions, workspaceKeys } from "@opercia/core/workspace/queries";
+import { agentListOptions, memberListOptions, squadMemberStatusOptions, workspaceKeys } from "@operica/core/workspace/queries";
 import { useNavigation } from "../../navigation";
 import { AppLink } from "../../navigation";
 import { BreadcrumbHeader } from "../../layout/breadcrumb-header";
 import { PageHeader } from "../../layout/page-header";
 import { Users, Plus, Trash2, ArrowUpRight, Crown, Loader2, Pencil, FileText, Save } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
+} from "@operica/ui/components/ui/popover";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import {
   Dialog,
   DialogContent,
@@ -37,7 +37,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,8 +47,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
+} from "@operica/ui/components/ui/alert-dialog";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { ContentEditor } from "../../editor/content-editor";
@@ -59,7 +59,7 @@ import {
 } from "../../issues/components/pickers/property-picker";
 import { ChevronDown, UserPlus } from "lucide-react";
 import { toast } from "sonner";
-import type { Squad, SquadMember, SquadMemberStatus, SquadMemberStatusValue, Agent, MemberWithUser } from "@opercia/core/types";
+import type { Squad, SquadMember, SquadMemberStatus, SquadMemberStatusValue, Agent, MemberWithUser } from "@operica/core/types";
 import { useT } from "../../i18n";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
 

@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import { ChevronRight, MessageSquare } from "lucide-react";
-import { decodeBuilderInput, stripBuilderDraft } from "@opercia/core/agents";
-import type { AgentBuilderSessionSummary } from "@opercia/core/types";
+import { decodeBuilderInput, stripBuilderDraft } from "@operica/core/agents";
+import type { AgentBuilderSessionSummary } from "@operica/core/types";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/dialog";
+import { cn } from "@operica/ui/lib/utils";
 import { useT, useTimeAgo } from "../../i18n";
 
 /**

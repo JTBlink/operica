@@ -8,18 +8,18 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@opercia/ui/components/ui/select";
-import { Switch } from "@opercia/ui/components/ui/switch";
-import { useTheme } from "@opercia/ui/components/common/theme-provider";
+} from "@operica/ui/components/ui/select";
+import { Switch } from "@operica/ui/components/ui/switch";
+import { useTheme } from "@operica/ui/components/common/theme-provider";
 import {
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
   type SupportedLocale,
-} from "@opercia/core/i18n";
-import { useLocaleAdapter } from "@opercia/core/i18n/react";
-import { useAuthStore } from "@opercia/core/auth";
-import { useCommentComposerStore } from "@opercia/core/issues/stores";
-import { api } from "@opercia/core/api";
+} from "@operica/core/i18n";
+import { useLocaleAdapter } from "@operica/core/i18n/react";
+import { useAuthStore } from "@operica/core/auth";
+import { useCommentComposerStore } from "@operica/core/issues/stores";
+import { api } from "@operica/core/api";
 import { browserTimezone, timezoneOptions } from "../../common/timezone-select";
 import { useT } from "../../i18n";
 import {

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { WorkspaceSlugProvider } from "@opercia/core/paths";
-import type { InboxItem } from "@opercia/core/types";
+import { WorkspaceSlugProvider } from "@operica/core/paths";
+import type { InboxItem } from "@operica/core/types";
 import { NavigationProvider } from "../../navigation";
 import type { NavigationAdapter } from "../../navigation";
 import { InboxListItem } from "./inbox-list-item";

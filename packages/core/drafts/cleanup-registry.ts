@@ -7,8 +7,8 @@ import { abortAll as abortAllUploads } from "./upload-coordinator";
  *
  * The old model required every new draft store to remember to append its
  * persist key to a list living in a different file; that list drifted and
- * left `opercia_comment_drafts`, `opercia_quick_create`, `opercia_project_draft`,
- * `opercia_feedback_draft`, and the chat draft-attachment / restore keys
+ * left `operica_comment_drafts`, `operica_quick_create`, `operica_project_draft`,
+ * `operica_feedback_draft`, and the chat draft-attachment / restore keys
  * uncleared on logout and workspace deletion (persistence-layer leak), while
  * the in-memory Zustand singletons kept a previous user's draft after a
  * client-side logout navigation (memory-layer leak, cross-user on a shared

@@ -7,7 +7,7 @@ import {
 } from "./navigation-guard";
 
 const DEV_RENDERER = "http://localhost:5173/";
-const PROD_RENDERER = "file:///Applications/Opercia.app/Contents/renderer/index.html";
+const PROD_RENDERER = "file:///Applications/Operica.app/Contents/renderer/index.html";
 
 describe("isTrustedRendererURL", () => {
   describe("dev server origin", () => {
@@ -40,7 +40,7 @@ describe("isTrustedRendererURL", () => {
       // this safe.
       expect(
         isTrustedRendererURL(
-          "file:///Applications/Opercia.app/Contents/renderer/other.html",
+          "file:///Applications/Operica.app/Contents/renderer/other.html",
           PROD_RENDERER,
         ),
       ).toBe(false);

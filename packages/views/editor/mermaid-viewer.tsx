@@ -24,15 +24,15 @@ import {
   Image as ImageIcon,
   X,
 } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
-import { Dialog, DialogContent, DialogTitle } from "@opercia/ui/components/ui/dialog";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
+import { Dialog, DialogContent, DialogTitle } from "@operica/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import { useT } from "../i18n";
 import { CodeBlockStatic } from "./code-block-static";
 import { useZoomCanvas } from "./hooks/use-zoom-canvas";

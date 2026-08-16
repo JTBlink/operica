@@ -10,12 +10,12 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/integrations/vcs"
 	"github.com/JTBlink/operica/server/internal/middleware"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // ── Response shapes ─────────────────────────────────────────────────────────
@@ -165,7 +165,7 @@ func (h *Handler) ConnectVCS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !h.isVCSConfigured() {
-		writeError(w, http.StatusServiceUnavailable, "vcs integration not configured (OPERCIA_VCS_SECRET_KEY unset)")
+		writeError(w, http.StatusServiceUnavailable, "vcs integration not configured (OPERICA_VCS_SECRET_KEY unset)")
 		return
 	}
 
@@ -287,7 +287,7 @@ func (h *Handler) RotateVCSConnectionWebhook(w http.ResponseWriter, r *http.Requ
 		return
 	}
 	if !h.isVCSConfigured() {
-		writeError(w, http.StatusServiceUnavailable, "vcs integration not configured (OPERCIA_VCS_SECRET_KEY unset)")
+		writeError(w, http.StatusServiceUnavailable, "vcs integration not configured (OPERICA_VCS_SECRET_KEY unset)")
 		return
 	}
 

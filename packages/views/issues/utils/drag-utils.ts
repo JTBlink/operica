@@ -3,9 +3,9 @@ import {
   closestCenter,
   type CollisionDetection,
 } from "@dnd-kit/core";
-import type { Issue, IssueAssigneeType, IssueStatus, UpdateIssueRequest } from "@opercia/core/types";
-import type { IssueGrouping } from "@opercia/core/issues/stores/view-store";
-import { propertyIdFromViewKey } from "@opercia/core/issues/stores/view-store";
+import type { Issue, IssueAssigneeType, IssueStatus, UpdateIssueRequest } from "@operica/core/types";
+import type { IssueGrouping } from "@operica/core/issues/stores/view-store";
+import { propertyIdFromViewKey } from "@operica/core/issues/stores/view-store";
 import type { BoardColumnGroup } from "../components/board-column";
 
 export type DragMoveTargetUpdates = Pick<
@@ -108,7 +108,7 @@ export function getMoveAnchors(
 /**
  * Insert `id` into `ids` at the slot implied by `position ASC`, reading each
  * id's position from `issueMap`. Mirrors `insertByPosition` in
- * `@opercia/core/issues/cache-helpers` so the board's optimistic placement on
+ * `@operica/core/issues/cache-helpers` so the board's optimistic placement on
  * drop matches the cache the settle reconcile rebuilds from — otherwise the
  * card would land in one slot, then jump when local columns re-derive from TQ.
  */

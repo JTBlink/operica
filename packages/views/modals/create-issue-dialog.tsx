@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@opercia/ui/lib/utils";
-import { Dialog, DialogContent } from "@opercia/ui/components/ui/dialog";
+import { cn } from "@operica/ui/lib/utils";
+import { Dialog, DialogContent } from "@operica/ui/components/ui/dialog";
 import {
   useCreateModeStore,
   type CreateMode,
-} from "@opercia/core/issues/stores/create-mode-store";
+} from "@operica/core/issues/stores/create-mode-store";
 import { AgentCreatePanel } from "./quick-create-issue";
 import { ManualCreatePanel, manualDialogContentClass } from "./create-issue";
 

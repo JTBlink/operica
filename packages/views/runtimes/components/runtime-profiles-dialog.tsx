@@ -15,17 +15,17 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { ApiError } from "@opercia/core/api";
+import { ApiError } from "@operica/core/api";
 import type {
   RuntimeProfile,
   RuntimeProtocolFamily,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   runtimeProfileListOptions,
   useCreateRuntimeProfile,
   useUpdateRuntimeProfile,
-} from "@opercia/core/runtimes";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/runtimes";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -33,11 +33,11 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/dialog";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
+import { Textarea } from "@operica/ui/components/ui/textarea";
+import { cn } from "@operica/ui/lib/utils";
 import { ProviderLogo } from "./provider-logo";
 import { DeleteRuntimeProfileDialog } from "./delete-runtime-profile-dialog";
 import {

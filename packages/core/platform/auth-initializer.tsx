@@ -119,7 +119,7 @@ export function AuthInitializer({
     // Token mode: read from localStorage (Electron / legacy). Even without a
     // stored token, probe the server: local development may authenticate the
     // request through AUTO_LOGIN_EMAIL.
-    const token = storage.getItem("opercia_token");
+    const token = storage.getItem("operica_token");
     if (token) api.setToken(token);
 
     Promise.all([api.getMe(), api.listWorkspaces()])
@@ -133,7 +133,7 @@ export function AuthInitializer({
         logger.error("auth init failed", err);
         api.setToken(null);
         setCurrentWorkspace(null, null);
-        storage.removeItem("opercia_token");
+        storage.removeItem("operica_token");
         onAuthFailure();
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps

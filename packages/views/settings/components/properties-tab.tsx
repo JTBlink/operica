@@ -14,33 +14,33 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { memberListOptions } from "@opercia/core/workspace/queries";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { memberListOptions } from "@operica/core/workspace/queries";
 import {
   propertyListOptions,
   useCreateProperty,
   useUpdateProperty,
-} from "@opercia/core/properties";
+} from "@operica/core/properties";
 import type {
   IssueProperty,
   IssuePropertyOption,
   IssuePropertyType,
-} from "@opercia/core/types";
-import { ISSUE_PROPERTY_TYPES } from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Badge } from "@opercia/ui/components/ui/badge";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
-import { Label as FieldLabel } from "@opercia/ui/components/ui/label";
-import { Switch } from "@opercia/ui/components/ui/switch";
+} from "@operica/core/types";
+import { ISSUE_PROPERTY_TYPES } from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
+import { Badge } from "@operica/ui/components/ui/badge";
+import { Input } from "@operica/ui/components/ui/input";
+import { Textarea } from "@operica/ui/components/ui/textarea";
+import { Label as FieldLabel } from "@operica/ui/components/ui/label";
+import { Switch } from "@operica/ui/components/ui/switch";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@opercia/ui/components/ui/select";
+} from "@operica/ui/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -48,7 +48,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -58,18 +58,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
+} from "@operica/ui/components/ui/popover";
 import { ColorPicker, COLOR_PICKER_PRESETS } from "../../common/color-picker";
 import {
   PropertyIcon,

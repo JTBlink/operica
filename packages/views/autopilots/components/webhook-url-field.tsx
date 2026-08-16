@@ -3,10 +3,10 @@
 import { useState, type ReactNode } from "react";
 import { Check, Copy, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
-import { maskAutopilotWebhookUrl } from "@opercia/core/autopilots";
-import { Button } from "@opercia/ui/components/ui/button";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
+import { maskAutopilotWebhookUrl } from "@operica/core/autopilots";
+import { Button } from "@operica/ui/components/ui/button";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
 import { useT } from "../../i18n";
 
 const SIZES = {

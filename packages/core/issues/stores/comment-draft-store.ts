@@ -237,7 +237,7 @@ export const useCommentDraftStore = create<CommentDraftStore>()(
         }),
     }),
     {
-      name: "opercia_comment_drafts",
+      name: "operica_comment_drafts",
       storage: createJSONStorage(() => createWorkspaceAwareStorage(defaultStorage)),
       onRehydrateStorage: () => (state) => {
         if (state) {
@@ -251,7 +251,7 @@ export const useCommentDraftStore = create<CommentDraftStore>()(
 registerForWorkspaceRehydration(() => useCommentDraftStore.persist.rehydrate());
 
 registerDraftCleanup({
-  storageKey: "opercia_comment_drafts",
+  storageKey: "operica_comment_drafts",
   workspaceScoped: true,
   resetInMemory: () => useCommentDraftStore.setState({ drafts: {} }),
 });

@@ -1,10 +1,10 @@
-# Opercia License
+# Operica License
 
-Opercia is provided under the terms of the Apache License, Version 2.0 —
+Operica is provided under the terms of the Apache License, Version 2.0 —
 the complete, unmodified text of which is reproduced in Part II of this
 file — subject to the additional conditions in Part I.
 
-Part I and Part II together constitute the "Opercia License". Neither part
+Part I and Part II together constitute the "Operica License". Neither part
 grants any rights on its own. Condition 3 states how the two parts fit
 together and what must be delivered when you redistribute.
 
@@ -12,17 +12,17 @@ together and what must be delivered when you redistribute.
 
                        Part I — Additional Conditions
 
-1. Opercia may be utilized commercially, including as a backend service for
+1. Operica may be utilized commercially, including as a backend service for
    other applications or as a task management platform for enterprises,
    subject to the following conditions:
 
    a. Hosted or embedded service: Unless you have obtained a commercial
-      license from the producer, you may not use the Opercia source code
-      to provide a hosted service to third parties, or embed Opercia as a
+      license from the producer, you may not use the Operica source code
+      to provide a hosted service to third parties, or embed Operica as a
       component of a product or service that is sold, licensed, or
       otherwise commercially distributed to third parties.
 
-      - This restriction applies to offering Opercia (in whole or
+      - This restriction applies to offering Operica (in whole or
         substantial part) as a SaaS platform, a managed service, or as
         an integrated component within another commercial offering.
       - Providing a hosted service to third parties is restricted whether
@@ -36,41 +36,41 @@ together and what must be delivered when you redistribute.
         code of a fork in a public repository, is not itself a hosted
         service and does not require a commercial license. Any such
         distribution remains subject to all applicable terms of this
-        Opercia License, including conditions (b) and (c) below and
+        Operica License, including conditions (b) and (c) below and
         condition 3. Source distribution does not grant recipients the
         right to operate a hosted service; each operator must obtain its
         own commercial license.
 
    b. Branding and copyright information: Unless the producer has granted
       you a written branding waiver, you may not remove or modify the
-      Opercia LOGO, the Opercia product name, or the copyright and
-      attribution information displayed by a Opercia user interface.
+      Operica LOGO, the Operica product name, or the copyright and
+      attribution information displayed by a Operica user interface.
 
       - User Interface Definition: For the purposes of this license, a
-        "Opercia user interface" means any user interface derived, in whole
+        "Operica user interface" means any user interface derived, in whole
         or in substantial part, from the user interface code in this
         repository. This includes the components located in the
         `apps/web/`, `apps/desktop/`, `apps/mobile/`, `packages/views/`,
-        and `packages/ui/` directories when running Opercia from the raw
+        and `packages/ui/` directories when running Operica from the raw
         source code, the frontend container image (published as
-        `ghcr.io/JTBlink/operica-web`) when running Opercia with
+        `ghcr.io/JTBlink/operica-web`) when running Operica with
         Docker, and any compiled desktop or mobile application built from
         that code. That enumeration is illustrative rather than
         exhaustive: user interface code remains covered when it is
         modified, moved, renamed, or extracted into another package or
         repository.
-      - This restriction is inapplicable to uses of Opercia that do not
-        involve a Opercia user interface, such as running only the
+      - This restriction is inapplicable to uses of Operica that do not
+        involve a Operica user interface, such as running only the
         `server/` backend, the daemon, or the CLI without redistributing
-        or operating any Opercia user interface. Such uses remain subject
+        or operating any Operica user interface. Such uses remain subject
         to condition (c) below.
 
    c. Attribution for non-interface use: If you redistribute or operate a
-      product or service built on Opercia's backend, daemon, or CLI
-      without a Opercia user interface, you must retain all copyright,
+      product or service built on Operica's backend, daemon, or CLI
+      without a Operica user interface, you must retain all copyright,
       patent, trademark, and attribution notices present in the source
       code and in the NOTICE file, and state in your user-facing
-      documentation that the product is built on Opercia, including a link
+      documentation that the product is built on Operica, including a link
       to https://github.com/JTBlink/operica.
 
    d. Relationship between grants: A branding waiver is not a commercial
@@ -81,26 +81,26 @@ together and what must be delivered when you redistribute.
       or from the producer's silence, review, or acceptance of your
       contributions.
 
-2. Contributions: By submitting a contribution to Opercia, you agree that:
+2. Contributions: By submitting a contribution to Operica, you agree that:
 
-   a. The producer can adjust this Opercia License to be more strict or
+   a. The producer can adjust this Operica License to be more strict or
       relaxed as deemed necessary.
 
    b. Your contributed code may be used for commercial purposes, including
       but not limited to its cloud business operations.
 
-   c. Your contribution is submitted under this Opercia License as a whole,
+   c. Your contribution is submitted under this Operica License as a whole,
       as described in condition 3, and not under Part II alone.
 
 3. Composition, precedence, and redistribution:
 
-   a. This entire file is the Opercia License. Part I (these additional
+   a. This entire file is the Operica License. Part I (these additional
       conditions) and Part II (the incorporated Apache License, Version
       2.0) together form a single set of terms. Apart from the conditions
       stated in Part I, all other rights and restrictions follow Part II.
 
    b. Wherever Part II refers to "this License", that reference means the
-      Opercia License as a whole — Part I and Part II together — and not
+      Operica License as a whole — Part I and Part II together — and not
       Part II in isolation. This includes the copy of the License that
       section 4(a) of Part II requires you to give to recipients, and the
       terms under which section 5 of Part II treats a contribution as
@@ -108,11 +108,11 @@ together and what must be delivered when you redistribute.
 
    c. If Part I and Part II conflict, Part I controls.
 
-   d. If you redistribute Opercia or a derivative work of it, you must
+   d. If you redistribute Operica or a derivative work of it, you must
       deliver this complete file. Delivering Part II alone does not
-      satisfy the Opercia License or section 4(a) of Part II.
+      satisfy the Operica License or section 4(a) of Part II.
 
-© 2025-2026 Opercia, Inc.
+© 2025-2026 Operica, Inc.
 
 ------------------------------------------------------------------------
 
@@ -120,7 +120,7 @@ together and what must be delivered when you redistribute.
 
 The text below is reproduced verbatim and unmodified from
 https://www.apache.org/licenses/LICENSE-2.0.txt. It is incorporated into
-the Opercia License as described in condition 3 above.
+the Operica License as described in condition 3 above.
 
 ------------------------------------------------------------------------
 

@@ -21,8 +21,8 @@ vi.mock("../issues/hooks", () => ({
 
 // Only the workspace hooks are stubbed — the real path helpers stay in place so
 // the reserved-slug rule that decides in-app vs external is the shipped one.
-vi.mock("@opercia/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@opercia/core/paths")>()),
+vi.mock("@operica/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@operica/core/paths")>()),
   useWorkspacePaths: () => ({
     issueDetail: (id: string) => `/test/issues/${id}`,
     projectDetail: (id: string) => `/test/projects/${id}`,
@@ -56,12 +56,12 @@ let openSpy: ReturnType<typeof vi.spyOn>;
 
 beforeEach(() => {
   navigatedPaths = [];
-  window.addEventListener("opercia:navigate", captureNavigate);
+  window.addEventListener("operica:navigate", captureNavigate);
   openSpy = vi.spyOn(window, "open").mockImplementation(() => null);
 });
 
 afterEach(() => {
-  window.removeEventListener("opercia:navigate", captureNavigate);
+  window.removeEventListener("operica:navigate", captureNavigate);
   vi.restoreAllMocks();
 });
 

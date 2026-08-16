@@ -5,13 +5,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@opercia/core/api";
-import type { ApiClient } from "@opercia/core/api/client";
+import { setApiInstance } from "@operica/core/api";
+import type { ApiClient } from "@operica/core/api/client";
 import {
   getIssueSurfaceViewStore,
   pruneIssueSurfaceViewStates,
-} from "@opercia/core/issues/stores/surface-view-store";
-import { ViewStoreProvider } from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/core/issues/stores/surface-view-store";
+import { ViewStoreProvider } from "@operica/core/issues/stores/view-store-context";
 import type {
   AgentTask,
   Issue,
@@ -19,7 +19,7 @@ import type {
   ListIssuesParams,
   ListIssuesResponse,
   WorkspaceWorkingAgent,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { useIssueSurfaceController } from "./use-issue-surface-controller";
 import { IssueTableExportIntegrityError } from "../components/table-view-model";
 import { statusTableMethodsFromLegacy } from "./status-table-test-api";
@@ -57,11 +57,11 @@ const batchUpdateMutateAsync = vi.hoisted(() => vi.fn());
 const batchDeleteMutateAsync = vi.hoisted(() => vi.fn());
 const openModal = vi.hoisted(() => vi.fn());
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@opercia/core/issues/mutations", () => ({
+vi.mock("@operica/core/issues/mutations", () => ({
   useUpdateIssue: () => ({ mutate: updateIssueMutate, isPending: false }),
   useBatchUpdateIssues: () => ({
     mutateAsync: batchUpdateMutateAsync,
@@ -73,7 +73,7 @@ vi.mock("@opercia/core/issues/mutations", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: {
     getState: () => ({ open: openModal }),
   },

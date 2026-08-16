@@ -38,10 +38,10 @@ func TestEveryWecomCounterActuallyCounts(t *testing.T) {
 
 	seen := gatherWecomValues(t, reg)
 	for _, want := range []string{
-		"opercia_wecom_connect_failures_total",
-		"opercia_wecom_auth_failures_total",
-		"opercia_wecom_inbound_callbacks_total",
-		"opercia_wecom_inbound_queue_blocked_total",
+		"operica_wecom_connect_failures_total",
+		"operica_wecom_auth_failures_total",
+		"operica_wecom_inbound_callbacks_total",
+		"operica_wecom_inbound_queue_blocked_total",
 	} {
 		if seen[want] != 1 {
 			t.Errorf("%s = %v, want 1 — the counter is wired to nothing", want, seen[want])
@@ -66,10 +66,10 @@ func TestAuthAndConnectFailuresAreSeparateSeries(t *testing.T) {
 	m.RecordConnectFailure()
 
 	seen := gatherWecomValues(t, reg)
-	if got := seen["opercia_wecom_auth_failures_total"]; got != 2 {
+	if got := seen["operica_wecom_auth_failures_total"]; got != 2 {
 		t.Errorf("auth failures = %v, want 2", got)
 	}
-	if got := seen["opercia_wecom_connect_failures_total"]; got != 1 {
+	if got := seen["operica_wecom_connect_failures_total"]; got != 1 {
 		t.Errorf("connect failures = %v, want 1", got)
 	}
 }
@@ -126,11 +126,11 @@ func TestTheRegistryExposesTheWecomCounters(t *testing.T) {
 		t.Fatalf("gather: %v", err)
 	}
 	for _, f := range families {
-		if f.GetName() == "opercia_wecom_auth_failures_total" {
+		if f.GetName() == "operica_wecom_auth_failures_total" {
 			return
 		}
 	}
-	t.Fatal("opercia_wecom_auth_failures_total is not on the registry the metrics server scrapes")
+	t.Fatal("operica_wecom_auth_failures_total is not on the registry the metrics server scrapes")
 }
 
 func gatherWecomValues(t *testing.T, reg prometheus.Gatherer) map[string]float64 {

@@ -17,9 +17,9 @@ type qwenBackend struct {
 	cfg Config
 }
 
-// qwenBlockedArgs are owned by Opercia. Qwen accepts the task prompt and stream
+// qwenBlockedArgs are owned by Operica. Qwen accepts the task prompt and stream
 // protocol as flags, so custom args must not replace either. Model/session are
-// also selected by Opercia, and safe mode disables the QWEN.md context file.
+// also selected by Operica, and safe mode disables the QWEN.md context file.
 // --yolo/-y, --approval-mode, and --core-tools are daemon-owned permission
 // flags; users may not disable bypass mode or narrow the core tool registry
 // from custom_args (use --exclude-tools to hard-deny specific tools instead).

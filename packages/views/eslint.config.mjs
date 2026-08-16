@@ -1,4 +1,4 @@
-import reactConfig from "@opercia/eslint-config/react";
+import reactConfig from "@operica/eslint-config/react";
 import i18next from "eslint-plugin-i18next";
 
 // Global i18n protection. Every JSX text node in this package must pass

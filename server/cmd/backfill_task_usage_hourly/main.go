@@ -49,9 +49,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/JTBlink/operica/server/internal/logger"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/JTBlink/operica/server/internal/logger"
 )
 
 func main() {
@@ -73,7 +73,7 @@ func run() error {
 
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dbURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 
 	// SIGINT/SIGTERM cancels ctx so an in-flight slice stops cleanly —

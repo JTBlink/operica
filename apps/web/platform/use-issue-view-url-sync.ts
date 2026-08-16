@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { useWorkspaceId } from "@opercia/core/hooks";
+import { useWorkspaceId } from "@operica/core/hooks";
 import {
   issueViewContainerKey,
   useActiveIssueViewStore,
-} from "@opercia/core/issue-views/active-view-store";
-import type { IssueViewScope } from "@opercia/core/issue-views/queries";
+} from "@operica/core/issue-views/active-view-store";
+import type { IssueViewScope } from "@operica/core/issue-views/queries";
 
 /**
  * Web-only two-way sync between the active saved view and `?view=<id>`:

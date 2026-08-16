@@ -4,10 +4,10 @@ import { ChangelogPageClient } from "@/features/landing/components/changelog-pag
 export const metadata: Metadata = {
   title: "Changelog",
   description:
-    "See what's new in Opercia — latest features, improvements, and fixes.",
+    "See what's new in Operica — latest features, improvements, and fixes.",
   openGraph: {
-    title: "Changelog | Opercia",
-    description: "Latest updates and releases from Opercia.",
+    title: "Changelog | Operica",
+    description: "Latest updates and releases from Operica.",
     url: "/changelog",
   },
   alternates: {

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { IssuePriority, UpdateIssueRequest } from "@opercia/core/types";
-import { PRIORITY_DISPLAY_ORDER, PRIORITY_CONFIG } from "@opercia/core/issues/config";
+import type { IssuePriority, UpdateIssueRequest } from "@operica/core/types";
+import { PRIORITY_DISPLAY_ORDER, PRIORITY_CONFIG } from "@operica/core/issues/config";
 import { PriorityIcon } from "../priority-icon";
 import { DeferredPopup } from "../../../common/deferred-popup";
 import { PropertyPicker, PickerItem, PICKER_TRIGGER_CLASS } from "./property-picker";

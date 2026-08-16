@@ -1,4 +1,4 @@
-import { AgentsPage } from "@opercia/views/agents";
+import { AgentsPage } from "@operica/views/agents";
 
 // Web has no bundled daemon, so the runtime filter always groups
 // local-mode runtimes under "Remote" (buildRuntimeMachines has no

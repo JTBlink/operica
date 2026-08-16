@@ -6,7 +6,7 @@ import {
   ItemDescription,
   ItemMedia,
   ItemTitle,
-} from "@opercia/ui/components/ui/item";
+} from "@operica/ui/components/ui/item";
 import { useT } from "../../i18n";
 
 /** Mirrors `mikaAgentAvatarURL` in server/internal/handler/mika_agent.go.

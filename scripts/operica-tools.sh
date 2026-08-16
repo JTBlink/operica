@@ -61,7 +61,7 @@ kill 参数:
 本地登录提示:
   默认账号: 未设置。配置 AUTO_LOGIN_EMAIL 后，本地请求会自动使用该账号登录
   默认密码: 无。Operica 使用邮箱验证码登录，不使用账号密码
-  登录验证码: 优先使用 OPERCIA_DEV_VERIFICATION_CODE 配置的 6 位验证码；
+  登录验证码: 优先使用 OPERICA_DEV_VERIFICATION_CODE 配置的 6 位验证码；
               未配置时，从本地后端日志中的 verification code 获取
   安全提示: 固定验证码仅用于本地开发，不要在 production 或公网环境启用
 
@@ -70,7 +70,7 @@ kill 参数:
                   默认主 checkout 使用 .env，linked worktree 使用 .env.worktree
   AUTO_LOGIN_EMAIL
                   本地开发自动登录账号，默认未设置
-  OPERCIA_DEV_VERIFICATION_CODE
+  OPERICA_DEV_VERIFICATION_CODE
                   非 production 环境的固定 6 位登录验证码，默认未设置
   PLATFORMS       build 的 GOOS/GOARCH 列表，以空格分隔
                   默认使用当前系统平台
@@ -167,7 +167,7 @@ cmd_build() {
   version_vars
   local platforms="${PLATFORMS:-$(go env GOOS)/$(go env GOARCH)}"
   local out_dir="${OUT_DIR:-dist/release}"
-  local go_targets=(server opercia migrate)
+  local go_targets=(server operica migrate)
 
   echo "==> 打包 Operica ${VERSION} (commit ${COMMIT})"
   echo "    输出目录: ${out_dir}"
@@ -177,7 +177,7 @@ cmd_build() {
   if [ "${SKIP_GO:-0}" != "1" ]; then
     for platform in $platforms; do
       local goos="${platform%%/*}" goarch="${platform##*/}"
-      local stage="$out_dir/opercia_${VERSION}_${goos}_${goarch}"
+      local stage="$out_dir/operica_${VERSION}_${goos}_${goarch}"
       mkdir -p "$stage"
 
       echo ""
@@ -191,7 +191,7 @@ cmd_build() {
         echo "    ✓ ${target}${ext}"
       done
 
-      local archive="opercia_${VERSION}_${goos}_${goarch}.tar.gz"
+      local archive="operica_${VERSION}_${goos}_${goarch}.tar.gz"
       tar -czf "$out_dir/$archive" -C "$out_dir" "$(basename "$stage")"
       rm -rf "$stage"
       echo "    → $archive"
@@ -214,7 +214,7 @@ cmd_build() {
       [ -d "$web_static" ] && cp -R "$web_static" "$stage/apps/web/.next/static"
       [ -d "apps/web/public" ] && cp -R "apps/web/public" "$stage/apps/web/public"
 
-      local archive="opercia-web_${VERSION}.tar.gz"
+      local archive="operica-web_${VERSION}.tar.gz"
       tar -czf "$out_dir/$archive" -C "$out_dir" web
       rm -rf "$stage"
       echo "    → $archive"
@@ -234,7 +234,7 @@ cmd_start() {
   local start_server=0
   local start_web=0
   local env_file="${ENV_FILE:-}"
-  local go_targets=(server opercia migrate)
+  local go_targets=(server operica migrate)
   local arg
 
   for arg in "$@"; do
@@ -353,8 +353,10 @@ cmd_kill() {
   local line pid command
   local root_pid
   local iteration alive
+  local protected_pid parent_pid
   local kill_targets=()
   local root_targets=()
+  local protected_pids=()
 
   for arg in "$@"; do
     case "$arg" in
@@ -373,9 +375,30 @@ cmd_kill() {
 
   pid_file="$(runtime_pid_file)"
 
+  # Never select this command or one of its parent shells. A wrapper command
+  # can legitimately contain text such as "pnpm dev:desktop", which would
+  # otherwise look like a stale development process during the ps scan.
+  protected_pid="$$"
+  while [[ "$protected_pid" =~ ^[0-9]+$ ]] && [ "$protected_pid" -gt 1 ]; do
+    protected_pids+=("$protected_pid")
+    parent_pid="$(ps -p "$protected_pid" -o ppid= 2>/dev/null | tr -d ' ')"
+    [ -n "$parent_pid" ] || break
+    protected_pid="$parent_pid"
+  done
+
+  process_is_protected() {
+    local candidate="$1"
+    local protected
+    for protected in "${protected_pids[@]}"; do
+      [ "$protected" = "$candidate" ] && return 0
+    done
+    return 1
+  }
+
   add_unique_pid() {
     local candidate="$1"
     local existing
+    process_is_protected "$candidate" && return
     for existing in "${root_targets[@]-}"; do
       [ -n "$existing" ] || continue
       [ "$existing" = "$candidate" ] && return
@@ -397,7 +420,7 @@ cmd_kill() {
     read -r pid command <<<"$line"
     case "$command" in
       *"scripts/operica-tools.sh start"* | *"pnpm dev:desktop"* | *"pnpm dev:web"* | \
-        *"turbo dev --filter=@opercia/desktop"* | *"turbo dev --filter=@opercia/web"* | \
+        *"turbo dev --filter=@operica/desktop"* | *"turbo dev --filter=@operica/web"* | \
         *"electron-vite"* | *"next-server"* | *"server/bin/server"*)
         if process_belongs_to_checkout "$pid"; then
           add_unique_pid "$pid"

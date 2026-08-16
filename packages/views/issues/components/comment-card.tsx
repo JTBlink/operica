@@ -3,16 +3,16 @@
 import { memo, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { CheckCircle2, ChevronRight, ListChevronsDownUp, Copy, Loader2, MoreHorizontal, Pencil, RotateCcw, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { Card } from "@opercia/ui/components/ui/card";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Card } from "@operica/ui/components/ui/card";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,24 +22,24 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import { ActorAvatar } from "../../common/actor-avatar";
-import { ReactionBar } from "@opercia/ui/components/common/reaction-bar";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
-import { useActorName } from "@opercia/core/workspace/hooks";
+import { ReactionBar } from "@operica/ui/components/common/reaction-bar";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
+import { useActorName } from "@operica/core/workspace/hooks";
 import { useTimeAgo } from "../../i18n";
 import { ContentEditor, type ContentEditorRef, ReadonlyContent, useFileDropZone, FileDropOverlay, Attachment as AttachmentRenderer, AttachmentDownloadProvider, useUploadGate, useComposerSubmit } from "../../editor";
 import { useCommentUploads } from "./use-comment-uploads";
-import { FileUploadButton } from "@opercia/ui/components/common/file-upload-button";
-import { api, dispatchReasonCode } from "@opercia/core/api";
+import { FileUploadButton } from "@operica/ui/components/common/file-upload-button";
+import { api, dispatchReasonCode } from "@operica/core/api";
 import { ReplyInput } from "./reply-input";
 import { CommentTriggerChips } from "./comment-trigger-chips";
 import { useCommentTriggerPreview } from "../hooks/use-comment-trigger-preview";
-import type { TimelineEntry, Attachment } from "@opercia/core/types";
-import { contentReferencesAttachment } from "@opercia/core/types";
-import { selectStandaloneAttachments } from "@opercia/core/attachments/image-sequence";
-import { useCommentCollapseStore, useCommentDraftStore } from "@opercia/core/issues/stores";
+import type { TimelineEntry, Attachment } from "@operica/core/types";
+import { contentReferencesAttachment } from "@operica/core/types";
+import { selectStandaloneAttachments } from "@operica/core/attachments/image-sequence";
+import { useCommentCollapseStore, useCommentDraftStore } from "@operica/core/issues/stores";
 import { useT } from "../../i18n";
 import { CommentsFoldBar } from "./resolved-thread-bar";
 import { deriveThreadResolution } from "./thread-utils";

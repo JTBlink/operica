@@ -1,5 +1,5 @@
 {
-  "name": "@opercia/ui",
+  "name": "@operica/ui",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -69,8 +69,8 @@
     "react-i18next": "catalog:"
   },
   "devDependencies": {
-    "@opercia/eslint-config": "workspace:*",
-    "@opercia/tsconfig": "workspace:*",
+    "@operica/eslint-config": "workspace:*",
+    "@operica/tsconfig": "workspace:*",
     "@types/linkify-it": "^5.0.0",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

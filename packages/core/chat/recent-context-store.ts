@@ -100,7 +100,7 @@ export const useRecentContextStore = create<RecentContextState>()(
         }),
     }),
     {
-      name: "opercia_recent_contexts",
+      name: "operica_recent_contexts",
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({ byWorkspace: state.byWorkspace }),
       version: 1,

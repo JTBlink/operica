@@ -1,68 +1,68 @@
 # CLI and Agent Daemon Guide
 
-The `opercia` CLI connects your local machine to Opercia. It handles authentication, workspace management, issue tracking, and runs the agent daemon that executes AI tasks locally.
+The `operica` CLI connects your local machine to Operica. It handles authentication, workspace management, issue tracking, and runs the agent daemon that executes AI tasks locally.
 
 ## Installation
 
 ### Homebrew (macOS/Linux)
 
 ```bash
-brew install opercia-ai/tap/opercia
+brew install operica-ai/tap/operica
 ```
 
 ### Build from Source
 
 ```bash
 git clone https://github.com/JTBlink/operica.git
-cd opercia
+cd operica
 make build
-cp server/bin/opercia /usr/local/bin/opercia
+cp server/bin/operica /usr/local/bin/operica
 ```
 
 ### Update
 
 ```bash
-brew upgrade opercia-ai/tap/opercia
+brew upgrade operica-ai/tap/operica
 ```
 
 For install script or manual installs, use:
 
 ```bash
-opercia update
+operica update
 ```
 
-`opercia update` auto-detects your installation method and upgrades accordingly.
+`operica update` auto-detects your installation method and upgrades accordingly.
 
 ## Quick Start
 
 ```bash
 # One-command setup: configure, authenticate, and start the daemon
-opercia setup
+operica setup
 
 # For self-hosted (local) deployments:
-opercia setup self-host
+operica setup self-host
 ```
 
 Or step by step:
 
 ```bash
 # 1. Authenticate (opens browser for login)
-opercia login
+operica login
 
 # 2. Start the agent daemon
-opercia daemon start
+operica daemon start
 
 # 3. Done — agents in your watched workspaces can now execute tasks on your machine
 ```
 
-`opercia login` automatically discovers all workspaces you belong to and adds them to the daemon watch list.
+`operica login` automatically discovers all workspaces you belong to and adds them to the daemon watch list.
 
 ## Authentication
 
 ### Browser Login
 
 ```bash
-opercia login
+operica login
 ```
 
 Opens your browser for OAuth authentication, creates a 90-day personal access token, and auto-configures your workspaces.
@@ -70,7 +70,7 @@ Opens your browser for OAuth authentication, creates a 90-day personal access to
 ### Token Login
 
 ```bash
-opercia login --token <mul_...>
+operica login --token <mul_...>
 ```
 
 Authenticate using a personal access token directly. Useful for headless environments. Pass `--token=` with an empty value to be prompted interactively (so the token never lands in shell history).
@@ -78,7 +78,7 @@ Authenticate using a personal access token directly. Useful for headless environ
 ### Check Status
 
 ```bash
-opercia auth status
+operica auth status
 ```
 
 Shows your current server, user, and token validity.
@@ -86,52 +86,52 @@ Shows your current server, user, and token validity.
 ### Logout
 
 ```bash
-opercia auth logout
+operica auth logout
 ```
 
 Removes the stored authentication token.
 
 ## Agent Daemon
 
-The daemon is the local agent runtime. It detects available AI CLIs on your machine, registers them with the Opercia server, and executes tasks when agents are assigned work.
+The daemon is the local agent runtime. It detects available AI CLIs on your machine, registers them with the Operica server, and executes tasks when agents are assigned work.
 
 ### Start
 
 ```bash
-opercia daemon start
+operica daemon start
 ```
 
-By default, the daemon runs in the background and logs to `~/.opercia/daemon.log`.
+By default, the daemon runs in the background and logs to `~/.operica/daemon.log`.
 
 To run in the foreground (useful for debugging):
 
 ```bash
-opercia daemon start --foreground
+operica daemon start --foreground
 ```
 
 #### Following a replaced binary
 
 A CLI-launched daemon periodically compares its own compile-time version against
-the `--version` output of the `opercia` binary it would re-exec. When they differ
-— `brew upgrade opercia`, a re-download, a local `make build` — it waits for any
+the `--version` output of the `operica` binary it would re-exec. When they differ
+— `brew upgrade operica`, a re-download, a local `make build` — it waits for any
 running task to finish, then restarts into the new binary. A running task is
 never interrupted; if the daemon is busy the restart is deferred to the next
-check, and `opercia daemon status` shows why it's still on the old version.
+check, and `operica daemon status` shows why it's still on the old version.
 
 This is separate from the GitHub self-update poller: disabling that does not stop
 the daemon from following a binary you installed yourself. To turn it off:
 
 ```bash
-OPERCIA_DAEMON_AUTO_RELOAD=0 opercia daemon start
+OPERICA_DAEMON_AUTO_RELOAD=0 operica daemon start
 # or
-opercia daemon start --no-auto-reload
+operica daemon start --no-auto-reload
 # or persist it
-opercia config set disable_auto_reload true
+operica config set disable_auto_reload true
 ```
 
 Agent CLIs (codex, claude, ...) are handled differently: when one of them is
 upgraded in place, the daemon re-probes its version and re-registers the runtime
-**without restarting**, so subsequent tasks pick up the new CLI while Opercia's
+**without restarting**, so subsequent tasks pick up the new CLI while Operica's
 availability stays independent of a third party's release cadence.
 
 Desktop-managed daemons ignore both, because the Desktop app owns its bundled
@@ -140,14 +140,14 @@ CLI's lifecycle.
 ### Stop
 
 ```bash
-opercia daemon stop
+operica daemon stop
 ```
 
 ### Status
 
 ```bash
-opercia daemon status
-opercia daemon status --output json
+operica daemon status
+operica daemon status --output json
 ```
 
 Shows PID, uptime, detected agents, and watched workspaces.
@@ -155,9 +155,9 @@ Shows PID, uptime, detected agents, and watched workspaces.
 ### Logs
 
 ```bash
-opercia daemon logs              # Last 50 lines
-opercia daemon logs -f           # Follow (tail -f)
-opercia daemon logs -n 100       # Last 100 lines
+operica daemon logs              # Last 50 lines
+operica daemon logs -f           # Follow (tail -f)
+operica daemon logs -n 100       # Last 100 lines
 ```
 
 ### Supported Agents
@@ -203,92 +203,92 @@ Daemon behavior is configured via flags or environment variables:
 
 | Setting | Flag | Env Variable | Default |
 |---------|------|--------------|---------|
-| Poll interval | `--poll-interval` | `OPERCIA_DAEMON_POLL_INTERVAL` | `3s` |
-| Heartbeat interval | `--heartbeat-interval` | `OPERCIA_DAEMON_HEARTBEAT_INTERVAL` | `15s` |
-| Agent timeout | `--agent-timeout` | `OPERCIA_AGENT_TIMEOUT` | `0` (no cap; bounded by the watchdogs) |
-| Codex semantic inactivity timeout | `--codex-semantic-inactivity-timeout` | `OPERCIA_CODEX_SEMANTIC_INACTIVITY_TIMEOUT` | `10m` |
-| OpenCode idle watchdog | — | `OPERCIA_OPENCODE_IDLE_WATCHDOG` | `10m` (`0` falls back to the generic idle watchdog; cannot extend it) |
-| Max concurrent tasks | `--max-concurrent-tasks` | `OPERCIA_DAEMON_MAX_CONCURRENT_TASKS` | `20` |
-| Daemon ID | `--daemon-id` | `OPERCIA_DAEMON_ID` | hostname |
-| Device name | `--device-name` | `OPERCIA_DAEMON_DEVICE_NAME` | hostname |
-| Runtime name | `--runtime-name` | `OPERCIA_AGENT_RUNTIME_NAME` | `Local Agent` |
-| Workspaces root | — | `OPERCIA_WORKSPACES_ROOT` | `~/opercia_workspaces` |
-| GC enabled | — | `OPERCIA_GC_ENABLED` | `true` (set `false`/`0` to disable) |
-| GC scan interval | — | `OPERCIA_GC_INTERVAL` | `2h` |
-| GC TTL (done/cancelled issues) | — | `OPERCIA_GC_TTL` | `24h` |
-| GC orphan TTL (no `.gc_meta.json`) | — | `OPERCIA_GC_ORPHAN_TTL` | `72h` |
-| GC artifact TTL (open issues) | — | `OPERCIA_GC_ARTIFACT_TTL` | `12h` (set `0` to disable) |
-| GC artifact patterns | — | `OPERCIA_GC_ARTIFACT_PATTERNS` | `node_modules,.next,.turbo` |
-| GC repo cache TTL (`.repos`) | — | `OPERCIA_GC_REPO_TTL` | `720h` (30d; set `0` to disable) |
-| GC Hermes memory TTL (per-agent `memories/`) | — | `OPERCIA_GC_HERMES_MEMORY_TTL` | `2160h` (90d; set `0` to disable) |
+| Poll interval | `--poll-interval` | `OPERICA_DAEMON_POLL_INTERVAL` | `3s` |
+| Heartbeat interval | `--heartbeat-interval` | `OPERICA_DAEMON_HEARTBEAT_INTERVAL` | `15s` |
+| Agent timeout | `--agent-timeout` | `OPERICA_AGENT_TIMEOUT` | `0` (no cap; bounded by the watchdogs) |
+| Codex semantic inactivity timeout | `--codex-semantic-inactivity-timeout` | `OPERICA_CODEX_SEMANTIC_INACTIVITY_TIMEOUT` | `10m` |
+| OpenCode idle watchdog | — | `OPERICA_OPENCODE_IDLE_WATCHDOG` | `10m` (`0` falls back to the generic idle watchdog; cannot extend it) |
+| Max concurrent tasks | `--max-concurrent-tasks` | `OPERICA_DAEMON_MAX_CONCURRENT_TASKS` | `20` |
+| Daemon ID | `--daemon-id` | `OPERICA_DAEMON_ID` | hostname |
+| Device name | `--device-name` | `OPERICA_DAEMON_DEVICE_NAME` | hostname |
+| Runtime name | `--runtime-name` | `OPERICA_AGENT_RUNTIME_NAME` | `Local Agent` |
+| Workspaces root | — | `OPERICA_WORKSPACES_ROOT` | `~/operica_workspaces` |
+| GC enabled | — | `OPERICA_GC_ENABLED` | `true` (set `false`/`0` to disable) |
+| GC scan interval | — | `OPERICA_GC_INTERVAL` | `2h` |
+| GC TTL (done/cancelled issues) | — | `OPERICA_GC_TTL` | `24h` |
+| GC orphan TTL (no `.gc_meta.json`) | — | `OPERICA_GC_ORPHAN_TTL` | `72h` |
+| GC artifact TTL (open issues) | — | `OPERICA_GC_ARTIFACT_TTL` | `12h` (set `0` to disable) |
+| GC artifact patterns | — | `OPERICA_GC_ARTIFACT_PATTERNS` | `node_modules,.next,.turbo` |
+| GC repo cache TTL (`.repos`) | — | `OPERICA_GC_REPO_TTL` | `720h` (30d; set `0` to disable) |
+| GC Hermes memory TTL (per-agent `memories/`) | — | `OPERICA_GC_HERMES_MEMORY_TTL` | `2160h` (90d; set `0` to disable) |
 
 #### Workspace garbage collection
 
-The daemon periodically scans `OPERCIA_WORKSPACES_ROOT` and reclaims disk space in four modes:
+The daemon periodically scans `OPERICA_WORKSPACES_ROOT` and reclaims disk space in four modes:
 
-- **Full task cleanup** — when an issue's status is `done` or `cancelled` and has been idle for `OPERCIA_GC_TTL`, the entire task directory is removed.
-- **Orphan cleanup** — task directories with no `.gc_meta.json` (e.g. left over from a daemon crash) are removed once they exceed `OPERCIA_GC_ORPHAN_TTL`.
-- **Artifact-only cleanup** — when a task has been completed for at least `OPERCIA_GC_ARTIFACT_TTL` but the issue is still open, regenerable build outputs whose directory basename matches `OPERCIA_GC_ARTIFACT_PATTERNS` are removed. The daemon also reclaims the exact managed path `codex-home/.sandbox-bin`; old task metadata without `completed_at` becomes eligible for this managed-only cleanup after its `.gc_meta.json` file has been idle for `OPERCIA_GC_ORPHAN_TTL`. The rest of the task (source, `.git`, `output/`, `logs/`, `.gc_meta.json`, Codex auth/config/session state) is preserved so the agent can resume it.
+- **Full task cleanup** — when an issue's status is `done` or `cancelled` and has been idle for `OPERICA_GC_TTL`, the entire task directory is removed.
+- **Orphan cleanup** — task directories with no `.gc_meta.json` (e.g. left over from a daemon crash) are removed once they exceed `OPERICA_GC_ORPHAN_TTL`.
+- **Artifact-only cleanup** — when a task has been completed for at least `OPERICA_GC_ARTIFACT_TTL` but the issue is still open, regenerable build outputs whose directory basename matches `OPERICA_GC_ARTIFACT_PATTERNS` are removed. The daemon also reclaims the exact managed path `codex-home/.sandbox-bin`; old task metadata without `completed_at` becomes eligible for this managed-only cleanup after its `.gc_meta.json` file has been idle for `OPERICA_GC_ORPHAN_TTL`. The rest of the task (source, `.git`, `output/`, `logs/`, `.gc_meta.json`, Codex auth/config/session state) is preserved so the agent can resume it.
 
-- **Repo cache eviction** — the bare git clones under `.repos/` are shared object stores: each task workdir is a `git worktree` off one of them rather than its own clone, so a task's `.git` is only a pointer file. They are evicted only when all of the following hold: the repo is no longer attached to any workspace this daemon watches, it has no worktrees left, and no task has created a worktree from it for `OPERCIA_GC_REPO_TTL`. A cache created before this stamp existed is not treated as ancient — its clock starts at the first GC cycle that sees it, so upgrading does not wipe every cache. Evicting is safe by construction: the next task that needs the repo re-clones it on demand, so a wrong eviction costs a clone, not a failure.
+- **Repo cache eviction** — the bare git clones under `.repos/` are shared object stores: each task workdir is a `git worktree` off one of them rather than its own clone, so a task's `.git` is only a pointer file. They are evicted only when all of the following hold: the repo is no longer attached to any workspace this daemon watches, it has no worktrees left, and no task has created a worktree from it for `OPERICA_GC_REPO_TTL`. A cache created before this stamp existed is not treated as ancient — its clock starts at the first GC cycle that sees it, so upgrading does not wipe every cache. Evicting is safe by construction: the next task that needs the repo re-clones it on demand, so a wrong eviction costs a clone, not a failure.
 
-- **Hermes memory store reclamation** — a Hermes agent's long-term memory (`memories/`) lives at `<profile dir>/hermes-state/<agent-id>/<hermes-profile>/`, outside any task directory, so it survives across tasks and issues (see [Hermes agent memory](#hermes-agent-memory)). A store untouched for `OPERCIA_GC_HERMES_MEMORY_TTL` is removed, giving a deleted agent's memory an eventual-reclamation guarantee. The default is deliberately long: these are a handful of markdown files, and reclaiming one is user-visible amnesia rather than a cache miss. A store a running task holds is never reclaimed.
+- **Hermes memory store reclamation** — a Hermes agent's long-term memory (`memories/`) lives at `<profile dir>/hermes-state/<agent-id>/<hermes-profile>/`, outside any task directory, so it survives across tasks and issues (see [Hermes agent memory](#hermes-agent-memory)). A store untouched for `OPERICA_GC_HERMES_MEMORY_TTL` is removed, giving a deleted agent's memory an eventual-reclamation guarantee. The default is deliberately long: these are a handful of markdown files, and reclaiming one is user-visible amnesia rather than a cache miss. A store a running task holds is never reclaimed.
 
-Configured patterns are basename-only — entries containing `/` or `\` are silently dropped — and `.git` subtrees are never descended into. The managed Codex cache is matched by its exact relative path, so a repository's own `.sandbox-bin` is not removed unless an operator explicitly adds that basename to `OPERCIA_GC_ARTIFACT_PATTERNS`. The default list (`node_modules`, `.next`, `.turbo`) is intentionally narrow; extend it per deployment if your repos consistently produce other regenerable directories (for example, `OPERCIA_GC_ARTIFACT_PATTERNS=node_modules,.next,.turbo,target,__pycache__`). To disable artifact cleanup entirely, including the managed Codex cache, set `OPERCIA_GC_ARTIFACT_TTL=0`.
+Configured patterns are basename-only — entries containing `/` or `\` are silently dropped — and `.git` subtrees are never descended into. The managed Codex cache is matched by its exact relative path, so a repository's own `.sandbox-bin` is not removed unless an operator explicitly adds that basename to `OPERICA_GC_ARTIFACT_PATTERNS`. The default list (`node_modules`, `.next`, `.turbo`) is intentionally narrow; extend it per deployment if your repos consistently produce other regenerable directories (for example, `OPERICA_GC_ARTIFACT_PATTERNS=node_modules,.next,.turbo,target,__pycache__`). To disable artifact cleanup entirely, including the managed Codex cache, set `OPERICA_GC_ARTIFACT_TTL=0`.
 
-`opercia daemon disk-usage` reports the `.repos` footprint on its own line rather than folding it into the per-task totals — every task in a workspace checks out from that shared cache, so attributing it to individual task directories would double-count it. Note that the repo cache is reclaimed on the schedule above and not by any per-issue status change, so it is normal for it to persist after every task directory is gone.
+`operica daemon disk-usage` reports the `.repos` footprint on its own line rather than folding it into the per-task totals — every task in a workspace checks out from that shared cache, so attributing it to individual task directories would double-count it. Note that the repo cache is reclaimed on the schedule above and not by any per-issue status change, so it is normal for it to persist after every task directory is gone.
 
 Agent-specific overrides:
 
 | Variable | Description |
 |----------|-------------|
-| `OPERCIA_CLAUDE_PATH` | Custom path to the `claude` binary |
-| `OPERCIA_CLAUDE_MODEL` | Override the Claude model used |
-| `OPERCIA_CLAUDE_ARGS` | Default extra arguments for Claude Code runs |
-| `OPERCIA_ANTIGRAVITY_PATH` | Custom path to the `agy` binary |
-| `OPERCIA_ANTIGRAVITY_MODEL` | Override the Antigravity model used |
-| `OPERCIA_CODEBUDDY_PATH` | Custom path to the `codebuddy` binary |
-| `OPERCIA_CODEBUDDY_MODEL` | Override the CodeBuddy model used |
-| `OPERCIA_CODEBUDDY_ARGS` | Default extra arguments for CodeBuddy runs |
-| `OPERCIA_DEVECO_PATH` | Custom path to the `deveco` binary |
-| `OPERCIA_DEVECO_MODEL` | Override the DevEco Code model used |
-| `OPERCIA_CODEX_PATH` | Custom path to the `codex` binary |
-| `OPERCIA_CODEX_MODEL` | Override the Codex model used |
-| `OPERCIA_CODEX_ARGS` | Default extra arguments for Codex runs |
-| `OPERCIA_COPILOT_PATH` | Custom path to the `copilot` binary |
-| `OPERCIA_COPILOT_MODEL` | Override the Copilot model used (note: GitHub Copilot routes models through your account entitlement, so this may not be honoured) |
-| `OPERCIA_OPENCODE_PATH` | Custom path to the `opencode` binary |
-| `OPERCIA_OPENCODE_MODEL` | Override the OpenCode model used |
-| `OPERCIA_OPENCLAW_PATH` | Custom path to the `openclaw` binary |
-| `OPERCIA_OPENCLAW_MODEL` | Override the OpenClaw model used |
-| `OPERCIA_HERMES_PATH` | Custom path to the `hermes` binary |
-| `OPERCIA_HERMES_MODEL` | Override the Hermes model used |
-| `OPERCIA_HERMES_TASK_MEMORY` | Revert Hermes memory to a fresh task-local `memories/` per task (see [Hermes agent memory](#hermes-agent-memory)) |
-| `OPERCIA_PI_PATH` | Custom path to the `pi` binary |
-| `OPERCIA_PI_MODEL` | Override the Pi model used |
-| `OPERCIA_CURSOR_PATH` | Custom path to the `cursor-agent` binary |
-| `OPERCIA_CURSOR_MODEL` | Override the Cursor Agent model used |
-| `OPERCIA_KIMI_PATH` | Custom path to the `kimi` binary |
-| `OPERCIA_KIMI_MODEL` | Override the Kimi model used |
-| `OPERCIA_REASONIX_PATH` | Custom path to the `reasonix` binary |
-| `OPERCIA_REASONIX_MODEL` | Override the Reasonix model used |
-| `OPERCIA_KIRO_PATH` | Custom path to the `kiro-cli` binary |
-| `OPERCIA_KIRO_MODEL` | Override the Kiro model used |
-| `OPERCIA_QODER_PATH` | Custom path to the `qodercli` binary |
-| `OPERCIA_QODER_MODEL` | Override the Qoder model used |
-| `OPERCIA_QODERCLICN_PATH` | Custom path to the `qoderclicn` binary |
-| `OPERCIA_QODERCLICN_MODEL` | Override the Qoder CN model used |
-| `OPERCIA_TRAECLI_PATH` | Custom path to the `traecli` binary |
-| `OPERCIA_TRAECLI_MODEL` | Override the Trae model used (a model id from your logged-in traecli catalog, e.g. `Doubao-Seed-2.1-Pro`) |
-| `OPERCIA_GROK_PATH` | Custom path to the `grok` binary (defaults to `grok` on PATH; often `~/.grok/bin/grok`) |
-| `OPERCIA_GROK_MODEL` | Override the Grok model used (e.g. `grok-4.5`) |
-| `OPERCIA_QWEN_PATH` | Custom path to the `qwen` binary |
-| `OPERCIA_QWEN_MODEL` | Override the Qwen Code model used |
-| `OPERCIA_QWEN_ARGS` | Daemon-wide extra Qwen arguments (POSIX shellword parsing; managed protocol flags are filtered) |
-| `OPERCIA_QWENPAW_PATH` | Custom path to the `qwenpaw` binary |
-| `OPERCIA_QWENPAW_ARGS` | Daemon-wide extra QwenPaw arguments (POSIX shellword parsing; managed protocol flags are filtered) |
+| `OPERICA_CLAUDE_PATH` | Custom path to the `claude` binary |
+| `OPERICA_CLAUDE_MODEL` | Override the Claude model used |
+| `OPERICA_CLAUDE_ARGS` | Default extra arguments for Claude Code runs |
+| `OPERICA_ANTIGRAVITY_PATH` | Custom path to the `agy` binary |
+| `OPERICA_ANTIGRAVITY_MODEL` | Override the Antigravity model used |
+| `OPERICA_CODEBUDDY_PATH` | Custom path to the `codebuddy` binary |
+| `OPERICA_CODEBUDDY_MODEL` | Override the CodeBuddy model used |
+| `OPERICA_CODEBUDDY_ARGS` | Default extra arguments for CodeBuddy runs |
+| `OPERICA_DEVECO_PATH` | Custom path to the `deveco` binary |
+| `OPERICA_DEVECO_MODEL` | Override the DevEco Code model used |
+| `OPERICA_CODEX_PATH` | Custom path to the `codex` binary |
+| `OPERICA_CODEX_MODEL` | Override the Codex model used |
+| `OPERICA_CODEX_ARGS` | Default extra arguments for Codex runs |
+| `OPERICA_COPILOT_PATH` | Custom path to the `copilot` binary |
+| `OPERICA_COPILOT_MODEL` | Override the Copilot model used (note: GitHub Copilot routes models through your account entitlement, so this may not be honoured) |
+| `OPERICA_OPENCODE_PATH` | Custom path to the `opencode` binary |
+| `OPERICA_OPENCODE_MODEL` | Override the OpenCode model used |
+| `OPERICA_OPENCLAW_PATH` | Custom path to the `openclaw` binary |
+| `OPERICA_OPENCLAW_MODEL` | Override the OpenClaw model used |
+| `OPERICA_HERMES_PATH` | Custom path to the `hermes` binary |
+| `OPERICA_HERMES_MODEL` | Override the Hermes model used |
+| `OPERICA_HERMES_TASK_MEMORY` | Revert Hermes memory to a fresh task-local `memories/` per task (see [Hermes agent memory](#hermes-agent-memory)) |
+| `OPERICA_PI_PATH` | Custom path to the `pi` binary |
+| `OPERICA_PI_MODEL` | Override the Pi model used |
+| `OPERICA_CURSOR_PATH` | Custom path to the `cursor-agent` binary |
+| `OPERICA_CURSOR_MODEL` | Override the Cursor Agent model used |
+| `OPERICA_KIMI_PATH` | Custom path to the `kimi` binary |
+| `OPERICA_KIMI_MODEL` | Override the Kimi model used |
+| `OPERICA_REASONIX_PATH` | Custom path to the `reasonix` binary |
+| `OPERICA_REASONIX_MODEL` | Override the Reasonix model used |
+| `OPERICA_KIRO_PATH` | Custom path to the `kiro-cli` binary |
+| `OPERICA_KIRO_MODEL` | Override the Kiro model used |
+| `OPERICA_QODER_PATH` | Custom path to the `qodercli` binary |
+| `OPERICA_QODER_MODEL` | Override the Qoder model used |
+| `OPERICA_QODERCLICN_PATH` | Custom path to the `qoderclicn` binary |
+| `OPERICA_QODERCLICN_MODEL` | Override the Qoder CN model used |
+| `OPERICA_TRAECLI_PATH` | Custom path to the `traecli` binary |
+| `OPERICA_TRAECLI_MODEL` | Override the Trae model used (a model id from your logged-in traecli catalog, e.g. `Doubao-Seed-2.1-Pro`) |
+| `OPERICA_GROK_PATH` | Custom path to the `grok` binary (defaults to `grok` on PATH; often `~/.grok/bin/grok`) |
+| `OPERICA_GROK_MODEL` | Override the Grok model used (e.g. `grok-4.5`) |
+| `OPERICA_QWEN_PATH` | Custom path to the `qwen` binary |
+| `OPERICA_QWEN_MODEL` | Override the Qwen Code model used |
+| `OPERICA_QWEN_ARGS` | Daemon-wide extra Qwen arguments (POSIX shellword parsing; managed protocol flags are filtered) |
+| `OPERICA_QWENPAW_PATH` | Custom path to the `qwenpaw` binary |
+| `OPERICA_QWENPAW_ARGS` | Daemon-wide extra QwenPaw arguments (POSIX shellword parsing; managed protocol flags are filtered) |
 
-If a previously generated `~/.opercia/hooks` wrapper is first on `PATH` and calls the same command name again, the daemon skips that hooks directory during built-in agent discovery and records the real binary path behind it. If your interactive shell still recurses when you run `claude`, `codex`, or `hermes` manually, remove the hooks entry from your shell startup file or replace the wrapper body with an absolute `exec /path/to/real-binary "$@"`.
+If a previously generated `~/.operica/hooks` wrapper is first on `PATH` and calls the same command name again, the daemon skips that hooks directory during built-in agent discovery and records the real binary path behind it. If your interactive shell still recurses when you run `claude`, `codex`, or `hermes` manually, remove the hooks entry from your shell startup file or replace the wrapper body with an absolute `exec /path/to/real-binary "$@"`.
 
 The daemon launches Qoder and Qoder CN as `qodercli --yolo --acp` and `qoderclicn --yolo --acp`, respectively, matching their ACP “bypass permissions” mode so tool runs do not block on interactive approval in headless runs.
 The daemon launches Qwen Code as `qwen -p <prompt> --output-format stream-json`. It writes the task brief to `QWEN.md`; when an agent has managed `mcp_config`, the daemon writes a 0600 per-run JSON file and passes it through `--mcp-config <path>`, then removes it after the process exits. A null config preserves Qwen Code native MCP settings.
@@ -307,11 +307,11 @@ Two consequences are worth knowing before debugging a missing MCP tool:
 If a configured server produces no tools, check the daemon log for those warnings first, then confirm the runtime itself exposes the server's tools to the model — some ACP adapters apply their own tool-profile filtering after connecting.
 
 
-The daemon launches QwenPaw as `qwenpaw acp --workspace <per-task dir>`. It writes the task brief to `AGENTS.md`, and materialises the run's bound skills into `<per-task dir>/skills/` plus a `skill.json` manifest, so QwenPaw discovers them through its own workspace skill discovery. `acp` and `--workspace` are reserved: `custom_args` cannot override them. QwenPaw is the one runtime with no `OPERCIA_QWENPAW_MODEL`: its `session/set_model` writes to a shared, persistent agent config rather than the session, so Opercia never sends it a model and leaves that choice to QwenPaw's own configuration.
+The daemon launches QwenPaw as `qwenpaw acp --workspace <per-task dir>`. It writes the task brief to `AGENTS.md`, and materialises the run's bound skills into `<per-task dir>/skills/` plus a `skill.json` manifest, so QwenPaw discovers them through its own workspace skill discovery. `acp` and `--workspace` are reserved: `custom_args` cannot override them. QwenPaw is the one runtime with no `OPERICA_QWENPAW_MODEL`: its `session/set_model` writes to a shared, persistent agent config rather than the session, so Operica never sends it a model and leaves that choice to QwenPaw's own configuration.
 
 #### Hermes agent memory
 
-Hermes discovers skills only from its own home, so binding Opercia skills to a Hermes agent makes the daemon build a per-task `HERMES_HOME` overlay for that agent. The agent's long-term memory (`memories/`) does **not** live inside that task-scoped overlay: it is linked to a persistent store at
+Hermes discovers skills only from its own home, so binding Operica skills to a Hermes agent makes the daemon build a per-task `HERMES_HOME` overlay for that agent. The agent's long-term memory (`memories/`) does **not** live inside that task-scoped overlay: it is linked to a persistent store at
 
 ```
 <profile dir>/hermes-state/<agent-id>/<hermes-profile>/
@@ -321,40 +321,40 @@ so the same agent keeps its memory across tasks and issues. `<hermes-profile>` i
 
 Consequences worth knowing:
 
-- **Memory is agent-scoped but runtime-local.** One agent's memory is never visible to another, and the user's own `~/.hermes/memories` is never read or written. The store lives in this runtime's Opercia profile directory, so it does **not** follow the agent to another machine — an agent that runs on two runtimes has a separate memory line on each. Everything else in the home — auth, config, plugins — is still shared from the user's real home by symlink, so the agent does not need its own login.
+- **Memory is agent-scoped but runtime-local.** One agent's memory is never visible to another, and the user's own `~/.hermes/memories` is never read or written. The store lives in this runtime's Operica profile directory, so it does **not** follow the agent to another machine — an agent that runs on two runtimes has a separate memory line on each. Everything else in the home — auth, config, plugins — is still shared from the user's real home by symlink, so the agent does not need its own login.
 - **To carry existing local memory in**, copy it into the store once: `cp -R ~/.hermes/memories/. "<profile dir>/hermes-state/<agent-id>/default/"`. To wipe an agent's memory, delete that directory.
 - **Session history is not covered.** `state.db` and its WAL sidecars stay task-local: sharing a live SQLite database across one agent's concurrent tasks needs lock and consistency handling (plus Windows byte-range locks on `-shm`) that plain memory files do not. The agent remembers accumulated notes, not previous transcripts.
 - **Concurrent tasks of one agent are last-writer-wins.** Hermes rewrites its memory files whole, so two tasks writing memory at the same time can overwrite each other.
-- **Every Hermes agent gets the overlay in practice**, so every one of them gets a persistent memory store. The daemon builds the overlay only when a task carries skills, but the server appends Opercia's built-in skills to every agent's skill set (`LoadAgentSkillBundles`), so that list is never empty — leaving an agent's own skill list empty does not opt out of the overlay, and is not a way to keep using the host's `~/.hermes/memories`.
-- `OPERCIA_HERMES_TASK_MEMORY=1` on the daemon reverts to the previous behaviour, a fresh task-local `memories/` per task.
+- **Every Hermes agent gets the overlay in practice**, so every one of them gets a persistent memory store. The daemon builds the overlay only when a task carries skills, but the server appends Operica's built-in skills to every agent's skill set (`LoadAgentSkillBundles`), so that list is never empty — leaving an agent's own skill list empty does not opt out of the overlay, and is not a way to keep using the host's `~/.hermes/memories`.
+- `OPERICA_HERMES_TASK_MEMORY=1` on the daemon reverts to the previous behaviour, a fresh task-local `memories/` per task.
 
-`OPERCIA_CLAUDE_ARGS`, `OPERCIA_CODEX_ARGS`, `OPERCIA_CODEBUDDY_ARGS`, `OPERCIA_QWEN_ARGS`, and `OPERCIA_QWENPAW_ARGS` are parsed with POSIX shellword quoting, so values such as `--model "gpt-5.1 codex" --sandbox read-only` are split like a shell command line. Agent arguments are applied in this order: hardcoded Opercia defaults, daemon-wide env defaults, then per-agent `custom_args` from the task.
+`OPERICA_CLAUDE_ARGS`, `OPERICA_CODEX_ARGS`, `OPERICA_CODEBUDDY_ARGS`, `OPERICA_QWEN_ARGS`, and `OPERICA_QWENPAW_ARGS` are parsed with POSIX shellword quoting, so values such as `--model "gpt-5.1 codex" --sandbox read-only` are split like a shell command line. Agent arguments are applied in this order: hardcoded Operica defaults, daemon-wide env defaults, then per-agent `custom_args` from the task.
 
 ### Self-Hosted Server
 
-When connecting to a self-hosted Opercia instance, the easiest approach is:
+When connecting to a self-hosted Operica instance, the easiest approach is:
 
 ```bash
 # One command — configures for localhost, authenticates, starts daemon
-opercia setup self-host
+operica setup self-host
 
 # Or for on-premise with custom domains:
-opercia setup self-host --server-url https://api.example.com --app-url https://app.example.com
+operica setup self-host --server-url https://api.example.com --app-url https://app.example.com
 ```
 
 Or configure manually:
 
 ```bash
 # Set URLs individually
-opercia config set server_url http://localhost:8080
-opercia config set app_url http://localhost:3000
+operica config set server_url http://localhost:8080
+operica config set app_url http://localhost:3000
 
 # For production with TLS:
-# opercia config set server_url https://api.example.com
-# opercia config set app_url https://app.example.com
+# operica config set server_url https://api.example.com
+# operica config set app_url https://app.example.com
 
-opercia login
-opercia daemon start
+operica login
+operica daemon start
 ```
 
 ### Profiles
@@ -363,16 +363,16 @@ Profiles let you run multiple daemons on the same machine — for example, one f
 
 ```bash
 # Set up a staging profile
-opercia setup self-host --profile staging --server-url https://api-staging.example.com --app-url https://staging.example.com
+operica setup self-host --profile staging --server-url https://api-staging.example.com --app-url https://staging.example.com
 
 # Start its daemon
-opercia daemon start --profile staging
+operica daemon start --profile staging
 
 # Default profile runs separately
-opercia daemon start
+operica daemon start
 ```
 
-Each profile gets its own config directory (`~/.opercia/profiles/<name>/`), daemon state, health port, and workspace root.
+Each profile gets its own config directory (`~/.operica/profiles/<name>/`), daemon state, health port, and workspace root.
 
 ## Workspaces
 
@@ -381,19 +381,19 @@ Each profile gets its own config directory (`~/.opercia/profiles/<name>/`), daem
 Every command runs against a single workspace. The CLI resolves which one in this order (highest priority first):
 
 1. `--workspace-id <id>` flag on the command
-2. `OPERCIA_WORKSPACE_ID` environment variable
-3. The default workspace stored in your current profile (set by `opercia workspace switch` or `opercia login`)
+2. `OPERICA_WORKSPACE_ID` environment variable
+3. The default workspace stored in your current profile (set by `operica workspace switch` or `operica login`)
 
-`opercia workspace switch <id|slug>` is the day-to-day way to change the default workspace. For scripting and headless setups where you don't want any stored state, prefer the `--workspace-id` flag or the env variable. `opercia config set workspace_id <id>` is the low-level equivalent of `switch` (it writes the same setting but skips the access check).
+`operica workspace switch <id|slug>` is the day-to-day way to change the default workspace. For scripting and headless setups where you don't want any stored state, prefer the `--workspace-id` flag or the env variable. `operica config set workspace_id <id>` is the low-level equivalent of `switch` (it writes the same setting but skips the access check).
 
 If you need full isolation between organizations or accounts — separate tokens, separate daemons, separate config dirs — use `--profile <name>` instead. Each profile keeps its own default workspace.
 
 ### List Workspaces
 
 ```bash
-opercia workspace list
-opercia workspace list --full-id
-opercia workspace list --output json
+operica workspace list
+operica workspace list --full-id
+operica workspace list --output json
 ```
 
 The current default workspace is marked with `*`. Table output shows short UUID prefixes — pass `--full-id` when you need the canonical UUIDs.
@@ -401,25 +401,25 @@ The current default workspace is marked with `*`. Table output shows short UUID 
 ### Switch Default Workspace
 
 ```bash
-opercia workspace switch <workspace-id>
-opercia workspace switch <slug>
+operica workspace switch <workspace-id>
+operica workspace switch <slug>
 ```
 
-Verifies you have access to the workspace, then sets it as the default for the current profile. Subsequent commands without `--workspace-id` and `OPERCIA_WORKSPACE_ID` target this workspace. Pair `--profile` if you want to change a non-default profile's workspace.
+Verifies you have access to the workspace, then sets it as the default for the current profile. Subsequent commands without `--workspace-id` and `OPERICA_WORKSPACE_ID` target this workspace. Pair `--profile` if you want to change a non-default profile's workspace.
 
 ### Get Details
 
 ```bash
-opercia workspace get <workspace-id>
-opercia workspace get <workspace-id> --output json
+operica workspace get <workspace-id>
+operica workspace get <workspace-id> --output json
 ```
 
-Passing no `<workspace-id>` resolves to the current default workspace, so `opercia workspace get` doubles as "what workspace am I on?".
+Passing no `<workspace-id>` resolves to the current default workspace, so `operica workspace get` doubles as "what workspace am I on?".
 
 ### List Members
 
 ```bash
-opercia workspace member list <workspace-id>
+operica workspace member list <workspace-id>
 ```
 
 ## Issues
@@ -427,14 +427,14 @@ opercia workspace member list <workspace-id>
 ### List Issues
 
 ```bash
-opercia issue list
-opercia issue list --status in_progress
-opercia issue list --priority urgent --assignee "Agent Name"
-opercia issue list --assignee-id 5fb87ac7-23b5-4a7a-81fa-ed295a54545d
-opercia issue list --full-id
-opercia issue list --limit 20 --output json
-opercia issue list --status todo --sort position       # board order (the default)
-opercia issue list --sort created_at --direction desc  # newest first
+operica issue list
+operica issue list --status in_progress
+operica issue list --priority urgent --assignee "Agent Name"
+operica issue list --assignee-id 5fb87ac7-23b5-4a7a-81fa-ed295a54545d
+operica issue list --full-id
+operica issue list --limit 20 --output json
+operica issue list --status todo --sort position       # board order (the default)
+operica issue list --sort created_at --direction desc  # newest first
 ```
 
 Table output shows a routable issue `KEY` such as `MUL-123`; copy that key into follow-up commands like `issue get`, `issue comment list`, `issue status`, or `--parent`. Add `--full-id` when you need canonical UUIDs. Available filters: `--status`, `--priority`, `--assignee` / `--assignee-id`, `--project`, `--metadata`, `--limit`. Use `--assignee-id <uuid>` for unambiguous filtering when names overlap.
@@ -444,31 +444,31 @@ Results come back in board order (`position`, ascending) by default. Pass `--sor
 Use `--metadata key=value` (repeatable; combined with AND) to filter by per-issue metadata. The value is JSON-parsed: `true`/`false` become bool, numbers become numbers, anything else is a string. Wrap as `'"42"'` to force a string when the value would otherwise sniff as a number:
 
 ```bash
-opercia issue list --metadata pipeline_status=waiting_review
-opercia issue list --metadata pr_number=482 --metadata is_blocked=true
+operica issue list --metadata pipeline_status=waiting_review
+operica issue list --metadata pr_number=482 --metadata is_blocked=true
 ```
 
 ### Get Issue
 
 ```bash
-opercia issue get <id>
-opercia issue get <id> --output json
+operica issue get <id>
+operica issue get <id> --output json
 ```
 
 ### Create Issue
 
 ```bash
-opercia issue create --title "Fix login bug" --description "..." --priority high --assignee "Lambda"
-opercia issue create --title "Fix login bug" --assignee-id 5fb87ac7-23b5-4a7a-81fa-ed295a54545d
+operica issue create --title "Fix login bug" --description "..." --priority high --assignee "Lambda"
+operica issue create --title "Fix login bug" --assignee-id 5fb87ac7-23b5-4a7a-81fa-ed295a54545d
 ```
 
-Flags: `--title` (required), `--description`, `--status`, `--priority`, `--assignee` / `--assignee-id`, `--parent`, `--project`, `--due-date`. Pass `--assignee-id <uuid>` (mutually exclusive with `--assignee`) when scripting against the IDs returned by `opercia workspace member list --output json` / `opercia agent list --output json`.
+Flags: `--title` (required), `--description`, `--status`, `--priority`, `--assignee` / `--assignee-id`, `--parent`, `--project`, `--due-date`. Pass `--assignee-id <uuid>` (mutually exclusive with `--assignee`) when scripting against the IDs returned by `operica workspace member list --output json` / `operica agent list --output json`.
 
 ### Update Issue
 
 ```bash
-opercia issue update <id> --title "New title" --priority urgent
-opercia issue update <id> --position 4.5
+operica issue update <id> --title "New title" --priority urgent
+operica issue update <id> --position 4.5
 ```
 
 `--position` sets the raw ordering value within the board column (lower sorts first). For relative moves, `issue reorder` is easier because it works out the value for you.
@@ -478,10 +478,10 @@ opercia issue update <id> --position 4.5
 Move an issue within its current status column. The new ordering value is computed the same way the board's drag-and-drop computes it, so the CLI and UI agree on where the issue lands.
 
 ```bash
-opercia issue reorder <id> --top              # top of its status column
-opercia issue reorder <id> --bottom           # bottom of its status column
-opercia issue reorder <id> --before <other>   # directly above another issue in the same column
-opercia issue reorder <id> --after  <other>   # directly below another issue in the same column
+operica issue reorder <id> --top              # top of its status column
+operica issue reorder <id> --bottom           # bottom of its status column
+operica issue reorder <id> --before <other>   # directly above another issue in the same column
+operica issue reorder <id> --after  <other>   # directly below another issue in the same column
 ```
 
 Pick exactly one of `--top`, `--bottom`, `--before`, or `--after`. Reorder stays inside the issue's current column, so `--before` / `--after` must name an issue in that same column. To move an issue to a different column, change its status first with `issue status`, then reorder within the new column.
@@ -489,9 +489,9 @@ Pick exactly one of `--top`, `--bottom`, `--before`, or `--after`. Reorder stays
 ### Assign Issue
 
 ```bash
-opercia issue assign <id> --to "Lambda"
-opercia issue assign <id> --to-id 5fb87ac7-23b5-4a7a-81fa-ed295a54545d
-opercia issue assign <id> --unassign
+operica issue assign <id> --to "Lambda"
+operica issue assign <id> --to-id 5fb87ac7-23b5-4a7a-81fa-ed295a54545d
+operica issue assign <id> --unassign
 ```
 
 Pass `--to-id <uuid>` to assign by canonical UUID (mutually exclusive with `--to`); useful when names overlap across members and agents.
@@ -499,7 +499,7 @@ Pass `--to-id <uuid>` to assign by canonical UUID (mutually exclusive with `--to
 ### Change Status
 
 ```bash
-opercia issue status <id> in_progress
+operica issue status <id> in_progress
 ```
 
 Valid statuses: `backlog`, `todo`, `in_progress`, `in_review`, `done`, `blocked`, `cancelled`.
@@ -510,49 +510,49 @@ Valid statuses: `backlog`, `todo`, `in_progress`, `in_review`, `done`, `blocked`
 # List comments — flat timeline, chronological. Hard cap of 2000 rows; on
 # long-running issues prefer one of the thread-aware reads below to keep
 # context windows tight.
-opercia issue comment list <issue-id>
+operica issue comment list <issue-id>
 
 # Single thread (root + every descendant). Anchor may be the root itself
 # or any reply inside the thread — the server walks up to the root.
-opercia issue comment list <issue-id> --thread <comment-id>
+operica issue comment list <issue-id> --thread <comment-id>
 
 # Single thread, capped to the N most recent replies. The thread root is
 # always included (even with --tail 0), so an agent landing on a long
 # thread keeps the "what is this about" context without dragging hundreds
 # of replies into its prompt.
-opercia issue comment list <issue-id> --thread <comment-id> --tail 30
+operica issue comment list <issue-id> --thread <comment-id> --tail 30
 
 # Scroll older replies inside the same thread. --before / --before-id are
 # the reply cursor that the previous response emitted on stderr as
 # `Next reply cursor: --before <ts> --before-id <reply-id>`.
-opercia issue comment list <issue-id> --thread <comment-id> --tail 30 \
+operica issue comment list <issue-id> --thread <comment-id> --tail 30 \
     --before <ts> --before-id <reply-id>
 
 # Most recently active threads (root + every descendant), grouped by
 # thread. Returns N complete conversational arcs, oldest-active first so
 # the freshest thread sits closest to "now" in an agent prompt.
-opercia issue comment list <issue-id> --recent 10
+operica issue comment list <issue-id> --recent 10
 
 # Scroll older threads. Under --recent, --before / --before-id are a
 # THREAD cursor (thread last_activity_at + root id), emitted on stderr as
 # `Next thread cursor: --before <ts> --before-id <root-id>`.
-opercia issue comment list <issue-id> --recent 10 \
+operica issue comment list <issue-id> --recent 10 \
     --before <ts> --before-id <root-id>
 
 # Incremental polling. Combines with --thread or --recent; filters out
 # replies created on or before <ts> from the page (the thread root is
 # exempt so the agent always gets context).
-opercia issue comment list <issue-id> --thread <comment-id> --tail 30 \
+operica issue comment list <issue-id> --thread <comment-id> --tail 30 \
     --since <RFC3339-timestamp>
 
 # Add a comment
-opercia issue comment add <issue-id> --content "Looks good, merging now"
+operica issue comment add <issue-id> --content "Looks good, merging now"
 
 # Reply to a specific comment
-opercia issue comment add <issue-id> --parent <comment-id> --content "Thanks!"
+operica issue comment add <issue-id> --parent <comment-id> --content "Thanks!"
 
 # Delete a comment
-opercia issue comment delete <comment-id>
+operica issue comment delete <comment-id>
 ```
 
 **`--before` / `--before-id` semantics depend on the paging mode**, by
@@ -565,8 +565,8 @@ design — same flag, different scope:
 
 Outside those two modes (`--thread` without `--tail`, or no `--thread`
 and no `--recent`) the cursor flags are rejected so they cannot silently
-no-op. The server emits the cursor headers (`X-Opercia-Next-Before` /
-`X-Opercia-Next-Before-Id`) only when an older page actually exists —
+no-op. The server emits the cursor headers (`X-Operica-Next-Before` /
+`X-Operica-Next-Before-Id`) only when an older page actually exists —
 exact-boundary pages (e.g. `--tail 3` on a thread with exactly 3
 replies) intentionally return no cursor so callers stop paginating.
 
@@ -586,42 +586,42 @@ The bar for writing is high: pin a value only when it is materially important to
 
 ```bash
 # List every key on an issue
-opercia issue metadata list <issue-id>
+operica issue metadata list <issue-id>
 
 # Read a single key
-opercia issue metadata get <issue-id> --key pipeline_status
+operica issue metadata get <issue-id> --key pipeline_status
 
 # Write a single key — value auto-typed (true/false → bool, numbers → number, else string)
-opercia issue metadata set <issue-id> --key pipeline_status --value waiting_review
-opercia issue metadata set <issue-id> --key pr_number --value 482
-opercia issue metadata set <issue-id> --key is_blocked --value true
+operica issue metadata set <issue-id> --key pipeline_status --value waiting_review
+operica issue metadata set <issue-id> --key pr_number --value 482
+operica issue metadata set <issue-id> --key is_blocked --value true
 
 # Force a specific type when sniffing would pick the wrong one
-opercia issue metadata set <issue-id> --key code --value 42 --type string
+operica issue metadata set <issue-id> --key code --value 42 --type string
 
 # Remove a key
-opercia issue metadata delete <issue-id> --key pipeline_status
+operica issue metadata delete <issue-id> --key pipeline_status
 ```
 
-All writes are single-key atomic — concurrent agents writing different keys do not lose each other's updates. To query, use `opercia issue list --metadata key=value` (see *List Issues* above).
+All writes are single-key atomic — concurrent agents writing different keys do not lose each other's updates. To query, use `operica issue list --metadata key=value` (see *List Issues* above).
 
 ### Subscribers
 
 ```bash
 # List subscribers of an issue
-opercia issue subscriber list <issue-id>
+operica issue subscriber list <issue-id>
 
 # Subscribe yourself to an issue
-opercia issue subscriber add <issue-id>
+operica issue subscriber add <issue-id>
 
 # Subscribe another member or agent by name
-opercia issue subscriber add <issue-id> --user "Lambda"
+operica issue subscriber add <issue-id> --user "Lambda"
 
 # Unsubscribe yourself
-opercia issue subscriber remove <issue-id>
+operica issue subscriber remove <issue-id>
 
 # Unsubscribe another member or agent
-opercia issue subscriber remove <issue-id> --user "Lambda"
+operica issue subscriber remove <issue-id> --user "Lambda"
 ```
 
 Subscribers receive notifications about issue activity (new comments, status changes, etc.). Without `--user`, the command acts on the caller.
@@ -630,21 +630,21 @@ Subscribers receive notifications about issue activity (new comments, status cha
 
 ```bash
 # List all execution runs for an issue
-opercia issue runs <issue-id>
-opercia issue runs <issue-id> --full-id
-opercia issue runs <issue-id> --output json
+operica issue runs <issue-id>
+operica issue runs <issue-id> --full-id
+operica issue runs <issue-id> --output json
 
 # View messages for a specific execution run
-opercia issue run-messages <task-id>
-opercia issue run-messages <short-task-id> --issue <issue-id>
-opercia issue run-messages <task-id> --output json
+operica issue run-messages <task-id>
+operica issue run-messages <short-task-id> --issue <issue-id>
+operica issue run-messages <task-id> --output json
 
 # Incremental fetch (only messages after a given sequence number)
-opercia issue run-messages <task-id> --since 42 --output json
+operica issue run-messages <task-id> --since 42 --output json
 
 # Aggregated token usage for an issue (sum across all its task runs)
-opercia issue usage <issue-id>
-opercia issue usage <issue-id> --output json
+operica issue usage <issue-id>
+operica issue usage <issue-id> --output json
 ```
 
 The `usage` command returns the aggregated token usage for an issue, summed across all of its task runs: input tokens, output tokens, cache read/write tokens, and the run count (`task_count`). It wraps `GET /api/issues/<id>/usage` — the same figures the issue detail view shows. Use `--output json` to feed billing/cost tooling.
@@ -659,9 +659,9 @@ belongs to a workspace and can optionally have a lead (member or agent).
 ### List Projects
 
 ```bash
-opercia project list
-opercia project list --status in_progress
-opercia project list --output json
+operica project list
+operica project list --status in_progress
+operica project list --output json
 ```
 
 Available filters: `--status`.
@@ -669,14 +669,14 @@ Available filters: `--status`.
 ### Get Project
 
 ```bash
-opercia project get <id>
-opercia project get <id> --output json
+operica project get <id>
+operica project get <id> --output json
 ```
 
 ### Create Project
 
 ```bash
-opercia project create --title "2026 Week 16 Sprint" --icon "🏃" --lead "Lambda"
+operica project create --title "2026 Week 16 Sprint" --icon "🏃" --lead "Lambda"
 ```
 
 Flags: `--title` (required), `--description`, `--status`, `--icon`, `--lead`, `--start-date`, `--due-date`. Dates are calendar days (`YYYY-MM-DD`).
@@ -684,9 +684,9 @@ Flags: `--title` (required), `--description`, `--status`, `--icon`, `--lead`, `-
 ### Update Project
 
 ```bash
-opercia project update <id> --title "New title" --status in_progress
-opercia project update <id> --lead "Lambda"
-opercia project update <id> --due-date 2026-04-15
+operica project update <id> --title "New title" --status in_progress
+operica project update <id> --lead "Lambda"
+operica project update <id> --due-date 2026-04-15
 ```
 
 Flags: `--title`, `--description`, `--status`, `--icon`, `--lead`, `--start-date`, `--due-date`. For the date flags, pass an empty string (e.g. `--start-date ""`) to clear the date.
@@ -694,7 +694,7 @@ Flags: `--title`, `--description`, `--status`, `--icon`, `--lead`, `--start-date
 ### Change Status
 
 ```bash
-opercia project status <id> in_progress
+operica project status <id> in_progress
 ```
 
 Valid statuses: `planned`, `in_progress`, `paused`, `completed`, `cancelled`.
@@ -702,7 +702,7 @@ Valid statuses: `planned`, `in_progress`, `paused`, `completed`, `cancelled`.
 ### Delete Project
 
 ```bash
-opercia project delete <id>
+operica project delete <id>
 ```
 
 ### Associating Issues with Projects
@@ -711,35 +711,35 @@ Use the `--project` flag on `issue create` / `issue update` to attach an issue t
 project, or on `issue list` to filter issues by project:
 
 ```bash
-opercia issue create --title "Login bug" --project <project-id>
-opercia issue update <issue-id> --project <project-id>
-opercia issue list --project <project-id>
+operica issue create --title "Login bug" --project <project-id>
+operica issue update <issue-id> --project <project-id>
+operica issue list --project <project-id>
 ```
 
 ## Setup
 
 ```bash
-# One-command setup for Opercia Cloud: configure, authenticate, and start the daemon
-opercia setup
+# One-command setup for Operica Cloud: configure, authenticate, and start the daemon
+operica setup
 
 # For local self-hosted deployments
-opercia setup self-host
+operica setup self-host
 
 # Custom ports
-opercia setup self-host --port 9090 --frontend-port 4000
+operica setup self-host --port 9090 --frontend-port 4000
 
 # On-premise with custom domains
-opercia setup self-host --server-url https://api.example.com --app-url https://app.example.com
+operica setup self-host --server-url https://api.example.com --app-url https://app.example.com
 ```
 
-`opercia setup` configures the CLI, opens your browser for authentication, and starts the daemon — all in one step. Use `opercia setup self-host` to connect to a self-hosted server instead of Opercia Cloud.
+`operica setup` configures the CLI, opens your browser for authentication, and starts the daemon — all in one step. Use `operica setup self-host` to connect to a self-hosted server instead of Operica Cloud.
 
 ## Configuration
 
 ### View Config
 
 ```bash
-opercia config show
+operica config show
 ```
 
 Shows config file path, server URL, app URL, and default workspace.
@@ -747,12 +747,12 @@ Shows config file path, server URL, app URL, and default workspace.
 ### Set Values
 
 ```bash
-opercia config set server_url https://api.example.com
-opercia config set app_url https://app.example.com
-opercia config set workspace_id <workspace-id>
+operica config set server_url https://api.example.com
+operica config set app_url https://app.example.com
+operica config set workspace_id <workspace-id>
 ```
 
-`config set workspace_id <id>` is the low-level interface — it writes the value verbatim without checking that the workspace exists or that you have access. Prefer `opercia workspace switch <id|slug>` for day-to-day workspace changes; it does both checks before saving.
+`config set workspace_id <id>` is the low-level interface — it writes the value verbatim without checking that the workspace exists or that you have access. Prefer `operica workspace switch <id|slug>` for day-to-day workspace changes; it does both checks before saving.
 
 ## Autopilot Commands
 
@@ -761,9 +761,9 @@ Autopilots are scheduled/triggered automations that dispatch agent tasks (either
 ### List Autopilots
 
 ```bash
-opercia autopilot list
-opercia autopilot list --full-id
-opercia autopilot list --status active --output json
+operica autopilot list
+operica autopilot list --full-id
+operica autopilot list --status active --output json
 ```
 
 Autopilot table IDs are short UUID prefixes; follow-up autopilot commands accept copied prefixes when they are unique in the current workspace. Use `--full-id` to print canonical UUIDs.
@@ -771,25 +771,25 @@ Autopilot table IDs are short UUID prefixes; follow-up autopilot commands accept
 ### Get Autopilot Details
 
 ```bash
-opercia autopilot get <id>
-opercia autopilot get <id> --output json   # includes triggers
+operica autopilot get <id>
+operica autopilot get <id> --output json   # includes triggers
 ```
 
 ### Create / Update / Delete
 
 ```bash
-opercia autopilot create \
+operica autopilot create \
   --title "Nightly bug triage" \
   --description "Scan todo issues and prioritize." \
   --agent "Lambda" \
   --mode create_issue \
   --subscriber "Alice"
 
-opercia autopilot update <id> --status paused
-opercia autopilot update <id> --description "New prompt"
-opercia autopilot update <id> --subscriber "Alice" --subscriber "Bob"
-opercia autopilot update <id> --clear-subscribers
-opercia autopilot delete <id>
+operica autopilot update <id> --status paused
+operica autopilot update <id> --description "New prompt"
+operica autopilot update <id> --subscriber "Alice" --subscriber "Bob"
+operica autopilot update <id> --clear-subscribers
+operica autopilot delete <id>
 ```
 
 `--mode` accepts `create_issue` (creates a new issue on each run and assigns it to the agent) or `run_only` (enqueues a direct agent task without creating an issue). `--agent` accepts either a name or UUID.
@@ -798,22 +798,22 @@ opercia autopilot delete <id>
 ### Manual Trigger
 
 ```bash
-opercia autopilot trigger <id>            # Fires the autopilot once, returns the run
+operica autopilot trigger <id>            # Fires the autopilot once, returns the run
 ```
 
 ### Run History
 
 ```bash
-opercia autopilot runs <id>
-opercia autopilot runs <id> --limit 50 --output json
+operica autopilot runs <id>
+operica autopilot runs <id> --limit 50 --output json
 ```
 
 ### Schedule Triggers
 
 ```bash
-opercia autopilot trigger-add <autopilot-id> --cron "0 9 * * 1-5" --timezone "America/New_York"
-opercia autopilot trigger-update <autopilot-id> <trigger-id> --enabled=false
-opercia autopilot trigger-delete <autopilot-id> <trigger-id>
+operica autopilot trigger-add <autopilot-id> --cron "0 9 * * 1-5" --timezone "America/New_York"
+operica autopilot trigger-update <autopilot-id> <trigger-id> --enabled=false
+operica autopilot trigger-delete <autopilot-id> <trigger-id>
 ```
 
 Only cron-based `schedule` triggers are currently exposed via the CLI. The data model also defines `webhook` and `api` kinds, but there is no server endpoint that fires them yet, so they're not surfaced here.
@@ -821,9 +821,9 @@ Only cron-based `schedule` triggers are currently exposed via the CLI. The data 
 ## Other Commands
 
 ```bash
-opercia version              # Show CLI version and commit hash
-opercia update               # Update to latest version
-opercia agent list           # List agents in the current workspace
+operica version              # Show CLI version and commit hash
+operica update               # Update to latest version
+operica agent list           # List agents in the current workspace
 ```
 
 ## Output Formats
@@ -834,8 +834,8 @@ Most commands support `--output` with two formats:
 - `json` — structured JSON (useful for scripting and automation)
 
 ```bash
-opercia issue list --output json
-opercia daemon status --output json
+operica issue list --output json
+operica daemon status --output json
 ```
 
 ## Error Messages
@@ -854,7 +854,7 @@ layer.) The underlying detail is still available on demand (see `--debug`).
   connection refused, TLS) and HTTP status failures (401/403/404/409/400·422/
   429/5xx) are each rendered as one clear sentence with a next step — for
   example a timeout suggests checking the network or raising
-  `OPERCIA_HTTP_TIMEOUT`, and a 401 tells you to run `opercia login`.
+  `OPERICA_HTTP_TIMEOUT`, and a 401 tells you to run `operica login`.
 - **Server-provided validation messages are preserved.** For a 400/422 that
   carries a message from the server, that message is shown verbatim
   (`Invalid request: <server message>`); only when there is none do you get the
@@ -870,7 +870,7 @@ precedence order), messages switch to **Chinese**. No flag is needed; set the
 locale as usual:
 
 ```bash
-LANG=zh_CN.UTF-8 opercia issue get MUL-9999   # 错误信息显示为中文
+LANG=zh_CN.UTF-8 operica issue get MUL-9999   # 错误信息显示为中文
 ```
 
 ### Exit codes
@@ -887,29 +887,29 @@ The process exit code is tiered so scripts can branch on the failure class:
 | `5` | validation (HTTP 400, 422) |
 
 ```bash
-opercia issue get MUL-9999
+operica issue get MUL-9999
 if [ $? -eq 4 ]; then echo "no such issue"; fi
 ```
 
 ### Seeing the full detail (`--debug`)
 
-Pass the global `--debug` flag (or set `OPERCIA_DEBUG=1`) to print the complete
+Pass the global `--debug` flag (or set `OPERICA_DEBUG=1`) to print the complete
 original error chain — the internal verb chain, the request method/path/status,
 and the raw server body — underneath the friendly message. Use it when you need
 to file a bug or understand exactly what the server returned:
 
 ```bash
-opercia issue list --debug
-OPERCIA_DEBUG=1 opercia issue update MUL-1234 --title "x"
+operica issue list --debug
+OPERICA_DEBUG=1 operica issue update MUL-1234 --title "x"
 ```
 
 ### Request timeout
 
 API requests use a default timeout of 30 seconds. Override it with
-`OPERCIA_HTTP_TIMEOUT` when you are on a slow network; it accepts a Go duration
+`OPERICA_HTTP_TIMEOUT` when you are on a slow network; it accepts a Go duration
 (`45s`, `2m`) or a plain number of seconds (`45`). Command-level deadlines are
 always at least this value, so raising it takes effect across all commands.
 
 ```bash
-OPERCIA_HTTP_TIMEOUT=60s opercia issue list
+OPERICA_HTTP_TIMEOUT=60s operica issue list
 ```

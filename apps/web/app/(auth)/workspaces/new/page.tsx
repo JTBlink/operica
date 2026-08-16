@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { paths } from "@opercia/core/paths";
-import { workspaceListOptions } from "@opercia/core/workspace/queries";
-import { CliInstallInstructions, OnboardingFlow } from "@opercia/views/onboarding";
+import { useAuthStore } from "@operica/core/auth";
+import { paths } from "@operica/core/paths";
+import { workspaceListOptions } from "@operica/core/workspace/queries";
+import { CliInstallInstructions, OnboardingFlow } from "@operica/views/onboarding";
 
 /**
  * Creating a workspace runs the onboarding flow, entered at the workspace

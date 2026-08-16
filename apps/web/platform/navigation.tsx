@@ -5,11 +5,11 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
   NavigationProvider,
   type NavigationAdapter,
-} from "@opercia/views/navigation";
+} from "@operica/views/navigation";
 import { canGoBackInApp } from "./in-app-history";
 
 /**
- * Web half of the `opercia:navigate` bridge — the event shared content
+ * Web half of the `operica:navigate` bridge — the event shared content
  * (comments, chat, issue descriptions) fires when a link resolves to an in-app
  * destination. A plain click ("push") is a router push in place. A modifier
  * click normally never reaches here on web — real anchors leave it to the
@@ -39,8 +39,8 @@ function useInternalLinkHandler(router: ReturnType<typeof useRouter>) {
       }
       router.push(path);
     };
-    window.addEventListener("opercia:navigate", handler);
-    return () => window.removeEventListener("opercia:navigate", handler);
+    window.addEventListener("operica:navigate", handler);
+    return () => window.removeEventListener("operica:navigate", handler);
   }, [router]);
 }
 

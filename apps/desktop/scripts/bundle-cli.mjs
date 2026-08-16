@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// Builds the `opercia` CLI from server/cmd/opercia and copies the binary
+// Builds the `operica` CLI from server/cmd/operica and copies the binary
 // into apps/desktop/resources/bin/ so electron-vite (dev) and electron-
 // builder (prod) pick it up. Running this on every dev/build/package
 // invocation guarantees the bundled CLI always matches the current Go
 // source — no more stale binary surprises. Go's build cache makes the
 // no-op case (nothing changed) effectively free.
 //
-// ldflags mirror `make build` so `opercia --version` reports a meaningful
+// ldflags mirror `make build` so `operica --version` reports a meaningful
 // version / commit / date.
 //
 // Graceful: if `go` is not installed (e.g. frontend-only contributor), we
@@ -60,7 +60,7 @@ function normalizeRuntimeArch(arch) {
 }
 
 function binaryNameForPlatform(platform) {
-  return platform === "win32" ? "opercia.exe" : "opercia";
+  return platform === "win32" ? "operica.exe" : "operica";
 }
 
 const targetPlatform = normalizeRuntimePlatform(
@@ -125,7 +125,7 @@ if (hasGo()) {
       ldflags,
       "-o",
       srcBinary,
-      "./cmd/opercia",
+      "./cmd/operica",
     ],
     {
       cwd: serverDir,

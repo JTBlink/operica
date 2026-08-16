@@ -2,9 +2,9 @@
 
 import { useMemo } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { api } from "@opercia/core/api";
-import { issueKeys } from "@opercia/core/issues/queries";
-import type { IssueAssigneeType, IssueStatus, IssueTriggerPreviewItem } from "@opercia/core/types";
+import { api } from "@operica/core/api";
+import { issueKeys } from "@operica/core/issues/queries";
+import type { IssueAssigneeType, IssueStatus, IssueTriggerPreviewItem } from "@operica/core/types";
 
 export interface UseIssueTriggerPreviewParams {
   /** Existing issues to evaluate (single assign/status or batch). */

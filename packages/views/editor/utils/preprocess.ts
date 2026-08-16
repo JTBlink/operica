@@ -3,8 +3,8 @@ import {
   preprocessMentionShortcodes,
   preprocessFileCards,
   preprocessIssueIdentifiers,
-} from "@opercia/ui/markdown";
-import { stripChannelMediaMarkers } from "@opercia/core/types";
+} from "@operica/ui/markdown";
+import { stripChannelMediaMarkers } from "@operica/core/types";
 
 /**
  * Preprocess a markdown string before loading into Tiptap via contentType: 'markdown'.

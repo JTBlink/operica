@@ -13,12 +13,12 @@ _setup_sandbox() {
   local payload_dir="$tmp/payload"
   mkdir -p "$stub_bin" "$install_bin" "$payload_dir"
 
-  cat >"$payload_dir/opercia" <<'STUB'
+  cat >"$payload_dir/operica" <<'STUB'
 #!/usr/bin/env bash
-echo "opercia v0.3.2 (commit: test)"
+echo "operica v0.3.2 (commit: test)"
 STUB
-  chmod +x "$payload_dir/opercia"
-  tar -czf "$tmp/opercia.tar.gz" -C "$payload_dir" opercia
+  chmod +x "$payload_dir/operica"
+  tar -czf "$tmp/operica.tar.gz" -C "$payload_dir" operica
 
   cat >"$stub_bin/curl" <<'STUB'
 #!/usr/bin/env bash
@@ -44,7 +44,7 @@ if [[ -z "$out" ]]; then
   echo "stub curl expected -o" >&2
   exit 2
 fi
-cp "$OPERCIA_TEST_ARCHIVE" "$out"
+cp "$OPERICA_TEST_ARCHIVE" "$out"
 STUB
   chmod +x "$stub_bin/curl"
 }
@@ -54,8 +54,8 @@ _run_installer() {
   local out="$tmp/install.out"
   local err="$tmp/install.err"
   if ! PATH="$tmp/stub-bin:$tmp/install-bin:/usr/bin:/bin" \
-    OPERCIA_BIN_DIR="$tmp/install-bin" \
-    OPERCIA_TEST_ARCHIVE="$tmp/opercia.tar.gz" \
+    OPERICA_BIN_DIR="$tmp/install-bin" \
+    OPERICA_TEST_ARCHIVE="$tmp/operica.tar.gz" \
     bash "$ROOT_DIR/scripts/install.sh" >"$out" 2>"$err"; then
     echo "install.sh exited non-zero" >&2
     cat "$out" >&2 || true
@@ -63,8 +63,8 @@ _run_installer() {
     return 1
   fi
 
-  if [[ ! -x "$tmp/install-bin/opercia" ]]; then
-    echo "expected fallback binary at $tmp/install-bin/opercia" >&2
+  if [[ ! -x "$tmp/install-bin/operica" ]]; then
+    echo "expected fallback binary at $tmp/install-bin/operica" >&2
     cat "$out" >&2 || true
     cat "$err" >&2 || true
     return 1
@@ -166,7 +166,7 @@ STUB
     cat "$tmp/install.out" >&2 || true
     return 1
   fi
-  if ! grep -q "https://opercia.ai/settings?tab=tokens" "$tmp/install.out"; then
+  if ! grep -q "https://operica.ai/settings?tab=tokens" "$tmp/install.out"; then
     echo "expected direct API Tokens settings URL in installer output" >&2
     cat "$tmp/install.out" >&2 || true
     return 1
@@ -176,17 +176,17 @@ STUB
     cat "$tmp/install.out" >&2 || true
     return 1
   fi
-  if ! grep -q "opercia login --token <YOUR_TOKEN>" "$tmp/install.out"; then
+  if ! grep -q "operica login --token <YOUR_TOKEN>" "$tmp/install.out"; then
     echo "expected token login command in installer output" >&2
     cat "$tmp/install.out" >&2 || true
     return 1
   fi
-  if grep -q "opercia config set server_url" "$tmp/install.out"; then
+  if grep -q "operica config set server_url" "$tmp/install.out"; then
     echo "did not expect default cloud server config command in installer output" >&2
     cat "$tmp/install.out" >&2 || true
     return 1
   fi
-  if grep -q "opercia config set app_url" "$tmp/install.out"; then
+  if grep -q "operica config set app_url" "$tmp/install.out"; then
     echo "did not expect default cloud app config command in installer output" >&2
     cat "$tmp/install.out" >&2 || true
     return 1
@@ -229,7 +229,7 @@ STUB
     cat "$tmp/install.out" >&2 || true
     return 1
   fi
-  if grep -q "opercia login --token <YOUR_TOKEN>" "$tmp/install.out"; then
+  if grep -q "operica login --token <YOUR_TOKEN>" "$tmp/install.out"; then
     echo "did not expect token login command in local installer output" >&2
     cat "$tmp/install.out" >&2 || true
     return 1
@@ -267,8 +267,8 @@ PORT=8080
 # SERVER_PORT=8080
 FRONTEND_PORT=3000
 JWT_SECRET=change-me-in-production
-POSTGRES_PASSWORD=opercia
-DATABASE_URL=postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable
+POSTGRES_PASSWORD=operica
+DATABASE_URL=postgres://operica:operica@localhost:5432/operica?sslmode=disable
 ENVFILE
   touch "$server_dir/docker-compose.selfhost.yml"
 
@@ -358,8 +358,8 @@ STUB
   printf '#!/usr/bin/env bash\nexit 0\n' >"$stub_bin/brew"
   chmod +x "$stub_bin/brew"
 
-  printf '#!/usr/bin/env bash\necho "opercia v0.3.2 (commit: test)"\n' >"$stub_bin/opercia"
-  chmod +x "$stub_bin/opercia"
+  printf '#!/usr/bin/env bash\necho "operica v0.3.2 (commit: test)"\n' >"$stub_bin/operica"
+  chmod +x "$stub_bin/operica"
 
   # curl records every probed URL so the health-check port can be asserted.
   cat >"$stub_bin/curl" <<'STUB'
@@ -367,7 +367,7 @@ STUB
 set -uo pipefail
 for arg in "$@"; do
   case "$arg" in
-    http*) printf '%s\n' "$arg" >>"$OPERCIA_TEST_CURL_LOG" ;;
+    http*) printf '%s\n' "$arg" >>"$OPERICA_TEST_CURL_LOG" ;;
   esac
 done
 exit 0
@@ -389,9 +389,9 @@ _run_with_server() {
   if ! env -i \
     PATH="$tmp/stub-bin:/usr/bin:/bin" \
     HOME="$tmp" \
-    OPERCIA_INSTALL_DIR="$tmp/server" \
-    OPERCIA_SELFHOST_REF="main" \
-    OPERCIA_TEST_CURL_LOG="$tmp/curl.log" \
+    OPERICA_INSTALL_DIR="$tmp/server" \
+    OPERICA_SELFHOST_REF="main" \
+    OPERICA_TEST_CURL_LOG="$tmp/curl.log" \
     "$@" \
     bash "$ROOT_DIR/scripts/install.sh" --with-server \
     >"$tmp/install.out" 2>"$tmp/install.err"; then

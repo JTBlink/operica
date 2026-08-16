@@ -2,8 +2,8 @@ import type {
   AgentRuntime,
   RuntimeUsage,
   RuntimeUsageByAgent,
-} from "@opercia/core/types";
-import { getCustomPricing } from "@opercia/core/runtimes/custom-pricing-store";
+} from "@operica/core/types";
+import { getCustomPricing } from "@operica/core/runtimes/custom-pricing-store";
 
 // A live local daemon re-registers itself within seconds of a server-side
 // delete (daemon self-heal, #2404), so deleting an online local runtime from

@@ -19,7 +19,7 @@ import (
 
 const (
 	connectionsOpenPath = "/v1.0/gateway/connections/open"
-	streamUserAgent     = "opercia-dingtalk/1.0"
+	streamUserAgent     = "operica-dingtalk/1.0"
 	openConnectTimeout  = 5 * time.Second
 )
 

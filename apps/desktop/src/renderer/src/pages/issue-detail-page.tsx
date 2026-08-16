@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { IssueDetailRoute } from "@opercia/views/issues/components";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCanonicalIssue } from "@opercia/core/issues/canonical-id";
+import { IssueDetailRoute } from "@operica/views/issues/components";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCanonicalIssue } from "@operica/core/issues/canonical-id";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export function IssueDetailPage({ onDelete }: { onDelete?: () => void }) {

@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { Bot, Users } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import {
   AVATAR_SIZE_PX,
   DEFAULT_AVATAR_SIZE,
   type AvatarSize,
-} from "@opercia/ui/lib/avatar-size";
-import { parseAvatarEmoji } from "@opercia/ui/lib/avatar-emoji";
-import { OperciaIcon } from "./opercia-icon";
+} from "@operica/ui/lib/avatar-size";
+import { parseAvatarEmoji } from "@operica/ui/lib/avatar-emoji";
+import { OpericaIcon } from "./operica-icon";
 
 interface ActorAvatarProps {
   name: string;
@@ -73,7 +73,7 @@ function ActorAvatar({
           onError={() => setImgError(true)}
         />
       ) : isSystem ? (
-        <OperciaIcon noSpin style={{ width: px * 0.55, height: px * 0.55 }} />
+        <OpericaIcon noSpin style={{ width: px * 0.55, height: px * 0.55 }} />
       ) : isAgent ? (
         <Bot style={{ width: px * 0.55, height: px * 0.55 }} />
       ) : isSquad ? (

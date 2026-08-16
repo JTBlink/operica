@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 
 const COMPOSIO_LOGO_BASE_URL = "https://logos.composio.dev/api";
 

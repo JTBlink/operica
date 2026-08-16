@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enSettings from "../../locales/en/settings.json";
 
@@ -54,22 +54,22 @@ vi.mock("@tanstack/react-query", () => ({
   queryOptions: <T,>(opts: T) => opts,
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useCurrentWorkspace: () => workspaceRef.current,
 }));
 
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"], queryFn: vi.fn() }),
   workspaceKeys: { list: () => ["workspaces"] },
 }));
 
-vi.mock("@opercia/core/github", async () => {
+vi.mock("@operica/core/github", async () => {
   const actual =
-    await vi.importActual<typeof import("@opercia/core/github")>("@opercia/core/github");
+    await vi.importActual<typeof import("@operica/core/github")>("@operica/core/github");
   return {
     ...actual,
     githubInstallationsOptions: () => ({
@@ -79,7 +79,7 @@ vi.mock("@opercia/core/github", async () => {
   };
 });
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     updateWorkspace: mockUpdateWorkspace,
     deleteGitHubInstallation: mockDeleteInstallation,
@@ -87,7 +87,7 @@ vi.mock("@opercia/core/api", () => ({
   },
 }));
 
-vi.mock("@opercia/core/auth", () => {
+vi.mock("@operica/core/auth", () => {
   const useAuthStore = Object.assign(
     (sel?: (s: { user: { id: string } }) => unknown) =>
       sel ? sel({ user: { id: "user-1" } }) : { user: { id: "user-1" } },
@@ -208,7 +208,7 @@ describe("GitHubTab", () => {
     render(<GitHubTab />, { wrapper: I18nWrapper });
 
     await user.click(screen.getByRole("button", { name: /^Disconnect$/ }));
-    expect(screen.getByText(/Opercia will stop receiving webhooks/i)).toBeTruthy();
+    expect(screen.getByText(/Operica will stop receiving webhooks/i)).toBeTruthy();
     expect(mockDeleteInstallation).not.toHaveBeenCalled();
 
     const dialogConfirm = screen

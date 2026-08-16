@@ -1,4 +1,4 @@
-const OFFICIAL_MARKETING_HOSTS = new Set(["opercia.ai", "www.opercia.ai"]);
+const OFFICIAL_MARKETING_HOSTS = new Set(["operica.ai", "www.operica.ai"]);
 
 export function isOfficialMarketingHost(hostname: string): boolean {
   const normalized = hostname.trim().toLowerCase().replace(/\.$/, "");

@@ -1,5 +1,5 @@
 {
-  "extends": "@opercia/tsconfig/react-library.json",
+  "extends": "@operica/tsconfig/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
@@ -7,8 +7,8 @@
       "@/lib/utils": ["./lib/utils.ts"],
       "@/hooks/*": ["./hooks/*"],
       "@/components/ui/*": ["./components/ui/*"],
-      "@opercia/ui/components": ["./components"],
-      "@opercia/ui/lib": ["./lib"]
+      "@operica/ui/components": ["./components"],
+      "@operica/ui/lib": ["./lib"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

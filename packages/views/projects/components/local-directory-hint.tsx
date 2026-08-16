@@ -2,9 +2,9 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { FolderOpen } from "lucide-react";
-import { projectResourcesOptions } from "@opercia/core/projects";
-import type { LocalDirectoryResourceRef, ProjectResource } from "@opercia/core/types";
-import { useWorkspaceId } from "@opercia/core/hooks";
+import { projectResourcesOptions } from "@operica/core/projects";
+import type { LocalDirectoryResourceRef, ProjectResource } from "@operica/core/types";
+import { useWorkspaceId } from "@operica/core/hooks";
 import { useLocalDaemonStatus } from "../../platform";
 import { useT } from "../../i18n";
 

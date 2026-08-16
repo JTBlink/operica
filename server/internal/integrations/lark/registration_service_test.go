@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/events"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // These tests cover the pure-Go halves of RegistrationService —
@@ -71,15 +71,15 @@ func TestRegistrationServiceConstructorValidatesDeps(t *testing.T) {
 }
 
 // TestBotNamePreset pins the bot-name pre-fill format that rides on the
-// QR URL: "<agent> - Opercia", with a blank agent name degrading to
-// plain "Opercia" rather than a dangling " - Opercia".
+// QR URL: "<agent> - Operica", with a blank agent name degrading to
+// plain "Operica" rather than a dangling " - Operica".
 func TestBotNamePreset(t *testing.T) {
 	cases := []struct{ in, want string }{
-		{"Ada", "Ada - Opercia"},
-		{"  Ada  ", "Ada - Opercia"},
-		{"产品助手", "产品助手 - Opercia"},
-		{"", "Opercia"},
-		{"   ", "Opercia"},
+		{"Ada", "Ada - Operica"},
+		{"  Ada  ", "Ada - Operica"},
+		{"产品助手", "产品助手 - Operica"},
+		{"", "Operica"},
+		{"   ", "Operica"},
 	}
 	for _, tc := range cases {
 		if got := botNamePreset(tc.in); got != tc.want {

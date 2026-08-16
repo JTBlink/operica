@@ -1,1 +1,1 @@
-export { InboxPage as default } from "@opercia/views/inbox";
+export { InboxPage as default } from "@operica/views/inbox";

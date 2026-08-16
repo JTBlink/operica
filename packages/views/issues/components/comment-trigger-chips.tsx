@@ -2,19 +2,19 @@
 
 import { useMemo, useState } from "react";
 import { TriangleAlert } from "lucide-react";
-import type { CommentTriggerPreviewAgent, CommentTriggerOutcome } from "@opercia/core/types";
-import { useAgentPresenceDetail } from "@opercia/core/agents";
-import { mentionLabelsByTarget } from "@opercia/core/issues/comment-trigger-outcomes";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { AVATAR_SIZE_PX } from "@opercia/ui/lib/avatar-size";
+import type { CommentTriggerPreviewAgent, CommentTriggerOutcome } from "@operica/core/types";
+import { useAgentPresenceDetail } from "@operica/core/agents";
+import { mentionLabelsByTarget } from "@operica/core/issues/comment-trigger-outcomes";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { AVATAR_SIZE_PX } from "@operica/ui/lib/avatar-size";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@opercia/ui/components/ui/tooltip";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/popover";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@operica/ui/components/ui/tooltip";
+import { cn } from "@operica/ui/lib/utils";
 import { AgentStatusDot } from "../../common/actor-avatar";
 import { useT } from "../../i18n";
 import { blockedReasonLabel, blockedShortReasonLabel } from "../blocked-trigger-copy";

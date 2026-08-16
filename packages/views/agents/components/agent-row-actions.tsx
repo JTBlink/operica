@@ -12,12 +12,12 @@ import {
 } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { Agent } from "@opercia/core/types";
-import type { AgentPresenceDetail } from "@opercia/core/agents";
-import { api } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
+import type { Agent } from "@operica/core/types";
+import type { AgentPresenceDetail } from "@operica/core/agents";
+import { api } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { workspaceKeys } from "@operica/core/workspace/queries";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,14 +27,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import { useT } from "../../i18n";
 import { AppLink, useIntentNavigate } from "../../navigation";
 
@@ -89,7 +89,7 @@ export function AgentRowActions({
   // branches.
   const showStop = canManage && !isArchived && hasActiveWork;
   const showDuplicate = !isArchived; // any workspace member can duplicate
-  // Opercia's built-in agents cannot be archived — the server refuses it, and
+  // Operica's built-in agents cannot be archived — the server refuses it, and
   // the workspace's entry point runs through one. Hide the action rather than
   // let it fail with a toast.
   const isSystemAgent = !!agent.system_key;

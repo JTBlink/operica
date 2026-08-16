@@ -34,7 +34,7 @@ dist-electron
 !apps/mobile/.env.staging
 # Mobile production config is public (production API URL) — track it so
 # external users can run `pnpm ios:mobile:device:prod:release` against
-# opercia.ai's production backend without copying templates first.
+# operica.ai's production backend without copying templates first.
 !apps/mobile/.env.production
 
 # test coverage
@@ -45,7 +45,7 @@ server/bin/
 server/tmp/
 server/migrate
 server/daemon
-server/opercia
+server/operica
 
 # Test artifacts
 test-results/
@@ -54,9 +54,8 @@ apps/web/test-results/
 # context (agent workspace)
 .context
 .agent_context/
+.operica/
 .multica/
-.omo/
-.opercia/
 
 # local settings
 .claude/

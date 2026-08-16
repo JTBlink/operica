@@ -7,9 +7,9 @@ import (
 	"github.com/google/uuid"
 )
 
-const markerPrefix = "<!-- opercia:channel-media:"
+const markerPrefix = "<!-- operica:channel-media:"
 
-var markerPattern = regexp.MustCompile(`<!-- opercia:channel-media:([0-9a-fA-F-]{36}) -->`)
+var markerPattern = regexp.MustCompile(`<!-- operica:channel-media:([0-9a-fA-F-]{36}) -->`)
 
 // DownloadPath is the durable, authorization-aware attachment URL persisted in
 // issue and chat Markdown.

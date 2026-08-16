@@ -20,7 +20,7 @@ func integrationPool(t *testing.T) *pgxpool.Pool {
 	t.Helper()
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dbURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 	ctx := context.Background()
 	pool, err := pgxpool.New(ctx, dbURL)

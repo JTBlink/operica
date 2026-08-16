@@ -257,7 +257,7 @@ func (s *ChannelStore) CreateLarkUserBinding(ctx context.Context, arg CreateUser
 	}
 	row, err := s.Queries.CreateChannelUserBinding(ctx, db.CreateChannelUserBindingParams{
 		WorkspaceID:    arg.WorkspaceID,
-		OperciaUserID:  arg.OperciaUserID,
+		OpericaUserID:  arg.OpericaUserID,
 		InstallationID: arg.InstallationID,
 		ChannelType:    channelTypeFeishu,
 		ChannelUserID:  arg.ChannelUserID,

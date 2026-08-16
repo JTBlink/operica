@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 import { AlertCircle, Info, LogIn } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Switch } from "@opercia/ui/components/ui/switch";
-import { cn } from "@opercia/ui/lib/utils";
+import { Button } from "@operica/ui/components/ui/button";
+import { Switch } from "@operica/ui/components/ui/switch";
+import { cn } from "@operica/ui/lib/utils";
 import { toast } from "sonner";
 import {
   SettingsCard,
   SettingsRow,
   SettingsSection,
   SettingsTab,
-} from "@opercia/views/settings";
+} from "@operica/views/settings";
 import { reauthenticateDaemon } from "../platform/daemon-reauth";
 import type { DaemonPrefs, DaemonStatus } from "../../../shared/daemon-types";
 import {
@@ -126,8 +126,8 @@ export function DaemonSettingsTab() {
             This device&apos;s daemon runs outside the app — for example inside
             WSL2 — so the app can&apos;t start or stop it. Start or stop it from
             that environment with{" "}
-            <code className="font-mono text-caption">opercia daemon start</code> /{" "}
-            <code className="font-mono text-caption">opercia daemon stop</code>.
+            <code className="font-mono text-caption">operica daemon start</code> /{" "}
+            <code className="font-mono text-caption">operica daemon stop</code>.
           </p>
         </div>
       )}
@@ -161,8 +161,8 @@ export function DaemonSettingsTab() {
             cliInstalled === null
               ? "Checking…"
               : cliInstalled
-                ? "opercia CLI is installed and available in PATH."
-                : "opercia CLI not found. Install it to enable daemon management."
+                ? "operica CLI is installed and available in PATH."
+                : "operica CLI not found. Install it to enable daemon management."
           }
         >
           {cliInstalled === false && (

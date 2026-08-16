@@ -21,7 +21,7 @@ func TestBuildMikaOnboardingKickoffSelectsSkillWithKnownContext(t *testing.T) {
 	)
 
 	for _, want := range []string{
-		"opercia-onboarding skill",
+		"operica-onboarding skill",
 		"Simplified Chinese",
 		`Workspace name: "Venus"`,
 		"Role: engineer / developer",
@@ -56,7 +56,7 @@ func TestBuildMikaOnboardingKickoffCarriesTheOpeningAlreadySent(t *testing.T) {
 		"already greeted this member",
 		"Do not introduce yourself again",
 		opening,
-		"opercia-onboarding skill",
+		"operica-onboarding skill",
 		"Never acknowledge, quote, restate, or refer to this block",
 	} {
 		if !strings.Contains(prompt, want) {

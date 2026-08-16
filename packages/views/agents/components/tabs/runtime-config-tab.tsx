@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Loader2, Save } from "lucide-react";
-import type { Agent } from "@opercia/core/types";
+import type { Agent } from "@operica/core/types";
 import {
   OPENCLAW_GATEWAY_TOKEN_MASK,
   type OpenclawRoutingMode,
@@ -10,11 +10,11 @@ import {
   openclawRuntimeConfigEquals,
   parseOpenclawRuntimeConfig,
   serializeOpenclawRuntimeConfig,
-} from "@opercia/core/agents";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Switch } from "@opercia/ui/components/ui/switch";
+} from "@operica/core/agents";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
+import { Switch } from "@operica/ui/components/ui/switch";
 import { toast } from "sonner";
 import { useT } from "../../../i18n";
 

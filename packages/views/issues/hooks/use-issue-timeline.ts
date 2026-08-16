@@ -10,7 +10,7 @@ import type {
   Comment,
   TimelineEntry,
   Reaction,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import type {
   CommentCreatedPayload,
   CommentUpdatedPayload,
@@ -20,11 +20,11 @@ import type {
   ActivityCreatedPayload,
   ReactionAddedPayload,
   ReactionRemovedPayload,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   issueTimelineOptions,
   issueKeys,
-} from "@opercia/core/issues/queries";
+} from "@operica/core/issues/queries";
 import {
   useCreateComment,
   useUpdateComment,
@@ -32,13 +32,13 @@ import {
   useResolveComment,
   useToggleCommentReaction,
   type ToggleCommentReactionVars,
-} from "@opercia/core/issues/mutations";
-import { sortTimelineEntriesAsc } from "@opercia/core/issues/timeline-sort";
+} from "@operica/core/issues/mutations";
+import { sortTimelineEntriesAsc } from "@operica/core/issues/timeline-sort";
 import {
   unhandledCommentTriggerOutcomes,
   mentionLabelsByTarget,
-} from "@opercia/core/issues/comment-trigger-outcomes";
-import { useWSEvent, useWSReconnect } from "@opercia/core/realtime";
+} from "@operica/core/issues/comment-trigger-outcomes";
+import { useWSEvent, useWSReconnect } from "@operica/core/realtime";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 import { blockedShortReasonLabel } from "../blocked-trigger-copy";

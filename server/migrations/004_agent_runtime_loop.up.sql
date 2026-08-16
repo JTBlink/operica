@@ -38,7 +38,7 @@ SELECT
     COALESCE(
         NULLIF(a.runtime_config->>'provider', ''),
         CASE
-            WHEN a.runtime_mode = 'cloud' THEN 'opercia_agent'
+            WHEN a.runtime_mode = 'cloud' THEN 'operica_agent'
             ELSE 'legacy_local'
         END
     ),

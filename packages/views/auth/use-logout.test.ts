@@ -25,7 +25,7 @@ vi.mock("@tanstack/react-query", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: (s: unknown) => unknown) => {
       const state = { logout: mockAuthLogout };
@@ -35,20 +35,20 @@ vi.mock("@opercia/core/auth", () => ({
   ),
 }));
 
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   workspaceKeys: { list: () => ["workspaces", "list"] },
 }));
 
-vi.mock("@opercia/core/platform", () => ({
+vi.mock("@operica/core/platform", () => ({
   clearWorkspaceStorage: mockClearWorkspaceStorage,
   defaultStorage: { getItem: () => null, setItem: () => {}, removeItem: () => {} },
 }));
 
-vi.mock("@opercia/core/drafts/cleanup-registry", () => ({
+vi.mock("@operica/core/drafts/cleanup-registry", () => ({
   resetAllRegisteredDrafts: mockReset,
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   paths: { login: () => "/login" },
 }));
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { SkillDetailPage } from "@opercia/views/skills";
+import { SkillDetailPage } from "@operica/views/skills";
 
 export default function SkillDetailRoute({
   params,

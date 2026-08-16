@@ -7,7 +7,7 @@ body:
     id: deployment
     attributes:
       label: Deployment type
-      description: Are you using the Official App (opercia.ai) or a self-hosted instance?
+      description: Are you using the Official App (operica.ai) or a self-hosted instance?
       options:
         - Official App
         - self-host

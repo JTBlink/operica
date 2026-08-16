@@ -19,13 +19,13 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      name: "Opercia",
-      url: "https://www.opercia.ai",
+      name: "Operica",
+      url: "https://www.operica.ai",
       sameAs: ["https://github.com/JTBlink/operica"],
     },
     {
       "@type": "SoftwareApplication",
-      name: "Opercia",
+      name: "Operica",
       applicationCategory: "ProjectManagement",
       operatingSystem: "Web",
       description:

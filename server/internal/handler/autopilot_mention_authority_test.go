@@ -636,7 +636,7 @@ func TestUpdateComment_AdminEditOfAgentCommentClearsStaleLineage(t *testing.T) {
 	commentID := seedLeaderPlainComment(t, issueID, fx.LeaderAgentID, fx.LeaderTaskID)
 
 	// A workspace admin who is NEITHER the worker owner nor the comment author.
-	adminID := createPermissionTestAdmin(t, "mul4857-edit-admin@opercia.test")
+	adminID := createPermissionTestAdmin(t, "mul4857-edit-admin@operica.test")
 
 	countQueued := func() int {
 		var n int

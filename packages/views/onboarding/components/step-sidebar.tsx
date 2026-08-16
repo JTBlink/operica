@@ -5,11 +5,11 @@ import { ArrowLeft, Check } from "lucide-react";
 import {
   ONBOARDING_STEP_ORDER,
   type OnboardingStep,
-} from "@opercia/core/onboarding";
-import { cn } from "@opercia/ui/lib/utils";
-import { Button } from "@opercia/ui/components/ui/button";
-import { OperciaIcon } from "@opercia/ui/components/common/opercia-icon";
-import { DotSphere } from "@opercia/ui/components/ui/dot-sphere";
+} from "@operica/core/onboarding";
+import { cn } from "@operica/ui/lib/utils";
+import { Button } from "@operica/ui/components/ui/button";
+import { OpericaIcon } from "@operica/ui/components/common/operica-icon";
+import { DotSphere } from "@operica/ui/components/ui/dot-sphere";
 import {
   Stepper,
   StepperDescription,
@@ -18,7 +18,7 @@ import {
   StepperNav,
   StepperSeparator,
   StepperTitle,
-} from "@opercia/ui/components/ui/stepper";
+} from "@operica/ui/components/ui/stepper";
 import { useT } from "../../i18n";
 
 /**
@@ -165,7 +165,7 @@ export function StepSidebar({
         <div className="relative flex min-h-0 flex-1 flex-col pt-5">
           <header className="flex min-h-9 shrink-0 items-center justify-between gap-3">
             <span className="flex min-w-0 items-center gap-2">
-              <OperciaIcon className="size-5 shrink-0 text-foreground" noSpin />
+              <OpericaIcon className="size-5 shrink-0 text-foreground" noSpin />
               <span className="truncate text-label font-medium text-foreground">
                 {t(($) => $.step_nav.wordmark)}
               </span>

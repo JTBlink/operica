@@ -20,16 +20,16 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@opercia/core/api";
-import type { ApiClient } from "@opercia/core/api/client";
-import { issueKeys } from "@opercia/core/issues/queries";
-import { ViewStoreProvider } from "@opercia/core/issues/stores/view-store-context";
-import { getIssueSurfaceViewStore } from "@opercia/core/issues/stores/surface-view-store";
+import { setApiInstance } from "@operica/core/api";
+import type { ApiClient } from "@operica/core/api/client";
+import { issueKeys } from "@operica/core/issues/queries";
+import { ViewStoreProvider } from "@operica/core/issues/stores/view-store-context";
+import { getIssueSurfaceViewStore } from "@operica/core/issues/stores/surface-view-store";
 import type {
   Issue,
   IssueTableQuerySpec,
   IssueTableRowsResponse,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { IssueSurfaceSelectionProvider } from "../surface/selection-context";
 import type { IssueSurfaceSelection } from "../surface/selection-context";
@@ -37,7 +37,7 @@ import type { IssueCreateDefaults } from "../surface/types";
 import type { ChildProgress } from "./list-row";
 import { TableView, useReleaseEditingCellOnUnmount } from "./table-view";
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
@@ -63,13 +63,13 @@ vi.mock("@tanstack/react-virtual", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Someone" }),
   buildActorNameResolver: () => () => "Someone",
 }));
 
 const mockAuthUser = { id: "user-1", email: "t@t.co", name: "Tester" };
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: (state: unknown) => unknown) => {
       const state = { user: mockAuthUser, isAuthenticated: true };
@@ -130,9 +130,9 @@ vi.mock("../../navigation", async () => {
   };
 });
 
-vi.mock("@opercia/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
-    "@opercia/core/paths",
+vi.mock("@operica/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/paths")>(
+    "@operica/core/paths",
   );
   return {
     ...actual,

@@ -1,4 +1,4 @@
-import type { TimelineEntry } from "@opercia/core/types";
+import type { TimelineEntry } from "@operica/core/types";
 
 /**
  * Stable-ascending sort for flat TimelineEntry[] caches.

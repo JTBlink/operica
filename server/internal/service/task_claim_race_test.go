@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func newTaskClaimRacePool(t *testing.T) *pgxpool.Pool {
@@ -20,7 +20,7 @@ func newTaskClaimRacePool(t *testing.T) *pgxpool.Pool {
 
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dbURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -141,7 +141,7 @@ func createClaimCapacityFixture(t *testing.T, ctx context.Context, pool *pgxpool
 	t.Helper()
 
 	suffix := time.Now().UnixNano()
-	email := fmt.Sprintf("claim-capacity-%d@opercia.ai", suffix)
+	email := fmt.Sprintf("claim-capacity-%d@operica.ai", suffix)
 	slug := fmt.Sprintf("claim-capacity-%d", suffix)
 
 	var userID string

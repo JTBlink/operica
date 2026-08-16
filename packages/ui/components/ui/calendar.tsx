@@ -8,8 +8,8 @@ import {
   type Locale,
 } from "react-day-picker"
 
-import { cn } from "@opercia/ui/lib/utils"
-import { Button, buttonVariants } from "@opercia/ui/components/ui/button"
+import { cn } from "@operica/ui/lib/utils"
+import { Button, buttonVariants } from "@operica/ui/components/ui/button"
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
 
 function Calendar({

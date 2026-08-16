@@ -2,12 +2,12 @@
 
 import { useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import { clearWorkspaceStorage, defaultStorage } from "@opercia/core/platform";
-import { resetAllRegisteredDrafts } from "@opercia/core/drafts/cleanup-registry";
-import { paths } from "@opercia/core/paths";
-import type { Workspace } from "@opercia/core/types";
+import { useAuthStore } from "@operica/core/auth";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import { clearWorkspaceStorage, defaultStorage } from "@operica/core/platform";
+import { resetAllRegisteredDrafts } from "@operica/core/drafts/cleanup-registry";
+import { paths } from "@operica/core/paths";
+import type { Workspace } from "@operica/core/types";
 import { useNavigation } from "../navigation";
 
 /**
@@ -60,7 +60,7 @@ export function useLogout() {
     // Clear desktop tab state. Tab paths can contain workspace slugs and
     // issue UUIDs that must not survive across user sessions on a shared
     // machine. No-op on web (web doesn't write this key).
-    defaultStorage.removeItem("opercia_tabs");
+    defaultStorage.removeItem("operica_tabs");
 
     queryClient.clear();
     authLogout();

@@ -27,9 +27,9 @@ const h = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("@opercia/core/api", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/api")>(
-    "@opercia/core/api",
+vi.mock("@operica/core/api", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/api")>(
+    "@operica/core/api",
   );
   return {
     ...actual,
@@ -43,17 +43,17 @@ vi.mock("@opercia/core/api", async () => {
     },
   };
 });
-vi.mock("@opercia/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@opercia/core/chat", () => ({
+vi.mock("@operica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@operica/core/chat", () => ({
   useChatStore: Object.assign((sel: (s: typeof h.store) => unknown) => sel(h.store), {
     getState: () => h.store,
   }),
 }));
-// `@opercia/core/realtime` is deliberately NOT mocked: removeChatMessageFromCaches
+// `@operica/core/realtime` is deliberately NOT mocked: removeChatMessageFromCaches
 // is the behaviour under test.
 
-import { chatKeys } from "@opercia/core/chat/queries";
-import type { ChatMessage, ChatMessagesPage } from "@opercia/core/types";
+import { chatKeys } from "@operica/core/chat/queries";
+import type { ChatMessage, ChatMessagesPage } from "@operica/core/types";
 import { useBuilderSession } from "./use-builder-session";
 
 const sessionId = "session-1";

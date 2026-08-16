@@ -67,7 +67,7 @@ func TestTriggerRestart_BrewLinuxCellarDeleted(t *testing.T) {
 	})
 
 	prefix := filepath.Join(t.TempDir(), "home", "linuxbrew", ".linuxbrew")
-	deletedCellarPath := filepath.Join(prefix, "Cellar", "opercia", "0.2.9", "bin", "opercia")
+	deletedCellarPath := filepath.Join(prefix, "Cellar", "operica", "0.2.9", "bin", "operica")
 	isBrewInstall = func() bool { return true }
 	getBrewPrefix = func() string { return prefix }
 
@@ -76,7 +76,7 @@ func TestTriggerRestart_BrewLinuxCellarDeleted(t *testing.T) {
 	}
 	d.triggerRestart()
 
-	want := filepath.Join(prefix, "bin", "opercia")
+	want := filepath.Join(prefix, "bin", "operica")
 	if got := d.RestartBinary(); got != want {
 		t.Fatalf("restart binary = %q, want %q", got, want)
 	}
@@ -93,7 +93,7 @@ func TestTriggerRestart_UsesResolvedFallback(t *testing.T) {
 		isBrewInstall = originalIsBrewInstall
 	})
 
-	want := filepath.Join(t.TempDir(), "opercia")
+	want := filepath.Join(t.TempDir(), "operica")
 	if err := os.WriteFile(want, []byte("test executable"), 0o755); err != nil {
 		t.Fatalf("write executable fixture: %v", err)
 	}
@@ -148,8 +148,8 @@ func TestIsBlockedEnvKey(t *testing.T) {
 		key  string
 		want bool
 	}{
-		{key: "OPERCIA_TOKEN", want: true},
-		{key: "opercia_runtime_id", want: true},
+		{key: "OPERICA_TOKEN", want: true},
+		{key: "operica_runtime_id", want: true},
 		{key: "HOME", want: true},
 		{key: "PATH", want: true},
 		{key: "TMPDIR", want: true},
@@ -193,7 +193,7 @@ func TestPrepareReasonixTaskStateHome(t *testing.T) {
 	if err != nil {
 		t.Fatalf("prepareReasonixTaskStateHome: %v", err)
 	}
-	want := filepath.Join(home, ".opercia", "profiles", "work", "reasonix-state", "runtime-1", "agent_2")
+	want := filepath.Join(home, ".operica", "profiles", "work", "reasonix-state", "runtime-1", "agent_2")
 	if got != want {
 		t.Fatalf("state home = %q, want %q", got, want)
 	}
@@ -266,10 +266,10 @@ func TestLayerCustomEnvAndHermesHome(t *testing.T) {
 		},
 		{
 			name:        "blocklisted key dropped, overlay still applied",
-			customEnv:   map[string]string{"CODEX_HOME": "/evil", "OPERCIA_TOKEN": "x"},
+			customEnv:   map[string]string{"CODEX_HOME": "/evil", "OPERICA_TOKEN": "x"},
 			overlayHome: "/tmp/task/hermes-home",
 			wantHermes:  "/tmp/task/hermes-home",
-			wantAbsent:  []string{"CODEX_HOME", "OPERCIA_TOKEN"},
+			wantAbsent:  []string{"CODEX_HOME", "OPERICA_TOKEN"},
 		},
 	}
 
@@ -337,15 +337,15 @@ func TestConfigureCodexTaskShellEnvironment(t *testing.T) {
 			"SystemRoot=C:\\Windows",
 			"USERPROFILE=C:\\Users\\test",
 			"OPENAI_API_KEY=host-secret",
-			"OPERCIA_LLM_API_KEY=daemon-secret",
+			"OPERICA_LLM_API_KEY=daemon-secret",
 		}
 		agentEnv := map[string]string{
 			"CUSTOM_ACCESS_TOKEN":      "agent-secret",
 			"CUSTOM_FLAG":              "enabled",
 			"UNAUTHORIZED_TOKEN":       "daemon-secret",
-			"OPERCIA_TASK_CONFIG_ROOT": "/task/opercia-config",
-			"OPERCIA_SERVER_URL":       "https://task.example",
-			"OPERCIA_TOKEN":            "mat_task",
+			"OPERICA_TASK_CONFIG_ROOT": "/task/operica-config",
+			"OPERICA_SERVER_URL":       "https://task.example",
+			"OPERICA_TOKEN":            "mat_task",
 		}
 		agentCustomEnv := map[string]string{
 			"CUSTOM_ACCESS_TOKEN": "agent-secret",
@@ -359,12 +359,12 @@ func TestConfigureCodexTaskShellEnvironment(t *testing.T) {
 			t.Fatalf("read config.toml: %v", err)
 		}
 		config := string(data)
-		for _, want := range []string{"SystemRoot", "USERPROFILE", "CUSTOM_ACCESS_TOKEN", "CUSTOM_FLAG", "OPERCIA_TASK_CONFIG_ROOT", "OPERCIA_SERVER_URL", "OPERCIA_TOKEN"} {
+		for _, want := range []string{"SystemRoot", "USERPROFILE", "CUSTOM_ACCESS_TOKEN", "CUSTOM_FLAG", "OPERICA_TASK_CONFIG_ROOT", "OPERICA_SERVER_URL", "OPERICA_TOKEN"} {
 			if !strings.Contains(config, want) {
 				t.Errorf("config.toml missing %q:\n%s", want, config)
 			}
 		}
-		for _, unwanted := range []string{"OPENAI_API_KEY", "OPERCIA_LLM_API_KEY", "UNAUTHORIZED_TOKEN", "OPERCIA_*", "agent-secret", "daemon-secret", "mat_task"} {
+		for _, unwanted := range []string{"OPENAI_API_KEY", "OPERICA_LLM_API_KEY", "UNAUTHORIZED_TOKEN", "OPERICA_*", "agent-secret", "daemon-secret", "mat_task"} {
 			if strings.Contains(config, unwanted) {
 				t.Errorf("config.toml unexpectedly contains %q:\n%s", unwanted, config)
 			}
@@ -373,7 +373,7 @@ func TestConfigureCodexTaskShellEnvironment(t *testing.T) {
 
 	t.Run("Codex without task home fails closed", func(t *testing.T) {
 		t.Parallel()
-		err := configureCodexTaskShellEnvironment("codex", "", nil, map[string]string{"OPERCIA_TOKEN": "mat_task"}, nil, slog.Default())
+		err := configureCodexTaskShellEnvironment("codex", "", nil, map[string]string{"OPERICA_TOKEN": "mat_task"}, nil, slog.Default())
 		if err == nil || !strings.Contains(err.Error(), "CODEX_HOME is missing") {
 			t.Fatalf("error = %v, want missing CODEX_HOME", err)
 		}
@@ -404,9 +404,9 @@ func TestCodexTaskShellEnvInheritsRealHome(t *testing.T) {
 	// task-scoped CODEX_HOME, and — since MUL-5578 — no HOME/XDG entry.
 	explicit := map[string]string{
 		"CODEX_HOME":               codexHome,
-		"OPERCIA_TASK_CONFIG_ROOT": "/task/opercia-config",
-		"OPERCIA_TOKEN":            "mat_task",
-		"OPERCIA_SERVER_URL":       "https://task.example",
+		"OPERICA_TASK_CONFIG_ROOT": "/task/operica-config",
+		"OPERICA_TOKEN":            "mat_task",
+		"OPERICA_SERVER_URL":       "https://task.example",
 	}
 
 	if err := configureCodexTaskShellEnvironment("codex", codexHome, inherited, explicit, nil, slog.Default()); err != nil {
@@ -438,8 +438,8 @@ func TestCodexTaskShellEnvInheritsRealHome(t *testing.T) {
 	if !slices.Contains(include, "CODEX_HOME") {
 		t.Errorf("include_only missing CODEX_HOME, got %v", include)
 	}
-	if !slices.Contains(include, "OPERCIA_TASK_CONFIG_ROOT") {
-		t.Errorf("include_only missing OPERCIA_TASK_CONFIG_ROOT, got %v", include)
+	if !slices.Contains(include, "OPERICA_TASK_CONFIG_ROOT") {
+		t.Errorf("include_only missing OPERICA_TASK_CONFIG_ROOT, got %v", include)
 	}
 }
 
@@ -449,7 +449,7 @@ func TestCodexShellAuthorizedCustomEnvNamesUsesDaemonBlocklist(t *testing.T) {
 	got := codexShellAuthorizedCustomEnvNames(map[string]string{
 		"CUSTOM_ACCESS_TOKEN": "agent-secret",
 		"custom_secret":       "agent-secret",
-		"OPERCIA_TOKEN":       "must-not-authorize",
+		"OPERICA_TOKEN":       "must-not-authorize",
 		"PATH":                "/must/not/override",
 		"HOME":                "/must/not/override",
 		"CODEX_HOME":          "/must/not/override",
@@ -511,59 +511,59 @@ func TestTaskScopedAuthToken(t *testing.T) {
 	}
 }
 
-func TestTaskOperciaEnvironmentIncludesPrivateConfigRoot(t *testing.T) {
+func TestTaskOpericaEnvironmentIncludesPrivateConfigRoot(t *testing.T) {
 	t.Parallel()
 
 	const (
 		fakeToken      = "mat_task_environment_sentinel"
-		taskRoot       = "/task/private-opercia-config"
-		workspacesRoot = "/daemon/opercia_workspaces_staging"
+		taskRoot       = "/task/private-operica-config"
+		workspacesRoot = "/daemon/operica_workspaces_staging"
 	)
 	task := Task{
 		ID:          "task-test",
 		AgentID:     "agent-test",
 		WorkspaceID: "workspace-test",
 	}
-	env := taskOperciaEnvironment(task, "agent-name", fakeToken, taskRoot, workspacesRoot, "https://task.example", 19514, 3, "/task/tmp")
+	env := taskOpericaEnvironment(task, "agent-name", fakeToken, taskRoot, workspacesRoot, "https://task.example", 19514, 3, "/task/tmp")
 
 	want := map[string]string{
-		"OPERCIA_TOKEN":                fakeToken,
-		"OPERCIA_TASK_CONFIG_ROOT":     taskRoot,
-		"OPERCIA_TASK_WORKSPACES_ROOT": workspacesRoot,
-		"OPERCIA_SERVER_URL":           "https://task.example",
-		"OPERCIA_DAEMON_PORT":          "19514",
-		"OPERCIA_WORKSPACE_ID":         "workspace-test",
-		"OPERCIA_AGENT_NAME":           "agent-name",
-		"OPERCIA_AGENT_ID":             "agent-test",
-		"OPERCIA_TASK_ID":              "task-test",
-		"OPERCIA_TASK_SLOT":            "3",
+		"OPERICA_TOKEN":                fakeToken,
+		"OPERICA_TASK_CONFIG_ROOT":     taskRoot,
+		"OPERICA_TASK_WORKSPACES_ROOT": workspacesRoot,
+		"OPERICA_SERVER_URL":           "https://task.example",
+		"OPERICA_DAEMON_PORT":          "19514",
+		"OPERICA_WORKSPACE_ID":         "workspace-test",
+		"OPERICA_AGENT_NAME":           "agent-name",
+		"OPERICA_AGENT_ID":             "agent-test",
+		"OPERICA_TASK_ID":              "task-test",
+		"OPERICA_TASK_SLOT":            "3",
 		"TMPDIR":                       "/task/tmp",
 		"TMP":                          "/task/tmp",
 		"TEMP":                         "/task/tmp",
 	}
 	if !maps.Equal(env, want) {
-		t.Fatalf("taskOperciaEnvironment() = %#v, want %#v", env, want)
+		t.Fatalf("taskOpericaEnvironment() = %#v, want %#v", env, want)
 	}
 
 	layerCustomEnvAndHermesHome(env, map[string]string{
-		"OPERCIA_TASK_CONFIG_ROOT":     "/owner/config",
-		"OPERCIA_TASK_WORKSPACES_ROOT": "/owner/opercia_workspaces",
-		"OPERCIA_TOKEN":                "mul_owner_sentinel",
+		"OPERICA_TASK_CONFIG_ROOT":     "/owner/config",
+		"OPERICA_TASK_WORKSPACES_ROOT": "/owner/operica_workspaces",
+		"OPERICA_TOKEN":                "mul_owner_sentinel",
 	}, "", nil)
-	if env["OPERCIA_TASK_CONFIG_ROOT"] != taskRoot {
-		t.Fatalf("custom env replaced task config root: %q", env["OPERCIA_TASK_CONFIG_ROOT"])
+	if env["OPERICA_TASK_CONFIG_ROOT"] != taskRoot {
+		t.Fatalf("custom env replaced task config root: %q", env["OPERICA_TASK_CONFIG_ROOT"])
 	}
 	if env[TaskWorkspacesRootEnv] != workspacesRoot {
 		t.Fatalf("custom env replaced task workspaces root: %q", env[TaskWorkspacesRootEnv])
 	}
-	if env["OPERCIA_TOKEN"] != fakeToken {
+	if env["OPERICA_TOKEN"] != fakeToken {
 		t.Fatal("custom env replaced task-scoped token")
 	}
 }
 
 // When `brew --prefix` is unavailable but the executable path is under a
 // known Cellar root, triggerRestart must recover the prefix from the
-// known-prefix list and target <prefix>/bin/opercia.
+// known-prefix list and target <prefix>/bin/operica.
 func TestTriggerRestart_BrewPrefixUnavailable_FallsBackToKnownPrefix(t *testing.T) {
 	originalIsBrewInstall := isBrewInstall
 	originalGetBrewPrefix := getBrewPrefix
@@ -577,7 +577,7 @@ func TestTriggerRestart_BrewPrefixUnavailable_FallsBackToKnownPrefix(t *testing.
 	})
 
 	const knownPrefix = "/home/linuxbrew/.linuxbrew"
-	cellarPath := filepath.Join(knownPrefix, "Cellar", "opercia", "0.2.9", "bin", "opercia")
+	cellarPath := filepath.Join(knownPrefix, "Cellar", "operica", "0.2.9", "bin", "operica")
 	isBrewInstall = func() bool { return true }
 	getBrewPrefix = func() string { return "" }
 	resolveSelfExecutable = func() (string, error) { return cellarPath, nil }
@@ -593,7 +593,7 @@ func TestTriggerRestart_BrewPrefixUnavailable_FallsBackToKnownPrefix(t *testing.
 	}
 	d.triggerRestart()
 
-	want := filepath.Join(knownPrefix, "bin", "opercia")
+	want := filepath.Join(knownPrefix, "bin", "operica")
 	if got := d.RestartBinary(); got != want {
 		t.Fatalf("restart binary = %q, want %q", got, want)
 	}
@@ -601,7 +601,7 @@ func TestTriggerRestart_BrewPrefixUnavailable_FallsBackToKnownPrefix(t *testing.
 
 // When `brew --prefix` is unavailable AND the executable is not under any
 // known Cellar root, triggerRestart logs a warning and keeps the executable
-// path (no fabricated <prefix>/bin/opercia path).
+// path (no fabricated <prefix>/bin/operica path).
 func TestTriggerRestart_BrewPrefixUnavailable_NoKnownPrefix_KeepsExecutable(t *testing.T) {
 	originalIsBrewInstall := isBrewInstall
 	originalGetBrewPrefix := getBrewPrefix
@@ -793,7 +793,7 @@ func TestBuildPromptContainsIssueID(t *testing.T) {
 	// Prompt should contain the issue ID and CLI hint.
 	for _, want := range []string{
 		issueID,
-		"opercia issue get",
+		"operica issue get",
 	} {
 		if !strings.Contains(prompt, want) {
 			t.Fatalf("prompt missing %q", want)
@@ -832,12 +832,12 @@ func TestSessionContinuityNoticeMatchesSurface(t *testing.T) {
 		},
 		{
 			// Slack has a history reader, so the conversation is recoverable —
-			// just from the channel rather than from Opercia. Telling the user it
+			// just from the channel rather than from Operica. Telling the user it
 			// was lost contradicts the commands the same prompt hands the agent.
 			name:         "slack rebuilds from the channel",
 			task:         Task{ChatSessionID: "chat-1", ChatChannelType: execenv.ChannelTypeSlack},
 			tellUser:     false,
-			wantMentions: "opercia chat history",
+			wantMentions: "operica chat history",
 		},
 		{
 			// Web chat history lived only in the provider session.
@@ -847,7 +847,7 @@ func TestSessionContinuityNoticeMatchesSurface(t *testing.T) {
 			wantMentions: "not readable from anywhere",
 		},
 		{
-			// Opercia ships no history reader for Feishu, so despite being a
+			// Operica ships no history reader for Feishu, so despite being a
 			// channel it is in the same position as a web chat.
 			name:         "feishu has no history reader",
 			task:         Task{ChatSessionID: "chat-1", ChatChannelType: execenv.ChannelTypeFeishu},
@@ -1055,7 +1055,7 @@ func TestBuildPromptAutopilotRunOnly(t *testing.T) {
 		"Autopilot run ID: run-1",
 		"Daily dependency check",
 		"Check dependencies and report outdated packages.",
-		"opercia autopilot get autopilot-1 --output json",
+		"operica autopilot get autopilot-1 --output json",
 	} {
 		if !strings.Contains(prompt, want) {
 			t.Fatalf("autopilot prompt missing %q\n---\n%s", want, prompt)
@@ -1066,7 +1066,7 @@ func TestBuildPromptAutopilotRunOnly(t *testing.T) {
 	// workflow section (execenv.AutopilotIssueCommandsGuard). MUL-5696 found
 	// that a second hand-maintained per-turn copy drifts, so the per-turn
 	// prompt must not restate it in any form.
-	if strings.Contains(prompt, "Do not run `opercia issue get`") {
+	if strings.Contains(prompt, "Do not run `operica issue get`") {
 		t.Fatalf("autopilot prompt restates the issue-command boundary the brief owns (MUL-5696)\n---\n%s", prompt)
 	}
 	if strings.Contains(prompt, "Your assigned issue ID is:") {
@@ -1097,7 +1097,7 @@ func TestBuildPromptCommentTriggered(t *testing.T) {
 		commentContent,
 		"Focus on THIS comment",
 		commentID,
-		"opercia issue comment add " + issueID + " --parent " + commentID,
+		"operica issue comment add " + issueID + " --parent " + commentID,
 		"do NOT reuse --parent values from previous turns",
 		// MUL-5442 (2026-08-06): with the generic no-reply rule retired,
 		// the reply command is framed as a plain imperative again — the
@@ -1110,7 +1110,7 @@ func TestBuildPromptCommentTriggered(t *testing.T) {
 	}
 
 	// Should still contain CLI hint for fetching issue context.
-	if !strings.Contains(prompt, "opercia issue get") {
+	if !strings.Contains(prompt, "operica issue get") {
 		t.Fatal("prompt missing CLI hint for issue context")
 	}
 }
@@ -1201,7 +1201,7 @@ func TestBuildPromptCommentTriggeredNoContent(t *testing.T) {
 		Agent:            &AgentData{Name: "Test"},
 	}, "claude")
 
-	if !strings.Contains(prompt, "opercia issue get") {
+	if !strings.Contains(prompt, "operica issue get") {
 		t.Fatal("prompt missing CLI hint")
 	}
 }
@@ -1230,7 +1230,7 @@ func TestBuildPromptSquadLeaderNoActionProhibition(t *testing.T) {
 	for _, want := range []string{
 		"Squad leader no_action rule",
 		"DO NOT post any comment",
-		"opercia squad activity",
+		"operica squad activity",
 	} {
 		if !strings.Contains(prompt, want) {
 			t.Fatalf("squad leader prompt missing %q\n---\n%s", want, prompt)
@@ -3430,7 +3430,7 @@ func TestEnsureRepoReadyRefreshesOnMiss(t *testing.T) {
 }
 
 // A project github_repo URL that the workspace itself does not bind must still
-// be allowed for `opercia repo checkout` after registerTaskRepos runs. Without
+// be allowed for `operica repo checkout` after registerTaskRepos runs. Without
 // this, the new project-repos-override-workspace-repos behavior would surface
 // repos in the meta-skill that the agent then can't actually clone.
 func TestRegisterTaskReposAllowsProjectOnlyURL(t *testing.T) {
@@ -3634,8 +3634,8 @@ func TestEnsureRepoReadyConcurrentMissRefreshesOnce(t *testing.T) {
 }
 
 func TestShellArgsFromEnv(t *testing.T) {
-	t.Setenv("OPERCIA_CLAUDE_ARGS", `--max-turns 60 --append-system-prompt "multi word"`)
-	got, err := shellArgsFromEnv("OPERCIA_CLAUDE_ARGS")
+	t.Setenv("OPERICA_CLAUDE_ARGS", `--max-turns 60 --append-system-prompt "multi word"`)
+	got, err := shellArgsFromEnv("OPERICA_CLAUDE_ARGS")
 	if err != nil {
 		t.Fatalf("shellArgsFromEnv: %v", err)
 	}
@@ -3646,8 +3646,8 @@ func TestShellArgsFromEnv(t *testing.T) {
 }
 
 func TestShellArgsFromEnvEmptyIsNil(t *testing.T) {
-	t.Setenv("OPERCIA_CODEX_ARGS", "   ")
-	got, err := shellArgsFromEnv("OPERCIA_CODEX_ARGS")
+	t.Setenv("OPERICA_CODEX_ARGS", "   ")
+	got, err := shellArgsFromEnv("OPERICA_CODEX_ARGS")
 	if err != nil {
 		t.Fatalf("shellArgsFromEnv: %v", err)
 	}
@@ -3806,7 +3806,7 @@ func TestReportTaskResult_CancelledParentStillReportsTerminalState(t *testing.T)
 	}
 }
 
-// Pins the GitHub opercia#1952 fail-closed behaviour: a task whose
+// Pins the GitHub operica#1952 fail-closed behaviour: a task whose
 // agent run never produced a real result (blocked, cancelled, or any
 // future status we forget to enumerate) MUST go through FailTask, so
 // the UI never shows a green "Completed" badge for a run that didn't
@@ -4838,12 +4838,12 @@ func TestSanitizeAgentEnv(t *testing.T) {
 	in := map[string]string{
 		"HOME":        "/evil",
 		"PATH":        "/evil/bin",
-		"OPERCIA_X":   "1",
+		"OPERICA_X":   "1",
 		"TEAM_SKILLS": "/srv/team",
 		"HERMES_HOME": "/some/home",
 	}
 	got := sanitizeAgentEnv(in)
-	for _, blocked := range []string{"HOME", "PATH", "OPERCIA_X"} {
+	for _, blocked := range []string{"HOME", "PATH", "OPERICA_X"} {
 		if _, ok := got[blocked]; ok {
 			t.Errorf("blocklisted key %q must be dropped from the effective env", blocked)
 		}

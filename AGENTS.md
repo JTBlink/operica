@@ -13,7 +13,7 @@ Read it before editing translations in `packages/views/locales/`, naming routes/
 
 ## Project Shape
 
-Opercia is an AI-native task management platform for small teams, with agents as first-class assignees that can own issues, comment, and change status.
+Operica is an AI-native task management platform for small teams, with agents as first-class assignees that can own issues, comment, and change status.
 
 - `server/`: Go backend, Chi router, sqlc, gorilla/websocket.
 - `apps/web/`: Next.js App Router.
@@ -51,7 +51,7 @@ Keep server state and client state separate.
 These are hard constraints:
 
 - `packages/core/`: no `react-dom`, `localStorage` (use `StorageAdapter`), `process.env`, or UI libraries.
-- `packages/ui/`: no `@opercia/core` imports and no business logic.
+- `packages/ui/`: no `@operica/core` imports and no business logic.
 - `packages/views/`: no `next/*`, no `react-router-dom`, no stores. Use `NavigationAdapter`, `useNavigation()`, and `<AppLink>`.
 - `apps/web/platform/`: only place for Next.js navigation/platform APIs.
 - `apps/desktop/src/renderer/src/platform/`: only place for `react-router-dom` navigation wiring.
@@ -69,7 +69,7 @@ If the same logic exists in both web and desktop, extract it unless it depends o
 3. Shared UI or business views belong in `packages/views/`.
 4. Shared primitives belong in `packages/ui/`.
 
-Mobile is independent. It may import types and pure functions from `@opercia/core`, with `import type` for types, but owns its UI, state, hooks, providers, i18n, React version, build pipeline, and release cadence.
+Mobile is independent. It may import types and pure functions from `@operica/core`, with `import type` for types, but owns its UI, state, hooks, providers, i18n, React version, build pipeline, and release cadence.
 
 ## Commands
 
@@ -164,11 +164,11 @@ Desktop routing has three categories:
 More desktop constraints:
 
 - New pre-workspace desktop flows register a `WindowOverlay` type in `stores/window-overlay-store.ts`; do not add them to `routes.tsx`.
-- `setCurrentWorkspace(slug, uuid)` from `@opercia/core/platform` mirrors the active route for headers, storage namespaces, and reconnects; workspace route layouts own setting it.
+- `setCurrentWorkspace(slug, uuid)` from `@operica/core/platform` mirrors the active route for headers, storage namespaces, and reconnects; workspace route layouts own setting it.
 - Code that leaves workspace context must call `setCurrentWorkspace(null, null)` explicitly.
 - Workspace delete must await the server before navigation/cleanup. Workspace leave currently clears/navigates before mutation only to avoid the `member:removed` realtime race; treat that as known debt, not a reusable pattern.
 - Cross-workspace navigation must go through the navigation adapter so it can call `switchWorkspace(slug, targetPath)`.
-- Full-window desktop views outside the dashboard shell must mount `<DragStrip />` from `@opercia/views/platform` as the first flex child. Interactive controls in the top 48px need `WebkitAppRegion: "no-drag"`.
+- Full-window desktop views outside the dashboard shell must mount `<DragStrip />` from `@operica/views/platform` as the first flex child. Interactive controls in the top 48px need `WebkitAppRegion: "no-drag"`.
 
 ## Mobile Rules
 
@@ -176,14 +176,14 @@ Read `apps/mobile/CLAUDE.md` before touching `apps/mobile/`. It contains the man
 
 Root-level reminders:
 
-- Mobile shares only `@opercia/core` types and pure functions.
+- Mobile shares only `@operica/core` types and pure functions.
 - Mobile must match web/desktop product semantics: counts, permissions, enums/transitions, and data identity.
 - Mobile may differ in UI/interaction when the phone context requires it.
 
 ## UI Rules
 
 - Prefer shadcn/Base UI components over custom implementations. Add them with `pnpm ui:add <component>` from the repo root.
-- The Pro `@reui` registry is configured in `packages/ui/components.json`; add items with `pnpm ui:add @reui/<name>` and answer `n` to every overwrite prompt so local component customizations survive. It reads `REUI_LICENSE_KEY` from the environment — agents get it from their Opercia agent environment, humans export it in their own shell. Never write the key into a repo file.
+- The Pro `@reui` registry is configured in `packages/ui/components.json`; add items with `pnpm ui:add @reui/<name>` and answer `n` to every overwrite prompt so local component customizations survive. It reads `REUI_LICENSE_KEY` from the environment — agents get it from their Operica agent environment, humans export it in their own shell. Never write the key into a repo file.
 - ReUI ships source, not a dependency: route the vendored output to our layout (new primitives to `packages/ui/components/ui/`, compositions to `packages/views/<domain>/`) and rewrite it to our conventions before committing.
 - Use design tokens and semantic classes; avoid hardcoded colors. Font sizes come from the role-named `--text-*` scale in `packages/ui/styles/tokens.css` (`text-caption`, `text-body`, `text-title`, …), which is the authoritative list — not Tailwind's default `text-sm` / `text-base` ramp.
 - An active/selected state must stay identifiable while hovered. Express it on a dimension hover does not touch (weight, text color), or define the `data-active:hover:` compound explicitly — otherwise hovering a selected row visually downgrades it to plain hover.
@@ -207,13 +207,13 @@ Rules:
 
 - Never test shared component behavior in an app test file.
 - `packages/views/` tests must not mock `next/*` or `react-router-dom`.
-- Mock `@opercia/core` stores with the Zustand callable-store shape (`selectorFn` plus `getState`).
-- Mock `@opercia/core/api` for API calls.
+- Mock `@operica/core` stores with the Zustand callable-store shape (`selectorFn` plus `getState`).
+- Mock `@operica/core/api` for API calls.
 - E2E tests should use `TestApiClient` for setup/teardown.
 - Prefer writing the failing test in the correct package before implementation when the change is behavioral.
 - Default tests must never resolve or execute user-installed agent CLIs. Pass a test-created fake executable path or a test-created missing path to agent subprocess code.
-- Real-agent smoke tests belong behind the `agentintegration` build tag and must check `OPERCIA_RUN_REAL_AGENT_SMOKE=1` before executable lookup or account access.
-- Run an explicitly authorized real-agent smoke test with `(cd server && OPERCIA_RUN_REAL_AGENT_SMOKE=1 go test -tags=agentintegration ./pkg/agent -run '<test-name>' -count=1 -v)`. This command may access an authenticated account and consume quota.
+- Real-agent smoke tests belong behind the `agentintegration` build tag and must check `OPERICA_RUN_REAL_AGENT_SMOKE=1` before executable lookup or account access.
+- Run an explicitly authorized real-agent smoke test with `(cd server && OPERICA_RUN_REAL_AGENT_SMOKE=1 go test -tags=agentintegration ./pkg/agent -run '<test-name>' -count=1 -v)`. This command may access an authenticated account and consume quota.
 - When adding a default agent command, add it to `scripts/agent-cli-command-names.txt`; the normal Linux/macOS test entry points fail on ambient agent CLI execution.
 
 ## Verification

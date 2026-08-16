@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { TimelineEntry } from "@opercia/core/types";
+import type { TimelineEntry } from "@operica/core/types";
 import {
   collectThreadReplies,
   resolvedThreadRootIds,

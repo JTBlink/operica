@@ -23,8 +23,8 @@ import {
   UserPen,
   Waves,
 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Spinner } from "@opercia/ui/components/ui/spinner";
+import { Button } from "@operica/ui/components/ui/button";
+import { Spinner } from "@operica/ui/components/ui/spinner";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -39,14 +39,14 @@ import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@opercia/ui/components/ui/popover";
-import { Calendar } from "@opercia/ui/components/ui/calendar";
-import { Switch } from "@opercia/ui/components/ui/switch";
+} from "@operica/ui/components/ui/popover";
+import { Calendar } from "@operica/ui/components/ui/calendar";
+import { Switch } from "@operica/ui/components/ui/switch";
 import {
   Select,
   SelectTrigger,
@@ -54,27 +54,27 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-} from "@opercia/ui/components/ui/select";
-import { Toggle } from "@opercia/ui/components/ui/toggle";
+} from "@operica/ui/components/ui/select";
+import { Toggle } from "@operica/ui/components/ui/toggle";
 import {
   ALL_STATUSES,
   PRIORITY_DISPLAY_ORDER,
-} from "@opercia/core/issues/config";
+} from "@operica/core/issues/config";
 import { StatusIcon, PriorityIcon } from ".";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { memberListOptions, agentListOptions, squadListOptions } from "@opercia/core/workspace/queries";
-import { projectListOptions } from "@opercia/core/projects/queries";
-import { labelListOptions } from "@opercia/core/labels/queries";
-import { propertyListOptions } from "@opercia/core/properties";
-import { propertyIdFromViewKey } from "@opercia/core/issues/stores/view-store";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { memberListOptions, agentListOptions, squadListOptions } from "@operica/core/workspace/queries";
+import { projectListOptions } from "@operica/core/projects/queries";
+import { labelListOptions } from "@operica/core/labels/queries";
+import { propertyListOptions } from "@operica/core/properties";
+import { propertyIdFromViewKey } from "@operica/core/issues/stores/view-store";
 import type {
   Issue,
   IssueProperty,
   IssueTableFacetSpec,
   IssueTableFacetsResponse,
   WorkingAgentSummary,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { PropertyIcon } from "../../common/property-icon";
@@ -92,26 +92,26 @@ import {
   type SwimlaneGrouping,
   type TableGrouping,
   type ViewMode,
-} from "@opercia/core/issues/stores/view-store";
-import { useViewStore, useViewStoreApi } from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/core/issues/stores/view-store";
+import { useViewStore, useViewStoreApi } from "@operica/core/issues/stores/view-store-context";
 import { FilterChipsBar } from "./filter-chips-bar";
 import { SaveViewDialog, type SaveViewScope } from "./save-view-dialog";
 import { ViewBar } from "./view-bar";
 import { toast } from "sonner";
-import { useActiveIssueView } from "@opercia/core/issue-views/use-active-view";
-import { useAuthStore } from "@opercia/core/auth";
-import type { IssueViewScope } from "@opercia/core/issue-views/queries";
-import { actorFilterKey, baselineFromQuery, type IssueViewBaseline } from "@opercia/core/issue-views/baseline";
-import type { IssueView } from "@opercia/core/api/schemas";
-import { addDaysDateOnly, dateOnlyToLocalDate, formatDateOnly, toDateOnly, todayDateOnly } from "@opercia/core/issues/date";
+import { useActiveIssueView } from "@operica/core/issue-views/use-active-view";
+import { useAuthStore } from "@operica/core/auth";
+import type { IssueViewScope } from "@operica/core/issue-views/queries";
+import { actorFilterKey, baselineFromQuery, type IssueViewBaseline } from "@operica/core/issue-views/baseline";
+import type { IssueView } from "@operica/core/api/schemas";
+import { addDaysDateOnly, dateOnlyToLocalDate, formatDateOnly, toDateOnly, todayDateOnly } from "@operica/core/issues/date";
 import {
   useIssuesScope,
   useIssuesScopeStore,
   type IssuesScope,
   type IssuesScopePageKey,
-} from "@opercia/core/issues/stores/issues-scope-store";
-import { actorKindForViewVariant } from "@opercia/core/issues/surface/scope";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
+} from "@operica/core/issues/stores/issues-scope-store";
+import { actorKindForViewVariant } from "@operica/core/issues/surface/scope";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip";
 import { useT } from "../../i18n";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";

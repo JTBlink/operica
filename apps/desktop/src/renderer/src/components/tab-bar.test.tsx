@@ -6,7 +6,7 @@ import {
   waitFor,
   within,
 } from "@testing-library/react";
-import { useScrollFade } from "@opercia/ui/hooks/use-scroll-fade";
+import { useScrollFade } from "@operica/ui/hooks/use-scroll-fade";
 
 type MockTab = {
   id: string;
@@ -64,9 +64,9 @@ vi.mock("@/stores/tab-store", () => {
   return { useTabStore, useActiveGroup };
 });
 
-vi.mock("@opercia/core/paths", async (importOriginal) => ({
+vi.mock("@operica/core/paths", async (importOriginal) => ({
   // Spread the real module so pure helpers (parseTabSubject etc.) keep working.
-  ...(await importOriginal<typeof import("@opercia/core/paths")>()),
+  ...(await importOriginal<typeof import("@operica/core/paths")>()),
   paths: {
     workspace: (slug: string) => ({
       issues: () => `/${slug}/issues`,
@@ -81,7 +81,7 @@ vi.mock("@opercia/core/paths", async (importOriginal) => ({
 // fallback); a test can set `pres.title` to simulate a resolved title that
 // differs, to exercise the active-tab persist effect.
 const pres = vi.hoisted(() => ({ title: null as string | null }));
-vi.mock("@opercia/views/layout", () => ({
+vi.mock("@operica/views/layout", () => ({
   useTabPresentation: (_url: string, fallbackTitle?: string) => ({
     visual: { kind: "icon", icon: "ListTodo" },
     title: pres.title ?? fallbackTitle ?? "",

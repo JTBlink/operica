@@ -14,9 +14,9 @@ import (
 )
 
 const (
-	piShimHelperEnv      = "OPERCIA_PI_SHIM_HELPER"
-	piShimHelperArgvFile = "OPERCIA_PI_SHIM_ARGV_FILE"
-	piShimHelperInFile   = "OPERCIA_PI_SHIM_STDIN_FILE"
+	piShimHelperEnv      = "OPERICA_PI_SHIM_HELPER"
+	piShimHelperArgvFile = "OPERICA_PI_SHIM_ARGV_FILE"
+	piShimHelperInFile   = "OPERICA_PI_SHIM_STDIN_FILE"
 )
 
 // TestPiShimHelperProcess is re-executed by the fake pi.ps1 as its native
@@ -102,7 +102,7 @@ func assertPiPromptSurvivesShim(t *testing.T) {
 		self)
 	writeFile(t, filepath.Join(dir, "pi.ps1"), ps1)
 
-	prompt := "OPERCIA_AGENT_BUILDER_INPUT\n" +
+	prompt := "OPERICA_AGENT_BUILDER_INPUT\n" +
 		`{"instructions":"Run go build -ldflags \"-X main.version=foo\"","description":"- local work"}`
 	backend, err := New("pi", Config{ExecutablePath: cmdPath, Logger: slog.Default()})
 	if err != nil {
@@ -131,7 +131,7 @@ func assertPiPromptSurvivesShim(t *testing.T) {
 		t.Fatalf("native child never recorded stdin: %v; result=%+v", err, result)
 	}
 	for _, arg := range strings.Split(strings.TrimSuffix(string(argvRaw), "\n"), "\n") {
-		for _, needle := range []string{"OPERCIA_AGENT_BUILDER_INPUT", "instructions", "-X", "local work"} {
+		for _, needle := range []string{"OPERICA_AGENT_BUILDER_INPUT", "instructions", "-X", "local work"} {
 			if strings.Contains(arg, needle) {
 				t.Errorf("prompt fragment %q leaked into native child argv element %q", needle, arg)
 			}

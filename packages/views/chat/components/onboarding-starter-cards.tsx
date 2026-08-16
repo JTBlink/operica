@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { ArrowUpRight, Check, Clock, LoaderCircle } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@opercia/ui/components/ui/tooltip";
-import type { ChatQuickAction } from "@opercia/core/types";
+} from "@operica/ui/components/ui/tooltip";
+import type { ChatQuickAction } from "@operica/core/types";
 import { useT } from "../../i18n";
 
 /**

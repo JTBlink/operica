@@ -2,8 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import type { RuntimeModel } from "@opercia/core/types";
-import { runtimeModelsOptions } from "@opercia/core/runtimes";
+import type { RuntimeModel } from "@operica/core/types";
+import { runtimeModelsOptions } from "@operica/core/runtimes";
 import { PropRow } from "../../../common/prop-row";
 import { SettingsRow } from "../../../settings/components/settings-layout";
 import { useT } from "../../../i18n";

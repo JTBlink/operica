@@ -2,24 +2,24 @@
 
 import { useState, type ReactNode } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { api } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
+import { api } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
 import {
   workspaceKeys,
   workspaceListOptions,
-} from "@opercia/core/workspace/queries";
+} from "@operica/core/workspace/queries";
 import {
   paths,
   resolvePostAuthDestination,
   useHasOnboarded,
-} from "@opercia/core/paths";
+} from "@operica/core/paths";
 import { AppLink, useNavigation } from "../navigation";
 import { useLogout } from "../auth";
 import { DragStrip } from "../platform";
 import { useT } from "../i18n";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import { Button } from "@operica/ui/components/ui/button";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import { ArrowLeft, LogOut, Users, Check, X } from "lucide-react";
 
 export interface InvitePageProps {

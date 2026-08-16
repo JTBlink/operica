@@ -1,7 +1,7 @@
-import type { Issue } from "@opercia/core/types";
-import { PRIORITY_ORDER } from "@opercia/core/issues/config";
-import type { SortField, SortDirection } from "@opercia/core/issues/stores/view-store";
-import { propertyIdFromViewKey } from "@opercia/core/issues/stores/view-store";
+import type { Issue } from "@operica/core/types";
+import { PRIORITY_ORDER } from "@operica/core/issues/config";
+import type { SortField, SortDirection } from "@operica/core/issues/stores/view-store";
+import { propertyIdFromViewKey } from "@operica/core/issues/stores/view-store";
 
 const PRIORITY_RANK: Record<string, number> = Object.fromEntries(
   PRIORITY_ORDER.map((p, i) => [p, i])

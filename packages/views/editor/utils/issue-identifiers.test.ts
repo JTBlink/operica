@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 import {
   preprocessIssueIdentifiers,
   isIssueIdentifier,
-} from "@opercia/ui/markdown";
+} from "@operica/ui/markdown";
 
 /**
  * Pure detector for the Linear-style issue-identifier autolink. Lives in
- * @opercia/ui/markdown (no test runner there), exercised here where views'
+ * @operica/ui/markdown (no test runner there), exercised here where views'
  * vitest can reach it.
  */
 describe("preprocessIssueIdentifiers", () => {

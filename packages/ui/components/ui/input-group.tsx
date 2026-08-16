@@ -3,12 +3,12 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@opercia/ui/lib/utils"
-import { Button } from "@opercia/ui/components/ui/button"
-import { Input } from "@opercia/ui/components/ui/input"
-import { SelectTrigger } from "@opercia/ui/components/ui/select"
-import { Textarea } from "@opercia/ui/components/ui/textarea"
-import { TimeInput } from "@opercia/ui/components/ui/time-input"
+import { cn } from "@operica/ui/lib/utils"
+import { Button } from "@operica/ui/components/ui/button"
+import { Input } from "@operica/ui/components/ui/input"
+import { SelectTrigger } from "@operica/ui/components/ui/select"
+import { Textarea } from "@operica/ui/components/ui/textarea"
+import { TimeInput } from "@operica/ui/components/ui/time-input"
 
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (

@@ -11,8 +11,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { useDeleteIssue } from "@opercia/core/issues/mutations";
+} from "@operica/ui/components/ui/alert-dialog";
+import { useDeleteIssue } from "@operica/core/issues/mutations";
 import { useBackOrReplace } from "../navigation";
 import { useT } from "../i18n";
 

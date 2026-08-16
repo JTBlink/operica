@@ -23,9 +23,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@opercia/ui/components/ui/table";
-import { columnSizeVar, getCellStyle } from "@opercia/ui/lib/data-table";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/table";
+import { columnSizeVar, getCellStyle } from "@operica/ui/lib/data-table";
+import { cn } from "@operica/ui/lib/utils";
 
 // Pointer travel that turns a press on the resize handle into a drag. Matches
 // the column-reorder sensor's activation distance so both gestures on the same

@@ -8,12 +8,12 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/integrations/channel/engine"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // CardStatus mirrors lark_outbound_card_message.status. Kept as a typed
@@ -79,7 +79,7 @@ type defaultRenderer struct{}
 func NewDefaultRenderer() Renderer { return &defaultRenderer{} }
 
 func (defaultRenderer) Render(in RenderInput) (CardRender, error) {
-	header := "Opercia"
+	header := "Operica"
 	if in.AgentName != "" {
 		header = in.AgentName
 	}
@@ -300,7 +300,7 @@ func (p *Patcher) processEvent(ctx context.Context, e events.Event) error {
 
 	// Only bound sessions reach here, so classify the task origin before
 	// spending any send work. Web/mobile direct-chat tasks can reuse a session
-	// that originated in Lark, but their replies belong only in Opercia.
+	// that originated in Lark, but their replies belong only in Operica.
 	// Sealed channel tasks own an input batch just like direct tasks, so the
 	// discriminator is the immutable channel_ingested provenance of that
 	// batch, not chat_input_task_id presence (which #5645 originally used).

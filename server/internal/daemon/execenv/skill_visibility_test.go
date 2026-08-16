@@ -117,7 +117,7 @@ Hidden body.`,
 		},
 	}
 
-	// The brief is now the only Opercia-rendered skill listing, for every kind.
+	// The brief is now the only Operica-rendered skill listing, for every kind.
 	for _, kind := range []TaskContextForEnv{
 		{IssueID: ctx.IssueID, AgentName: ctx.AgentName, AgentID: ctx.AgentID, AgentSkills: ctx.AgentSkills},
 		{QuickCreatePrompt: ctx.QuickCreatePrompt, AgentName: ctx.AgentName, AgentID: ctx.AgentID, AgentSkills: ctx.AgentSkills},
@@ -152,7 +152,7 @@ Hidden body.`,
 
 // sanitizeSkillName is not injective — "A B" and "A-B" both reduce to "a-b" —
 // so a listing built from it alone names two skills identically while
-// writeSkillFiles puts the second in `a-b-opercia`. The second skill then has
+// writeSkillFiles puts the second in `a-b-operica`. The second skill then has
 // no invocable name and the model is silently pointed at the first. This needs
 // no user-installed skill and no local_directory: an ordinary task with two
 // such skills bound reproduces it in a clean workdir.
@@ -229,11 +229,11 @@ func TestBatchSlugAllocationCountsHiddenSkills(t *testing.T) {
 		t.Fatalf("expected 1 visible skill, got %d", len(visible))
 	}
 	// The hidden skill took `a-b`, so the visible one must be listed — and
-	// written — as `a-b-opercia`.
-	if visible[0].Name != "a-b-opercia" {
-		t.Errorf("visible skill listed as %q, want %q", visible[0].Name, "a-b-opercia")
+	// written — as `a-b-operica`.
+	if visible[0].Name != "a-b-operica" {
+		t.Errorf("visible skill listed as %q, want %q", visible[0].Name, "a-b-operica")
 	}
-	if _, err := os.Stat(filepath.Join(dir, "a-b-opercia", "SKILL.md")); err != nil {
+	if _, err := os.Stat(filepath.Join(dir, "a-b-operica", "SKILL.md")); err != nil {
 		t.Errorf("listed name has no matching directory: %v", err)
 	}
 }

@@ -6,13 +6,13 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@opercia/ui/components/ui/popover";
+} from "@operica/ui/components/ui/popover";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { isImeComposing } from "@opercia/core/utils";
+} from "@operica/ui/components/ui/tooltip";
+import { isImeComposing } from "@operica/core/utils";
 import { useT } from "../../../i18n";
 
 const HIGHLIGHT_CLASS = "bg-accent";

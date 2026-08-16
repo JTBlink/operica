@@ -7,15 +7,15 @@ import {
   useRouteError,
 } from "react-router-dom";
 import { AlertTriangle, RotateCw, X } from "lucide-react";
-import { useAuthStore } from "@opercia/core/auth";
-import { setCurrentWorkspace } from "@opercia/core/platform";
-import { WorkspaceSlugProvider } from "@opercia/core/paths";
-import { workspaceBySlugOptions } from "@opercia/core/workspace";
-import { Button } from "@opercia/ui/components/ui/button";
-import { OperciaIcon } from "@opercia/ui/components/common/opercia-icon";
-import { ModalRegistry } from "@opercia/views/modals/registry";
-import { WorkspacePresencePrefetch } from "@opercia/views/layout";
-import { DragStrip } from "@opercia/views/platform";
+import { useAuthStore } from "@operica/core/auth";
+import { setCurrentWorkspace } from "@operica/core/platform";
+import { WorkspaceSlugProvider } from "@operica/core/paths";
+import { workspaceBySlugOptions } from "@operica/core/workspace";
+import { Button } from "@operica/ui/components/ui/button";
+import { OpericaIcon } from "@operica/ui/components/common/operica-icon";
+import { ModalRegistry } from "@operica/views/modals/registry";
+import { WorkspacePresencePrefetch } from "@operica/views/layout";
+import { DragStrip } from "@operica/views/platform";
 import type { IssueWindowContext } from "../../../shared/issue-window";
 import { IssueDetailPage } from "../pages/issue-detail-page";
 import { IssueWindowNavigationProvider } from "../platform/issue-window-navigation";
@@ -55,7 +55,7 @@ function IssueWindowRoute() {
     return (
       <IssueWindowFrame>
         <div className="flex min-h-0 flex-1 items-center justify-center">
-          <OperciaIcon className="size-6 animate-pulse" />
+          <OpericaIcon className="size-6 animate-pulse" />
         </div>
       </IssueWindowFrame>
     );

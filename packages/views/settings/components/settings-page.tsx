@@ -18,9 +18,9 @@ import {
   Zap,
 } from "lucide-react";
 import { GitHubMark } from "./github-mark";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@opercia/ui/components/ui/tabs";
-import { useIsMobile } from "@opercia/ui/hooks/use-mobile";
-import { useCurrentWorkspace } from "@opercia/core/paths";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@operica/ui/components/ui/tabs";
+import { useIsMobile } from "@operica/ui/hooks/use-mobile";
+import { useCurrentWorkspace } from "@operica/core/paths";
 import { useNavigation } from "../../navigation";
 import { AccountTab } from "./account-tab";
 import { PreferencesTab } from "./preferences-tab";

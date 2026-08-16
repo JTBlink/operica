@@ -7,10 +7,10 @@ import { SlackTab } from "./slack-tab";
 import { DingTalkTab } from "./dingtalk-tab";
 import { VCSTab } from "./vcs-tab";
 import { WecomTab } from "./wecom-tab";
-import { ApiError } from "@opercia/core/api";
-import { composioToolkitsOptions } from "@opercia/core/composio";
-import { useConfigStore, useFeatureEnabled } from "@opercia/core/config";
-import { COMPOSIO_MCP_APPS_FLAG } from "@opercia/core/feature-flags";
+import { ApiError } from "@operica/core/api";
+import { composioToolkitsOptions } from "@operica/core/composio";
+import { useConfigStore, useFeatureEnabled } from "@operica/core/config";
+import { COMPOSIO_MCP_APPS_FLAG } from "@operica/core/feature-flags";
 import { useT } from "../../i18n";
 import { SettingsSection, SettingsTab } from "./settings-layout";
 

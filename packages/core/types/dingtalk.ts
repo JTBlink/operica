@@ -1,4 +1,4 @@
-/** A DingTalk robot installation bound to a single Opercia agent.
+/** A DingTalk robot installation bound to a single Operica agent.
  *
  * Wire shape mirrors `DingTalkInstallationResponse` in
  * `server/internal/handler/dingtalk.go`. New fields the backend adds in the
@@ -39,7 +39,7 @@ export interface RegisterDingTalkBYORequest {
 }
 
 /** Post-redemption echo: the DingTalk user id the token carried is now bound to
- * the logged-in Opercia user in this workspace/installation. */
+ * the logged-in Operica user in this workspace/installation. */
 export interface RedeemDingTalkBindingTokenResponse {
   workspace_id: string;
   installation_id: string;

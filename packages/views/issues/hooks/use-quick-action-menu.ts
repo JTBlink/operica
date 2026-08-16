@@ -3,9 +3,9 @@
 import { useCallback, useMemo, useRef } from "react";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@opercia/core/api";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { quickActionListOptions } from "@opercia/core/quick-actions";
+import { api } from "@operica/core/api";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { quickActionListOptions } from "@operica/core/quick-actions";
 
 /**
  * Supplies the comment composer's `/` menu with this workspace's quick actions

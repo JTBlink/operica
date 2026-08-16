@@ -1,3 +1,3 @@
-import reactConfig from "@opercia/eslint-config/react";
+import reactConfig from "@operica/eslint-config/react";
 
 export default [...reactConfig];

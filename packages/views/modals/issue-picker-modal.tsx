@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import type { Issue } from "@opercia/core/types";
-import { api } from "@opercia/core/api";
+import type { Issue } from "@operica/core/types";
+import { api } from "@operica/core/api";
 import {
   Command,
   CommandDialog,
@@ -11,7 +11,7 @@ import {
   CommandEmpty,
   CommandGroup,
   CommandItem,
-} from "@opercia/ui/components/ui/command";
+} from "@operica/ui/components/ui/command";
 import { StatusIcon } from "../issues/components/status-icon";
 import { useT } from "../i18n";
 

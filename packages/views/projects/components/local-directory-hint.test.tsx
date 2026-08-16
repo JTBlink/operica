@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import type { ProjectResource } from "@opercia/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
+import type { ProjectResource } from "@operica/core/types";
 import enCommon from "../../locales/en/common.json";
 import enProjects from "../../locales/en/projects.json";
 
@@ -18,13 +18,13 @@ vi.mock("../../platform", () => ({
   useLocalDaemonStatus: () => mockDaemonStatus,
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
 const mockListResources = vi.hoisted(() => vi.fn());
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     listProjectResources: (...args: unknown[]) => mockListResources(...args),
   },

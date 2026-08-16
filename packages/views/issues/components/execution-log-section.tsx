@@ -4,16 +4,16 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronRight, Loader2, RotateCcw, Square } from "lucide-react";
 import { toast } from "sonner";
-import { api, dispatchReasonCode } from "@opercia/core/api";
-import { issueKeys } from "@opercia/core/issues/queries";
-import { useCustomPricingStore } from "@opercia/core/runtimes/custom-pricing-store";
-import type { AgentTask } from "@opercia/core/types";
+import { api, dispatchReasonCode } from "@operica/core/api";
+import { issueKeys } from "@operica/core/issues/queries";
+import { useCustomPricingStore } from "@operica/core/runtimes/custom-pricing-store";
+import type { AgentTask } from "@operica/core/types";
 import { useTimeAgo } from "../../i18n";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { formatDuration } from "../../agents/components/agent-activity-hover-content";
 import { TranscriptButton } from "../../common/task-transcript";

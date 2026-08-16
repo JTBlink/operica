@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { Button } from "@opercia/ui/components/ui/button";
-import { api, ApiError } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { Button } from "@operica/ui/components/ui/button";
+import { api, ApiError } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
 import { AppLink } from "../navigation";
 import { useT } from "../i18n";
 
@@ -17,7 +17,7 @@ type RedeemState =
 
 // DingTalkBindPage is the destination the bot's "link your account" prompt
 // points at. The user lands here logged out OR logged in; we require auth
-// before redeeming because the redeemer's Opercia identity is taken from the
+// before redeeming because the redeemer's Operica identity is taken from the
 // session (the token alone never proves who is binding).
 //
 // The token comes in via `?token=<raw>`. We POST it to

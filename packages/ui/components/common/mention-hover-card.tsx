@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { Users } from "lucide-react";
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@opercia/ui/components/ui/hover-card";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@operica/ui/components/ui/hover-card";
 import { ActorAvatar } from "./actor-avatar";
 
 interface MentionHoverCardProps {

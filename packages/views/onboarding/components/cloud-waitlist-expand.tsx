@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
-import { joinCloudWaitlist } from "@opercia/core/onboarding";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
+import { Textarea } from "@operica/ui/components/ui/textarea";
+import { joinCloudWaitlist } from "@operica/core/onboarding";
 import { useT } from "../../i18n";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

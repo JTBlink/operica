@@ -11,24 +11,24 @@ import {
   type TabTitleSpec,
   type TabEntityData,
   type TabLabelKey,
-} from "@opercia/core/paths";
-import { issueDetailOptions } from "@opercia/core/issues/queries";
-import { projectDetailOptions } from "@opercia/core/projects/queries";
-import { autopilotDetailOptions } from "@opercia/core/autopilots/queries";
+} from "@operica/core/paths";
+import { issueDetailOptions } from "@operica/core/issues/queries";
+import { projectDetailOptions } from "@operica/core/projects/queries";
+import { autopilotDetailOptions } from "@operica/core/autopilots/queries";
 import {
   skillDetailOptions,
   agentListOptions,
   memberListOptions,
   squadListOptions,
-} from "@opercia/core/workspace/queries";
-import { runtimeListOptions } from "@opercia/core/runtimes/queries";
-import { runtimeDisplayName } from "@opercia/core/runtimes";
-import { chatSessionsOptions } from "@opercia/core/chat/queries";
+} from "@operica/core/workspace/queries";
+import { runtimeListOptions } from "@operica/core/runtimes/queries";
+import { runtimeDisplayName } from "@operica/core/runtimes";
+import { chatSessionsOptions } from "@operica/core/chat/queries";
 import {
   inboxListOptions,
   archivedInboxListOptions,
-} from "@opercia/core/inbox/queries";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/core/inbox/queries";
+import { cn } from "@operica/ui/lib/utils";
 import { StatusIcon } from "../issues/components";
 import { ProjectIcon } from "../projects/components/project-icon";
 import { ActorAvatar } from "../common/actor-avatar";
@@ -39,7 +39,7 @@ import { ROUTE_ICON_COMPONENTS } from "./route-icon-components";
 /**
  * Desktop tab presentation: turn a tab URL into a leading visual and a title,
  * live from the query cache. This is the view half of the contract whose pure
- * core is `@opercia/core/paths` (`parseTabSubject` + `resolveTabPresentation`).
+ * core is `@operica/core/paths` (`parseTabSubject` + `resolveTabPresentation`).
  *
  * Cache-only reads: every query in `useTabEntityData` is `enabled: false`. It
  * observes whatever the pages/directory already loaded and re-renders when that

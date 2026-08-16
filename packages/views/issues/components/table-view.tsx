@@ -51,9 +51,9 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
-import { DataTable } from "@opercia/ui/components/ui/data-table";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+import { DataTable } from "@operica/ui/components/ui/data-table";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -63,37 +63,37 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   TableCell,
   TableRow,
-} from "@opercia/ui/components/ui/table";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { cn } from "@opercia/ui/lib/utils";
-import { ApiError } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { ALL_STATUSES } from "@opercia/core/issues/config";
+} from "@operica/ui/components/ui/table";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { cn } from "@operica/ui/lib/utils";
+import { ApiError } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { ALL_STATUSES } from "@operica/core/issues/config";
 import {
   issueKeys,
   issueTableGroupsOptions,
   issueTableRowPageOptions,
-} from "@opercia/core/issues/queries";
+} from "@operica/core/issues/queries";
 import {
   TABLE_SYSTEM_COLUMNS,
   propertyIdFromViewKey,
   type SortField,
   type TableColumnKey,
   type TableSystemColumnKey,
-} from "@opercia/core/issues/stores/view-store";
-import { useViewStore } from "@opercia/core/issues/stores/view-store-context";
-import { propertyListOptions } from "@opercia/core/properties";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { buildActorNameResolver, useActorName } from "@opercia/core/workspace/hooks";
+} from "@operica/core/issues/stores/view-store";
+import { useViewStore } from "@operica/core/issues/stores/view-store-context";
+import { propertyListOptions } from "@operica/core/properties";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { buildActorNameResolver, useActorName } from "@operica/core/workspace/hooks";
 import {
   agentListOptions,
   memberListOptions,
   squadListOptions,
-} from "@opercia/core/workspace/queries";
+} from "@operica/core/workspace/queries";
 import type {
   Issue,
   IssueProperty,
@@ -105,7 +105,7 @@ import type {
   IssueTableRowsResponse,
   Project,
   UpdateIssueRequest,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   useInfiniteQuery,
   useQueries,

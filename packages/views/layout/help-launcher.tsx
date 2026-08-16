@@ -9,14 +9,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { useModalStore } from "@opercia/core/modals";
-import { useConfigStore } from "@opercia/core/config";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { useModalStore } from "@operica/core/modals";
+import { useConfigStore } from "@operica/core/config";
 import { DISCORD_URL, DiscordIcon } from "./discord";
 import { useT } from "../i18n";
 
-const DOCS_URL = "https://opercia.ai/docs";
-const CHANGELOG_URL = "https://opercia.ai/changelog";
+const DOCS_URL = "https://operica.ai/docs";
+const CHANGELOG_URL = "https://operica.ai/changelog";
 
 export function HelpLauncher() {
   const { t } = useT("layout");

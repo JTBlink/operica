@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import type { UploadResult } from "@opercia/core/hooks/use-file-upload";
+import { I18nProvider } from "@operica/core/i18n/react";
+import type { UploadResult } from "@operica/core/hooks/use-file-upload";
 import enCommon from "../../locales/en/common.json";
 import enChat from "../../locales/en/chat.json";
 import enEditor from "../../locales/en/editor.json";
@@ -10,7 +10,7 @@ import enEditor from "../../locales/en/editor.json";
 // `api.uploadFile(file, ctx, signal)` (MUL-5181 L2).
 const mockApiUploadFile = vi.hoisted(() => vi.fn());
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { uploadFile: mockApiUploadFile },
 }));
 
@@ -153,7 +153,7 @@ vi.mock("@tiptap/react", () => ({
   ),
 }));
 
-vi.mock("@opercia/core/chat", () => {
+vi.mock("@operica/core/chat", () => {
   const state = {
     activeSessionId: null as string | null,
     selectedAgentId: "agent-1",
@@ -184,7 +184,7 @@ vi.mock("@opercia/core/chat", () => {
 });
 
 import { ChatInput } from "./chat-input";
-import { useChatStore } from "@opercia/core/chat";
+import { useChatStore } from "@operica/core/chat";
 
 const TEST_RESOURCES = { en: { common: enCommon, chat: enChat, editor: enEditor } };
 
@@ -223,7 +223,7 @@ function store() {
 function element(props: Partial<React.ComponentProps<typeof ChatInput>> = {}) {
   return (
     <I18nProvider locale="en" resources={TEST_RESOURCES}>
-      <ChatInput onSend={vi.fn()} agentName="Opercia" {...props} />
+      <ChatInput onSend={vi.fn()} agentName="Operica" {...props} />
     </I18nProvider>
   );
 }

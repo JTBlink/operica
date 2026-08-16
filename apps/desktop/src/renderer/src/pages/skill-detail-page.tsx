@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { SkillDetailPage as SharedSkillDetailPage } from "@opercia/views/skills";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { skillDetailOptions } from "@opercia/core/workspace/queries";
+import { SkillDetailPage as SharedSkillDetailPage } from "@operica/views/skills";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { skillDetailOptions } from "@operica/core/workspace/queries";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export function SkillDetailPage() {

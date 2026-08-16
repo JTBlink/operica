@@ -19,26 +19,26 @@ import type {
   Agent,
   AgentRuntime,
   UpdateAgentRequest,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   type AgentPresenceDetail,
   isAgentRuntimeBound,
   useWorkspacePresenceMap,
-} from "@opercia/core/agents";
-import { api, ApiError } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useModalStore } from "@opercia/core/modals";
-import { useWorkspacePaths } from "@opercia/core/paths";
+} from "@operica/core/agents";
+import { api, ApiError } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useModalStore } from "@operica/core/modals";
+import { useWorkspacePaths } from "@operica/core/paths";
 import {
   agentListOptions,
   memberListOptions,
   workspaceKeys,
-} from "@opercia/core/workspace/queries";
-import { runtimeDisplayLabel, runtimeListOptions } from "@opercia/core/runtimes";
-import { useAgentPermissions } from "@opercia/core/permissions";
-import { Button } from "@opercia/ui/components/ui/button";
-import { CapabilityBanner } from "@opercia/ui/components/common/capability-banner";
+} from "@operica/core/workspace/queries";
+import { runtimeDisplayLabel, runtimeListOptions } from "@operica/core/runtimes";
+import { useAgentPermissions } from "@operica/core/permissions";
+import { Button } from "@operica/ui/components/ui/button";
+import { CapabilityBanner } from "@operica/ui/components/common/capability-banner";
 import {
   Dialog,
   DialogContent,
@@ -46,14 +46,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import { AppLink, useNavigation } from "../../navigation";
 import { PageHeader } from "../../layout/page-header";
 import { ActorAvatar } from "../../common/actor-avatar";
@@ -452,7 +452,7 @@ function DetailHeader({
    *  the chat, which is what stops AppLink from pushing. */
   onDm: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   onAssign: () => void;
-  /** Absent for Opercia's built-in agents, which the server refuses to
+  /** Absent for Operica's built-in agents, which the server refuses to
    *  archive — the menu hides the action rather than offering a failure. */
   onArchive?: () => void;
 }) {

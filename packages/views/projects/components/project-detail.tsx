@@ -4,22 +4,22 @@ import { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import { useDefaultLayout, usePanelRef } from "react-resizable-panels";
 import { Check, ChevronRight, Link2, MoreHorizontal, PanelRight, Pin, PinOff, Trash2, UserMinus } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
 import { toast } from "sonner";
-import type { ProjectStatus, ProjectPriority } from "@opercia/core/types";
-import { useAuthStore } from "@opercia/core/auth";
-import { projectDetailOptions } from "@opercia/core/projects/queries";
-import { useUpdateProject, useDeleteProject } from "@opercia/core/projects/mutations";
-import { pinListOptions } from "@opercia/core/pins";
-import { useCreatePin, useDeletePin } from "@opercia/core/pins";
-import { memberListOptions, agentListOptions } from "@opercia/core/workspace/queries";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useIssuesScope } from "@opercia/core/issues/stores";
-import { useRecentContextStore } from "@opercia/core/chat";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { PROJECT_STATUS_ORDER, PROJECT_STATUS_CONFIG, PROJECT_PRIORITY_ORDER } from "@opercia/core/projects/config";
+import type { ProjectStatus, ProjectPriority } from "@operica/core/types";
+import { useAuthStore } from "@operica/core/auth";
+import { projectDetailOptions } from "@operica/core/projects/queries";
+import { useUpdateProject, useDeleteProject } from "@operica/core/projects/mutations";
+import { pinListOptions } from "@operica/core/pins";
+import { useCreatePin, useDeletePin } from "@operica/core/pins";
+import { memberListOptions, agentListOptions } from "@operica/core/workspace/queries";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useIssuesScope } from "@operica/core/issues/stores";
+import { useRecentContextStore } from "@operica/core/chat";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { PROJECT_STATUS_ORDER, PROJECT_STATUS_CONFIG, PROJECT_PRIORITY_ORDER } from "@operica/core/projects/config";
 import { getProjectIssueMetrics } from "./project-issue-metrics";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useNavigation } from "../../navigation";
@@ -29,29 +29,29 @@ import { ProjectResourcesSection } from "./project-resources-section";
 import { ProjectStartDatePicker } from "./project-start-date-picker";
 import { ProjectDueDatePicker } from "./project-due-date-picker";
 import { IssueSurface } from "../../issues/surface/issue-surface";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { Button } from "@opercia/ui/components/ui/button";
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@opercia/ui/components/ui/resizable";
-import { Sheet, SheetContent } from "@opercia/ui/components/ui/sheet";
-import { useIsMobile } from "@opercia/ui/hooks/use-mobile";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { Button } from "@operica/ui/components/ui/button";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@operica/ui/components/ui/resizable";
+import { Sheet, SheetContent } from "@operica/ui/components/ui/sheet";
+import { useIsMobile } from "@operica/ui/hooks/use-mobile";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@opercia/ui/components/ui/popover";
+} from "@operica/ui/components/ui/popover";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@opercia/ui/components/ui/tooltip";
-import { EmojiPicker } from "@opercia/ui/components/common/emoji-picker";
+} from "@operica/ui/components/ui/tooltip";
+import { EmojiPicker } from "@operica/ui/components/common/emoji-picker";
 import { BreadcrumbHeader } from "../../layout/breadcrumb-header";
 import {
   AnimatedRightSidebar,
@@ -68,7 +68,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import { useT } from "../../i18n";
 import { useProjectStatusLabels, useProjectPriorityLabels } from "./labels";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
@@ -152,7 +152,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
 
   // Sidebar panel
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({
-    id: "opercia_project_detail_layout",
+    id: "operica_project_detail_layout",
   });
   const sidebarRef = usePanelRef();
   const desktopSidebarInitialOpen = getAnimatedRightSidebarInitialOpen(

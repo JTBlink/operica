@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/service"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 func createMika(t *testing.T, body any) *httptest.ResponseRecorder {
@@ -167,7 +167,7 @@ func TestMikaSystemInstructionsUsesTheCurrentDisplayName(t *testing.T) {
 	}
 	// The product identity is still stated, just not as the display name.
 	if !strings.Contains(renamed, "built-in system agent (Mika)") {
-		t.Fatal("prompt should still identify itself as Opercia's built-in agent")
+		t.Fatal("prompt should still identify itself as Operica's built-in agent")
 	}
 
 	if blank := service.MikaSystemInstructions("   "); !strings.HasPrefix(blank, "You are Mika,") {

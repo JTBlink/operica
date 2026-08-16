@@ -1,4 +1,4 @@
-import { useAuthStore } from "@opercia/core/auth";
+import { useAuthStore } from "@operica/core/auth";
 import { browserTimezone } from "./timezone-select";
 
 // Viewer's IANA tz: stored user preference, else browser-detected, else UTC.

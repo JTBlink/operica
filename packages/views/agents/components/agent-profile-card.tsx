@@ -1,20 +1,20 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import type { Agent, AgentRuntime } from "@opercia/core/types";
-import { useAgentPresenceDetail } from "@opercia/core/agents";
-import { useWorkspaceId } from "@opercia/core/hooks";
+import type { Agent, AgentRuntime } from "@operica/core/types";
+import { useAgentPresenceDetail } from "@operica/core/agents";
+import { useWorkspaceId } from "@operica/core/hooks";
 import {
   deriveRuntimeHealth,
   runtimeDisplayLabel,
   type RuntimeHealth,
-} from "@opercia/core/runtimes";
-import { agentListOptions, memberListOptions } from "@opercia/core/workspace/queries";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { runtimeListOptions } from "@opercia/core/runtimes/queries";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+} from "@operica/core/runtimes";
+import { agentListOptions, memberListOptions } from "@operica/core/workspace/queries";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { runtimeListOptions } from "@operica/core/runtimes/queries";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import { AppLink } from "../../navigation";
 import { HealthIcon } from "../../runtimes/components/shared";
 import { availabilityConfig } from "../presence";

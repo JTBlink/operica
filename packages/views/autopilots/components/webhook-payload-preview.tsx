@@ -3,8 +3,8 @@
 import { useState, useMemo } from "react";
 import { Webhook, ChevronDown, ChevronRight, Copy, Check } from "lucide-react";
 import { toast } from "sonner";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
 import { useT } from "../../i18n";
 
 interface WebhookPayloadPreviewProps {

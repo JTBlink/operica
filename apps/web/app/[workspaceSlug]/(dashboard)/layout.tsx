@@ -1,15 +1,15 @@
 "use client";
 
-import { DashboardLayout } from "@opercia/views/layout";
-import { OperciaIcon } from "@opercia/ui/components/common/opercia-icon";
-import { SearchCommand, SearchTrigger } from "@opercia/views/search";
-import { FloatingChat } from "@opercia/views/chat";
+import { DashboardLayout } from "@operica/views/layout";
+import { OpericaIcon } from "@operica/ui/components/common/operica-icon";
+import { SearchCommand, SearchTrigger } from "@operica/views/search";
+import { FloatingChat } from "@operica/views/chat";
 import { WebNotificationBridge } from "@/components/web-notification-bridge";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <DashboardLayout
-      loadingIndicator={<OperciaIcon className="size-6" />}
+      loadingIndicator={<OpericaIcon className="size-6" />}
       searchSlot={<SearchTrigger />}
       extra={
         <>

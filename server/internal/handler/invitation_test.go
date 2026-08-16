@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-const invitationTestEmail = "invitation-test@opercia.ai"
+const invitationTestEmail = "invitation-test@operica.ai"
 
 func clearInvitationsForTestWorkspace(t *testing.T) {
 	t.Helper()

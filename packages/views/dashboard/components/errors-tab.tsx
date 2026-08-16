@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { BarChart3 } from "lucide-react";
-import { NumberFlow } from "@opercia/ui/components/ui/number-flow";
-import { FAILURE_CLASSES, type FailureClass } from "@opercia/core/dashboard";
-import { useWorkspacePaths } from "@opercia/core/paths";
+import { NumberFlow } from "@operica/ui/components/ui/number-flow";
+import { FAILURE_CLASSES, type FailureClass } from "@operica/core/dashboard";
+import { useWorkspacePaths } from "@operica/core/paths";
 import { KpiCard } from "../../runtimes/components/shared";
 import {
   DailyErrorsChart,

@@ -38,13 +38,13 @@ vi.mock("../i18n", async () => {
   };
 });
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { getAttachmentTextContent: vi.fn() },
   PreviewTooLargeError: class extends Error {},
   PreviewUnsupportedError: class extends Error {},
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({
     issueDetail: (id: string) => `/test/issues/${id}`,
     projectDetail: (id: string) => `/test/projects/${id}`,
@@ -127,7 +127,7 @@ Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
 
 import { ReadonlyContent } from "../editor/readonly-content";
 import { ChatMessageList } from "../chat/components/chat-message-list";
-import { taskMessagesOptions } from "@opercia/core/chat/queries";
+import { taskMessagesOptions } from "@operica/core/chat/queries";
 
 // naiyuan's fixture, corrected to a single closed fence.
 const MERMAID_FIXTURE = [

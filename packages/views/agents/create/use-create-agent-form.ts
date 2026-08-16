@@ -12,19 +12,19 @@ import {
   EMPTY_AGENT_DRAFT,
   isDraftDescriptionWithinLimit,
   type AgentDraft,
-} from "@opercia/core/agents";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { isRuntimeUsableForUser, runtimeListOptions } from "@opercia/core/runtimes";
+} from "@operica/core/agents";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { isRuntimeUsableForUser, runtimeListOptions } from "@operica/core/runtimes";
 import type {
   MemberWithUser,
   RuntimeDevice,
   SkillSummary,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   memberListOptions,
   skillListOptions,
-} from "@opercia/core/workspace/queries";
+} from "@operica/core/workspace/queries";
 
 interface CreateAgentForm {
   draft: AgentDraft;

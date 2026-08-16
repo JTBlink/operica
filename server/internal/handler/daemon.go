@@ -15,9 +15,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/analytics"
 	"github.com/JTBlink/operica/server/internal/auth"
 	"github.com/JTBlink/operica/server/internal/daemonws"
@@ -31,6 +28,9 @@ import (
 	"github.com/JTBlink/operica/server/pkg/protocol"
 	"github.com/JTBlink/operica/server/pkg/redact"
 	"github.com/JTBlink/operica/server/pkg/taskfailure"
+	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // ---------------------------------------------------------------------------
@@ -178,7 +178,7 @@ type DaemonRegisterRequest struct {
 	// and tasks keep working without manual intervention.
 	LegacyDaemonIDs []string `json:"legacy_daemon_ids"`
 	DeviceName      string   `json:"device_name"`
-	CLIVersion      string   `json:"cli_version"` // opercia CLI version
+	CLIVersion      string   `json:"cli_version"` // operica CLI version
 	LaunchedBy      string   `json:"launched_by"` // "desktop" when spawned by the Electron app
 	Runtimes        []struct {
 		Name    string `json:"name"`
@@ -1888,7 +1888,7 @@ func (h *Handler) buildClaimedTaskResponse(r *http.Request, task *db.AgentTaskQu
 							Label:        label,
 						})
 						// Lift github_repo resources into the daemon's repo list
-						// so `opercia repo checkout` and the meta-skill render
+						// so `operica repo checkout` and the meta-skill render
 						// them as the issue's repos.
 						if row.ResourceType == "github_repo" {
 							var payload struct {
@@ -2158,7 +2158,7 @@ func (h *Handler) buildClaimedTaskResponse(r *http.Request, task *db.AgentTaskQu
 				}
 			}
 			// Flag a channel-backed session so the daemon makes the agent aware it
-			// is operating inside an IM conversation and not the Opercia web app
+			// is operating inside an IM conversation and not the Operica web app
 			// (MUL-3871). Empty for a web-only chat session.
 			//
 			// The binding is read WITHOUT naming a channel. Every channel writes
@@ -2168,11 +2168,11 @@ func (h *Handler) buildClaimedTaskResponse(r *http.Request, task *db.AgentTaskQu
 			// was the bug twice over: the Slack-only lookup reported a Feishu
 			// chat as web-backed (MUL-4899), and the {slack, feishu} list that
 			// replaced it did the same to WeCom. Downstream that mis-flag makes
-			// the brief inject `opercia attachment upload` guidance into a
+			// the brief inject `operica attachment upload` guidance into a
 			// conversation that cannot carry attachments at all.
 			//
 			// ChatInThread stays Slack-only on purpose. It selects between
-			// `opercia chat history` and `opercia chat thread`, and those two
+			// `operica chat history` and `operica chat thread`, and those two
 			// endpoints are hardwired to h.SlackHistory (chat_history.go) — there
 			// is no history reader on any other channel, so the flag has nothing
 			// to select between there and must not imply one exists.
@@ -2290,7 +2290,7 @@ func (h *Handler) buildClaimedTaskResponse(r *http.Request, task *db.AgentTaskQu
 			// (MUL-2968: "看上海天气" then "还有青岛" must both be delivered) —
 			// so a rolling deploy never replays their history. Attachments are
 			// collected per included message so the agent can
-			// `opercia attachment download <id>` (the inline markdown URL is
+			// `operica attachment download <id>` (the inline markdown URL is
 			// signed + 30-min expiring on the CDN).
 			var unanswered []db.ChatMessage
 			var inputLoadErr error
@@ -2419,7 +2419,7 @@ func (h *Handler) buildClaimedTaskResponse(r *http.Request, task *db.AgentTaskQu
 			// When the user picked a project in the modal, surface its title
 			// and resources to the daemon so the agent has the same context
 			// it would for an issue-bound task: the prompt template can name
-			// the project, and `opercia repo checkout` sees the project's
+			// the project, and `operica repo checkout` sees the project's
 			// github_repo resources instead of the workspace fallback.
 			var projectRepos []RepoData
 			if qc.ProjectID != "" {
@@ -2538,7 +2538,7 @@ func (h *Handler) buildClaimedTaskResponse(r *http.Request, task *db.AgentTaskQu
 	}
 
 	// Workspace isolation check: the daemon uses this response's workspace_id
-	// as the only authority for OPERCIA_WORKSPACE_ID in the agent env. An
+	// as the only authority for OPERICA_WORKSPACE_ID in the agent env. An
 	// empty value would make the CLI silently fall back to the user-global
 	// config and talk to whatever workspace the user happened to last
 	// configure; a value that doesn't match the runtime's workspace means
@@ -2674,7 +2674,7 @@ func (h *Handler) ClaimTaskByRuntime(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	// Mint a task-scoped `mat_` token bound to (agent, task, workspace,
-	// owner). The daemon will inject this as OPERCIA_TOKEN into the agent
+	// owner). The daemon will inject this as OPERICA_TOKEN into the agent
 	// process instead of its own credential, so any API call the agent
 	// makes — even one that strips X-Agent-ID / X-Task-ID headers — is
 	// recognized server-side as actor=agent, closing the lateral-movement

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 
-import { cn } from "@opercia/ui/lib/utils"
+import { cn } from "@operica/ui/lib/utils"
 
 function Drawer({
   ...props

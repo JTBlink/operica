@@ -10,10 +10,10 @@ import {
   Info,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { runtimeListOptions } from "@opercia/core/runtimes";
-import { agentTaskSnapshotOptions } from "@opercia/core/agents";
-import { Button } from "@opercia/ui/components/ui/button";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { runtimeListOptions } from "@operica/core/runtimes";
+import { agentTaskSnapshotOptions } from "@operica/core/agents";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import { toast } from "sonner";
 import { DaemonPanel } from "./daemon-panel";
 import { reauthenticateDaemon } from "../platform/daemon-reauth";

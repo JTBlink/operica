@@ -3,20 +3,20 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Check, Search, Tag } from "lucide-react";
-import { useWorkspaceId } from "@opercia/core/hooks";
+import { useWorkspaceId } from "@operica/core/hooks";
 import {
   labelListOptions,
   resourceLabelsOptions,
   useAttachResourceLabel,
   useDetachResourceLabel,
-} from "@opercia/core/labels";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+} from "@operica/core/labels";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
+} from "@operica/ui/components/ui/popover";
 import { useT } from "../i18n";
 import { LabelChip } from "./label-chip";
 

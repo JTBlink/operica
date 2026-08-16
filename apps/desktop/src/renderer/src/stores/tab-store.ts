@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { arrayMove } from "@dnd-kit/sortable";
-import { createPersistStorage, defaultStorage } from "@opercia/core/platform";
-import { createSafeId } from "@opercia/core/utils";
-import { isReservedSlug } from "@opercia/core/paths";
+import { createPersistStorage, defaultStorage } from "@operica/core/platform";
+import { createSafeId } from "@operica/core/utils";
+import { isReservedSlug } from "@operica/core/paths";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -263,8 +263,8 @@ interface TabStore {
 // ---------------------------------------------------------------------------
 //
 // A tab's icon is NOT part of this model. It is derived from `tab.url` at
-// render time via `routeIconForPath` (@opercia/views/layout), which shares the
-// route → icon map in `@opercia/core/paths` with the sidebar nav — so the two
+// render time via `routeIconForPath` (@operica/views/layout), which shares the
+// route → icon map in `@operica/core/paths` with the sidebar nav — so the two
 // surfaces cannot drift, and no stale icon can survive in persisted state.
 // Title is likewise not determined here; it comes from document.title.
 
@@ -955,7 +955,7 @@ export const useTabStore = create<TabStore>()(
       },
     }),
     {
-      name: "opercia_tabs",
+      name: "operica_tabs",
       version: 4,
       storage: createJSONStorage(() => createPersistStorage(defaultStorage)),
       migrate: (persistedState, version) => {

@@ -14,14 +14,14 @@
 
 import { useCallback, type ReactNode, type RefObject } from "react";
 import { Frame, Maximize, Minus, Plus } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { createShortcutChord, type ShortcutChord } from "@opercia/core/shortcuts";
+} from "@operica/ui/components/ui/tooltip";
+import { createShortcutChord, type ShortcutChord } from "@operica/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useT } from "../i18n";
 import type { ZoomCanvasApi } from "./hooks/use-zoom-canvas";

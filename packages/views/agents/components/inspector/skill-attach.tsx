@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import type { Agent } from "@opercia/core/types";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { skillListOptions } from "@opercia/core/workspace/queries";
+import type { Agent } from "@operica/core/types";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { skillListOptions } from "@operica/core/workspace/queries";
 import { SkillAddDialog } from "../skill-add-dialog";
 import { useT } from "../../../i18n";
 

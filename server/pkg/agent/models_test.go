@@ -1041,8 +1041,8 @@ func writeFakePiRPCModelsBinary(t *testing.T) string {
 if [ "$1" = "--mode" ] && [ "$2" = "rpc" ]; then
   IFS= read -r _state_request
   IFS= read -r _models_request
-  printf '%s\n' '{"id":"opercia-state","type":"response","command":"get_state","success":true,"data":{"model":{"id":"gpt-5.6-luna","name":"Luna","provider":"openai-multi","reasoning":true,"thinkingLevelMap":{"off":"none","minimal":"none","low":"low","medium":null,"high":"high","xhigh":"xhigh","max":"max"}},"thinkingLevel":"max"}}'
-  printf '%s\n' '{"id":"opercia-models","type":"response","command":"get_available_models","success":true,"data":{"models":[{"id":"gpt-5.6-sol","name":"Sol","provider":"openai-multi","reasoning":true},{"id":"gpt-5.6-luna","name":"Luna","provider":"openai-multi","reasoning":true,"thinkingLevelMap":{"off":"none","minimal":"none","low":"low","medium":null,"high":"high","xhigh":"xhigh","max":"max"}},{"id":"plain-chat","name":"Plain chat","provider":"openai-multi","reasoning":false}]}}'
+  printf '%s\n' '{"id":"operica-state","type":"response","command":"get_state","success":true,"data":{"model":{"id":"gpt-5.6-luna","name":"Luna","provider":"openai-multi","reasoning":true,"thinkingLevelMap":{"off":"none","minimal":"none","low":"low","medium":null,"high":"high","xhigh":"xhigh","max":"max"}},"thinkingLevel":"max"}}'
+  printf '%s\n' '{"id":"operica-models","type":"response","command":"get_available_models","success":true,"data":{"models":[{"id":"gpt-5.6-sol","name":"Sol","provider":"openai-multi","reasoning":true},{"id":"gpt-5.6-luna","name":"Luna","provider":"openai-multi","reasoning":true,"thinkingLevelMap":{"off":"none","minimal":"none","low":"low","medium":null,"high":"high","xhigh":"xhigh","max":"max"}},{"id":"plain-chat","name":"Plain chat","provider":"openai-multi","reasoning":false}]}}'
   exit 0
 fi
 printf '%s\n' 'provider model context max-out thinking images'
@@ -1107,7 +1107,7 @@ func TestDiscoverPiModelsIDLessRPCErrorFallsBack(t *testing.T) {
 if [ "$1" = "--mode" ] && [ "$2" = "rpc" ]; then
   IFS= read -r _state_request
   IFS= read -r _models_request
-  printf '%s\n' '{"id":"opercia-state","type":"response","command":"get_state","success":true,"data":{"thinkingLevel":"high"}}'
+  printf '%s\n' '{"id":"operica-state","type":"response","command":"get_state","success":true,"data":{"thinkingLevel":"high"}}'
   printf '%s\n' '{"type":"response","command":"get_available_models","success":false,"error":"Unknown command: get_available_models"}'
   cat >/dev/null
   exit 0

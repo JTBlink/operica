@@ -18,25 +18,25 @@ import {
   autopilotDeliveriesOptions,
   autopilotDeliveryOptions,
   useReplayAutopilotDelivery,
-} from "@opercia/core/autopilots";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Badge } from "@opercia/ui/components/ui/badge";
+} from "@operica/core/autopilots";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { Button } from "@operica/ui/components/ui/button";
+import { Badge } from "@operica/ui/components/ui/badge";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
+} from "@operica/ui/components/ui/dialog";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 import type {
   WebhookDelivery,
   WebhookDeliveryStatus,
   WebhookSignatureStatus,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 
 // --- Status visuals -------------------------------------------------------
 

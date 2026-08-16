@@ -2,10 +2,10 @@
 
 import { useMemo } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { selectRecentContexts, useRecentContextStore, type RecentContextEntry } from "@opercia/core/chat";
-import { issueDetailOptions } from "@opercia/core/issues/queries";
-import { projectDetailOptions } from "@opercia/core/projects/queries";
-import type { Issue, Project } from "@opercia/core/types";
+import { selectRecentContexts, useRecentContextStore, type RecentContextEntry } from "@operica/core/chat";
+import { issueDetailOptions } from "@operica/core/issues/queries";
+import { projectDetailOptions } from "@operica/core/projects/queries";
+import type { Issue, Project } from "@operica/core/types";
 import type { MentionItem } from "../../editor/extensions/mention-suggestion";
 import { useNavigation } from "../../navigation";
 

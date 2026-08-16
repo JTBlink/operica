@@ -22,11 +22,11 @@ import {
   FileQuestion,
   type LucideIcon,
 } from "lucide-react";
-import { resolveRouteIconName, type RouteIconName } from "@opercia/core/paths";
+import { resolveRouteIconName, type RouteIconName } from "@operica/core/paths";
 
 /**
  * Icon name → component registry: the rendering half of the route icon
- * contract defined in `@opercia/core/paths`.
+ * contract defined in `@operica/core/paths`.
  *
  * Every {@link RouteIconName} must have an entry — the `Record` type makes a
  * missing key a compile error.

@@ -19,7 +19,7 @@ const tabState = {
   url: null as string | null,
 };
 
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: (selector: (s: typeof authState) => unknown) => selector(authState),
 }));
 
@@ -34,7 +34,7 @@ vi.mock("@/stores/tab-store", () => ({
 }));
 
 import { DiagnosticRouteReporter } from "./diagnostic-route-reporter";
-import { getDiagnosticRoute, resetDiagnosticContext } from "@opercia/core/diagnostics";
+import { getDiagnosticRoute, resetDiagnosticContext } from "@operica/core/diagnostics";
 
 const setRendererRouteContext = vi.fn();
 

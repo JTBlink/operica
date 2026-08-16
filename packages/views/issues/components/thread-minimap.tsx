@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
-import type { TimelineEntry } from "@opercia/core/types";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { cn } from "@opercia/ui/lib/utils";
+import type { TimelineEntry } from "@operica/core/types";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../../i18n";
 
 // ---------------------------------------------------------------------------

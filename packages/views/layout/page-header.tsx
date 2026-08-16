@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@opercia/ui/lib/utils";
-import { SidebarTrigger, useSidebarSafe } from "@opercia/ui/components/ui/sidebar";
+import { cn } from "@operica/ui/lib/utils";
+import { SidebarTrigger, useSidebarSafe } from "@operica/ui/components/ui/sidebar";
 
 /**
  * The way back to the nav wherever it is not a permanent column: a sheet below

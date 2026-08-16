@@ -5,13 +5,13 @@ import {
   QueryClientProvider,
   QueryObserver,
 } from "@tanstack/react-query";
-import { setApiInstance } from "@opercia/core/api";
-import { agentTaskSnapshotKeys, agentTasksKeys } from "@opercia/core/agents/queries";
-import { useBatchDeleteIssues, useDeleteIssue } from "@opercia/core/issues/mutations";
-import { issueKeys } from "@opercia/core/issues/queries";
-import { labelKeys } from "@opercia/core/labels/queries";
-import { WorkspaceSlugProvider } from "@opercia/core/paths";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
+import { setApiInstance } from "@operica/core/api";
+import { agentTaskSnapshotKeys, agentTasksKeys } from "@operica/core/agents/queries";
+import { useBatchDeleteIssues, useDeleteIssue } from "@operica/core/issues/mutations";
+import { issueKeys } from "@operica/core/issues/queries";
+import { labelKeys } from "@operica/core/labels/queries";
+import { WorkspaceSlugProvider } from "@operica/core/paths";
+import { workspaceKeys } from "@operica/core/workspace/queries";
 import type {
   AgentTask,
   Attachment,
@@ -22,7 +22,7 @@ import type {
   ListIssuesCache,
   TimelineEntry,
   Workspace,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 
 const WS_ID = "ws-1";
 const SLUG = "test";

@@ -208,17 +208,17 @@ vi.mock("@tanstack/react-query", async () => {
   };
 });
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
 // The leaderboard renders ActorAvatar, which resolves avatar URLs through
 // the api singleton. Only the base-URL read is exercised here.
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { getBaseUrl: () => "https://example.test" },
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({
     agentDetail: (id: string) => `/acme/agents/${id}`,
   }),
@@ -226,7 +226,7 @@ vi.mock("@opercia/core/paths", () => ({
 
 const tzRef = vi.hoisted(() => ({ current: "UTC" as string | null }));
 
-vi.mock("@opercia/core/auth", () => {
+vi.mock("@operica/core/auth", () => {
   type AuthState = { user: { timezone: string | null } | null };
   const state = (): AuthState => ({ user: { timezone: tzRef.current } });
   const useAuthStore = Object.assign(
@@ -236,7 +236,7 @@ vi.mock("@opercia/core/auth", () => {
   return { useAuthStore };
 });
 
-vi.mock("@opercia/core/runtimes/custom-pricing-store", () => {
+vi.mock("@operica/core/runtimes/custom-pricing-store", () => {
   const state = () => ({ pricings: {} });
   const useCustomPricingStore = Object.assign(
     (sel?: (s: ReturnType<typeof state>) => unknown) =>
@@ -319,7 +319,7 @@ describe("DashboardPage — viewing timezone drives the query key", () => {
   });
 
   // The `tz` segment is the last element of every dashboard key
-  // (see dashboardKeys in @opercia/core/dashboard/queries).
+  // (see dashboardKeys in @operica/core/dashboard/queries).
   function tzSegments(): unknown[] {
     return queryKeys
       .filter((k) => k[0] === "dashboard")

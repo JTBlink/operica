@@ -3,8 +3,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   chatKeys,
   chatQuickActionsFailureOptions,
-} from "@opercia/core/chat/queries";
-import type { ChatQuickActionsFailureState } from "@opercia/core/types";
+} from "@operica/core/chat/queries";
+import type { ChatQuickActionsFailureState } from "@operica/core/types";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 

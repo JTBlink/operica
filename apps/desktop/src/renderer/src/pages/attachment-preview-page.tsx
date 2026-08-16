@@ -1,6 +1,6 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { AttachmentPreviewPage } from "@opercia/views/attachments";
-import { ErrorBoundary } from "@opercia/ui/components/common/error-boundary";
+import { AttachmentPreviewPage } from "@operica/views/attachments";
+import { ErrorBoundary } from "@operica/ui/components/common/error-boundary";
 
 export function AttachmentPreviewRoute() {
   const { id } = useParams<{ id: string }>();

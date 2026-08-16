@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ProjectDetail } from "@opercia/views/projects/components";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { projectDetailOptions } from "@opercia/core/projects/queries";
+import { ProjectDetail } from "@operica/views/projects/components";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { projectDetailOptions } from "@operica/core/projects/queries";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export function ProjectDetailPage() {

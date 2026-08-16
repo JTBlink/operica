@@ -2,13 +2,13 @@
 
 import { useCallback, useMemo } from "react";
 import { toast } from "sonner";
-import type { UpdateIssueRequest } from "@opercia/core/types";
+import type { UpdateIssueRequest } from "@operica/core/types";
 import {
   useBatchDeleteIssues,
   useBatchUpdateIssues,
   useUpdateIssue,
-} from "@opercia/core/issues/mutations";
-import { useModalStore } from "@opercia/core/modals";
+} from "@operica/core/issues/mutations";
+import { useModalStore } from "@operica/core/modals";
 import {
   type IssueSurfaceActions,
   type IssueSurfaceMutationOptions,

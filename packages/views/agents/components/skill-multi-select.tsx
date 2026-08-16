@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { ChevronDown, Plus, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import type { SkillSummary } from "@opercia/core/types";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { skillListOptions } from "@opercia/core/workspace/queries";
-import { Button } from "@opercia/ui/components/ui/button";
+import type { SkillSummary } from "@operica/core/types";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { skillListOptions } from "@operica/core/workspace/queries";
+import { Button } from "@operica/ui/components/ui/button";
 import { useT } from "../../i18n";
 import { SkillPickerList } from "./skill-picker-list";
 

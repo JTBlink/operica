@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { LogOut } from "lucide-react";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Textarea } from "@operica/ui/components/ui/textarea";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -14,25 +14,25 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { useLeaveWorkspace, useDeleteWorkspace } from "@opercia/core/workspace/mutations";
+import { useAuthStore } from "@operica/core/auth";
+import { useLeaveWorkspace, useDeleteWorkspace } from "@operica/core/workspace/mutations";
 import {
   memberListOptions,
   workspaceKeys,
   workspaceListOptions,
-} from "@opercia/core/workspace/queries";
-import { issueKeys } from "@opercia/core/issues/queries";
-import { api } from "@opercia/core/api";
+} from "@operica/core/workspace/queries";
+import { issueKeys } from "@operica/core/issues/queries";
+import { api } from "@operica/core/api";
 import {
   resolvePostAuthDestination,
   useCurrentWorkspace,
   useHasOnboarded,
-} from "@opercia/core/paths";
-import { setCurrentWorkspace } from "@opercia/core/platform";
-import type { Workspace } from "@opercia/core/types";
+} from "@operica/core/paths";
+import { setCurrentWorkspace } from "@operica/core/platform";
+import type { Workspace } from "@operica/core/types";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { useNavigation } from "../../navigation";
 import { DeleteWorkspaceDialog } from "./delete-workspace-dialog";

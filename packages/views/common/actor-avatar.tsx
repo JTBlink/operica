@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { AVATAR_SIZE_PX, type AvatarSize } from "@opercia/ui/lib/avatar-size";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { AVATAR_SIZE_PX, type AvatarSize } from "@operica/ui/lib/avatar-size";
 import {
   HoverCard,
   HoverCardTrigger,
   HoverCardContent,
-} from "@opercia/ui/components/ui/hover-card";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { useAgentPresenceDetail } from "@opercia/core/agents";
-import { useCurrentWorkspace, useWorkspacePaths } from "@opercia/core/paths";
+} from "@operica/ui/components/ui/hover-card";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { useAgentPresenceDetail } from "@operica/core/agents";
+import { useCurrentWorkspace, useWorkspacePaths } from "@operica/core/paths";
 import { AgentProfileCard } from "../agents/components/agent-profile-card";
 import { AgentLivePeekCard } from "../agents/components/agent-live-peek-card";
 import { MemberProfileCard } from "../members/member-profile-card";

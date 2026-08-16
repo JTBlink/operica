@@ -6,16 +6,16 @@ import type {
   Agent,
   AgentRuntime,
   MemberWithUser,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   AGENT_DESCRIPTION_MAX_LENGTH,
   AGENT_MAX_CONCURRENT_TASKS_MAX,
   AGENT_MAX_CONCURRENT_TASKS_MIN,
-} from "@opercia/core/agents";
-import { runtimeModelsOptions } from "@opercia/core/runtimes";
-import { isImeComposing } from "@opercia/core/utils";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
+} from "@operica/core/agents";
+import { runtimeModelsOptions } from "@operica/core/runtimes";
+import { isImeComposing } from "@operica/core/utils";
+import { Input } from "@operica/ui/components/ui/input";
+import { Textarea } from "@operica/ui/components/ui/textarea";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import {
   SettingsCard,

@@ -370,7 +370,7 @@ func TestValidateThinkingLevelCodexPerModelFallbackCatalog(t *testing.T) {
 }
 
 // TestParseCodexModelCatalog_PreservesFutureEfforts pins the dynamic-catalog
-// contract: a future Codex effort should reach the picker without a Opercia
+// contract: a future Codex effort should reach the picker without a Operica
 // code update, pass the server's safe-token gate, and remain scoped to the
 // model that advertised it.
 func TestParseCodexModelCatalog_PreservesFutureEfforts(t *testing.T) {
@@ -499,7 +499,7 @@ func TestIsKnownThinkingValue(t *testing.T) {
 	}
 }
 
-// TestThinkingControlSupported pins which runtimes Opercia can actually hand a
+// TestThinkingControlSupported pins which runtimes Operica can actually hand a
 // per-agent effort to. The distinction drives the API's rejection copy, so a
 // provider must not drift into "supported" without a real injection path.
 func TestThinkingControlSupported(t *testing.T) {

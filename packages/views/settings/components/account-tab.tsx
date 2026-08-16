@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
+import { Input } from "@operica/ui/components/ui/input";
+import { Textarea } from "@operica/ui/components/ui/textarea";
 import { toast } from "sonner";
-import { useAuthStore } from "@opercia/core/auth";
-import { api } from "@opercia/core/api";
+import { useAuthStore } from "@operica/core/auth";
+import { api } from "@operica/core/api";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { useT } from "../../i18n";
 import {

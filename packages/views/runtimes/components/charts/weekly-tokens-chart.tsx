@@ -11,7 +11,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@opercia/ui/components/ui/chart";
+} from "@operica/ui/components/ui/chart";
 import { formatTokens, type WeeklyTokenData } from "../../utils";
 import { useT } from "../../../i18n";
 

@@ -3,33 +3,33 @@
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChevronDown, UserPlus, X } from "lucide-react";
-import { api } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
+import { api } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
 import {
   agentListOptions,
   memberListOptions,
   workspaceKeys,
-} from "@opercia/core/workspace/queries";
-import { AGENT_DESCRIPTION_MAX_LENGTH } from "@opercia/core/agents";
-import { isImeComposing } from "@opercia/core/utils";
-import type { Agent, MemberWithUser } from "@opercia/core/types";
+} from "@operica/core/workspace/queries";
+import { AGENT_DESCRIPTION_MAX_LENGTH } from "@operica/core/agents";
+import { isImeComposing } from "@operica/core/utils";
+import type { Agent, MemberWithUser } from "@operica/core/types";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
+} from "@operica/ui/components/ui/popover";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
 import { toast } from "sonner";
 
 import { useNavigation } from "../navigation";

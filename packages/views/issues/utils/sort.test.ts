@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Issue } from "@opercia/core/types";
+import type { Issue } from "@operica/core/types";
 import { sortIssues } from "./sort";
 
 const propertyId = "prop-effort";

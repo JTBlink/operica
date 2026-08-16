@@ -1,4 +1,4 @@
-import type { SupportedLocale } from "@opercia/core/i18n";
+import type { SupportedLocale } from "@operica/core/i18n";
 
 export interface CelestialWorkspaceName {
   slugBase: string;

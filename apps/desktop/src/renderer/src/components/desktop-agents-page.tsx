@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AgentsPage } from "@opercia/views/agents";
+import { AgentsPage } from "@operica/views/agents";
 import type { DaemonStatus } from "../../../shared/daemon-types";
 
 /**

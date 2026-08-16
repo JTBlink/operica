@@ -1,11 +1,11 @@
 ---
 title: CLI を使う
-description: Opercia CLI をインストールしてサインインし、ターミナルからワークスペース、イシュー、エージェント、ランタイムを管理します。
+description: Operica CLI をインストールしてサインインし、ターミナルからワークスペース、イシュー、エージェント、ランタイムを管理します。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Opercia CLI は、ローカルのランタイムを接続する役割と、ターミナルからワークスペース、イシュー、エージェント、オートパイロットを管理する役割の両方を担います。このページではよく使う操作の流れを紹介します。現在のバージョンがサポートするフラグは、常に各コマンド自身の `--help` が正です。
+Operica CLI は、ローカルのランタイムを接続する役割と、ターミナルからワークスペース、イシュー、エージェント、オートパイロットを管理する役割の両方を担います。このページではよく使う操作の流れを紹介します。現在のバージョンがサポートするフラグは、常に各コマンド自身の `--help` が正です。
 
 ## インストール
 
@@ -18,7 +18,7 @@ curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/instal
 Homebrew がインストールされていれば、次のコマンドでもインストールできます:
 
 ```bash
-brew install opercia-ai/tap/opercia
+brew install operica-ai/tap/operica
 ```
 
 **Windows PowerShell**
@@ -30,21 +30,21 @@ irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 |
 インストールを確認します:
 
 ```bash
-opercia version
+operica version
 ```
 
 ## 初回接続
 
-Opercia Cloud に接続する:
+Operica Cloud に接続する:
 
 ```bash
-opercia setup
+operica setup
 ```
 
 セルフホストインスタンスに接続する:
 
 ```bash
-opercia setup self-host \
+operica setup self-host \
   --server-url https://api.example.com \
   --app-url https://app.example.com
 ```
@@ -52,14 +52,14 @@ opercia setup self-host \
 `setup` はサーバーアドレスを保存し、ブラウザを開いてサインインを完了し、デーモンを起動します。完了したら確認します:
 
 ```bash
-opercia auth status
-opercia daemon status
+operica auth status
+operica daemon status
 ```
 
-他の設定を上書きせずにサインインだけやり直したい場合は、`opercia login` を実行します。ブラウザのない環境では、先に Web の設定で個人アクセストークンを作成しておき、次のコマンドで入力します:
+他の設定を上書きせずにサインインだけやり直したい場合は、`operica login` を実行します。ブラウザのない環境では、先に Web の設定で個人アクセストークンを作成しておき、次のコマンドで入力します:
 
 ```bash
-opercia login --token
+operica login --token
 ```
 
 このコマンドはターミナル上でトークンの貼り付けを促すため、完全な値が shell history に残りません。
@@ -69,72 +69,72 @@ opercia login --token
 ワークスペースを一覧し、デフォルトを切り替えます:
 
 ```bash
-opercia workspace list
-opercia workspace switch <slug>
+operica workspace list
+operica workspace switch <slug>
 ```
 
-以降のコマンドはこのワークスペースを使います。単発のコマンドでは `--workspace-id` で一時的に上書きでき、`OPERCIA_WORKSPACE_ID` を設定することもできます。
+以降のコマンドはこのワークスペースを使います。単発のコマンドでは `--workspace-id` で一時的に上書きでき、`OPERICA_WORKSPACE_ID` を設定することもできます。
 
 メンバーを招待する:
 
 ```bash
-opercia workspace member invite teammate@example.com
-opercia workspace member invite admin@example.com --role admin
+operica workspace member invite teammate@example.com
+operica workspace member invite admin@example.com --role admin
 ```
 
 ## よく使うイシュー操作
 
 ```bash
 # 表示と検索
-opercia issue list
-opercia issue get MUL-123
-opercia issue search "ログイン失敗"
+operica issue list
+operica issue get MUL-123
+operica issue search "ログイン失敗"
 
 # 作成と更新
-opercia issue create --title "ログイン失敗を修正"
-opercia issue status MUL-123 in_progress
-opercia issue assign MUL-123 --to "Backend Agent"
+operica issue create --title "ログイン失敗を修正"
+operica issue status MUL-123 in_progress
+operica issue assign MUL-123 --to "Backend Agent"
 
 # コメントと実行履歴
-opercia issue comment list MUL-123
-opercia issue comment add MUL-123 --content "まず回帰テストを確認してください"
-opercia issue runs MUL-123
+operica issue comment list MUL-123
+operica issue comment add MUL-123 --content "まず回帰テストを確認してください"
+operica issue runs MUL-123
 ```
 
 長い説明やコメントは stdin から読み込むと、改行や引用符の扱いに悩まずに済みます:
 
 ```bash
-opercia issue create --title "アップグレードメモ" --description-stdin < notes.md
-opercia issue comment add MUL-123 --content-stdin < review.md
+operica issue create --title "アップグレードメモ" --description-stdin < notes.md
+operica issue comment add MUL-123 --content-stdin < review.md
 ```
 
 1 回の実行のメッセージを表示する、またはタスクを停止する:
 
 ```bash
-opercia issue run-messages <task-id> --issue MUL-123
-opercia issue cancel-task <task-id> --issue MUL-123
+operica issue run-messages <task-id> --issue MUL-123
+operica issue cancel-task <task-id> --issue MUL-123
 ```
 
 ## エージェントとスキル
 
 ```bash
-opercia agent list
-opercia agent get <agent-id>
-opercia agent create --help
-opercia agent update <agent-id> --help
+operica agent list
+operica agent get <agent-id>
+operica agent create --help
+operica agent update <agent-id> --help
 
-opercia skill list
-opercia skill get <skill-id>
-opercia skill import --url <skill-url>
-opercia agent skills add <agent-id> --skill-ids <skill-id>
+operica skill list
+operica skill get <skill-id>
+operica skill import --url <skill-url>
+operica agent skills add <agent-id> --skill-ids <skill-id>
 ```
 
 インポートで同名のスキルに当たった場合、デフォルトでは既存の内容を変更せずに停止します。意図に応じて選択してください:
 
 ```bash
-opercia skill import --url <skill-url> --on-conflict overwrite
-opercia skill import --url <skill-url> --on-conflict rename
-opercia skill import --url <skill-url> --on-conflict skip
+operica skill import --url <skill-url> --on-conflict overwrite
+operica skill import --url <skill-url> --on-conflict rename
+operica skill import --url <skill-url> --on-conflict skip
 ```
 
 `overwrite` はスキルの作成者だけが使え、元の ID とエージェントの紐付けを維持します。
@@ -142,19 +142,19 @@ opercia skill import --url <skill-url> --on-conflict skip
 ## デーモンとランタイム
 
 ```bash
-opercia daemon start
-opercia daemon stop
-opercia daemon restart
-opercia daemon status --output json
-opercia daemon logs --follow
+operica daemon start
+operica daemon stop
+operica daemon restart
+operica daemon status --output json
+operica daemon logs --follow
 
-opercia runtime list
-opercia runtime rename <runtime-id> "Office Mac"
-opercia runtime usage <runtime-id>
-opercia runtime activity <runtime-id>
+operica runtime list
+operica runtime rename <runtime-id> "Office Mac"
+operica runtime usage <runtime-id>
+operica runtime activity <runtime-id>
 ```
 
-アクティブなエージェントがまだ紐付いているランタイムの削除は、デフォルトで拒否されます。`opercia runtime delete <id> --cascade` は、それらのエージェントをランタイムから解除して設定と履歴を保持し、アクティブなタスクをキャンセルします。
+アクティブなエージェントがまだ紐付いているランタイムの削除は、デフォルトで拒否されます。`operica runtime delete <id> --cascade` は、それらのエージェントをランタイムから解除して設定と履歴を保持し、アクティブなタスクをキャンセルします。
 
 仕組みとカスタムプロファイルについては[デーモンとランタイム](/daemon-runtimes)を参照してください。
 
@@ -176,7 +176,7 @@ opercia runtime activity <runtime-id>
 | `config` | 現在の CLI プロファイルのローカル設定を表示・編集 |
 | `update`、`version` | CLI の更新とバージョンの表示 |
 
-`opercia chat` が読み取るのは、**エージェントが現在処理している外部チャットセッション**です。主にチャット統合の中のエージェントが使うもので、任意のワークスペースの会話を閲覧するための汎用コマンドではありません。
+`operica chat` が読み取るのは、**エージェントが現在処理している外部チャットセッション**です。主にチャット統合の中のエージェントが使うもので、任意のワークスペースの会話を閲覧するための汎用コマンドではありません。
 
 ## ID と出力形式
 
@@ -187,38 +187,38 @@ opercia runtime activity <runtime-id>
 多くのコマンドが構造化出力をサポートします:
 
 ```bash
-opercia issue list --output json
-opercia agent list --output json
+operica issue list --output json
+operica agent list --output json
 ```
 
-スクリプトでは、ターミナル向けの表を解析せず JSON 出力を使ってください。各コマンドがサポートする出力形式とページネーションのフラグは `opercia <command> --help` が正です。
+スクリプトでは、ターミナル向けの表を解析せず JSON 出力を使ってください。各コマンドがサポートする出力形式とページネーションのフラグは `operica <command> --help` が正です。
 
 ## プロファイルと設定
 
-デフォルトの設定は `~/.opercia/config.json` に保存されます。`--profile <name>` を使うと、サーバーアドレス、トークン、デフォルトワークスペース、デーモン状態を別のセットとして分離できます:
+デフォルトの設定は `~/.operica/config.json` に保存されます。`--profile <name>` を使うと、サーバーアドレス、トークン、デフォルトワークスペース、デーモン状態を別のセットとして分離できます:
 
 ```bash
-opercia setup self-host --profile staging \
+operica setup self-host --profile staging \
   --server-url https://api.staging.example.com \
   --app-url https://app.staging.example.com
 
-opercia issue list --profile staging
+operica issue list --profile staging
 ```
 
-名前付きプロファイルは `~/.opercia/profiles/<name>/config.json` に保存されます。現在の値を確認する:
+名前付きプロファイルは `~/.operica/profiles/<name>/config.json` に保存されます。現在の値を確認する:
 
 ```bash
-opercia config show
-opercia config show --profile staging
+operica config show
+operica config show --profile staging
 ```
 
 <Callout type="warning">
-CLI の設定ファイルには、あなたとして Opercia にアクセスできるトークンが含まれます。リポジトリにコミットしたり、ログにアップロードしたり、他人と共有したりしないでください。
+CLI の設定ファイルには、あなたとして Operica にアクセスできるトークンが含まれます。リポジトリにコミットしたり、ログにアップロードしたり、他人と共有したりしないでください。
 </Callout>
 
 ## コマンドリファレンス
 
-以下の表は、現在のすべてのトップレベルコマンドを CLI 自身のグループ分けに沿って掲載しています。すべてのコマンドがグローバルフラグ `--server-url`、`--workspace-id`、`--profile`、`--debug` を受け付けます。`--output` はコマンドごとに登録されるフラグで、デフォルトの形式はコマンドによって異なります: `list` 系は表、`get` や `create` 系は多くが JSON です。完全なフラグは `opercia <command> --help` が正です。
+以下の表は、現在のすべてのトップレベルコマンドを CLI 自身のグループ分けに沿って掲載しています。すべてのコマンドがグローバルフラグ `--server-url`、`--workspace-id`、`--profile`、`--debug` を受け付けます。`--output` はコマンドごとに登録されるフラグで、デフォルトの形式はコマンドによって異なります: `list` 系は表、`get` や `create` 系は多くが JSON です。完全なフラグは `operica <command> --help` が正です。
 
 ### Core
 
@@ -275,7 +275,7 @@ CLI の設定ファイルには、あなたとして Opercia にアクセスで�
 
 | コマンド | サブコマンド | 用途 | 主なフラグ |
 | --- | --- | --- | --- |
-| `daemon` | `start` | ローカルデーモンを起動 | `--foreground`、`--device-name`、`--runtime-name`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` は上限なし）、`--max-concurrent-tasks`、`--no-auto-update`；それぞれに対応する `OPERCIA_*` 環境変数があります |
+| `daemon` | `start` | ローカルデーモンを起動 | `--foreground`、`--device-name`、`--runtime-name`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` は上限なし）、`--max-concurrent-tasks`、`--no-auto-update`；それぞれに対応する `OPERICA_*` 環境変数があります |
 | | `stop` / `status` / `restart` | 停止、状態の確認、再起動（`restart` は `start` と同じフラグ） | |
 | | `logs` | デーモンのログを表示 | `--follow`、`--lines` |
 | | `disk-usage` | ローカルのディスク使用量を表示 | `--by-workspace`、`--by-task`、`--top` |

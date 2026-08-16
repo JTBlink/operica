@@ -1,10 +1,10 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { SidebarMenuButton } from "@opercia/ui/components/ui/sidebar";
+import { SidebarMenuButton } from "@operica/ui/components/ui/sidebar";
 import {
   useShortcut,
-} from "@opercia/core/shortcuts";
+} from "@operica/core/shortcuts";
 import { useSearchStore } from "./search-store";
 import { useT } from "../i18n";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";

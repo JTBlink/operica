@@ -1,14 +1,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { workspaceListOptions } from "@opercia/core/workspace";
+import { useAuthStore } from "@operica/core/auth";
+import { workspaceListOptions } from "@operica/core/workspace";
 import {
   paths,
   resolvePostAuthDestination,
   useHasOnboarded,
-} from "@opercia/core/paths";
-import type { Workspace } from "@opercia/core/types";
+} from "@operica/core/paths";
+import type { Workspace } from "@operica/core/types";
 
 /**
  * While the workspace list is in flight the CTA points at `/issues`, which the

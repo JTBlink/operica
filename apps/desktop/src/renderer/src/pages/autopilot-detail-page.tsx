@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { AutopilotDetailPage as AutopilotDetail } from "@opercia/views/autopilots/components";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { autopilotDetailOptions } from "@opercia/core/autopilots/queries";
+import { AutopilotDetailPage as AutopilotDetail } from "@operica/views/autopilots/components";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { autopilotDetailOptions } from "@operica/core/autopilots/queries";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export function AutopilotDetailPage() {

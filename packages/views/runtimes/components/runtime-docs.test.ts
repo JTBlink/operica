@@ -6,17 +6,17 @@ import {
 
 describe("runtime docs links", () => {
   it.each([
-    ["en", "https://opercia.ai/docs/daemon-runtimes"],
-    ["zh-Hans", "https://opercia.ai/docs/zh/daemon-runtimes"],
-    ["ja", "https://opercia.ai/docs/ja/daemon-runtimes"],
-    ["ko", "https://opercia.ai/docs/ko/daemon-runtimes"],
+    ["en", "https://operica.ai/docs/daemon-runtimes"],
+    ["zh-Hans", "https://operica.ai/docs/zh/daemon-runtimes"],
+    ["ja", "https://operica.ai/docs/ja/daemon-runtimes"],
+    ["ko", "https://operica.ai/docs/ko/daemon-runtimes"],
   ])("localizes the daemon guide for %s", (language, expected) => {
     expect(daemonRuntimesDocsHref(language)).toBe(expected);
   });
 
   it("adds the localized custom runtime section", () => {
     expect(customRuntimeDocsHref("zh-Hans")).toBe(
-      `https://opercia.ai/docs/zh/daemon-runtimes#${encodeURIComponent("自定义运行时配置")}`,
+      `https://operica.ai/docs/zh/daemon-runtimes#${encodeURIComponent("自定义运行时配置")}`,
     );
   });
 });

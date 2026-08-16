@@ -7,14 +7,14 @@ import { ActorAvatar } from "../../common/actor-avatar";
 import {
   isRuntimeUsableForUser,
   runtimeDisplayName,
-} from "@opercia/core/runtimes";
-import type { MemberWithUser, RuntimeDevice } from "@opercia/core/types";
+} from "@operica/core/runtimes";
+import type { MemberWithUser, RuntimeDevice } from "@operica/core/types";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@opercia/ui/components/ui/popover";
-import { Label } from "@opercia/ui/components/ui/label";
+} from "@operica/ui/components/ui/popover";
+import { Label } from "@operica/ui/components/ui/label";
 import { useT } from "../../i18n";
 import {
   buildRuntimeMachines,

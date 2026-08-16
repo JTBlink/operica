@@ -22,7 +22,7 @@ import {
   Tag,
   X as XIcon,
 } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import { toast } from "sonner";
 import type {
   Issue,
@@ -30,12 +30,12 @@ import type {
   IssuePriority,
   IssueAssigneeType,
   IssuePropertyValue,
-} from "@opercia/core/types";
-import { contentReferencesAttachment } from "@opercia/core/types";
+} from "@operica/core/types";
+import { contentReferencesAttachment } from "@operica/core/types";
 import {
   DialogContent,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,42 +45,42 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@opercia/ui/components/ui/tooltip";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Switch } from "@opercia/ui/components/ui/switch";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@operica/ui/components/ui/tooltip";
+import { Button } from "@operica/ui/components/ui/button";
+import { Switch } from "@operica/ui/components/ui/switch";
 import { ContentEditor, type ContentEditorRef, TitleEditor, type TitleEditorRef, useFileDropZone, FileDropOverlay, useUploadGate, useComposerSubmit } from "../editor";
 import { useIssueCreateUploads } from "./use-issue-create-uploads";
-import { useShortcut } from "@opercia/core/shortcuts";
+import { useShortcut } from "@operica/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { StatusIcon, StatusPicker, PriorityIcon, PriorityPicker, StagePicker, AssigneePicker, StartDatePicker, DueDatePicker, LabelPicker } from "../issues/components";
 import { maxSiblingStage } from "../issues/components/pickers/stage-picker";
 import { ProjectPicker } from "../projects/components/project-picker";
 import { useIssueTriggerPreview } from "../issues/hooks/use-issue-trigger-preview";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { useCurrentWorkspace, useWorkspacePaths } from "@opercia/core/paths";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useIssueDraftStore, type IssueCreateDraft } from "@opercia/core/issues/stores/draft-store";
-import { useCreateModeStore } from "@opercia/core/issues/stores/create-mode-store";
-import { useQuickCreateStore } from "@opercia/core/issues/stores/quick-create-store";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { useCurrentWorkspace, useWorkspacePaths } from "@operica/core/paths";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useIssueDraftStore, type IssueCreateDraft } from "@operica/core/issues/stores/draft-store";
+import { useCreateModeStore } from "@operica/core/issues/stores/create-mode-store";
+import { useQuickCreateStore } from "@operica/core/issues/stores/quick-create-store";
 import {
   useIssueCreateSettingsStore,
   type ManualCreateField,
-} from "@opercia/core/issues/stores/issue-create-settings-store";
-import { issueDetailOptions, childIssuesOptions } from "@opercia/core/issues/queries";
-import { useCreateIssue, useUpdateIssue } from "@opercia/core/issues/mutations";
-import { useAttachLabelToIssue } from "@opercia/core/labels";
+} from "@operica/core/issues/stores/issue-create-settings-store";
+import { issueDetailOptions, childIssuesOptions } from "@operica/core/issues/queries";
+import { useCreateIssue, useUpdateIssue } from "@operica/core/issues/mutations";
+import { useAttachLabelToIssue } from "@operica/core/labels";
 import {
   propertyListOptions,
   useSetIssueProperty,
-} from "@opercia/core/properties";
+} from "@operica/core/properties";
 import {
   ApiError,
   DuplicateIssueErrorBodySchema,
   type DuplicateIssueErrorBody,
   parseWithFallback,
-} from "@opercia/core/api";
-import { FileUploadButton } from "@opercia/ui/components/common/file-upload-button";
+} from "@operica/core/api";
+import { FileUploadButton } from "@operica/ui/components/common/file-upload-button";
 import { ClearablePillButton, PillButton } from "../common/pill-button";
 import { ActorAvatar } from "../common/actor-avatar";
 import { PropertyIcon } from "../common/property-icon";
@@ -1314,7 +1314,7 @@ export function manualDialogContentClass(isExpanded: boolean) {
 // shell's shared Dialog, but a few legacy callers (and the test suite) still
 // import this module's modal version. Equivalent runtime behavior to the
 // pre-refactor component when used standalone.
-import { Dialog as DialogRoot } from "@opercia/ui/components/ui/dialog";
+import { Dialog as DialogRoot } from "@operica/ui/components/ui/dialog";
 export function CreateIssueModal(props: {
   onClose: () => void;
   data?: Record<string, unknown> | null;

@@ -1,6 +1,6 @@
 import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
-import { useCustomPricingStore } from "@opercia/core/runtimes/custom-pricing-store";
-import type { AgentRuntime, RuntimeUsage } from "@opercia/core/types";
+import { useCustomPricingStore } from "@operica/core/runtimes/custom-pricing-store";
+import type { AgentRuntime, RuntimeUsage } from "@operica/core/types";
 
 import {
   addDaysIso,

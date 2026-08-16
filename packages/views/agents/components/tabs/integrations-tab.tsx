@@ -2,14 +2,14 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { MessagesSquare, Webhook } from "lucide-react";
-import type { Agent } from "@opercia/core/types";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { larkInstallationsOptions } from "@opercia/core/lark";
-import { slackInstallationsOptions } from "@opercia/core/slack";
-import { dingtalkInstallationsOptions } from "@opercia/core/dingtalk";
-import { wecomInstallationsOptions } from "@opercia/core/wecom";
-import { memberListOptions } from "@opercia/core/workspace/queries";
+import type { Agent } from "@operica/core/types";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { larkInstallationsOptions } from "@operica/core/lark";
+import { slackInstallationsOptions } from "@operica/core/slack";
+import { dingtalkInstallationsOptions } from "@operica/core/dingtalk";
+import { wecomInstallationsOptions } from "@operica/core/wecom";
+import { memberListOptions } from "@operica/core/workspace/queries";
 import { LarkAgentBindButton } from "../../../settings/components/lark-tab";
 import { SlackAgentBindButton } from "../../../settings/components/slack-tab";
 import { DingTalkAgentBindButton } from "../../../settings/components/dingtalk-tab";

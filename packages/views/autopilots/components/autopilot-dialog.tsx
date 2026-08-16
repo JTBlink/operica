@@ -20,13 +20,13 @@ import {
   X as XIcon,
   Zap,
 } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/dialog";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip";
 import {
   Popover,
   PopoverTrigger,
@@ -34,26 +34,26 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverDescription,
-} from "@opercia/ui/components/ui/popover";
-import { Button } from "@opercia/ui/components/ui/button";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { agentListOptions, squadListOptions } from "@opercia/core/workspace/queries";
-import { projectListOptions } from "@opercia/core/projects/queries";
+} from "@operica/ui/components/ui/popover";
+import { Button } from "@operica/ui/components/ui/button";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { agentListOptions, squadListOptions } from "@operica/core/workspace/queries";
+import { projectListOptions } from "@operica/core/projects/queries";
 import {
   useCreateAutopilot,
   useCreateAutopilotTrigger,
   useUpdateAutopilot,
   useUpdateAutopilotTrigger,
-} from "@opercia/core/autopilots/mutations";
-import { buildAutopilotWebhookUrl } from "@opercia/core/autopilots";
-import { api } from "@opercia/core/api";
+} from "@operica/core/autopilots/mutations";
+import { buildAutopilotWebhookUrl } from "@operica/core/autopilots";
+import { api } from "@operica/core/api";
 import type {
   AutopilotAssigneeType,
   AutopilotCollaborator,
   AutopilotExecutionMode,
   AutopilotTrigger,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { TitleEditor, ContentEditor, type TitleEditorRef } from "../../editor";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { SegmentedToggle } from "../../common/segmented-toggle";
@@ -71,7 +71,7 @@ import { WebhookEventFilterSection } from "./webhook-event-filter-section";
 import { WebhookUrlField } from "./webhook-url-field";
 import { useT } from "../../i18n";
 import { formatSchedulePartialFailureToast } from "./autopilot-dialog-toast";
-import type { WebhookEventFilter } from "@opercia/core/types";
+import type { WebhookEventFilter } from "@operica/core/types";
 
 // ---------------------------------------------------------------------------
 // Types

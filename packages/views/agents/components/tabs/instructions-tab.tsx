@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Loader2, Save } from "lucide-react";
-import type { Agent } from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
+import type { Agent } from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
+import { Textarea } from "@operica/ui/components/ui/textarea";
 import { useT } from "../../../i18n";
 
 export function InstructionsTab({

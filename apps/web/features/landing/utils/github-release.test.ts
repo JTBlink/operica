@@ -2,15 +2,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fetchLatestRelease } from "./github-release";
 
 const SAMPLE_LATEST_ASSET = {
-  name: "opercia-desktop-0.2.14-mac-arm64.dmg",
+  name: "operica-desktop-0.2.14-mac-arm64.dmg",
   browser_download_url:
-    "https://github.com/JTBlink/operica/releases/download/v0.2.14/opercia-desktop-0.2.14-mac-arm64.dmg",
+    "https://github.com/JTBlink/operica/releases/download/v0.2.14/operica-desktop-0.2.14-mac-arm64.dmg",
 };
 
 const SAMPLE_PREV_ASSET = {
-  name: "opercia-desktop-0.2.13-mac-arm64.dmg",
+  name: "operica-desktop-0.2.13-mac-arm64.dmg",
   browser_download_url:
-    "https://github.com/JTBlink/operica/releases/download/v0.2.13/opercia-desktop-0.2.13-mac-arm64.dmg",
+    "https://github.com/JTBlink/operica/releases/download/v0.2.13/operica-desktop-0.2.13-mac-arm64.dmg",
 };
 
 function releasePayload(overrides: {

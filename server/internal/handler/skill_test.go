@@ -985,8 +985,8 @@ func treeOnlySkillFixture(tree []githubTreeEntry) http.HandlerFunc {
 }
 
 func TestFetchFromSkillsSh_AnthropicPptxIntegration(t *testing.T) {
-	if os.Getenv("OPERCIA_RUN_SKILLS_SH_INTEGRATION") == "" {
-		t.Skip("set OPERCIA_RUN_SKILLS_SH_INTEGRATION=1 to run live GitHub integration test")
+	if os.Getenv("OPERICA_RUN_SKILLS_SH_INTEGRATION") == "" {
+		t.Skip("set OPERICA_RUN_SKILLS_SH_INTEGRATION=1 to run live GitHub integration test")
 	}
 
 	result, err := fetchFromSkillsSh(t.Context(), &http.Client{Timeout: 30 * time.Second}, "https://skills.sh/anthropics/skills/pptx")

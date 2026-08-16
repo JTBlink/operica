@@ -24,12 +24,12 @@ func TestRealtimeCollectorExposesCounters(t *testing.T) {
 	body := rec.Body.String()
 
 	for _, want := range []string{
-		"opercia_realtime_active_connections 3",
-		"opercia_realtime_messages_sent_total 11",
-		"opercia_realtime_inbound_too_large_total 7",
-		"opercia_realtime_redis_connected 1",
-		`opercia_realtime_redis_mirror_errors_total{target="primary"} 2`,
-		`opercia_realtime_redis_mirror_errors_total{target="secondary"} 5`,
+		"operica_realtime_active_connections 3",
+		"operica_realtime_messages_sent_total 11",
+		"operica_realtime_inbound_too_large_total 7",
+		"operica_realtime_redis_connected 1",
+		`operica_realtime_redis_mirror_errors_total{target="primary"} 2`,
+		`operica_realtime_redis_mirror_errors_total{target="secondary"} 5`,
 	} {
 		if !strings.Contains(body, want) {
 			t.Fatalf("metrics body missing %q\n%s", want, body)

@@ -118,21 +118,21 @@ func TestPrepareDirectoryMode(t *testing.T) {
 	defer env.Cleanup(true)
 
 	// Verify directory structure.
-	for _, sub := range []string{"workdir", "output", "logs", "opercia-config"} {
+	for _, sub := range []string{"workdir", "output", "logs", "operica-config"} {
 		path := filepath.Join(env.RootDir, sub)
 		if _, err := os.Stat(path); os.IsNotExist(err) {
 			t.Fatalf("expected %s to exist", path)
 		}
 	}
-	if env.OperciaConfigRoot != filepath.Join(env.RootDir, "opercia-config") {
-		t.Fatalf("OperciaConfigRoot = %q, want task-local config directory", env.OperciaConfigRoot)
+	if env.OpericaConfigRoot != filepath.Join(env.RootDir, "operica-config") {
+		t.Fatalf("OpericaConfigRoot = %q, want task-local config directory", env.OpericaConfigRoot)
 	}
-	info, err := os.Stat(env.OperciaConfigRoot)
+	info, err := os.Stat(env.OpericaConfigRoot)
 	if err != nil {
-		t.Fatalf("stat OperciaConfigRoot: %v", err)
+		t.Fatalf("stat OpericaConfigRoot: %v", err)
 	}
 	if got := info.Mode().Perm(); got != 0o700 {
-		t.Fatalf("OperciaConfigRoot mode = %o, want 700", got)
+		t.Fatalf("OpericaConfigRoot mode = %o, want 700", got)
 	}
 
 	// Verify context file contains issue ID and CLI hints.
@@ -207,7 +207,7 @@ func TestPrepareWithProjectResources(t *testing.T) {
 	defer env.Cleanup(true)
 
 	// resources.json should exist and decode back to what we wrote.
-	resourcesPath := filepath.Join(env.WorkDir, ".opercia", "project", "resources.json")
+	resourcesPath := filepath.Join(env.WorkDir, ".operica", "project", "resources.json")
 	raw, err := os.ReadFile(resourcesPath)
 	if err != nil {
 		t.Fatalf("failed to read resources.json: %v", err)
@@ -255,7 +255,7 @@ func TestPrepareWithProjectResources(t *testing.T) {
 		"https://github.com/JTBlink/operica",
 		"checkout ref: `release/v2`",
 		"default branch hint: `main`",
-		".opercia/project/resources.json",
+		".operica/project/resources.json",
 	} {
 		if !strings.Contains(s, want) {
 			t.Errorf("CLAUDE.md missing %q", want)
@@ -370,7 +370,7 @@ func TestWriteProjectResourcesSkippedWhenNone(t *testing.T) {
 	if err := writeProjectResources(dir, TaskContextForEnv{}, nil); err != nil {
 		t.Fatalf("writeProjectResources: %v", err)
 	}
-	if _, err := os.Stat(filepath.Join(dir, ".opercia", "project", "resources.json")); !os.IsNotExist(err) {
+	if _, err := os.Stat(filepath.Join(dir, ".operica", "project", "resources.json")); !os.IsNotExist(err) {
 		t.Errorf("expected no resources.json to be written when project context is empty")
 	}
 }
@@ -411,7 +411,7 @@ func TestPrepareWithRepoContext(t *testing.T) {
 	}
 	for _, e := range entries {
 		name := e.Name()
-		if name != ".agent_context" && name != ".opercia" && name != "CLAUDE.md" && name != ".claude" {
+		if name != ".agent_context" && name != ".operica" && name != "CLAUDE.md" && name != ".claude" {
 			t.Errorf("unexpected entry in workdir: %s", name)
 		}
 	}
@@ -423,7 +423,7 @@ func TestPrepareWithRepoContext(t *testing.T) {
 	}
 	s := string(content)
 	for _, want := range []string{
-		"opercia repo checkout",
+		"operica repo checkout",
 		"https://github.com/org/backend",
 		"[--ref <branch-or-sha>]",
 		"https://github.com/org/frontend",
@@ -546,14 +546,14 @@ func TestWriteContextFilesAutopilotRunOnly(t *testing.T) {
 		"run-1",
 		"autopilot-1",
 		"Check dependencies and report outdated packages.",
-		"opercia autopilot get autopilot-1 --output json",
+		"operica autopilot get autopilot-1 --output json",
 		"no assigned issue",
 	} {
 		if !strings.Contains(s, want) {
 			t.Errorf("autopilot context missing %q\n---\n%s", want, s)
 		}
 	}
-	if strings.Contains(s, "Run `opercia issue get") {
+	if strings.Contains(s, "Run `operica issue get") {
 		t.Errorf("autopilot context should not contain issue get workflow\n---\n%s", s)
 	}
 }
@@ -675,8 +675,8 @@ func TestWriteContextFilesCodebuddyNativeSkills(t *testing.T) {
 // TestReuseRefreshesSkillsWithoutDuplicating is the regression guard for
 // GitHub #3684: re-dispatching the same agent on the same issue goes through
 // the Reuse path, which must refresh skills in place rather than pile up
-// collision-free duplicates (issue-review, issue-review-opercia,
-// issue-review-opercia-2, …). Reuse rolls back the prior dispatch's writes
+// collision-free duplicates (issue-review, issue-review-operica,
+// issue-review-operica-2, …). Reuse rolls back the prior dispatch's writes
 // via its sidecar manifest before re-writing, so each skill lands at its
 // natural slug on every dispatch instead of dodging its own prior output.
 func TestReuseRefreshesSkillsWithoutDuplicating(t *testing.T) {
@@ -724,7 +724,7 @@ func TestReuseRefreshesSkillsWithoutDuplicating(t *testing.T) {
 		names = append(names, e.Name())
 	}
 	if len(names) != 1 || names[0] != "issue-review" {
-		t.Fatalf("after re-dispatch the skills dir = %v, want exactly [issue-review] with no -opercia duplicates", names)
+		t.Fatalf("after re-dispatch the skills dir = %v, want exactly [issue-review] with no -operica duplicates", names)
 	}
 
 	// The surviving skill keeps its natural slug in frontmatter, so the agent
@@ -742,7 +742,7 @@ func TestReuseRefreshesSkillsWithoutDuplicating(t *testing.T) {
 // #3716 review surfaced: a prior-dispatch agent writes a file into the
 // platform's managed skill directory. CleanupSidecars on its own would keep
 // that now-non-empty directory, leaving the canonical slug occupied so the
-// next refresh dodges to issue-review-opercia. Reuse must reclaim the
+// next refresh dodges to issue-review-operica. Reuse must reclaim the
 // platform-owned skill directory so the refreshed skill stays at its natural
 // slug.
 func TestReuseReclaimsManagedSkillDirWithStrayAgentFile(t *testing.T) {
@@ -793,7 +793,7 @@ func TestReuseReclaimsManagedSkillDirWithStrayAgentFile(t *testing.T) {
 		names = append(names, e.Name())
 	}
 	if len(names) != 1 || names[0] != "issue-review" {
-		t.Fatalf("after reuse with a stray agent file the skills dir = %v, want exactly [issue-review] with no -opercia duplicate", names)
+		t.Fatalf("after reuse with a stray agent file the skills dir = %v, want exactly [issue-review] with no -operica duplicate", names)
 	}
 
 	// The managed skill dir is platform-owned: reclaiming it drops the agent's
@@ -948,9 +948,9 @@ func TestInjectRuntimeConfigClaude(t *testing.T) {
 
 	s := string(content)
 	for _, want := range []string{
-		"Opercia Agent Runtime",
-		"opercia issue get",
-		"opercia issue comment list",
+		"Operica Agent Runtime",
+		"operica issue get",
+		"operica issue comment list",
 		// Skills are listed by on-disk slug: that is the directory
 		// writeSkillFiles creates and the only identifier the model can
 		// actually invoke (MUL-5529).
@@ -1075,17 +1075,17 @@ func TestInjectRuntimeConfigAvailableCommandsCoreOnly(t *testing.T) {
 	for _, want := range []string{
 		"## Available Commands",
 		"core agent loop and common issue create/update tasks",
-		"`opercia <command> --help`",
-		"opercia issue get <id> --output json",
-		"opercia issue comment list <issue-id>",
-		"opercia issue create --title",
-		"opercia issue update <id>",
+		"`operica <command> --help`",
+		"operica issue get <id> --output json",
+		"operica issue comment list <issue-id>",
+		"operica issue create --title",
+		"operica issue update <id>",
 		"--description-file <path>",
 		"--parent \"\"",
-		"opercia repo checkout <url>",
-		"opercia issue status <id> <status>",
-		"opercia issue comment add <issue-id>",
-		"opercia issue comment add --help",
+		"operica repo checkout <url>",
+		"operica issue status <id> <status>",
+		"operica issue comment add <issue-id>",
+		"operica issue comment add --help",
 	} {
 		if !strings.Contains(s, want) {
 			t.Errorf("AGENTS.md missing core command/help text %q\n---\n%s", want, s)
@@ -1107,7 +1107,7 @@ func TestInjectRuntimeConfigAvailableCommandsCoreOnly(t *testing.T) {
 	}
 	for _, want := range []string{
 		"### Squad maintenance",
-		"opercia squad member set-role <squad-id>",
+		"operica squad member set-role <squad-id>",
 	} {
 		if !strings.Contains(string(leader), want) {
 			t.Errorf("squad-leader AGENTS.md missing %q\n---\n%s", want, leader)
@@ -1115,30 +1115,30 @@ func TestInjectRuntimeConfigAvailableCommandsCoreOnly(t *testing.T) {
 	}
 
 	for _, banned := range []string{
-		"opercia issue list [--status",
-		"opercia issue label list",
-		"opercia issue subscriber list",
-		"opercia label list",
-		"opercia workspace member list",
-		"opercia agent list",
-		"opercia squad list",
-		"opercia issue runs",
-		"opercia issue run-messages",
-		"opercia attachment download",
-		"opercia autopilot list",
-		"opercia autopilot create",
-		"opercia autopilot update",
-		"opercia autopilot trigger",
-		"opercia autopilot delete",
-		"opercia project get",
-		"opercia project resource list",
-		"opercia issue assign",
-		"opercia issue label add",
-		"opercia issue label remove",
-		"opercia issue subscriber add",
-		"opercia issue subscriber remove",
-		"opercia issue comment delete",
-		"opercia label create",
+		"operica issue list [--status",
+		"operica issue label list",
+		"operica issue subscriber list",
+		"operica label list",
+		"operica workspace member list",
+		"operica agent list",
+		"operica squad list",
+		"operica issue runs",
+		"operica issue run-messages",
+		"operica attachment download",
+		"operica autopilot list",
+		"operica autopilot create",
+		"operica autopilot update",
+		"operica autopilot trigger",
+		"operica autopilot delete",
+		"operica project get",
+		"operica project resource list",
+		"operica issue assign",
+		"operica issue label add",
+		"operica issue label remove",
+		"operica issue subscriber add",
+		"operica issue subscriber remove",
+		"operica issue comment delete",
+		"operica label create",
 	} {
 		if strings.Contains(s, banned) {
 			t.Errorf("AGENTS.md should not inject non-core command %q\n---\n%s", banned, s)
@@ -1165,7 +1165,7 @@ func TestInjectRuntimeConfigCodex(t *testing.T) {
 	}
 
 	s := string(content)
-	if !strings.Contains(s, "Opercia Agent Runtime") {
+	if !strings.Contains(s, "Operica Agent Runtime") {
 		t.Error("AGENTS.md missing meta skill header")
 	}
 	// Listed by on-disk slug rather than the display name (MUL-5529).
@@ -1190,8 +1190,8 @@ func TestInjectRuntimeConfigNoSkills(t *testing.T) {
 	}
 
 	s := string(content)
-	if !strings.Contains(s, "opercia issue get") {
-		t.Error("should reference opercia CLI even without skills")
+	if !strings.Contains(s, "operica issue get") {
+		t.Error("should reference operica CLI even without skills")
 	}
 	if strings.Contains(s, "## Skills") {
 		t.Error("should not have Skills section when there are no skills")
@@ -1361,8 +1361,8 @@ func TestWriteContextFilesForcesSkillFrontmatterNameToSlug(t *testing.T) {
 
 // The directory-name == frontmatter-name invariant must survive collision
 // fallback, where the allocated slug is NOT sanitizeSkillName(Name). A
-// user-installed skill already sitting at the natural slug pushes Opercia's
-// copy to `<slug>-opercia`; the frontmatter has to follow it there, or the
+// user-installed skill already sitting at the natural slug pushes Operica's
+// copy to `<slug>-operica`; the frontmatter has to follow it there, or the
 // skill answers to the user's slug on Claude and to its own stale name on
 // OpenCode.
 func TestWriteContextFilesFrontmatterNameFollowsCollisionSlug(t *testing.T) {
@@ -1382,7 +1382,7 @@ func TestWriteContextFilesFrontmatterNameFollowsCollisionSlug(t *testing.T) {
 	ctx := TaskContextForEnv{
 		IssueID: "collision-test",
 		AgentSkills: []SkillContextForEnv{
-			{Name: "Review", Content: "---\nname: whatever-upstream-said\n---\n\nopercia body"},
+			{Name: "Review", Content: "---\nname: whatever-upstream-said\n---\n\noperica body"},
 		},
 	}
 
@@ -1399,12 +1399,12 @@ func TestWriteContextFilesFrontmatterNameFollowsCollisionSlug(t *testing.T) {
 		t.Errorf("user skill was overwritten; got:\n%s", got)
 	}
 
-	// Opercia's copy landed at the fallback slug and names itself after it.
-	moved, err := os.ReadFile(filepath.Join(dir, ".opencode", "skills", "review-opercia", "SKILL.md"))
+	// Operica's copy landed at the fallback slug and names itself after it.
+	moved, err := os.ReadFile(filepath.Join(dir, ".opencode", "skills", "review-operica", "SKILL.md"))
 	if err != nil {
 		t.Fatalf("read relocated SKILL.md: %v", err)
 	}
-	want := "---\nname: review-opercia\n---\n\nopercia body"
+	want := "---\nname: review-operica\n---\n\noperica body"
 	if string(moved) != want {
 		t.Errorf("frontmatter name did not follow the collision slug; got:\n%s\nwant:\n%s", moved, want)
 	}
@@ -1662,7 +1662,7 @@ func TestInjectRuntimeConfigOpencode(t *testing.T) {
 	}
 
 	s := string(content)
-	if !strings.Contains(s, "Opercia Agent Runtime") {
+	if !strings.Contains(s, "Operica Agent Runtime") {
 		t.Error("AGENTS.md missing meta skill header")
 	}
 	// Listed by on-disk slug rather than the display name (MUL-5529).
@@ -1698,7 +1698,7 @@ func TestInjectRuntimeConfigKiro(t *testing.T) {
 	}
 
 	s := string(content)
-	if !strings.Contains(s, "Opercia Agent Runtime") {
+	if !strings.Contains(s, "Operica Agent Runtime") {
 		t.Error("AGENTS.md missing meta skill header")
 	}
 	// Listed by on-disk slug rather than the display name (MUL-5529).
@@ -1729,7 +1729,7 @@ func TestInjectRuntimeConfigQoder(t *testing.T) {
 	}
 
 	s := string(content)
-	if !strings.Contains(s, "Opercia Agent Runtime") {
+	if !strings.Contains(s, "Operica Agent Runtime") {
 		t.Error("AGENTS.md missing meta skill header")
 	}
 	// Listed by on-disk slug rather than the display name (MUL-5529).
@@ -1758,7 +1758,7 @@ func TestInjectRuntimeConfigQoderCN(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to read AGENTS.md: %v", err)
 	}
-	if !strings.Contains(string(content), "Opercia Agent Runtime") {
+	if !strings.Contains(string(content), "Operica Agent Runtime") {
 		t.Error("AGENTS.md missing meta skill header")
 	}
 }
@@ -1785,7 +1785,7 @@ func TestInjectRuntimeConfigAntigravity(t *testing.T) {
 	}
 
 	s := string(content)
-	if !strings.Contains(s, "Opercia Agent Runtime") {
+	if !strings.Contains(s, "Operica Agent Runtime") {
 		t.Error("AGENTS.md missing meta skill header")
 	}
 	// Listed by on-disk slug rather than the display name (MUL-5529).
@@ -1866,7 +1866,7 @@ func TestPrepareWithRepoContextOpencode(t *testing.T) {
 	}
 	for _, e := range entries {
 		name := e.Name()
-		if name != ".agent_context" && name != ".opercia" && name != "AGENTS.md" {
+		if name != ".agent_context" && name != ".operica" && name != "AGENTS.md" {
 			t.Errorf("unexpected entry in workdir: %s", name)
 		}
 	}
@@ -1878,7 +1878,7 @@ func TestPrepareWithRepoContextOpencode(t *testing.T) {
 	}
 	s := string(content)
 	for _, want := range []string{
-		"opercia repo checkout",
+		"operica repo checkout",
 		"https://github.com/org/backend",
 	} {
 		if !strings.Contains(s, want) {
@@ -1920,13 +1920,13 @@ func TestInjectRuntimeConfigRequiresExplicitCommentPost(t *testing.T) {
 			}
 			s := string(data)
 
-			// The workflow must contain an explicit `opercia issue comment add`
+			// The workflow must contain an explicit `operica issue comment add`
 			// invocation for this issue — not just a prose mention of posting.
 			mustContain := []string{
 				// MUL-5442 cross-channel dedup: the brief states the loop shape; the
 				// ready-to-run commands with real ids live in the per-turn message.
 				// Pin the command NAME and the flag mnemonics, not full templates.
-				"post it with `opercia issue comment add` using",
+				"post it with `operica issue comment add` using",
 				"mandatory",
 			}
 			for _, want := range mustContain {
@@ -1939,7 +1939,7 @@ func TestInjectRuntimeConfigRequiresExplicitCommentPost(t *testing.T) {
 			// output is not user-visible. This is the second line of defense
 			// in case the agent skips past the workflow steps.
 			for _, want := range []string{
-				"Final results MUST be delivered via `opercia issue comment add`",
+				"Final results MUST be delivered via `operica issue comment add`",
 				"does NOT see your terminal output",
 			} {
 				if !strings.Contains(s, want) {
@@ -2028,7 +2028,7 @@ func TestInjectRuntimeConfigCommentGuardrailIsProviderAgnostic(t *testing.T) {
 // `--content-stdin` rule was kept for years to defend against backtick / `$()`
 // substitution in the body (MUL-2904), but the heredoc/flag boundary turned out
 // to be its own structural bug: when a model wrapped extra flags around the
-// heredoc on `opercia issue create`, the flags were silently swallowed into
+// heredoc on `operica issue create`, the flags were silently swallowed into
 // stdin (OXY-78, OXY-76). The file path defeats both classes — the body never
 // reaches the shell, and all flags live on one shell-token line — and converges
 // the Linux/macOS template with the long-standing Windows file-only path.
@@ -2104,7 +2104,7 @@ func TestInjectRuntimeConfigLinuxCommentFormattingEmphasizesFile(t *testing.T) {
 // the Comment Formatting section directs the agent at `--content-file`
 // instead of `--content-stdin`. PowerShell 5.1 / cmd.exe re-encode piped
 // HEREDOC bytes through the active console codepage and silently drop
-// non-ASCII as `?` before reaching `opercia.exe` (#2198 / #2236 / #2376).
+// non-ASCII as `?` before reaching `operica.exe` (#2198 / #2236 / #2376).
 //
 // Not parallel: mutates the package-level runtimeGOOS.
 func TestInjectRuntimeConfigCodexWindowsUsesContentFile(t *testing.T) {
@@ -2198,7 +2198,7 @@ func TestInjectRuntimeConfigAutopilotRunOnlyNoIssueWorkflow(t *testing.T) {
 		"Autopilot in run-only mode",
 		"Autopilot run ID: `run-1`",
 		"Check dependencies and report outdated packages.",
-		"opercia autopilot get autopilot-1 --output json",
+		"operica autopilot get autopilot-1 --output json",
 		"Your final assistant output is captured automatically as the autopilot run result",
 	} {
 		if !strings.Contains(s, want) {
@@ -2207,8 +2207,8 @@ func TestInjectRuntimeConfigAutopilotRunOnlyNoIssueWorkflow(t *testing.T) {
 	}
 
 	for _, absent := range []string{
-		"Run `opercia issue get",
-		"Final results MUST be delivered via `opercia issue comment add`",
+		"Run `operica issue get",
+		"Final results MUST be delivered via `operica issue comment add`",
 	} {
 		if strings.Contains(s, absent) {
 			t.Errorf("autopilot runtime config should not contain %q\n---\n%s", absent, s)
@@ -2252,7 +2252,7 @@ func TestInjectRuntimeConfigHermes(t *testing.T) {
 	}
 
 	s := string(content)
-	if !strings.Contains(s, "Opercia Agent Runtime") {
+	if !strings.Contains(s, "Operica Agent Runtime") {
 		t.Error("AGENTS.md missing meta skill header")
 	}
 	// Listed by on-disk slug rather than the display name (MUL-5529).
@@ -3165,10 +3165,10 @@ env_key = "NEW_API_KEY"
 	// Daemon-managed sandbox / multi-agent / memory blocks must all be
 	// re-applied on top of the fresh copy — PR correctness depends on it.
 	for _, marker := range []string{
-		operciaManagedBeginMarker,
-		operciaMultiAgentBeginMarker,
-		operciaMemoryFeatureBeginMarker,
-		operciaMemoryConfigBeginMarker,
+		opericaManagedBeginMarker,
+		opericaMultiAgentBeginMarker,
+		opericaMemoryFeatureBeginMarker,
+		opericaMemoryConfigBeginMarker,
 	} {
 		if !strings.Contains(s, marker) {
 			t.Errorf("daemon-managed marker %q missing after refresh, got:\n%s", marker, s)
@@ -3271,10 +3271,10 @@ env_key = "OLD_API_KEY"
 		}
 	}
 	for _, marker := range []string{
-		operciaManagedBeginMarker,
-		operciaMultiAgentBeginMarker,
-		operciaMemoryFeatureBeginMarker,
-		operciaMemoryConfigBeginMarker,
+		opericaManagedBeginMarker,
+		opericaMultiAgentBeginMarker,
+		opericaMemoryFeatureBeginMarker,
+		opericaMemoryConfigBeginMarker,
 	} {
 		if !strings.Contains(s, marker) {
 			t.Errorf("daemon-managed marker %q missing after shared source removed, got:\n%s", marker, s)
@@ -3297,7 +3297,7 @@ func TestEnsureCodexSandboxConfigCreatesDefaultLinux(t *testing.T) {
 		t.Fatalf("failed to read config.toml: %v", err)
 	}
 	s := string(data)
-	if !strings.Contains(s, operciaManagedBeginMarker) || !strings.Contains(s, operciaManagedEndMarker) {
+	if !strings.Contains(s, opericaManagedBeginMarker) || !strings.Contains(s, opericaManagedEndMarker) {
 		t.Errorf("missing managed block markers, got:\n%s", s)
 	}
 	if !strings.Contains(s, `sandbox_mode = "danger-full-access"`) {
@@ -3332,7 +3332,7 @@ func TestEnsureCodexSandboxConfigDarwinFallsBack(t *testing.T) {
 
 // TestEnsureCodexSandboxConfigWindowsFallsBack pins MUL-4957: when a Windows
 // user has not opted into a native Codex sandbox, Codex cannot enforce
-// workspace-write and rejects mutation commands (e.g. `opercia issue create`)
+// workspace-write and rejects mutation commands (e.g. `operica issue create`)
 // "by policy". The daemon therefore defaults Windows to danger-full-access and
 // emits no workspace-write keys.
 func TestEnsureCodexSandboxConfigWindowsFallsBack(t *testing.T) {
@@ -3415,7 +3415,7 @@ func TestEnsureCodexSandboxConfigIsIdempotent(t *testing.T) {
 	}
 	data, _ := os.ReadFile(configPath)
 	// The managed block should appear exactly once.
-	if n := strings.Count(string(data), operciaManagedBeginMarker); n != 1 {
+	if n := strings.Count(string(data), opericaManagedBeginMarker); n != 1 {
 		t.Errorf("expected exactly 1 managed block, got %d in:\n%s", n, data)
 	}
 }
@@ -3494,12 +3494,12 @@ func TestEnsureCodexSandboxConfigHoistsAboveUserTables(t *testing.T) {
 
 	// User config that ends inside a table. If the managed block were
 	// appended at EOF, `sandbox_mode = "..."` would be parsed as
-	// permissions.opercia.sandbox_mode and Codex would never see it — see
+	// permissions.operica.sandbox_mode and Codex would never see it — see
 	// review of MUL-963 PR #1246. The block must be hoisted above any
 	// user-defined table headers so it lives at the TOML root.
 	existing := `model = "o3"
 
-[permissions.opercia]
+[permissions.operica]
 trust = "always"
 `
 	os.WriteFile(configPath, []byte(existing), 0o644)
@@ -3512,9 +3512,9 @@ trust = "always"
 	data, _ := os.ReadFile(configPath)
 	s := string(data)
 
-	beginIdx := strings.Index(s, operciaManagedBeginMarker)
-	endIdx := strings.Index(s, operciaManagedEndMarker)
-	tableIdx := strings.Index(s, "[permissions.opercia]")
+	beginIdx := strings.Index(s, opericaManagedBeginMarker)
+	endIdx := strings.Index(s, opericaManagedEndMarker)
+	tableIdx := strings.Index(s, "[permissions.operica]")
 	if beginIdx < 0 || endIdx < 0 || tableIdx < 0 {
 		t.Fatalf("expected managed block and user table to both be present, got:\n%s", s)
 	}
@@ -3522,14 +3522,14 @@ trust = "always"
 	// that sandbox_mode and sandbox_workspace_write.network_access are
 	// parsed at the TOML root.
 	if !(beginIdx < endIdx && endIdx < tableIdx) {
-		t.Errorf("managed block must be hoisted above [permissions.opercia]; got begin=%d end=%d table=%d:\n%s", beginIdx, endIdx, tableIdx, s)
+		t.Errorf("managed block must be hoisted above [permissions.operica]; got begin=%d end=%d table=%d:\n%s", beginIdx, endIdx, tableIdx, s)
 	}
 	// User content must be preserved verbatim.
 	if !strings.Contains(s, `model = "o3"`) {
 		t.Error("lost user top-level key")
 	}
 	if !strings.Contains(s, `trust = "always"`) {
-		t.Error("lost user permissions.opercia content")
+		t.Error("lost user permissions.operica content")
 	}
 
 	// Running again must be idempotent even when the preceding content ends
@@ -3541,7 +3541,7 @@ trust = "always"
 	if string(data2) != s {
 		t.Errorf("second pass should be idempotent:\n--- first ---\n%s\n--- second ---\n%s", s, data2)
 	}
-	if n := strings.Count(string(data2), operciaManagedBeginMarker); n != 1 {
+	if n := strings.Count(string(data2), opericaManagedBeginMarker); n != 1 {
 		t.Errorf("expected exactly one managed block after idempotent rewrite, got %d", n)
 	}
 }
@@ -3557,15 +3557,15 @@ func TestEnsureCodexSandboxConfigMovesLegacyTrailingBlockToTop(t *testing.T) {
 	// top; otherwise sandbox_mode remains trapped inside the preceding table.
 	legacy := `model = "o3"
 
-[permissions.opercia]
+[permissions.operica]
 trust = "always"
 
-` + operciaManagedBeginMarker + `
+` + opericaManagedBeginMarker + `
 sandbox_mode = "workspace-write"
 
 [sandbox_workspace_write]
 network_access = true
-` + operciaManagedEndMarker + `
+` + opericaManagedEndMarker + `
 `
 	os.WriteFile(configPath, []byte(legacy), 0o644)
 
@@ -3576,12 +3576,12 @@ network_access = true
 	data, _ := os.ReadFile(configPath)
 	s := string(data)
 
-	beginIdx := strings.Index(s, operciaManagedBeginMarker)
-	tableIdx := strings.Index(s, "[permissions.opercia]")
+	beginIdx := strings.Index(s, opericaManagedBeginMarker)
+	tableIdx := strings.Index(s, "[permissions.operica]")
 	if beginIdx < 0 || tableIdx < 0 || beginIdx > tableIdx {
-		t.Errorf("expected managed block to be hoisted above [permissions.opercia], got:\n%s", s)
+		t.Errorf("expected managed block to be hoisted above [permissions.operica], got:\n%s", s)
 	}
-	if strings.Count(s, operciaManagedBeginMarker) != 1 {
+	if strings.Count(s, opericaManagedBeginMarker) != 1 {
 		t.Errorf("expected exactly one managed block, got:\n%s", s)
 	}
 	// The old inline `[sandbox_workspace_write]` header must be gone — the
@@ -3868,7 +3868,7 @@ func TestPrepareCodexHomeFailsClosedWhenSandboxWriteFails(t *testing.T) {
 	// Reused per-task home still holding the prior run's danger-full-access.
 	codexHome := t.TempDir()
 	configPath := filepath.Join(codexHome, "config.toml")
-	stale := operciaManagedBeginMarker + "\nsandbox_mode = \"danger-full-access\"\n" + operciaManagedEndMarker + "\n"
+	stale := opericaManagedBeginMarker + "\nsandbox_mode = \"danger-full-access\"\n" + opericaManagedEndMarker + "\n"
 	if err := os.WriteFile(configPath, []byte(stale), 0o644); err != nil {
 		t.Fatal(err)
 	}
@@ -3926,7 +3926,7 @@ func TestPrepareCodexHomeWritesManagedSandboxBlock(t *testing.T) {
 		t.Fatalf("config.toml not created: %v", err)
 	}
 	s := string(data)
-	if !strings.Contains(s, operciaManagedBeginMarker) {
+	if !strings.Contains(s, opericaManagedBeginMarker) {
 		t.Errorf("config.toml missing managed block, got:\n%s", s)
 	}
 	if !strings.Contains(s, `sandbox_mode = "danger-full-access"`) {
@@ -3973,13 +3973,13 @@ func TestReuseRestoresCodexHome(t *testing.T) {
 	if reused.CodexHome == "" {
 		t.Fatal("expected CodexHome to be restored after Reuse")
 	}
-	if reused.OperciaConfigRoot != filepath.Join(reused.RootDir, "opercia-config") {
-		t.Fatalf("OperciaConfigRoot = %q, want restored task-local config directory", reused.OperciaConfigRoot)
+	if reused.OpericaConfigRoot != filepath.Join(reused.RootDir, "operica-config") {
+		t.Fatalf("OpericaConfigRoot = %q, want restored task-local config directory", reused.OpericaConfigRoot)
 	}
-	if info, err := os.Stat(reused.OperciaConfigRoot); err != nil {
-		t.Fatalf("stat restored OperciaConfigRoot: %v", err)
+	if info, err := os.Stat(reused.OpericaConfigRoot); err != nil {
+		t.Fatalf("stat restored OpericaConfigRoot: %v", err)
 	} else if got := info.Mode().Perm(); got != 0o700 {
-		t.Fatalf("restored OperciaConfigRoot mode = %o, want 700", got)
+		t.Fatalf("restored OpericaConfigRoot mode = %o, want 700", got)
 	}
 
 	// Verify config.toml has a managed block (exact mode depends on host
@@ -3988,8 +3988,8 @@ func TestReuseRestoresCodexHome(t *testing.T) {
 	if err != nil {
 		t.Fatalf("config.toml not found in reused CodexHome: %v", err)
 	}
-	if !strings.Contains(string(data), operciaManagedBeginMarker) {
-		t.Error("reused config.toml missing opercia-managed block")
+	if !strings.Contains(string(data), opericaManagedBeginMarker) {
+		t.Error("reused config.toml missing operica-managed block")
 	}
 }
 
@@ -4438,7 +4438,7 @@ func TestReuseUpdatesCodexWorkspaceSkills(t *testing.T) {
 
 // TestPrepareCodexSeedsUserSkills covers the fix for #1922: skills the user
 // installs under ~/.codex/skills/ must be discoverable by the codex CLI
-// inside a Opercia task, despite the daemon redirecting CODEX_HOME to a
+// inside a Operica task, despite the daemon redirecting CODEX_HOME to a
 // per-task directory.
 func TestPrepareCodexSeedsUserSkills(t *testing.T) {
 	// Cannot use t.Parallel() with t.Setenv.
@@ -5089,7 +5089,7 @@ func TestInjectRuntimeConfigSquadLeaderCommentTriggeredNoAction(t *testing.T) {
 	for _, want := range []string{
 		"Squad leader rule",
 		"DO NOT post any comment",
-		"opercia squad activity",
+		"operica squad activity",
 		"Unless your outcome is `no_action` (Squad leader rule above), posting your reply as a comment is mandatory",
 	} {
 		if !strings.Contains(s, want) {
@@ -5513,7 +5513,7 @@ func TestInjectRuntimeConfigBriefOmitsResumedThreadAnchor(t *testing.T) {
 		"No other new comments on this issue since your last run",
 		"If your reply depends on thread context",
 		"do not rely only on resumed session memory",
-		"opercia issue comment list " + issueID + " --thread thread-root-1 --tail 30 --compact --output json",
+		"operica issue comment list " + issueID + " --thread thread-root-1 --tail 30 --compact --output json",
 	} {
 		if !strings.Contains(hint, want) {
 			t.Errorf("resumed hint missing %q\n---\n%s", want, hint)
@@ -5556,7 +5556,7 @@ func TestInjectRuntimeConfigAssignmentTriggerScansRootsFirst(t *testing.T) {
 	}
 	// Older context must remain reachable through pagination. The cursor
 	// labels and flags now live in the CLI's own --help (MUL-5442, pinned by
-	// TestIssueCommentListHelpCarriesReadContract in cmd/opercia); the brief
+	// TestIssueCommentListHelpCarriesReadContract in cmd/operica); the brief
 	// keeps a pointer in the flag reference.
 	for _, want := range []string{
 		"paging cursors, and full flag semantics: `--help`",
@@ -5566,7 +5566,7 @@ func TestInjectRuntimeConfigAssignmentTriggerScansRootsFirst(t *testing.T) {
 		}
 	}
 	for _, banned := range []string{
-		"opercia issue comment list issue-1 --output json",
+		"operica issue comment list issue-1 --output json",
 		"read the full comment history",
 		"read the full history page-by-page",
 		"`--recent` is a way to read the full history",
@@ -5619,7 +5619,7 @@ func TestInjectRuntimeConfigCatchUpScansRootsFirst(t *testing.T) {
 		// The headline saturation warning stays in the flag reference; the
 		// deep semantics (per-thread cap, root-thread saturation) moved to the
 		// CLI's own --help (MUL-5442) and are pinned there
-		// (TestIssueCommentListHelpCarriesReadContract in cmd/opercia).
+		// (TestIssueCommentListHelpCarriesReadContract in cmd/operica).
 		"caps THREADS, not comments",
 	} {
 		if !strings.Contains(s, want) {
@@ -5629,7 +5629,7 @@ func TestInjectRuntimeConfigCatchUpScansRootsFirst(t *testing.T) {
 
 	// The workflow steps must not hand the agent a ready-to-paste bulk read;
 	// that is what made the mandatory step pull whole histories.
-	if strings.Contains(s, "opercia issue comment list issue-1 --recent") {
+	if strings.Contains(s, "operica issue comment list issue-1 --recent") {
 		t.Errorf("workflow steps must not present an issue-scoped --recent command\n---\n%s", s)
 	}
 	// The saturation warning belongs to the flag reference, which introduces
@@ -5668,9 +5668,9 @@ func TestInjectRuntimeConfigIssueMetadataSectionScope(t *testing.T) {
 	// CLI when an agent decides to read or write metadata outside the
 	// numbered workflow.
 	coreDiscoveryLines := []string{
-		"opercia issue metadata list <issue-id>",
-		"opercia issue metadata set <issue-id> --key <k> --value <v> [--type string|number|bool]",
-		"opercia issue metadata delete <issue-id> --key <k>",
+		"operica issue metadata list <issue-id>",
+		"operica issue metadata set <issue-id> --key <k> --value <v> [--type string|number|bool]",
+		"operica issue metadata delete <issue-id> --key <k>",
 	}
 
 	type wantSection struct {
@@ -5692,19 +5692,19 @@ func TestInjectRuntimeConfigIssueMetadataSectionScope(t *testing.T) {
 			// express — the read stance, the re-read bar, and the two
 			// write-time boundaries (secrets, length). The full ban list
 			// and the key-naming conventions live in the
-			// opercia-working-on-issues skill, pinned by
+			// operica-working-on-issues skill, pinned by
 			// TestWorkingOnIssuesSkillCoversIssueLoopContracts so this
 			// pointer cannot dangle. The recommended-keys block was
 			// removed outright: metadata is deliberately free-form custom
 			// state (owner decision on MUL-5442), not a vocabulary the
 			// platform curates in every brief.
 			"never secrets or long content",
-			"opercia issue metadata delete",
-			"the `opercia-working-on-issues` skill",
+			"operica issue metadata delete",
+			"the `operica-working-on-issues` skill",
 		},
 	}
 	withoutSection := wantSection{
-		// We can't simply require `opercia issue metadata list` absent
+		// We can't simply require `operica issue metadata list` absent
 		// because the Available Commands → Core discovery line is
 		// global (it uses `<issue-id>` placeholder text). What MUST be
 		// absent is the semantic section itself plus the workflow-step
@@ -5742,7 +5742,7 @@ func TestInjectRuntimeConfigIssueMetadataSectionScope(t *testing.T) {
 			provider: "claude",
 			filename: "CLAUDE.md",
 			workflowStepPresent: []string{
-				"Read the metadata bag (`opercia issue metadata list`)",
+				"Read the metadata bag (`operica issue metadata list`)",
 				// Platform failure semantics, not tool mechanics: a failed
 				// metadata read must never block the main task (MUL-5442
 				// stage-1 review).
@@ -5755,8 +5755,8 @@ func TestInjectRuntimeConfigIssueMetadataSectionScope(t *testing.T) {
 				// Exit step must show both write and delete, not just
 				// "set" — stale-key cleanup is the half that keeps
 				// metadata from rotting.
-				"opercia issue metadata set",
-				"opercia issue metadata delete",
+				"operica issue metadata set",
+				"operica issue metadata delete",
 				"Before exiting",
 			},
 			want: withSection,
@@ -5767,11 +5767,11 @@ func TestInjectRuntimeConfigIssueMetadataSectionScope(t *testing.T) {
 			provider: "claude",
 			filename: "CLAUDE.md",
 			workflowStepPresent: []string{
-				"Read the metadata bag (`opercia issue metadata list`)",
+				"Read the metadata bag (`operica issue metadata list`)",
 				"What to look for: `## Issue Metadata`",
 				"the bar in `## Issue Metadata`",
-				"opercia issue metadata set",
-				"opercia issue metadata delete",
+				"operica issue metadata set",
+				"operica issue metadata delete",
 				"Before exiting",
 			},
 			want: withSection,
@@ -5887,7 +5887,7 @@ func TestInjectRuntimeConfigIssueMetadataCodexFormattingUnchanged(t *testing.T) 
 		if !strings.Contains(s, "## Issue Metadata") {
 			t.Fatalf("Issue Metadata section missing\n---\n%s", s)
 		}
-		if !strings.Contains(s, "Read the metadata bag (`opercia issue metadata list`)") {
+		if !strings.Contains(s, "Read the metadata bag (`operica issue metadata list`)") {
 			t.Fatalf("metadata list step missing\n---\n%s", s)
 		}
 		// ...AND the post-#4182 file-first rule is still emitted on Linux.

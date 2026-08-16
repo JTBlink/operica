@@ -1,6 +1,6 @@
 "use client";
 
-import type { Agent, MemberWithUser } from "@opercia/core/types";
+import type { Agent, MemberWithUser } from "@operica/core/types";
 import {
   SettingsCard,
   SettingsSection,

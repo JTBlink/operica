@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { TriangleAlert } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import {
   ContentEditor,
   type ContentEditorRef,
@@ -17,15 +17,15 @@ import {
   useCoordinatedUploads,
   type UploadDraftBinding,
 } from "../../editor/use-coordinated-uploads";
-import { SubmitButton } from "@opercia/ui/components/common/submit-button";
+import { SubmitButton } from "@operica/ui/components/common/submit-button";
 import { ChatAddMenu } from "./chat-add-menu";
 import { CHAT_COLUMN, CHAT_GUTTER } from "./chat-column";
-import { useChatStore, DRAFT_NEW_SESSION } from "@opercia/core/chat";
-import { attachmentToDraftUpload, type DraftUpload } from "@opercia/core/drafts";
-import { createLogger } from "@opercia/core/logger";
-import { formatShortcut, useShortcut } from "@opercia/core/shortcuts";
+import { useChatStore, DRAFT_NEW_SESSION } from "@operica/core/chat";
+import { attachmentToDraftUpload, type DraftUpload } from "@operica/core/drafts";
+import { createLogger } from "@operica/core/logger";
+import { formatShortcut, useShortcut } from "@operica/core/shortcuts";
 import type { MentionItem } from "../../editor/extensions/mention-suggestion";
-import type { Attachment, Project } from "@opercia/core/types";
+import type { Attachment, Project } from "@operica/core/types";
 import { ProjectPicker } from "../../projects/components/project-picker";
 import { ClearablePillButton } from "../../common/pill-button";
 import { useT } from "../../i18n";

@@ -7,9 +7,9 @@ import {
   Check,
   Lock,
 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { api } from "@opercia/core/api";
-import type { RuntimeUpdateStatus } from "@opercia/core/types";
+import { Button } from "@operica/ui/components/ui/button";
+import { api } from "@operica/core/api";
+import type { RuntimeUpdateStatus } from "@operica/core/types";
 import { useT } from "../../i18n";
 
 const GITHUB_RELEASES_URL =

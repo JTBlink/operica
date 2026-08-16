@@ -1,14 +1,14 @@
 "use client";
 
-import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
-import { Button } from "@opercia/ui/components/ui/button";
+import { ActorAvatar } from "@operica/ui/components/common/actor-avatar";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@opercia/ui/components/ui/hover-card";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import type { WorkingAgentSummary } from "@opercia/core/types";
+} from "@operica/ui/components/ui/hover-card";
+import { useActorName } from "@operica/core/workspace/hooks";
+import type { WorkingAgentSummary } from "@operica/core/types";
 import { AgentAvatarStack } from "../../agents/components/agent-avatar-stack";
 import { useT } from "../../i18n";
 

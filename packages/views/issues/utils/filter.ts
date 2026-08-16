@@ -1,5 +1,5 @@
-import type { Issue, IssueStatus, IssuePriority, IssueAssigneeGroup } from "@opercia/core/types";
-import type { ActorFilterValue } from "@opercia/core/issues/stores/view-store";
+import type { Issue, IssueStatus, IssuePriority, IssueAssigneeGroup } from "@operica/core/types";
+import type { ActorFilterValue } from "@operica/core/issues/stores/view-store";
 import type { IssueActivityState } from "../surface/activity";
 
 export interface IssueFilters {

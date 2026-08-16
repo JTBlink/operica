@@ -2,12 +2,12 @@
 
 import type { ReactNode } from "react";
 import { ArrowUp, Loader2, Square } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 
 interface SubmitButtonProps {
   onClick: () => void;
@@ -28,7 +28,7 @@ interface SubmitButtonProps {
    * Tooltip shown over the send button when idle. Pass a string or a node
    * (e.g. `Send · ⌘↵`). Omit to render no tooltip.
    * Callers compose the shortcut hint themselves to keep this component
-   * free of `@opercia/core` (platform-detection) and i18n imports.
+   * free of `@operica/core` (platform-detection) and i18n imports.
    */
   tooltip?: ReactNode;
   /** Accessible name for the icon-only submit button. */

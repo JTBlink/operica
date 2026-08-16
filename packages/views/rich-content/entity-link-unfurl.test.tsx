@@ -16,7 +16,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { NavigationProvider } from "../navigation/context";
 import type { NavigationAdapter } from "../navigation/types";
-import type { Issue } from "@opercia/core/types";
+import type { Issue } from "@operica/core/types";
 
 // Identifier → issue lookup, set per test. `null` is the honest default: a
 // miss, a still-loading query and a cross-workspace identifier all look the
@@ -41,7 +41,7 @@ vi.mock("../i18n", async () => {
   };
 });
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { getAttachmentTextContent: vi.fn() },
   PreviewTooLargeError: class extends Error {},
   PreviewUnsupportedError: class extends Error {},
@@ -51,8 +51,8 @@ vi.mock("@opercia/core/api", () => ({
 // helpers (isReservedSlug / isGlobalPath) stay real — the URL parser under test
 // depends on the same reserved-slug list the backend enforces, and stubbing it
 // would make the assertions meaningless.
-vi.mock("@opercia/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@opercia/core/paths")>()),
+vi.mock("@operica/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@operica/core/paths")>()),
   useWorkspacePaths: () => ({
     issueDetail: (id: string) => `/acme/issues/${id}`,
     projectDetail: (id: string) => `/acme/projects/${id}`,
@@ -79,7 +79,7 @@ vi.mock("../editor/link-hover-card", () => ({
 
 import { RichContent } from "./rich-content";
 
-const APP_ORIGIN = "https://app.opercia.ai";
+const APP_ORIGIN = "https://app.operica.ai";
 const PROJECT_ID = "8f14e45f-ceea-4d0e-a1a2-9b1c0d3e4f5a";
 const ISSUE_ID = "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed";
 

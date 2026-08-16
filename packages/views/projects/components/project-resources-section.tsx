@@ -17,25 +17,25 @@ import {
   useCreateProjectResource,
   useDeleteProjectResource,
   useUpdateProjectResource,
-} from "@opercia/core/projects";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCurrentWorkspace } from "@opercia/core/paths";
+} from "@operica/core/projects";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCurrentWorkspace } from "@operica/core/paths";
 import type {
   GithubRepoResourceRef,
   LocalDirectoryResourceRef,
   ProjectResource,
-} from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
+} from "@operica/ui/components/ui/popover";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import {
   isDesktopShell,
   pickDirectory,
@@ -50,7 +50,7 @@ import { githubShortLabel } from "../../common/github-url";
 //
 // Type-dispatched at the row + add-flow level. Add a new resource_type by:
 //   (1) extending the server validator
-//   (2) extending ProjectResourceType in @opercia/core/types
+//   (2) extending ProjectResourceType in @operica/core/types
 //   (3) adding a render case in ResourceRow and an add-control here
 function isGithubRef(r: ProjectResource): r is ProjectResource & {
   resource_ref: GithubRepoResourceRef;

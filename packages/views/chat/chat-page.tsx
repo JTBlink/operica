@@ -4,21 +4,21 @@ import { useEffect, useRef, useState } from "react";
 import { useDefaultLayout } from "react-resizable-panels";
 import { ArrowLeft, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   ResizablePanelGroup,
   ResizablePanel,
   ResizableHandle,
-} from "@opercia/ui/components/ui/resizable";
-import { useIsCompact } from "@opercia/ui/hooks/use-mobile";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { useChatStore } from "@opercia/core/chat";
-import { chatQuickActionsPendingOptions } from "@opercia/core/chat/queries";
-import { useRegenerateChatQuickActions } from "@opercia/core/chat/mutations";
-import { useQuickActionsPendingTimeout } from "@opercia/core/chat/use-quick-actions-pending-timeout";
+} from "@operica/ui/components/ui/resizable";
+import { useIsCompact } from "@operica/ui/hooks/use-mobile";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { useChatStore } from "@operica/core/chat";
+import { chatQuickActionsPendingOptions } from "@operica/core/chat/queries";
+import { useRegenerateChatQuickActions } from "@operica/core/chat/mutations";
+import { useQuickActionsPendingTimeout } from "@operica/core/chat/use-quick-actions-pending-timeout";
 import { useQuickActionsFailureToast } from "./components/use-quick-actions-failure-toast";
 import { useQuery } from "@tanstack/react-query";
-import type { Agent, ChatSession } from "@opercia/core/types";
+import type { Agent, ChatSession } from "@operica/core/types";
 import { PageHeader } from "../layout/page-header";
 import { useNavigation } from "../navigation";
 import { useT } from "../i18n";
@@ -117,7 +117,7 @@ export function ChatPage() {
   }, [c.activeSessionId]);
 
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({
-    id: "opercia_chat_layout",
+    id: "operica_chat_layout",
   });
 
   // `?agent=` intent bookkeeping. The ref holds the param value already

@@ -1,5 +1,5 @@
-import { deriveRuntimeHealth, type RuntimeHealth } from "@opercia/core/runtimes";
-import type { AgentRuntime } from "@opercia/core/types";
+import { deriveRuntimeHealth, type RuntimeHealth } from "@operica/core/runtimes";
+import type { AgentRuntime } from "@operica/core/types";
 import { formatDeviceInfo } from "../utils";
 
 export type RuntimeMachineSection = "local" | "remote" | "cloud";

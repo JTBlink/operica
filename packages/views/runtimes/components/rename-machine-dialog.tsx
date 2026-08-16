@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useUpdateRuntime } from "@opercia/core/runtimes/mutations";
+import { useUpdateRuntime } from "@operica/core/runtimes/mutations";
 import {
   AlertDialog,
   AlertDialogContent,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+} from "@operica/ui/components/ui/alert-dialog";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import { useT } from "../../i18n";
 
 // RenameMachineDialog names a whole machine (MUL-4217). A machine hosts one

@@ -4,28 +4,28 @@ import { useEffect, useMemo, useState } from "react";
 import { AlertTriangle, Globe, Info, Lock } from "lucide-react";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { ApiError } from "@opercia/core/api";
-import type { Agent, AgentRuntime, MemberWithUser } from "@opercia/core/types";
-import { runtimeDisplayLabel } from "@opercia/core/runtimes";
+import { ApiError } from "@operica/core/api";
+import type { Agent, AgentRuntime, MemberWithUser } from "@operica/core/types";
+import { runtimeDisplayLabel } from "@operica/core/runtimes";
 import {
   useDeleteRuntime,
   useUnbindAgentsAndDeleteRuntime,
-} from "@opercia/core/runtimes/mutations";
+} from "@operica/core/runtimes/mutations";
 import {
   agentListOptions,
   memberListOptions,
-} from "@opercia/core/workspace/queries";
+} from "@operica/core/workspace/queries";
 import {
   type AgentPresenceDetail,
   useWorkspacePresenceMap,
-} from "@opercia/core/agents";
-import { useAuthStore } from "@opercia/core/auth";
+} from "@operica/core/agents";
+import { useAuthStore } from "@operica/core/auth";
 import {
   AlertDialog,
   AlertDialogContent,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
+} from "@operica/ui/components/ui/alert-dialog";
+import { Button } from "@operica/ui/components/ui/button";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { availabilityConfig, workloadConfig } from "../../agents/presence";
 import { useT } from "../../i18n";

@@ -5,7 +5,7 @@ import {
   configureShortcutPlatform,
   getShortcut,
   useShortcutStore,
-} from "@opercia/core/shortcuts";
+} from "@operica/core/shortcuts";
 import { renderWithI18n } from "../../test/i18n";
 import { KeyboardShortcutsTab } from "./keyboard-shortcuts-tab";
 

@@ -28,11 +28,11 @@ type BuiltinRuntime struct {
 	ProtocolFamily string
 
 	// DefaultCommand is the bare CLI name the probe looks up on PATH
-	// when OPERCIA_<ID>_PATH is not set (e.g. "omp").
+	// when OPERICA_<ID>_PATH is not set (e.g. "omp").
 	DefaultCommand string
 
-	// EnvPrefix is the OPERCIA_ prefix for *_PATH and *_MODEL env overrides
-	// (e.g. "OPERCIA_OMP" → OPERCIA_OMP_PATH / OPERCIA_OMP_MODEL).
+	// EnvPrefix is the OPERICA_ prefix for *_PATH and *_MODEL env overrides
+	// (e.g. "OPERICA_OMP" → OPERICA_OMP_PATH / OPERICA_OMP_MODEL).
 	EnvPrefix string
 
 	// DisplayName is the human-facing runtime name. The daemon and frontend
@@ -88,7 +88,7 @@ var BuiltinRuntimes = []BuiltinRuntime{
 		ID:                "omp",
 		ProtocolFamily:    "pi",
 		DefaultCommand:    "omp",
-		EnvPrefix:         "OPERCIA_OMP",
+		EnvPrefix:         "OPERICA_OMP",
 		DisplayName:       "Oh-My-Pi",
 		SkillsDir:         ".omp/skills",
 		UserSkillsDir:     ".omp/agent/skills",

@@ -1,7 +1,7 @@
 import {
   matchLocale,
   type SupportedLocale,
-} from "@opercia/core/i18n";
+} from "@operica/core/i18n";
 
 export {
   INSTALL_RUNTIME_ISSUE_TITLE,

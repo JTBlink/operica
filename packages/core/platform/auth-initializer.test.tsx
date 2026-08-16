@@ -14,7 +14,7 @@ import { AuthInitializer } from "./auth-initializer";
 
 const user: User = {
   id: "user-1",
-  name: "Opercia",
+  name: "Operica",
   email: "operica@operica.local",
   avatar_url: null,
   onboarded_at: "2026-08-14T00:00:00Z",
@@ -29,8 +29,8 @@ const user: User = {
 
 const workspace: Workspace = {
   id: "workspace-1",
-  name: "Opercia",
-  slug: "opercia",
+  name: "Operica",
+  slug: "operica",
   description: null,
   context: null,
   settings: {},

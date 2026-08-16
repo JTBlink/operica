@@ -1,9 +1,9 @@
 import { act, render } from "@testing-library/react";
 import { createRef, type ReactNode } from "react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import type { Agent, MemberWithUser } from "@opercia/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import type { Agent, MemberWithUser } from "@operica/core/types";
 import type { QueryClient } from "@tanstack/react-query";
 import enEditor from "../../locales/en/editor.json";
 
@@ -23,17 +23,17 @@ beforeAll(() => {
   Element.prototype.scrollIntoView = vi.fn();
 });
 
-vi.mock("@opercia/core/platform", () => ({
+vi.mock("@operica/core/platform", () => ({
   getCurrentWsId: () => "ws-1",
 }));
 
 const authState = { user: { id: "u1" } as { id: string } | null };
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: { getState: () => authState },
 }));
 
 const chatState = { selectedAgentId: "agent-1" as string | null };
-vi.mock("@opercia/core/chat", () => ({
+vi.mock("@operica/core/chat", () => ({
   useChatStore: { getState: () => chatState },
 }));
 

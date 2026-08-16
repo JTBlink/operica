@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // TestSquadOperatingProtocolOwnsParentStatus locks the parent-issue status
@@ -24,7 +24,7 @@ func TestSquadOperatingProtocolOwnsParentStatus(t *testing.T) {
 		"Own the parent issue status",
 		"move the parent to `in_progress`",
 		"successful dispatch is not completion",
-		"opercia issue status <issue-id> in_review",
+		"operica issue status <issue-id> in_review",
 		"Leave `done` to a human reviewer",
 	} {
 		if !strings.Contains(compact, want) {
@@ -45,7 +45,7 @@ func TestSquadOperatingProtocolScopesParentStatusOwnership(t *testing.T) {
 	for _, want := range []string{
 		"Do NOT change this issue's status",
 		"not assigned to your squad",
-		"never run `opercia issue status` on it",
+		"never run `operica issue status` on it",
 	} {
 		if !strings.Contains(compactGuest, want) {
 			t.Errorf("expected guest-leader protocol to contain %q\n--- protocol ---\n%s", want, guest)
@@ -54,7 +54,7 @@ func TestSquadOperatingProtocolScopesParentStatusOwnership(t *testing.T) {
 	// The grant must be entirely absent — not merely qualified.
 	for _, forbidden := range []string{
 		"Own the parent issue status",
-		"opercia issue status <issue-id> in_review",
+		"operica issue status <issue-id> in_review",
 	} {
 		if strings.Contains(compactGuest, forbidden) {
 			t.Errorf("guest-leader protocol must not contain status grant %q\n--- protocol ---\n%s", forbidden, guest)

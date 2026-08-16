@@ -42,7 +42,7 @@ type EnvProvider struct {
 }
 
 // NewEnvProvider returns an EnvProvider with the supplied prefix. Pass
-// "FF_" for the conventional opercia prefix.
+// "FF_" for the conventional operica prefix.
 func NewEnvProvider(prefix string) *EnvProvider {
 	return &EnvProvider{Prefix: prefix, lookup: os.LookupEnv}
 }

@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { Keyboard, RotateCcw, Search, X } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,8 +13,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/alert-dialog";
+import { cn } from "@operica/ui/lib/utils";
 import {
   findShortcutConflict,
   createShortcutChord,
@@ -29,8 +29,8 @@ import {
   type ShortcutActionId,
   type ShortcutCategory,
   type ShortcutChord,
-} from "@opercia/core/shortcuts";
-import { isImeComposing } from "@opercia/core/utils";
+} from "@operica/core/shortcuts";
+import { isImeComposing } from "@operica/core/utils";
 import { useT } from "../../i18n";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
 import {

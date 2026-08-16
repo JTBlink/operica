@@ -70,7 +70,7 @@ func (b *openclawBackend) Execute(ctx context.Context, prompt string, opts ExecO
 
 	sessionID := opts.ResumeSessionID
 	if sessionID == "" {
-		sessionID = fmt.Sprintf("opercia-%d", time.Now().UnixNano())
+		sessionID = fmt.Sprintf("operica-%d", time.Now().UnixNano())
 	}
 	args := buildOpenclawArgs(prompt, sessionID, opts, b.cfg.Logger)
 

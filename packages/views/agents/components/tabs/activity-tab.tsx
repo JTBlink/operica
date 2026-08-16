@@ -15,22 +15,22 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { NumberFlow } from "@opercia/ui/components/ui/number-flow";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+} from "@operica/ui/components/ui/tooltip";
+import { NumberFlow } from "@operica/ui/components/ui/number-flow";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import type { Agent, AgentTask, Issue } from "@opercia/core/types";
+import type { Agent, AgentTask, Issue } from "@operica/core/types";
 import {
   type AgentActivity,
   agentTaskSnapshotOptions,
   agentTasksOptions,
   summarizeActivityWindow,
   useWorkspaceActivityMap,
-} from "@opercia/core/agents";
-import { api } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { issueDetailOptions } from "@opercia/core/issues/queries";
+} from "@operica/core/agents";
+import { api } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { issueDetailOptions } from "@operica/core/issues/queries";
 import { AppLink } from "../../../navigation";
 import { TranscriptButton } from "../../../common/task-transcript";
 import { AttributionBadge } from "../../../issues/components/attribution-badge";

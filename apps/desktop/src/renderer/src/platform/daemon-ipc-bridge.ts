@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { runtimeKeys } from "@opercia/core/runtimes";
-import type { AgentRuntime } from "@opercia/core/types";
+import { runtimeKeys } from "@operica/core/runtimes";
+import type { AgentRuntime } from "@operica/core/types";
 
 /**
  * DesktopAPI exposes a richer DaemonStatus shape than the public AgentRuntime

@@ -15,12 +15,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/auth"
 	"github.com/JTBlink/operica/server/internal/storage"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // ---------------------------------------------------------------------------
@@ -362,7 +362,7 @@ func (h *Handler) avatarObjectLoadsUnauthenticated(rawURL string) bool {
 	return h.storageURLIsPubliclyReadable(rawURL)
 }
 
-// absolutizeAvatarPath anchors the served path on OPERCIA_PUBLIC_URL when it
+// absolutizeAvatarPath anchors the served path on OPERICA_PUBLIC_URL when it
 // is configured, so clients that don't share the API's document origin
 // (Desktop, mobile webview) can load it. Same policy as buildMarkdownURL;
 // falling back to the site-relative path is safe because every client

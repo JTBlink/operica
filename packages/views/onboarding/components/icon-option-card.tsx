@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 import { Check } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { cn } from "@opercia/ui/lib/utils";
+import { Button } from "@operica/ui/components/ui/button";
+import { cn } from "@operica/ui/lib/utils";
 
 const OTHER_INPUT_MAX_LENGTH = 80;
 

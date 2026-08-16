@@ -2,20 +2,20 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { useViewStore, useViewStoreApi } from "@opercia/core/issues/stores/view-store-context";
-import type { GanttZoom } from "@opercia/core/issues/stores/view-store";
-import { projectListOptions } from "@opercia/core/projects/queries";
-import type { Issue, IssueStatus } from "@opercia/core/types";
-import { dateOnlyToUTCDate } from "@opercia/core/issues/date";
-import { cn } from "@opercia/ui/lib/utils";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { useViewStore, useViewStoreApi } from "@operica/core/issues/stores/view-store-context";
+import type { GanttZoom } from "@operica/core/issues/stores/view-store";
+import { projectListOptions } from "@operica/core/projects/queries";
+import type { Issue, IssueStatus } from "@operica/core/types";
+import { dateOnlyToUTCDate } from "@operica/core/issues/date";
+import { cn } from "@operica/ui/lib/utils";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@opercia/ui/components/ui/tooltip";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/ui/components/ui/tooltip";
+import { Button } from "@operica/ui/components/ui/button";
 import { AppLink } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { ProjectIcon } from "../../projects/components/project-icon";
@@ -46,7 +46,7 @@ function daysBetween(a: Date, b: Date): number {
 
 // Issue dates arrive as date-only "YYYY-MM-DD" strings (calendar days). Anchor
 // each to UTC midnight so the bar lands on exactly that day, independent of the
-// viewer's timezone. See @opercia/core/issues/date.
+// viewer's timezone. See @operica/core/issues/date.
 function parseDay(iso: string | null): Date | null {
   return dateOnlyToUTCDate(iso);
 }

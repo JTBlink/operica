@@ -2,19 +2,19 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@opercia/core/api";
-import type { ApiClient } from "@opercia/core/api/client";
+import { setApiInstance } from "@operica/core/api";
+import type { ApiClient } from "@operica/core/api/client";
 import { NavigationProvider } from "../../navigation";
 import type { NavigationAdapter } from "../../navigation";
 import { IssueDetailRoute, useCanonicalIssueUrl } from "./issue-detail-route";
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@opercia/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
-    "@opercia/core/paths",
+vi.mock("@operica/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/paths")>(
+    "@operica/core/paths",
   );
   return {
     ...actual,
@@ -33,7 +33,7 @@ function wrapper({ children }: { children: ReactNode }) {
     back: vi.fn(),
     pathname: "/acme/issues/x",
     searchParams: new URLSearchParams(),
-    getShareableUrl: (p: string) => `https://app.opercia.com${p}`,
+    getShareableUrl: (p: string) => `https://app.operica.com${p}`,
   };
   return <NavigationProvider value={adapter}>{children}</NavigationProvider>;
 }
@@ -111,7 +111,7 @@ describe("IssueDetailRoute with an identifier that names no issue", () => {
             back: vi.fn(),
             pathname: "/acme/issues/ZZZ-134",
             searchParams: new URLSearchParams(),
-            getShareableUrl: (p: string) => `https://app.opercia.com${p}`,
+            getShareableUrl: (p: string) => `https://app.operica.com${p}`,
           }}
         >
           <IssueDetailRoute routeId="ZZZ-134" />
@@ -132,7 +132,7 @@ describe("IssueDetailRoute with an identifier that names no issue", () => {
             back: vi.fn(),
             pathname: "/acme/issues/ZZZ-134",
             searchParams: new URLSearchParams(),
-            getShareableUrl: (p: string) => `https://app.opercia.com${p}`,
+            getShareableUrl: (p: string) => `https://app.operica.com${p}`,
           }}
         >
           <IssueDetailRoute routeId="ZZZ-134" />

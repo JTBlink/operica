@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/dispatch"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // seedSecurityTestOwner creates a throwaway workspace member to own an agent, so
@@ -22,7 +22,7 @@ func seedSecurityTestOwner(t *testing.T, label string) string {
 	ctx := context.Background()
 	var ownerID string
 	if err := testPool.QueryRow(ctx, `INSERT INTO "user" (name, email) VALUES ($1, $2) RETURNING id`,
-		label, fmt.Sprintf("%s-%d@opercia.test", label, time.Now().UnixNano())).Scan(&ownerID); err != nil {
+		label, fmt.Sprintf("%s-%d@operica.test", label, time.Now().UnixNano())).Scan(&ownerID); err != nil {
 		t.Fatalf("seed owner user: %v", err)
 	}
 	t.Cleanup(func() { testPool.Exec(context.Background(), `DELETE FROM "user" WHERE id = $1`, ownerID) })

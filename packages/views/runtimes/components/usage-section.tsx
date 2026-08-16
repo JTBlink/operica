@@ -3,21 +3,21 @@
 import { useMemo, useState } from "react";
 import { BarChart3, ChevronRight, AlertCircle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { Button } from "@opercia/ui/components/ui/button";
-import { cn } from "@opercia/ui/lib/utils";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { Button } from "@operica/ui/components/ui/button";
+import { cn } from "@operica/ui/lib/utils";
 import {
   CompactNumberFlow,
   CurrencyNumberFlow,
-} from "@opercia/ui/components/ui/number-flow";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { agentListOptions } from "@opercia/core/workspace/queries";
-import type { RuntimeUsage, AgentRuntime } from "@opercia/core/types";
+} from "@operica/ui/components/ui/number-flow";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { agentListOptions } from "@operica/core/workspace/queries";
+import type { RuntimeUsage, AgentRuntime } from "@operica/core/types";
 import {
   runtimeUsageOptions,
   runtimeUsageByAgentOptions,
-} from "@opercia/core/runtimes/queries";
-import { useCustomPricingStore } from "@opercia/core/runtimes/custom-pricing-store";
+} from "@operica/core/runtimes/queries";
+import { useCustomPricingStore } from "@operica/core/runtimes/custom-pricing-store";
 import { useViewingTimezone } from "../../common/use-viewing-timezone";
 import {
   formatTokens,

@@ -7,7 +7,7 @@ const { getAttachmentTextContentMock } = vi.hoisted(() => ({
   getAttachmentTextContentMock: vi.fn(),
 }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     getAttachmentTextContent: getAttachmentTextContentMock,
     getAttachment: vi.fn(),
@@ -32,8 +32,8 @@ vi.mock("../../navigation", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@opercia/core/paths")>();
+vi.mock("@operica/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@operica/core/paths")>();
   return {
     ...actual,
     useWorkspaceSlug: () => "acme",

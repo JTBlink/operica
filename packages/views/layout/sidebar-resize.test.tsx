@@ -6,7 +6,7 @@ import {
   SidebarProvider,
   SidebarRail,
   useSidebar,
-} from "@opercia/ui/components/ui/sidebar";
+} from "@operica/ui/components/ui/sidebar";
 import { renderWithI18n } from "../test/i18n";
 
 describe("left sidebar resizing", () => {

@@ -5,7 +5,7 @@ import {
   runtimeListOptions,
   readRuntimeCliVersion,
   chatProjectContextSupported,
-} from "@opercia/core/runtimes";
+} from "@operica/core/runtimes";
 
 /**
  * Whether the active agent's daemon is new enough to inject a chat session's

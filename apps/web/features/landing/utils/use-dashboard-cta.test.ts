@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { paths } from "@opercia/core/paths";
-import type { Workspace } from "@opercia/core/types";
+import { paths } from "@operica/core/paths";
+import type { Workspace } from "@operica/core/types";
 import { resolveDashboardCtaHref } from "./use-dashboard-cta";
 
 function makeWs(slug: string): Workspace {

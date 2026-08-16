@@ -1,7 +1,7 @@
 import { Extension } from "@tiptap/core";
 import { Plugin, PluginKey, TextSelection } from "@tiptap/pm/state";
-import type { UploadResult } from "@opercia/core/hooks/use-file-upload";
-import { createSafeId } from "@opercia/core/utils";
+import type { UploadResult } from "@operica/core/hooks/use-file-upload";
+import { createSafeId } from "@operica/core/utils";
 
 /**
  * Locate this upload's placeholder node, whichever shape it took.

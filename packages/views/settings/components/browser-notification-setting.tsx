@@ -6,8 +6,8 @@ import {
   isWebNotificationSupported,
   requestWebNotificationPermission,
   type WebNotificationPermission,
-} from "@opercia/core/platform";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/platform";
+import { Button } from "@operica/ui/components/ui/button";
 import { isDesktopShell } from "../../platform";
 import { useT } from "../../i18n";
 import { SettingsCard, SettingsRow } from "./settings-layout";

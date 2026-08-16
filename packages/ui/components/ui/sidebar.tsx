@@ -6,24 +6,24 @@ import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 import { useTranslation } from "react-i18next"
 
-import { useIsCompact } from "@opercia/ui/hooks/use-mobile"
-import { cn } from "@opercia/ui/lib/utils"
-import { Button } from "@opercia/ui/components/ui/button"
-import { Input } from "@opercia/ui/components/ui/input"
-import { Separator } from "@opercia/ui/components/ui/separator"
+import { useIsCompact } from "@operica/ui/hooks/use-mobile"
+import { cn } from "@operica/ui/lib/utils"
+import { Button } from "@operica/ui/components/ui/button"
+import { Input } from "@operica/ui/components/ui/input"
+import { Separator } from "@operica/ui/components/ui/separator"
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@opercia/ui/components/ui/sheet"
-import { Skeleton } from "@opercia/ui/components/ui/skeleton"
+} from "@operica/ui/components/ui/sheet"
+import { Skeleton } from "@operica/ui/components/ui/skeleton"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip"
+} from "@operica/ui/components/ui/tooltip"
 import { PanelLeftIcon } from "lucide-react"
 
 const SIDEBAR_WIDTH_DEFAULT = 256

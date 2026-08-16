@@ -2,7 +2,7 @@
 
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 
-import { cn } from "@opercia/ui/lib/utils"
+import { cn } from "@operica/ui/lib/utils"
 
 function TooltipProvider({
   delay = 200,

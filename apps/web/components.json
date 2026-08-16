@@ -13,11 +13,11 @@
   "iconLibrary": "lucide",
   "rtl": false,
   "aliases": {
-    "components": "@opercia/ui/components",
-    "utils": "@opercia/ui/lib/utils",
-    "ui": "@opercia/ui/components/ui",
-    "lib": "@opercia/ui/lib",
-    "hooks": "@opercia/ui/hooks"
+    "components": "@operica/ui/components",
+    "utils": "@operica/ui/lib/utils",
+    "ui": "@operica/ui/components/ui",
+    "lib": "@operica/ui/lib",
+    "hooks": "@operica/ui/hooks"
   },
   "menuColor": "default",
   "menuAccent": "subtle",

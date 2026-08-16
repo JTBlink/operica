@@ -2,7 +2,7 @@ import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { Project } from "@opercia/core/types";
+import type { Project } from "@operica/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { ProjectsPage } from "./projects-page";
@@ -52,7 +52,7 @@ vi.mock("@tanstack/react-query", () => ({
   },
 }));
 
-vi.mock("@opercia/core/projects", () => ({
+vi.mock("@operica/core/projects", () => ({
   projectListOptions: () => ({ queryKey: ["projects"] }),
   useUpdateProject: () => ({ mutate: mocks.updateProject }),
   useDeleteProject: () => ({ mutate: mocks.deleteProject }),
@@ -60,17 +60,17 @@ vi.mock("@opercia/core/projects", () => ({
     selector(mocks.projectViewState),
 }));
 
-vi.mock("@opercia/core/pins", () => ({
+vi.mock("@operica/core/pins", () => ({
   pinListOptions: () => ({ queryKey: ["pins"] }),
   useCreatePin: () => ({ mutate: mocks.createPin }),
   useDeletePin: () => ({ mutate: mocks.deletePin }),
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({
     projectDetail: (id: string) => `/test-workspace/projects/${id}`,
     memberDetail: (id: string) => `/test-workspace/members/${id}`,
@@ -78,17 +78,17 @@ vi.mock("@opercia/core/paths", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: (selector: (state: unknown) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));
 
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"] }),
   agentListOptions: () => ({ queryKey: ["agents"] }),
 }));
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({
     getActorName: () => "Test Lead",
     getActorInitials: () => "TL",
@@ -96,13 +96,13 @@ vi.mock("@opercia/core/workspace/hooks", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: {
     getState: () => ({ open: mocks.openModal }),
   },
 }));
 
-vi.mock("@opercia/ui/components/ui/dropdown-menu", () => ({
+vi.mock("@operica/ui/components/ui/dropdown-menu", () => ({
   DropdownMenu: ({ children }: { children: React.ReactNode }) => (
     <>{children}</>
   ),
@@ -166,7 +166,7 @@ vi.mock("@opercia/ui/components/ui/dropdown-menu", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/popover", () => ({
+vi.mock("@operica/ui/components/ui/popover", () => ({
   Popover: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   PopoverTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   PopoverContent: ({ children }: { children: React.ReactNode }) => (
@@ -174,7 +174,7 @@ vi.mock("@opercia/ui/components/ui/popover", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/tooltip", () => ({
+vi.mock("@operica/ui/components/ui/tooltip", () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   TooltipTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   TooltipContent: ({ children }: { children: React.ReactNode }) => (

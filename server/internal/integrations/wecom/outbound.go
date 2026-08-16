@@ -114,8 +114,8 @@ func (o *Outbound) processEvent(ctx context.Context, e events.Event) error {
 	}
 	// Only bound, non-empty completions reach here, so classify the task
 	// origin before loading credentials or sending. A question asked in the
-	// Opercia web UI can reuse a session that originated in WeCom — and its
-	// answer belongs only in Opercia. Without this gate that answer is pushed
+	// Operica web UI can reuse a session that originated in WeCom — and its
+	// answer belongs only in Operica. Without this gate that answer is pushed
 	// into the WeCom chat, which in a group means in front of everyone in the
 	// room. slack/outbound.go:118 and the lark and dingtalk equivalents all
 	// gate here; WeCom was the one that did not.
@@ -251,7 +251,7 @@ func (o *Outbound) tryDeliverInbox(ctx context.Context, item map[string]any, rec
 	}
 	binding, err := o.q.FindChannelBindingForMember(ctx, db.FindChannelBindingForMemberParams{
 		WorkspaceID:   workspaceID,
-		OperciaUserID: recipientID,
+		OpericaUserID: recipientID,
 		ChannelType:   channelTypeWecom,
 	})
 	if err != nil {

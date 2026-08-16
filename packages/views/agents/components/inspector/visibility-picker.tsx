@@ -6,8 +6,8 @@ import {
   VISIBILITY_DESCRIPTION,
   VISIBILITY_LABEL,
   VISIBILITY_TOOLTIP,
-} from "@opercia/core/agents";
-import type { AgentVisibility } from "@opercia/core/types";
+} from "@operica/core/agents";
+import type { AgentVisibility } from "@operica/core/types";
 import {
   PickerItem,
   PropertyPicker,

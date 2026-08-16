@@ -11,7 +11,7 @@ import (
 )
 
 func TestDBCollectorExposesPoolStats(t *testing.T) {
-	pool, err := pgxpool.New(context.Background(), "postgres://opercia:opercia@127.0.0.1:1/opercia?sslmode=disable")
+	pool, err := pgxpool.New(context.Background(), "postgres://operica:operica@127.0.0.1:1/operica?sslmode=disable")
 	if err != nil {
 		t.Fatalf("create pool: %v", err)
 	}
@@ -23,10 +23,10 @@ func TestDBCollectorExposesPoolStats(t *testing.T) {
 	body := rec.Body.String()
 
 	for _, want := range []string{
-		"opercia_db_pool_acquired_conns",
-		"opercia_db_pool_idle_conns",
-		"opercia_db_pool_max_conns",
-		"opercia_db_pool_acquire_duration_seconds_total",
+		"operica_db_pool_acquired_conns",
+		"operica_db_pool_idle_conns",
+		"operica_db_pool_max_conns",
+		"operica_db_pool_acquire_duration_seconds_total",
 	} {
 		if !strings.Contains(body, want) {
 			t.Fatalf("metrics body missing %q\n%s", want, body)

@@ -2,14 +2,14 @@
 
 import { useCallback, useMemo } from "react";
 import { useQuery, useQueryClient, useMutationState } from "@tanstack/react-query";
-import type { IssueReaction } from "@opercia/core/types";
+import type { IssueReaction } from "@operica/core/types";
 import type {
   IssueReactionAddedPayload,
   IssueReactionRemovedPayload,
-} from "@opercia/core/types";
-import { issueReactionsOptions, issueKeys } from "@opercia/core/issues/queries";
-import { useToggleIssueReaction, type ToggleIssueReactionVars } from "@opercia/core/issues/mutations";
-import { useWSEvent, useWSReconnect } from "@opercia/core/realtime";
+} from "@operica/core/types";
+import { issueReactionsOptions, issueKeys } from "@operica/core/issues/queries";
+import { useToggleIssueReaction, type ToggleIssueReactionVars } from "@operica/core/issues/mutations";
+import { useWSEvent, useWSReconnect } from "@operica/core/realtime";
 
 export function useIssueReactions(issueId: string, userId?: string) {
   const qc = useQueryClient();

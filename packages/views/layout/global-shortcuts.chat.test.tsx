@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
-import { configureShortcutPlatform } from "@opercia/core/shortcuts";
+import { configureShortcutPlatform } from "@operica/core/shortcuts";
 import { GlobalShortcuts } from "./global-shortcuts";
 
 // The floating chat overlay is reachable from the keyboard (MUL-5522). What
@@ -13,19 +13,19 @@ const h = vi.hoisted(() => ({
   searchToggle: vi.fn(),
 }));
 
-vi.mock("@opercia/core/chat", () => ({
+vi.mock("@operica/core/chat", () => ({
   useChatStore: Object.assign(
     (selector: (state: typeof h.chat) => unknown) => selector(h.chat),
     { getState: () => h.chat },
   ),
 }));
-vi.mock("@opercia/core/issues/stores", () => ({
+vi.mock("@operica/core/issues/stores", () => ({
   openCreateIssueWithPreference: vi.fn(),
 }));
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: { getState: () => ({ modal: null }) },
 }));
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({
     inbox: () => "/acme/inbox",
     chat: () => "/acme/chat",
@@ -41,7 +41,7 @@ vi.mock("@opercia/core/paths", () => ({
     settings: () => "/acme/settings",
   }),
 }));
-vi.mock("@opercia/ui/components/ui/sidebar", () => ({
+vi.mock("@operica/ui/components/ui/sidebar", () => ({
   useSidebar: () => ({ toggleSidebar: h.toggleSidebar }),
 }));
 vi.mock("../navigation", () => ({ useNavigation: () => h.navigation }));

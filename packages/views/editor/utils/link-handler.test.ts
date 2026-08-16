@@ -5,7 +5,7 @@ import {
   toInternalAppPath,
 } from "./link-handler";
 
-const APP_ORIGIN = "https://app.opercia.ai";
+const APP_ORIGIN = "https://app.operica.ai";
 
 function navigatedPaths(): string[] {
   return dispatched.map((e) => (e as CustomEvent<{ path: string }>).detail.path);

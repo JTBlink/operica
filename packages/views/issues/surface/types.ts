@@ -1,6 +1,6 @@
-import type { IssueScope } from "@opercia/core/issues/surface/scope";
-import type { CreateIssueRequest } from "@opercia/core/types";
-import type { ViewMode } from "@opercia/core/issues/stores/view-store";
+import type { IssueScope } from "@operica/core/issues/surface/scope";
+import type { CreateIssueRequest } from "@operica/core/types";
+import type { ViewMode } from "@operica/core/issues/stores/view-store";
 
 export type IssueCreateDefaults = Partial<
   Omit<

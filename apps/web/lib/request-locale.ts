@@ -1,16 +1,16 @@
 import { cache } from "react";
 import { cookies, headers } from "next/headers";
-import { LOCALE_COOKIE, type SupportedLocale } from "@opercia/core/i18n";
+import { LOCALE_COOKIE, type SupportedLocale } from "@operica/core/i18n";
 import {
   isSupportedLocale,
-  OPERCIA_LOCALE_HEADER,
+  OPERICA_LOCALE_HEADER,
   resolveLocaleFromSignals,
 } from "./locale-routing";
 
 export const getRequestLocale = cache(
   async (): Promise<SupportedLocale> => {
     const headerList = await headers();
-    const headerLocale = headerList.get(OPERCIA_LOCALE_HEADER);
+    const headerLocale = headerList.get(OPERICA_LOCALE_HEADER);
     if (isSupportedLocale(headerLocale)) return headerLocale;
 
     const cookieStore = await cookies();

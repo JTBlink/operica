@@ -37,7 +37,7 @@ vi.mock("../platform", () => ({
   DragStrip: () => null,
 }));
 
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: (s: unknown) => unknown) => {
       const state = { refreshMe };
@@ -49,7 +49,7 @@ vi.mock("@opercia/core/auth", () => ({
   ),
 }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     acceptInvitation,
     markOnboardingComplete,
@@ -58,7 +58,7 @@ vi.mock("@opercia/core/api", () => ({
   },
 }));
 
-import { I18nProvider } from "@opercia/core/i18n/react";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../locales/en/common.json";
 import enInvite from "../locales/en/invite.json";
 import { InvitationsPage } from "./invitations-page";

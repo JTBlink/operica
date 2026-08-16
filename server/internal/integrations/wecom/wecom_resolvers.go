@@ -127,7 +127,7 @@ func (r *installationResolver) ResolveInstallation(ctx context.Context, msg chan
 type identityResolver struct{ store *Store }
 
 // ResolveSender maps the WeCom smart-bot userid (the anonymized "T"-prefixed
-// id the aibot API assigns per bot, from Source.SenderID) to a Opercia user
+// id the aibot API assigns per bot, from Source.SenderID) to a Operica user
 // via the channel_user_binding table. First-time senders have no row and
 // return engine.ErrSenderUnbound, which the Router pairs with the outbound
 // binding prompt (see OutboundReplier.sendBindingPrompt).
@@ -158,14 +158,14 @@ func (r *identityResolver) ResolveSender(ctx context.Context, inst engine.Resolv
 		}
 		return engine.ResolvedIdentity{}, err
 	}
-	isMember, err := r.store.IsWorkspaceMember(ctx, inst.WorkspaceID, binding.OperciaUserID)
+	isMember, err := r.store.IsWorkspaceMember(ctx, inst.WorkspaceID, binding.OpericaUserID)
 	if err != nil {
 		return engine.ResolvedIdentity{}, err
 	}
 	if !isMember {
 		return engine.ResolvedIdentity{}, engine.ErrSenderNotMember
 	}
-	return engine.ResolvedIdentity{UserID: binding.OperciaUserID}, nil
+	return engine.ResolvedIdentity{UserID: binding.OpericaUserID}, nil
 }
 
 // ---- dedup ----
@@ -234,7 +234,7 @@ func (r *sessionBinder) AppendMessage(ctx context.Context, p engine.AppendParams
 	// The adapter's own command source wins, and Text is only the fallback.
 	// Overwriting it with Text — which this used to do — threw away the
 	// mention-stripped line the adapter had already worked out, so in a group
-	// the /issue parser was handed "@Opercia Bot /issue …" and saw prose.
+	// the /issue parser was handed "@Operica Bot /issue …" and saw prose.
 	// Same two lines as lark/feishu_resolvers.go:206 and slack/resolvers.go:337.
 	commandText := p.Message.CommandText
 	if commandText == "" {

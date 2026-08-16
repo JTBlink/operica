@@ -2,10 +2,10 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import enCommon from "@opercia/views/locales/en/common.json";
-import enAuth from "@opercia/views/locales/en/auth.json";
-import enSettings from "@opercia/views/locales/en/settings.json";
+import { I18nProvider } from "@operica/core/i18n/react";
+import enCommon from "@operica/views/locales/en/common.json";
+import enAuth from "@operica/views/locales/en/auth.json";
+import enSettings from "@operica/views/locales/en/settings.json";
 import type { ReactNode } from "react";
 
 const TEST_RESOURCES = {
@@ -62,10 +62,10 @@ vi.mock("next/navigation", () => ({
 // web wrapper uses useAuthStore((s) => s.user/isLoading). Keep the real
 // sanitizeNextUrl so the redirect-sanitization rules are exercised rather
 // than silently drifting behind a mock reimplementation.
-vi.mock("@opercia/core/auth", async () => {
+vi.mock("@operica/core/auth", async () => {
   const actual =
-    await vi.importActual<typeof import("@opercia/core/auth")>(
-      "@opercia/core/auth",
+    await vi.importActual<typeof import("@operica/core/auth")>(
+      "@operica/core/auth",
     );
   authStateRef.state.sendCode = mockSendCode;
   authStateRef.state.verifyCode = mockVerifyCode;
@@ -83,7 +83,7 @@ vi.mock("@/features/auth/auth-cookie", () => ({
 }));
 
 // Mock api
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     listWorkspaces: mockListWorkspaces,
     listMyInvitations: mockListMyInvitations,
@@ -109,7 +109,7 @@ describe("LoginPage", () => {
   it("renders login form with email input and continue button", () => {
     render(<LoginPage />, { wrapper: createWrapper() });
 
-    expect(screen.getByText("Sign in to Opercia")).toBeInTheDocument();
+    expect(screen.getByText("Sign in to Operica")).toBeInTheDocument();
     expect(screen.getByText("Enter your email to get a login code")).toBeInTheDocument();
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
     expect(
@@ -130,11 +130,11 @@ describe("LoginPage", () => {
     const user = userEvent.setup();
     render(<LoginPage />, { wrapper: createWrapper() });
 
-    await user.type(screen.getByLabelText("Email"), "test@opercia.ai");
+    await user.type(screen.getByLabelText("Email"), "test@operica.ai");
     await user.click(screen.getByRole("button", { name: "Continue" }));
 
     await waitFor(() => {
-      expect(mockSendCode).toHaveBeenCalledWith("test@opercia.ai");
+      expect(mockSendCode).toHaveBeenCalledWith("test@operica.ai");
     });
   });
 
@@ -143,7 +143,7 @@ describe("LoginPage", () => {
     const user = userEvent.setup();
     render(<LoginPage />, { wrapper: createWrapper() });
 
-    await user.type(screen.getByLabelText("Email"), "test@opercia.ai");
+    await user.type(screen.getByLabelText("Email"), "test@operica.ai");
     await user.click(screen.getByRole("button", { name: "Continue" }));
 
     await waitFor(() => {
@@ -156,7 +156,7 @@ describe("LoginPage", () => {
     const user = userEvent.setup();
     render(<LoginPage />, { wrapper: createWrapper() });
 
-    await user.type(screen.getByLabelText("Email"), "test@opercia.ai");
+    await user.type(screen.getByLabelText("Email"), "test@operica.ai");
     await user.click(screen.getByRole("button", { name: "Continue" }));
 
     await waitFor(() => {
@@ -169,7 +169,7 @@ describe("LoginPage", () => {
     const user = userEvent.setup();
     render(<LoginPage />, { wrapper: createWrapper() });
 
-    await user.type(screen.getByLabelText("Email"), "test@opercia.ai");
+    await user.type(screen.getByLabelText("Email"), "test@operica.ai");
     await user.click(screen.getByRole("button", { name: "Continue" }));
 
     await waitFor(() => {
@@ -180,10 +180,10 @@ describe("LoginPage", () => {
   // Regression: MUL-1080 — if the user is already authenticated on the web
   // and the Desktop app redirects them to /login?platform=desktop, the web
   // must exchange the cookie session for a bearer token and hand it off via
-  // the opercia:// deep link, not silently redirect to the workspace page.
+  // the operica:// deep link, not silently redirect to the workspace page.
   it("mints a token and deep-links to Desktop when already logged in with platform=desktop", async () => {
     searchParamsState.params = new URLSearchParams({ platform: "desktop" });
-    authStateRef.state.user = { id: "u1", email: "test@opercia.ai" };
+    authStateRef.state.user = { id: "u1", email: "test@operica.ai" };
     mockIssueCliToken.mockImplementation(() =>
       Promise.resolve({ token: "handoff-jwt" }),
     );
@@ -203,11 +203,11 @@ describe("LoginPage", () => {
       });
       await waitFor(() => {
         expect(hrefSetter).toHaveBeenCalledWith(
-          "opercia://auth/callback?token=handoff-jwt",
+          "operica://auth/callback?token=handoff-jwt",
         );
       });
       expect(
-        await screen.findByRole("button", { name: "Open Opercia Desktop" }),
+        await screen.findByRole("button", { name: "Open Operica Desktop" }),
       ).toBeInTheDocument();
     } finally {
       Object.defineProperty(window, "location", {
@@ -226,7 +226,7 @@ describe("LoginPage", () => {
   describe("post-login redirect ownership (#5009)", () => {
     const onboardedUser = {
       id: "u1",
-      email: "test@opercia.ai",
+      email: "test@operica.ai",
       onboarded_at: "2026-01-01T00:00:00Z",
     };
 

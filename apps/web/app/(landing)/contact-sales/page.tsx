@@ -4,9 +4,9 @@ import { ContactSalesPageClient } from "@/features/landing/components/contact-sa
 export const metadata: Metadata = {
   title: "Contact Sales",
   description:
-    "Talk to the Opercia team about rolling out human + agent workflows at your company.",
+    "Talk to the Operica team about rolling out human + agent workflows at your company.",
   openGraph: {
-    title: "Contact Sales — Opercia",
+    title: "Contact Sales — Operica",
     description:
       "Tell us about your team. We’ll respond within three business days.",
     url: "/contact-sales",

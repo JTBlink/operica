@@ -11,7 +11,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enIssues from "../../../locales/en/issues.json";
 import { AssigneePicker } from "./assignee-picker";
 
@@ -27,16 +27,16 @@ vi.mock("@tanstack/react-query", () => ({
   },
 }));
 
-vi.mock("@opercia/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
-vi.mock("@opercia/core/auth", () => ({ useAuthStore: () => ({ id: "user-1" }) }));
-vi.mock("@opercia/core/agents", () => ({ isAgentRuntimeBound: () => true }));
-vi.mock("@opercia/core/permissions", () => ({
+vi.mock("@operica/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
+vi.mock("@operica/core/auth", () => ({ useAuthStore: () => ({ id: "user-1" }) }));
+vi.mock("@operica/core/agents", () => ({ isAgentRuntimeBound: () => true }));
+vi.mock("@operica/core/permissions", () => ({
   canAssignAgentToIssue: () => ({ allowed: true }),
 }));
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Ada Lovelace" }),
 }));
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"] }),
   agentListOptions: () => ({ queryKey: ["agents"] }),
   squadListOptions: () => ({ queryKey: ["squads"] }),

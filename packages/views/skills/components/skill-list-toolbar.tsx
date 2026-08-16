@@ -11,9 +11,9 @@ import {
   Search,
   X,
 } from "lucide-react";
-import type { Agent, MemberWithUser } from "@opercia/core/types";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { Button } from "@opercia/ui/components/ui/button";
+import type { Agent, MemberWithUser } from "@operica/core/types";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -24,20 +24,20 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { Input } from "@opercia/ui/components/ui/input";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Switch } from "@opercia/ui/components/ui/switch";
+} from "@operica/ui/components/ui/popover";
+import { Switch } from "@operica/ui/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
+} from "@operica/ui/components/ui/tooltip";
+import { ActorAvatar } from "@operica/ui/components/common/actor-avatar";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";
 import {
   type SkillColumnKey,
@@ -45,7 +45,7 @@ import {
   type SkillOriginType,
   type SkillSortDirection,
   type SkillSortField,
-} from "@opercia/core/skills/stores";
+} from "@operica/core/skills/stores";
 import { useT } from "../../i18n";
 import type { SkillRow } from "./skills-page";
 

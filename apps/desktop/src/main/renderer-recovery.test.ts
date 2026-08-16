@@ -96,7 +96,7 @@ describe("installRendererRecoveryHandlers", () => {
       showReloadPrompt,
       getDiagnosticContext: () => ({
         windowUrl:
-          "file:///Applications/Opercia.app/Contents/Resources/app.asar/index.html",
+          "file:///Applications/Operica.app/Contents/Resources/app.asar/index.html",
         desktopRoute,
       }),
       unresponsivePromptDelayMs: 100,
@@ -109,7 +109,7 @@ describe("installRendererRecoveryHandlers", () => {
       kind: "unresponsive",
       context: {
         windowUrl:
-          "file:///Applications/Opercia.app/Contents/Resources/app.asar/index.html",
+          "file:///Applications/Operica.app/Contents/Resources/app.asar/index.html",
         desktopRoute,
       },
     });
@@ -163,10 +163,10 @@ describe("installRendererRecoveryHandlers", () => {
 
     expect(showMessageBox).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: "Opercia needs to reload",
+        title: "Operica needs to reload",
         message: "The desktop window has been stuck for a few seconds.",
         detail: expect.stringContaining(
-          "Click Reload to refresh this window and keep using Opercia.",
+          "Click Reload to refresh this window and keep using Operica.",
         ),
       }),
     );

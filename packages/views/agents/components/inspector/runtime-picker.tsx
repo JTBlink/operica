@@ -9,7 +9,7 @@ import {
   Lock,
   Monitor,
 } from "lucide-react";
-import type { AgentRuntime, MemberWithUser } from "@opercia/core/types";
+import type { AgentRuntime, MemberWithUser } from "@operica/core/types";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import {
   PickerItem,
@@ -21,7 +21,7 @@ import {
   runtimeRowLabel,
   type RuntimeMachine,
 } from "../../../runtimes/components/runtime-machines";
-import { Label } from "@opercia/ui/components/ui/label";
+import { Label } from "@operica/ui/components/ui/label";
 import { CHIP_CLASS } from "./chip";
 import { useT } from "../../../i18n";
 

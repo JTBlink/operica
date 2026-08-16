@@ -1,10 +1,10 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { ArrowUpRight } from "lucide-react";
 
-// Docs-local stateless Opercia mark — matches @opercia/ui's OperciaIcon,
+// Docs-local stateless Operica mark — matches @operica/ui's OpericaIcon,
 // while staying safe to render from Server Components. Keep in sync with
-// packages/ui/components/common/opercia-icon.tsx if the mark changes.
-function OperciaMark() {
+// packages/ui/components/common/operica-icon.tsx if the mark changes.
+function OpericaMark() {
   return (
     <svg
       viewBox="0 0 256 256"
@@ -50,7 +50,7 @@ function GitHubMark() {
 }
 
 // External links shown at the top of the sidebar (and in the top nav on
-// desktop). Leading icon = brand identity (GitHub mark / Opercia mark);
+// desktop). Leading icon = brand identity (GitHub mark / Operica mark);
 // trailing ArrowUpRight = "opens externally" glyph, same pattern as
 // `packages/views/layout/help-launcher.tsx` from PR #1560.
 const externalLinkText = (label: string) => (
@@ -63,7 +63,7 @@ const externalLinkText = (label: string) => (
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
-      <span className="font-semibold text-base">Opercia Docs</span>
+      <span className="font-semibold text-base">Operica Docs</span>
     ),
   },
   links: [
@@ -74,9 +74,9 @@ export const baseOptions: BaseLayoutProps = {
       external: true,
     },
     {
-      icon: <OperciaMark />,
-      text: externalLinkText("Opercia"),
-      url: "https://opercia.ai",
+      icon: <OpericaMark />,
+      text: externalLinkText("Operica"),
+      url: "https://operica.ai",
       external: true,
     },
   ],

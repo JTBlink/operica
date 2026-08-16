@@ -12,8 +12,8 @@ import {
 import type {
   RuntimeModel,
   RuntimeModelListRequest,
-} from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
+} from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../../locales/en/common.json";
 import enAgents from "../../../locales/en/agents.json";
 import enIssues from "../../../locales/en/issues.json";
@@ -25,7 +25,7 @@ const TEST_RESOURCES = {
 const mockInitiateListModels = vi.hoisted(() => vi.fn());
 const mockGetListModelsResult = vi.hoisted(() => vi.fn());
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     initiateListModels: (...args: unknown[]) =>
       mockInitiateListModels(...args),
@@ -206,7 +206,7 @@ describe("ThinkingPropRow", () => {
     renderRow({ value: "" });
 
     await screen.findByText("Thinking");
-    // Empty value means Opercia omits --effort, so the local CLI's
+    // Empty value means Operica omits --effort, so the local CLI's
     // config decides — chip + tooltip both read "Follow CLI config".
     expect((await screen.findAllByText("Follow CLI config")).length).toBeGreaterThan(0);
   });

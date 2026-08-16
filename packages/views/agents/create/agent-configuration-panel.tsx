@@ -7,12 +7,12 @@ import {
   applyDraftRuntimeChange,
   type AgentDraft,
   type AgentPermissionScope,
-} from "@opercia/core/agents";
-import type { MemberWithUser, RuntimeDevice } from "@opercia/core/types";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/core/agents";
+import type { MemberWithUser, RuntimeDevice } from "@operica/core/types";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
+import { Input } from "@operica/ui/components/ui/input";
+import { Textarea } from "@operica/ui/components/ui/textarea";
+import { cn } from "@operica/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { useT } from "../../i18n";

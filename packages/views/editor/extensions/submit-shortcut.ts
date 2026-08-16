@@ -5,8 +5,8 @@ import {
   isPlainShortcut,
   shortcutMatchesEvent,
   type ShortcutChord,
-} from "@opercia/core/shortcuts";
-import { isImeComposing } from "@opercia/core/utils";
+} from "@operica/core/shortcuts";
+import { isImeComposing } from "@operica/core/utils";
 
 export function shouldHandleSubmitShortcut(
   event: KeyboardEvent,

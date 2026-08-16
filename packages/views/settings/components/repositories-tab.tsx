@@ -2,10 +2,10 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { LoaderCircle, Plus, Search, Trash2 } from "lucide-react";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Badge } from "@opercia/ui/components/ui/badge";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
+import { Input } from "@operica/ui/components/ui/input";
+import { Button } from "@operica/ui/components/ui/button";
+import { Badge } from "@operica/ui/components/ui/badge";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -13,14 +13,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@opercia/ui/components/ui/select";
+} from "@operica/ui/components/ui/select";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,27 +30,27 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import { toast } from "sonner";
 import {
   useInfiniteQuery,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { memberListOptions, workspaceKeys } from "@opercia/core/workspace/queries";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { memberListOptions, workspaceKeys } from "@operica/core/workspace/queries";
 import {
   githubInstallationRepositoriesOptions,
   githubInstallationsOptions,
-} from "@opercia/core/github";
-import { api } from "@opercia/core/api";
+} from "@operica/core/github";
+import { api } from "@operica/core/api";
 import type {
   GitHubRepository,
   Workspace,
   WorkspaceRepo,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
 import {

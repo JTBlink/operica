@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/go-chi/chi/v5"
 )
 
 // ---------------------------------------------------------------------------
@@ -26,7 +26,7 @@ import (
 // across API replicas — POST, heartbeat and poll can each land on a different
 // node, and they all need to see the same request lifecycle. The single-node
 // in-memory implementation is fine for self-hosted dev; multi-node deploys
-// (Opercia Cloud) MUST use the Redis-backed implementation, otherwise the
+// (Operica Cloud) MUST use the Redis-backed implementation, otherwise the
 // pending request is invisible to whichever replica receives the next call
 // and the picker shows "No models available" (regression: see issue
 // review on JTBlink/operica#2009).

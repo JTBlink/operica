@@ -7,8 +7,8 @@ import {
   Webhook, RotateCw, Server,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { autopilotDetailOptions, autopilotRunsOptions, autopilotRunOptions } from "@opercia/core/autopilots/queries";
-import { projectDetailOptions } from "@opercia/core/projects/queries";
+import { autopilotDetailOptions, autopilotRunsOptions, autopilotRunOptions } from "@operica/core/autopilots/queries";
+import { projectDetailOptions } from "@operica/core/projects/queries";
 import {
   useUpdateAutopilot,
   useDeleteAutopilot,
@@ -16,25 +16,25 @@ import {
   useCreateAutopilotTrigger,
   useDeleteAutopilotTrigger,
   useRotateAutopilotTriggerWebhookToken,
-} from "@opercia/core/autopilots/mutations";
-import { buildAutopilotWebhookUrl } from "@opercia/core/autopilots";
-import { api } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { useActorName } from "@opercia/core/workspace/hooks";
+} from "@operica/core/autopilots/mutations";
+import { buildAutopilotWebhookUrl } from "@operica/core/autopilots";
+import { api } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { useActorName } from "@operica/core/workspace/hooks";
 import { useNavigation, AppLink } from "../../navigation";
 import { BreadcrumbHeader } from "../../layout/breadcrumb-header";
 import { ActorAvatar } from "../../common/actor-avatar";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Switch } from "@opercia/ui/components/ui/switch";
-import { cn } from "@opercia/ui/lib/utils";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { Button } from "@operica/ui/components/ui/button";
+import { Switch } from "@operica/ui/components/ui/switch";
+import { cn } from "@operica/ui/lib/utils";
 import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -44,7 +44,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import { ScheduleEditor } from "./schedule-editor/schedule-editor";
 import { WebhookUrlField } from "./webhook-url-field";
 import { getDefaultScheduleConfig, type ScheduleConfig } from "./schedule-editor/model";
@@ -59,8 +59,8 @@ import type {
   AutopilotRun,
   AutopilotSubscriber,
   AutopilotTrigger,
-} from "@opercia/core/types";
-import type { AgentTask } from "@opercia/core/types/agent";
+} from "@operica/core/types";
+import type { AgentTask } from "@operica/core/types/agent";
 import { ReadonlyContent } from "../../editor";
 import { TranscriptButton } from "../../common/task-transcript";
 import { AutopilotDialog } from "./autopilot-dialog";

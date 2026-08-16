@@ -1,8 +1,8 @@
 "use client";
 
-import type { IssueProperty } from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
-import { cn } from "@opercia/ui/lib/utils";
+import type { IssueProperty } from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
+import { cn } from "@operica/ui/lib/utils";
 import {
   Bookmark,
   BriefcaseBusiness,

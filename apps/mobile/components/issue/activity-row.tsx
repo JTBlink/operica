@@ -25,7 +25,7 @@ import type {
   IssuePriority,
   IssueStatus,
   TimelineEntry,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { Text } from "@/components/ui/text";
 import { StatusIcon } from "@/components/ui/status-icon";
 import { PriorityIcon } from "@/components/ui/priority-icon";

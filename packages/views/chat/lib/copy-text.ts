@@ -1,5 +1,5 @@
-import type { ChatMessage } from "@opercia/core/types";
-import type { ChatTimelineItem } from "@opercia/core/chat";
+import type { ChatMessage } from "@operica/core/types";
+import type { ChatTimelineItem } from "@operica/core/chat";
 
 /**
  * Split an assistant timeline into three regions for the conductor-style fold:

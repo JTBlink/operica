@@ -12,46 +12,46 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { CurrencyNumberFlow } from "@opercia/ui/components/ui/number-flow";
+import { CurrencyNumberFlow } from "@operica/ui/components/ui/number-flow";
 import type {
   Agent,
   AgentRuntime,
   AgentTask,
   MemberWithUser,
   RuntimeProfile,
-} from "@opercia/core/types";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
+} from "@operica/core/types";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
 import {
   agentListOptions,
   memberListOptions,
-} from "@opercia/core/workspace/queries";
-import { agentTaskSnapshotOptions } from "@opercia/core/agents";
+} from "@operica/core/workspace/queries";
+import { agentTaskSnapshotOptions } from "@operica/core/agents";
 import {
   deriveRuntimeHealth,
   runtimeProfileListOptions,
   runtimeUsageOptions,
-} from "@opercia/core/runtimes";
-import { useWorkspacePaths } from "@opercia/core/paths";
+} from "@operica/core/runtimes";
+import { useWorkspacePaths } from "@operica/core/paths";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   ListGrid,
   ListGridCell,
   ListGridHeader,
   ListGridHeaderCell,
   ListGridRow,
-} from "@opercia/ui/components/ui/list-grid";
+} from "@operica/ui/components/ui/list-grid";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import { useIntentNavigate, useRowLink } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useViewingTimezone } from "../../common/use-viewing-timezone";
@@ -476,7 +476,7 @@ export function CliCell({ runtime }: { runtime: AgentRuntime }) {
   const meta = runtime.metadata as Record<string, unknown> | null;
   // `version` is the agent's own underlying CLI tool version — distinct per
   // provider (e.g. "2.1.5 (Claude Code)", "codex-cli 0.118.0", "0.42.0").
-  // The separate `cli_version` is the shared opercia daemon CLI, identical
+  // The separate `cli_version` is the shared operica daemon CLI, identical
   // for every runtime on one machine; surfacing it here made all agents
   // show the same number (#3838). The daemon CLI version and its update
   // prompt belong to the machine — they live in the machine header, not on a

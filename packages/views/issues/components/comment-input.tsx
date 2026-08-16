@@ -1,13 +1,13 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import { ContentEditor, type ContentEditorRef, useFileDropZone, FileDropOverlay, useLazyEditor, useUploadGate, useComposerSubmit } from "../../editor";
-import { FileUploadButton } from "@opercia/ui/components/common/file-upload-button";
-import { SubmitButton } from "@opercia/ui/components/common/submit-button";
-import { contentReferencesAttachment } from "@opercia/core/types";
-import { formatShortcut, useShortcut } from "@opercia/core/shortcuts";
-import { useCommentDraftStore } from "@opercia/core/issues/stores";
+import { FileUploadButton } from "@operica/ui/components/common/file-upload-button";
+import { SubmitButton } from "@operica/ui/components/common/submit-button";
+import { contentReferencesAttachment } from "@operica/core/types";
+import { formatShortcut, useShortcut } from "@operica/core/shortcuts";
+import { useCommentDraftStore } from "@operica/core/issues/stores";
 import { useT } from "../../i18n";
 import { CommentTriggerChips } from "./comment-trigger-chips";
 import { useCommentTriggerPreview } from "../hooks/use-comment-trigger-preview";

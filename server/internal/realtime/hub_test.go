@@ -14,9 +14,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/JTBlink/operica/server/internal/auth"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/gorilla/websocket"
-	"github.com/JTBlink/operica/server/internal/auth"
 )
 
 const testWorkspaceID = "test-workspace"
@@ -406,7 +406,7 @@ func TestCheckOrigin(t *testing.T) {
 	prev := allowedWSOrigins.Load().([]string)
 	SetAllowedOrigins([]string{
 		"http://localhost:3000",
-		"https://opercia.ai",
+		"https://operica.ai",
 	})
 	t.Cleanup(func() { SetAllowedOrigins(prev) })
 
@@ -426,24 +426,24 @@ func TestCheckOrigin(t *testing.T) {
 		remoteAddr string
 		want       bool
 	}{
-		{"empty origin allowed", "api.opercia.ai", "", "", "1.2.3.4:5678", true},
+		{"empty origin allowed", "api.operica.ai", "", "", "1.2.3.4:5678", true},
 		{"same-origin allowed (native client default)", "localhost:8080", "http://localhost:8080", "", "1.2.3.4:5678", true},
-		{"same-origin allowed (https)", "api.opercia.ai", "https://api.opercia.ai", "", "1.2.3.4:5678", true},
-		{"same-origin allowed (case-insensitive host, RFC 7230)", "API.Opercia.AI", "https://api.opercia.ai", "", "1.2.3.4:5678", true},
+		{"same-origin allowed (https)", "api.operica.ai", "https://api.operica.ai", "", "1.2.3.4:5678", true},
+		{"same-origin allowed (case-insensitive host, RFC 7230)", "API.Operica.AI", "https://api.operica.ai", "", "1.2.3.4:5678", true},
 		{"whitelisted origin allowed (web cross-origin)", "localhost:8080", "http://localhost:3000", "", "1.2.3.4:5678", true},
-		{"whitelisted origin allowed (prod web)", "api.opercia.ai", "https://opercia.ai", "", "1.2.3.4:5678", true},
-		{"unknown origin rejected (CSWSH defense)", "api.opercia.ai", "https://evil.com", "", "1.2.3.4:5678", false},
+		{"whitelisted origin allowed (prod web)", "api.operica.ai", "https://operica.ai", "", "1.2.3.4:5678", true},
+		{"unknown origin rejected (CSWSH defense)", "api.operica.ai", "https://evil.com", "", "1.2.3.4:5678", false},
 		{"different port rejected", "localhost:8080", "http://localhost:9999", "", "1.2.3.4:5678", false},
-		{"X-Forwarded-Host from trusted proxy matches origin", "internal.proxy", "https://opercia.ai", "opercia.ai", "127.0.0.1:5678", true},
-		{"X-Forwarded-Host from trusted proxy case-insensitive", "internal.proxy", "https://Opercia.AI", "opercia.ai", "10.0.0.1:5678", true},
+		{"X-Forwarded-Host from trusted proxy matches origin", "internal.proxy", "https://operica.ai", "operica.ai", "127.0.0.1:5678", true},
+		{"X-Forwarded-Host from trusted proxy case-insensitive", "internal.proxy", "https://Operica.AI", "operica.ai", "10.0.0.1:5678", true},
 		{"X-Forwarded-Host from untrusted source rejected", "internal.proxy", "https://example.com", "example.com", "1.2.3.4:5678", false},
-		{"X-Forwarded-Host from trusted proxy but evil origin rejected", "internal.proxy", "https://evil.com", "opercia.ai", "127.0.0.1:5678", false},
-		{"X-Forwarded-Host present but origin matches direct Host", "opercia.ai", "https://opercia.ai", "other.host", "1.2.3.4:5678", true},
+		{"X-Forwarded-Host from trusted proxy but evil origin rejected", "internal.proxy", "https://evil.com", "operica.ai", "127.0.0.1:5678", false},
+		{"X-Forwarded-Host present but origin matches direct Host", "operica.ai", "https://operica.ai", "other.host", "1.2.3.4:5678", true},
 		{"X-Forwarded-Host spoofed by attacker rejected", "internal.proxy", "https://evil.com", "evil.com", "1.2.3.4:5678", false},
-		{"X-Forwarded-Host from trusted CIDR range matches origin", "internal.proxy", "https://opercia.ai", "opercia.ai", "10.5.6.7:5678", true},
-		{"X-Forwarded-Host from trusted IPv6 proxy matches origin", "internal.proxy", "https://opercia.ai", "opercia.ai", "[::1]:5678", true},
-		{"X-Forwarded-Host comma list uses first (client-facing) value", "internal.proxy", "https://opercia.ai", "opercia.ai, proxy.internal", "127.0.0.1:5678", true},
-		{"X-Forwarded-Host comma list ignores trailing values", "internal.proxy", "https://staging.opercia.ai", "proxy.internal, staging.opercia.ai", "127.0.0.1:5678", false},
+		{"X-Forwarded-Host from trusted CIDR range matches origin", "internal.proxy", "https://operica.ai", "operica.ai", "10.5.6.7:5678", true},
+		{"X-Forwarded-Host from trusted IPv6 proxy matches origin", "internal.proxy", "https://operica.ai", "operica.ai", "[::1]:5678", true},
+		{"X-Forwarded-Host comma list uses first (client-facing) value", "internal.proxy", "https://operica.ai", "operica.ai, proxy.internal", "127.0.0.1:5678", true},
+		{"X-Forwarded-Host comma list ignores trailing values", "internal.proxy", "https://staging.operica.ai", "proxy.internal, staging.operica.ai", "127.0.0.1:5678", false},
 	}
 
 	for _, tc := range cases {

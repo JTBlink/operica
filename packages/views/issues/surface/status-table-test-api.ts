@@ -1,4 +1,4 @@
-import { ALL_STATUSES } from "@opercia/core/issues/config";
+import { ALL_STATUSES } from "@operica/core/issues/config";
 import type {
   Issue,
   IssueTableGroupDescriptor,
@@ -9,7 +9,7 @@ import type {
   IssueTableRowsRequest,
   ListIssuesParams,
   ListIssuesResponse,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 
 type LegacyListIssues = (
   params?: ListIssuesParams,

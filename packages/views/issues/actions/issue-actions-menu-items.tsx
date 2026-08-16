@@ -19,15 +19,15 @@ import {
   Unlink,
   UserMinus,
 } from "lucide-react";
-import type { AgentTask, Issue } from "@opercia/core/types";
-import { todayDateOnly, addDaysDateOnly } from "@opercia/core/issues/date";
-import { api } from "@opercia/core/api";
+import type { AgentTask, Issue } from "@operica/core/types";
+import { todayDateOnly, addDaysDateOnly } from "@operica/core/issues/date";
+import { api } from "@operica/core/api";
 import {
   ALL_STATUSES,
   PRIORITY_DISPLAY_ORDER,
   PRIORITY_CONFIG,
-} from "@opercia/core/issues/config";
-import { issueKeys } from "@opercia/core/issues/queries";
+} from "@operica/core/issues/config";
+import { issueKeys } from "@operica/core/issues/queries";
 import { StatusIcon } from "../components/status-icon";
 import { PriorityIcon } from "../components/priority-icon";
 import {
@@ -36,15 +36,15 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
   DropdownMenuSeparator,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   ContextMenuItem,
   ContextMenuSub,
   ContextMenuSubTrigger,
   ContextMenuSubContent,
   ContextMenuSeparator,
-} from "@opercia/ui/components/ui/context-menu";
-import { copyText } from "@opercia/ui/lib/clipboard";
+} from "@operica/ui/components/ui/context-menu";
+import { copyText } from "@operica/ui/lib/clipboard";
 import type { UseIssueActionsResult } from "./use-issue-actions";
 import { useT } from "../../i18n";
 

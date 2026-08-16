@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enSkills from "../../locales/en/skills.json";
 
@@ -17,17 +17,17 @@ const mockRuntimeListOptions = vi.hoisted(() => vi.fn());
 const mockRuntimeLocalSkillsOptions = vi.hoisted(() => vi.fn());
 const mockListMembers = vi.hoisted(() => vi.fn());
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     listMembers: (...args: unknown[]) => mockListMembers(...args),
   },
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@opercia/core/auth", () => {
+vi.mock("@operica/core/auth", () => {
   const stateUser = { id: "user-1", email: "u@example.com", name: "User" };
   const useAuthStore = (selector?: (s: { user: typeof stateUser }) => unknown) => {
     const state = { user: stateUser };
@@ -39,10 +39,10 @@ vi.mock("@opercia/core/auth", () => {
 // Spread the real module so alias helpers (runtimeDisplayLabel) and the
 // machine-grouping helpers used transitively by buildRuntimeMachines
 // (deriveRuntimeHealth) stay real; only the data/import entrypoints are mocked.
-vi.mock("@opercia/core/runtimes", async () => {
+vi.mock("@operica/core/runtimes", async () => {
   const actual =
-    await vi.importActual<typeof import("@opercia/core/runtimes")>(
-      "@opercia/core/runtimes",
+    await vi.importActual<typeof import("@operica/core/runtimes")>(
+      "@operica/core/runtimes",
     );
   return {
     ...actual,

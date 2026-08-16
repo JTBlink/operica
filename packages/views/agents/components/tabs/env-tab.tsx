@@ -10,10 +10,10 @@ import {
   Save,
   Trash2,
 } from "lucide-react";
-import { api } from "@opercia/core/api";
-import type { Agent } from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+import { api } from "@operica/core/api";
+import type { Agent } from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import { toast } from "sonner";
 import { useT } from "../../../i18n";
 

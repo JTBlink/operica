@@ -17,15 +17,15 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   return {
     ...config,
     name: isProd
-      ? "Opercia"
+      ? "Operica"
       : isStaging
-        ? "Opercia (Staging)"
-        : "Opercia (Dev)",
-    slug: "opercia-mobile",
+        ? "Operica (Staging)"
+        : "Operica (Dev)",
+    slug: "operica-mobile",
     version: "0.1.0",
     orientation: "portrait",
     userInterfaceStyle: "automatic",
-    scheme: "opercia",
+    scheme: "operica",
     // Expo prebuild generates every required iOS icon size from this
     // full-bleed 1024x1024 PNG. The editable source is assets/icon.svg.
     icon: "./assets/icon.png",
@@ -33,7 +33,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       supportsTablet: false,
       // Per-variant bundle id overrides exist for one reason: an Apple ID
       // can only sign bundle prefixes it owns, so contributors not on the
-      // Opercia Apple Developer team (and external users self-building a
+      // Operica Apple Developer team (and external users self-building a
       // personal copy against production) need to swap to a reverse-domain
       // they control. Each variant has its own `_<VARIANT>` suffix and is
       // only read inside that variant's branch — a generic
@@ -41,10 +41,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       // auto-loads `.env.<mode>.local` regardless of APP_ENV) and collapse
       // dev / staging / prod onto a single id.
       bundleIdentifier: isProd
-        ? (process.env.EXPO_BUNDLE_IDENTIFIER_PROD ?? "ai.opercia.mobile")
+        ? (process.env.EXPO_BUNDLE_IDENTIFIER_PROD ?? "ai.operica.mobile")
         : isStaging
-          ? "ai.opercia.mobile.staging"
-          : (process.env.EXPO_BUNDLE_IDENTIFIER_DEV ?? "ai.opercia.mobile.dev"),
+          ? "ai.operica.mobile.staging"
+          : (process.env.EXPO_BUNDLE_IDENTIFIER_DEV ?? "ai.operica.mobile.dev"),
     },
     plugins: [
       "expo-router",
@@ -59,7 +59,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           // iOS 14+. Camera + microphone are disabled — we only ever read
           // from the existing photo library.
           photosPermission:
-            "Allow Opercia to access your photos to attach images to issues and comments.",
+            "Allow Operica to access your photos to attach images to issues and comments.",
           cameraPermission: false,
           microphonePermission: false,
         },

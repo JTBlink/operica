@@ -1290,7 +1290,7 @@ func TestCodexDeliverableOutputExcludesNarration(t *testing.T) {
 				t.Fatalf("Result.Output = %q, want %q", got, tc.want)
 			}
 			// Narrowing delivery must not narrow the transcript: both messages
-			// still stream to the timeline the Opercia UI renders.
+			// still stream to the timeline the Operica UI renders.
 			if len(streamed) != 2 || streamed[0] != "Let me check the logs." {
 				t.Fatalf("expected both agent messages streamed, got %q", streamed)
 			}
@@ -1823,9 +1823,9 @@ func TestCodexStartOrResumeThreadResumesPriorThread(t *testing.T) {
 	}
 }
 
-// codexRuntimeBriefCanary stands in for the Opercia runtime brief the daemon
+// codexRuntimeBriefCanary stands in for the Operica runtime brief the daemon
 // would inline if developerInstructions were ever wired back up.
-const codexRuntimeBriefCanary = "OPERCIA-RUNTIME-BRIEF-CANARY"
+const codexRuntimeBriefCanary = "OPERICA-RUNTIME-BRIEF-CANARY"
 
 // assertNoDeveloperInstructions pins the MUL-5392 contract: Codex loads the
 // per-task AGENTS.md from the thread's cwd, so the daemon never inlines the
@@ -4263,9 +4263,9 @@ func TestEnsureCodexMcpConfigEmptyClearsBlock(t *testing.T) {
 	// `[mcp_servers.user]`) is left untouched.
 	tmp := filepath.Join(t.TempDir(), "config.toml")
 	initial := "sandbox_mode = \"workspace-write\"\n\n" +
-		operciaCodexMcpBeginMarker + "\n" +
+		opericaCodexMcpBeginMarker + "\n" +
 		"[mcp_servers.fetch]\ncommand = \"uvx\"\n" +
-		operciaCodexMcpEndMarker + "\n\n" +
+		opericaCodexMcpEndMarker + "\n\n" +
 		"[mcp_servers.user_global]\ncommand = \"keep\"\n"
 	if err := os.WriteFile(tmp, []byte(initial), 0o600); err != nil {
 		t.Fatalf("seed config: %v", err)
@@ -4279,7 +4279,7 @@ func TestEnsureCodexMcpConfigEmptyClearsBlock(t *testing.T) {
 		t.Fatalf("read after: %v", err)
 	}
 	got := string(data)
-	if strings.Contains(got, operciaCodexMcpBeginMarker) {
+	if strings.Contains(got, opericaCodexMcpBeginMarker) {
 		t.Fatalf("managed block should be cleared, got:\n%s", got)
 	}
 	if !strings.Contains(got, "[mcp_servers.user_global]") {
@@ -4311,7 +4311,7 @@ func TestEnsureCodexMcpConfigWritesManagedBlock(t *testing.T) {
 	}
 	got := string(data)
 
-	if !strings.Contains(got, operciaCodexMcpBeginMarker) || !strings.Contains(got, operciaCodexMcpEndMarker) {
+	if !strings.Contains(got, opericaCodexMcpBeginMarker) || !strings.Contains(got, opericaCodexMcpEndMarker) {
 		t.Fatalf("expected managed block markers, got:\n%s", got)
 	}
 	alphaIdx := strings.Index(got, "[mcp_servers.alpha]")
@@ -4627,7 +4627,7 @@ func TestEnsureCodexMcpConfigAbsentLeavesUserTablesAlone(t *testing.T) {
 		if !strings.Contains(got, "[mcp_servers.user_global]") {
 			t.Fatalf("absent mcp_config (%q) must leave user MCP tables alone, got:\n%s", string(raw), got)
 		}
-		if strings.Contains(got, operciaCodexMcpBeginMarker) {
+		if strings.Contains(got, opericaCodexMcpBeginMarker) {
 			t.Fatalf("absent mcp_config (%q) must not write managed markers, got:\n%s", string(raw), got)
 		}
 	}
@@ -4660,7 +4660,7 @@ func TestEnsureCodexMcpConfigEmptyManagedSetStripsUserMcp(t *testing.T) {
 		if strings.Contains(got, "user_global") {
 			t.Fatalf("managed empty set (%q) must strip user MCP tables, got:\n%s", string(raw), got)
 		}
-		if !strings.Contains(got, operciaCodexMcpBeginMarker) || !strings.Contains(got, operciaCodexMcpEndMarker) {
+		if !strings.Contains(got, opericaCodexMcpBeginMarker) || !strings.Contains(got, opericaCodexMcpEndMarker) {
 			t.Fatalf("managed empty set (%q) must still write markers so future runs find them, got:\n%s", string(raw), got)
 		}
 		if !strings.Contains(got, `sandbox_mode = "workspace-write"`) {

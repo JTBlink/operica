@@ -4,9 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { AlertTriangle, Check, Loader2, Plug, RefreshCw, Trash2 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { Input } from "@opercia/ui/components/ui/input";
+import { Button } from "@operica/ui/components/ui/button";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,14 +16,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { api } from "@opercia/core/api";
+} from "@operica/ui/components/ui/alert-dialog";
+import { api } from "@operica/core/api";
 import {
   composioConnectionsOptions,
   composioKeys,
   composioToolkitsOptions,
-} from "@opercia/core/composio";
-import type { ComposioToolkit } from "@opercia/core/types";
+} from "@operica/core/composio";
+import type { ComposioToolkit } from "@operica/core/types";
 import { ComposioToolkitLogo } from "../../common/composio-toolkit-logo";
 import { useT, useTimeAgo } from "../../i18n";
 import { useNavigation } from "../../navigation";

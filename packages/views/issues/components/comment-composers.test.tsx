@@ -2,10 +2,10 @@ import { forwardRef, useEffect, useImperativeHandle, useRef, type ReactNode, typ
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
-import type { UploadResult } from "@opercia/core/hooks/use-file-upload";
-import type { Attachment } from "@opercia/core/types";
-import { useCommentComposerStore, useCommentDraftStore } from "@opercia/core/issues/stores";
-import { WorkspaceSlugProvider } from "@opercia/core/paths";
+import type { UploadResult } from "@operica/core/hooks/use-file-upload";
+import type { Attachment } from "@operica/core/types";
+import { useCommentComposerStore, useCommentDraftStore } from "@operica/core/issues/stores";
+import { WorkspaceSlugProvider } from "@operica/core/paths";
 import { renderWithI18n } from "../../test/i18n";
 import { CommentInput } from "./comment-input";
 import { ReplyInput } from "./reply-input";
@@ -53,7 +53,7 @@ const editorUploadSignal = vi.hoisted(
 // the same or the two records drift apart only in tests.
 let mockUploadIdSeq = 0;
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     uploadFile: apiUploadFile,
     listWorkspaces: apiListWorkspaces,
@@ -62,9 +62,9 @@ vi.mock("@opercia/core/api", () => ({
   },
 }));
 
-vi.mock("@opercia/core/hooks/use-file-upload", async () => ({
-  ...(await vi.importActual<typeof import("@opercia/core/hooks/use-file-upload")>(
-    "@opercia/core/hooks/use-file-upload",
+vi.mock("@operica/core/hooks/use-file-upload", async () => ({
+  ...(await vi.importActual<typeof import("@operica/core/hooks/use-file-upload")>(
+    "@operica/core/hooks/use-file-upload",
   )),
   useFileUpload: () => ({ uploadWithToast }),
 }));

@@ -27,27 +27,27 @@ import type {
   IssueTableGroupDescriptor,
   Project,
   UpdateIssueRequest,
-} from "@opercia/core/types";
-import { useViewStore, useViewStoreApi } from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/core/types";
+import { useViewStore, useViewStoreApi } from "@operica/core/issues/stores/view-store-context";
 import { useViewBaseline } from "../surface/view-baseline-context";
 import { filterIssues, type IssueFilters } from "../utils/filter";
 import { getMoveAnchors } from "../utils/drag-utils";
-import type { SwimlaneGrouping } from "@opercia/core/issues/stores/view-store";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { childrenByParentsOptions, issueKeys } from "@opercia/core/issues/queries";
+import type { SwimlaneGrouping } from "@operica/core/issues/stores/view-store";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { childrenByParentsOptions, issueKeys } from "@operica/core/issues/queries";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import { sortIssues } from "../utils/sort";
-import { ALL_STATUSES, STATUS_CONFIG } from "@opercia/core/issues/config";
+import { ALL_STATUSES, STATUS_CONFIG } from "@operica/core/issues/config";
 import { DraggableBoardCard, BoardCardContent } from "./board-card";
 import { StatusIcon } from "./status-icon";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import { StatusHeading } from "./status-heading";
 import { HiddenColumnsPanel, HiddenColumnRow } from "./hidden-columns-panel";
 import { InfiniteScrollSentinel } from "./infinite-scroll-sentinel";

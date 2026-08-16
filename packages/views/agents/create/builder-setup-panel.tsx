@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import { useWorkspacePaths } from "@opercia/core/paths";
+import { useWorkspacePaths } from "@operica/core/paths";
 import type {
   AgentBuilderSessionSummary,
   RuntimeDevice,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { BuilderSetup } from "./builder-conversation";
 import { UnfinishedDraftsBanner } from "./unfinished-drafts";
 import { useBuilderSession } from "./use-builder-session";

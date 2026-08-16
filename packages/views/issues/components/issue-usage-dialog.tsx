@@ -1,16 +1,16 @@
 "use client";
 
 import { useMemo } from "react";
-import type { AgentTask } from "@opercia/core/types";
+import type { AgentTask } from "@operica/core/types";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { useCustomPricingStore } from "@opercia/core/runtimes/custom-pricing-store";
+} from "@operica/ui/components/ui/dialog";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { useCustomPricingStore } from "@operica/core/runtimes/custom-pricing-store";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useT } from "../../i18n";
 import { formatDuration } from "../../agents/components/agent-activity-hover-content";

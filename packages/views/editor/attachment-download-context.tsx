@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, use, useMemo, type ReactNode } from "react";
-import type { Attachment } from "@opercia/core/types";
-import { matchAttachmentByURL } from "@opercia/core/attachments/image-sequence";
+import type { Attachment } from "@operica/core/types";
+import { matchAttachmentByURL } from "@operica/core/attachments/image-sequence";
 import { openExternal } from "../platform";
 import { useDownloadAttachment } from "./use-download-attachment";
 

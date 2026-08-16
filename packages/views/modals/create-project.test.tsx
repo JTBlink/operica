@@ -5,19 +5,19 @@ import userEvent from "@testing-library/user-event";
 import { renderWithI18n } from "../test/i18n";
 
 const longRepoUrl =
-  "https://github.com/opercia-ai/a-very-long-repository-name-that-needs-a-tooltip";
-const apiRepoUrl = "https://github.com/opercia-ai/api";
-const webRepoUrl = "https://github.com/opercia-ai/web";
+  "https://github.com/operica-ai/a-very-long-repository-name-that-needs-a-tooltip";
+const apiRepoUrl = "https://github.com/operica-ai/api";
+const webRepoUrl = "https://github.com/operica-ai/web";
 
 vi.mock("@tanstack/react-query", () => ({
   useQuery: () => ({ data: [] }),
 }));
 
-vi.mock("@opercia/core/projects/mutations", () => ({
+vi.mock("@operica/core/projects/mutations", () => ({
   useCreateProject: () => ({ mutateAsync: vi.fn() }),
 }));
 
-vi.mock("@opercia/core/projects", () => ({
+vi.mock("@operica/core/projects", () => ({
   useProjectDraftStore: (selector: (state: unknown) => unknown) =>
     selector({
       draft: {
@@ -34,11 +34,11 @@ vi.mock("@opercia/core/projects", () => ({
     }),
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useCurrentWorkspace: () => ({
     id: "workspace-1",
     name: "Test Workspace",
@@ -50,12 +50,12 @@ vi.mock("@opercia/core/paths", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"], queryFn: vi.fn() }),
   agentListOptions: () => ({ queryKey: ["agents"], queryFn: vi.fn() }),
 }));
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: vi.fn() }),
 }));
 
@@ -100,13 +100,13 @@ vi.mock("../projects/components/project-due-date-picker", () => ({
   ProjectDueDatePicker: () => <button type="button">Due date</button>,
 }));
 
-vi.mock("@opercia/ui/components/ui/dialog", () => ({
+vi.mock("@operica/ui/components/ui/dialog", () => ({
   Dialog: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   DialogContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   DialogTitle: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
-vi.mock("@opercia/ui/components/ui/dropdown-menu", () => ({
+vi.mock("@operica/ui/components/ui/dropdown-menu", () => ({
   DropdownMenu: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   DropdownMenuTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   DropdownMenuContent: ({ children }: { children: React.ReactNode }) => <>{children}</>,
@@ -123,13 +123,13 @@ vi.mock("@opercia/ui/components/ui/dropdown-menu", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/popover", () => ({
+vi.mock("@operica/ui/components/ui/popover", () => ({
   Popover: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   PopoverTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   PopoverContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
-vi.mock("@opercia/ui/components/ui/tooltip", () => ({
+vi.mock("@operica/ui/components/ui/tooltip", () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   TooltipTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   TooltipContent: ({ children }: { children: React.ReactNode }) => (
@@ -137,7 +137,7 @@ vi.mock("@opercia/ui/components/ui/tooltip", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/button", () => ({
+vi.mock("@operica/ui/components/ui/button", () => ({
   Button: ({
     children,
     disabled,
@@ -155,11 +155,11 @@ vi.mock("@opercia/ui/components/ui/button", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/common/emoji-picker", () => ({
+vi.mock("@operica/ui/components/common/emoji-picker", () => ({
   EmojiPicker: () => null,
 }));
 
-vi.mock("@opercia/ui/lib/utils", () => ({
+vi.mock("@operica/ui/lib/utils", () => ({
   cn: (...values: Array<string | false | null | undefined>) =>
     values.filter(Boolean).join(" "),
 }));

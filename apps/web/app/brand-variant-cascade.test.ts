@@ -2,8 +2,8 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import postcss from "postcss";
 import tailwind from "@tailwindcss/postcss";
-import { cn } from "@opercia/ui/lib/utils";
-import { buttonVariants } from "@opercia/ui/components/ui/button";
+import { cn } from "@operica/ui/lib/utils";
+import { buttonVariants } from "@operica/ui/components/ui/button";
 import { beforeAll, describe, expect, it } from "vitest";
 
 /**

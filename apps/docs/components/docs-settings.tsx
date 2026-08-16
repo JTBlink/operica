@@ -4,14 +4,14 @@ import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { cn } from "@operica/ui/lib/utils";
 import { i18n } from "@/lib/i18n";
 import { localeLabels } from "@/lib/translations";
 

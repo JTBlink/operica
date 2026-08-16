@@ -3,9 +3,9 @@
 import { useMemo, useState } from "react";
 import { Plus, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { memberListOptions } from "@opercia/core/workspace/queries";
-import { cn } from "@opercia/ui/lib/utils";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { memberListOptions } from "@operica/core/workspace/queries";
+import { cn } from "@operica/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import {
   PropertyPicker,

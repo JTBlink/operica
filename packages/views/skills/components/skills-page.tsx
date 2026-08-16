@@ -17,22 +17,22 @@ import type {
   MemberWithUser,
   Skill,
   SkillSummary,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { useQuery } from "@tanstack/react-query";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
 import {
   agentListOptions,
   memberListOptions,
   selectSkillAssignments,
   skillListOptions,
-} from "@opercia/core/workspace/queries";
-import { runtimeDisplayLabel, runtimeListOptions } from "@opercia/core/runtimes";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
+} from "@operica/core/workspace/queries";
+import { runtimeDisplayLabel, runtimeListOptions } from "@operica/core/runtimes";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { Button } from "@operica/ui/components/ui/button";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
 import {
   LIST_GRID_BOTTOM_CLEARANCE,
   ListGrid,
@@ -42,14 +42,14 @@ import {
   ListGridHeaderCell,
   ListGridRow,
   type ListGridSortDirection,
-} from "@opercia/ui/components/ui/list-grid";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+} from "@operica/ui/components/ui/list-grid";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
+} from "@operica/ui/components/ui/tooltip";
+import { ActorAvatar } from "@operica/ui/components/common/actor-avatar";
 import { useNavigation, useRowLink } from "../../navigation";
 import {
   CollectionPageHeader,
@@ -64,7 +64,7 @@ import {
   DEFAULT_HIDDEN_COLUMNS,
   type SkillColumnKey,
   type SkillSortField,
-} from "@opercia/core/skills/stores";
+} from "@operica/core/skills/stores";
 import { SkillListToolbar } from "./skill-list-toolbar";
 import {
   SkillBatchToolbar,
@@ -145,7 +145,7 @@ function columnTrackVars(
 }
 
 // Sort/filter/column types and defaults live in the core view store
-// (@opercia/core/skills/stores/view-store) so the persisted state and the
+// (@operica/core/skills/stores/view-store) so the persisted state and the
 // UI share one definition. Re-exported here for the toolbar's convenience.
 export type SortField = SkillSortField;
 
@@ -178,7 +178,7 @@ function PageHeaderBar({
       count={totalCount}
       description={t(($) => $.page.tagline)}
       learnMore={{
-        href: "https://opercia.ai/docs/skills",
+        href: "https://operica.ai/docs/skills",
         label: t(($) => $.page.learn_more),
       }}
       actions={

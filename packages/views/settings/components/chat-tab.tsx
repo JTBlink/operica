@@ -1,7 +1,7 @@
 "use client";
 
-import { Switch } from "@opercia/ui/components/ui/switch";
-import { useChatStore } from "@opercia/core/chat";
+import { Switch } from "@operica/ui/components/ui/switch";
+import { useChatStore } from "@operica/core/chat";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 import {

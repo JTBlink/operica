@@ -219,12 +219,12 @@ func TestIsValidGitRepoURL(t *testing.T) {
 		"",
 		"not-a-url",
 		"github.com/JTBlink/operica", // no scheme, no scp-style colon
-		"https://",                      // empty host
-		"git@github.com",                // missing :path
-		"git@:foo/bar",                  // missing host
-		"git@github.com:",               // missing path
-		"ftp://example.com/repo",        // unsupported scheme
-		"file:///tmp/repo",              // unsupported scheme
+		"https://",                   // empty host
+		"git@github.com",             // missing :path
+		"git@:foo/bar",               // missing host
+		"git@github.com:",            // missing path
+		"ftp://example.com/repo",     // unsupported scheme
+		"file:///tmp/repo",           // unsupported scheme
 		"some random text with spaces",
 		"github.com:org/repo@branch", // '@' after ':' belongs to the path, not user
 		"foo:bar@baz",                // '@' after ':' with no scheme
@@ -539,7 +539,7 @@ func TestProjectResourceCountBreadcrumb(t *testing.T) {
 	w = httptest.NewRecorder()
 	req = newRequest("POST", "/api/projects/"+project.ID+"/resources", map[string]any{
 		"resource_type": "github_repo",
-		"resource_ref":  map[string]any{"url": "https://github.com/opercia-ai/breadcrumb"},
+		"resource_ref":  map[string]any{"url": "https://github.com/operica-ai/breadcrumb"},
 	})
 	req = withURLParam(req, "id", project.ID)
 	testHandler.CreateProjectResource(w, req)
@@ -633,7 +633,7 @@ func TestCreateProjectWithResourcesEchoesCount(t *testing.T) {
 		"resources": []map[string]any{
 			{
 				"resource_type": "github_repo",
-				"resource_ref":  map[string]any{"url": "https://github.com/opercia-ai/echo-count"},
+				"resource_ref":  map[string]any{"url": "https://github.com/operica-ai/echo-count"},
 			},
 		},
 	})

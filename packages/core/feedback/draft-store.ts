@@ -5,7 +5,7 @@ interface FeedbackDraft {
 }
 
 export const useFeedbackDraftStore = createDraftStore<FeedbackDraft>({
-  storageKey: "opercia_feedback_draft",
+  storageKey: "operica_feedback_draft",
   emptyData: { message: "" },
   hasMeaningful: (d) => !!d.message,
 });

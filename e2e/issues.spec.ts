@@ -4,7 +4,7 @@ import { loginAsDefault, createTestApi, preferManualCreateMode, reloadAppPage } 
 import type { TestApiClient } from "./fixtures";
 
 const DATABASE_URL =
-  process.env.DATABASE_URL ?? "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable";
+  process.env.DATABASE_URL ?? "postgres://operica:operica@localhost:5432/operica?sslmode=disable";
 
 async function setIssueTimestamps(
   issueId: string,

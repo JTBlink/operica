@@ -146,7 +146,7 @@ func tempDirOnOtherVolume(t *testing.T, other string) string {
 		if strings.ToUpper(volume) == skipVolume {
 			continue
 		}
-		dir, err := os.MkdirTemp(volume+`\`, "opercia-repocache-")
+		dir, err := os.MkdirTemp(volume+`\`, "operica-repocache-")
 		if err != nil {
 			continue
 		}

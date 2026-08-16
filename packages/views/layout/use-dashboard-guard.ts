@@ -2,16 +2,16 @@
 
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigationStore } from "@opercia/core/navigation";
-import { useAuthStore } from "@opercia/core/auth";
+import { useNavigationStore } from "@operica/core/navigation";
+import { useAuthStore } from "@operica/core/auth";
 import {
   paths,
   resolvePostAuthDestination,
   useCurrentWorkspace,
   useHasOnboarded,
-} from "@opercia/core/paths";
-import { workspaceListOptions } from "@opercia/core/workspace";
-import { useRecentIssuesStore } from "@opercia/core/issues/stores";
+} from "@operica/core/paths";
+import { workspaceListOptions } from "@operica/core/workspace";
+import { useRecentIssuesStore } from "@operica/core/issues/stores";
 import { useNavigation } from "../navigation";
 
 /**

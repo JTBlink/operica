@@ -4,7 +4,7 @@ import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import { baseOptions } from "@/app/layout.config";
 import { source } from "@/lib/source";
 import { i18n, type Lang } from "@/lib/i18n";
@@ -46,11 +46,11 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Opercia Docs",
-    default: "Opercia Docs",
+    template: "%s | Operica Docs",
+    default: "Operica Docs",
   },
   description:
-    "Documentation for Opercia — the open-source managed agents platform.",
+    "Documentation for Operica — the open-source managed agents platform.",
 };
 
 export function generateStaticParams() {

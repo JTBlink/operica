@@ -1,14 +1,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import type { Agent, MemberRole } from "@opercia/core/types";
-import { useWorkspaceId } from "@opercia/core";
-import { agentRunCounts30dOptions } from "@opercia/core/agents";
-import { agentListOptions, memberListOptions } from "@opercia/core/workspace/queries";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import type { Agent, MemberRole } from "@operica/core/types";
+import { useWorkspaceId } from "@operica/core";
+import { agentRunCounts30dOptions } from "@operica/core/agents";
+import { agentListOptions, memberListOptions } from "@operica/core/workspace/queries";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import { ActorAvatar } from "../common/actor-avatar";
 import { AppLink } from "../navigation";
 import { useT } from "../i18n";

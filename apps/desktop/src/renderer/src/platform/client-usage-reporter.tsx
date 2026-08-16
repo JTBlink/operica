@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
-import { api } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
-import { getOrCreateInstallId, utcDay } from "@opercia/core/client-usage";
-import { defaultStorage } from "@opercia/core/platform";
+import { api } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
+import { getOrCreateInstallId, utcDay } from "@operica/core/client-usage";
+import { defaultStorage } from "@operica/core/platform";
 import type { LocalRuntimeProbe } from "../../../shared/daemon-types";
 
-const LAST_RUNTIME_PREFIX = "opercia_runtime_probe_last_reported";
+const LAST_RUNTIME_PREFIX = "operica_runtime_probe_last_reported";
 
 export function runtimeProbeSignature(probe: LocalRuntimeProbe): string {
   if (probe.probeResult === "error") return "error";

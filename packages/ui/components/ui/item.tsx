@@ -3,8 +3,8 @@ import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@opercia/ui/lib/utils"
-import { Separator } from "@opercia/ui/components/ui/separator"
+import { cn } from "@operica/ui/lib/utils"
+import { Separator } from "@operica/ui/components/ui/separator"
 
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (

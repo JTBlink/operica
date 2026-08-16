@@ -3,7 +3,7 @@
 import {
   NumberFlow,
   NumberFlowGroup,
-} from "@opercia/ui/components/ui/number-flow";
+} from "@operica/ui/components/ui/number-flow";
 import { formatDuration } from "../utils";
 
 // Period selector — mirrors the runtime detail page so users see the same

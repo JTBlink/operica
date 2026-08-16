@@ -13,13 +13,13 @@ import {
   profileUserIdPath,
 } from "./daemon-profile";
 
-const OPERCIA_DIR = join(homedir(), ".opercia");
-const DEFAULT_CLI_CONFIG = join(OPERCIA_DIR, "config.json");
+const OPERICA_DIR = join(homedir(), ".operica");
+const DEFAULT_CLI_CONFIG = join(OPERICA_DIR, "config.json");
 
 describe("deriveProfileName", () => {
   it("names the profile after the target host", () => {
-    expect(deriveProfileName("https://api.opercia.ai")).toBe(
-      "desktop-api.opercia.ai",
+    expect(deriveProfileName("https://api.operica.ai")).toBe(
+      "desktop-api.operica.ai",
     );
   });
 
@@ -36,20 +36,20 @@ describe("deriveProfileName", () => {
 
 describe("profile paths", () => {
   it("always resolves under profiles/<name>", () => {
-    const dir = join(OPERCIA_DIR, "profiles", "desktop-api.opercia.ai");
-    expect(profileDir("desktop-api.opercia.ai")).toBe(dir);
-    expect(profileConfigPath("desktop-api.opercia.ai")).toBe(
+    const dir = join(OPERICA_DIR, "profiles", "desktop-api.operica.ai");
+    expect(profileDir("desktop-api.operica.ai")).toBe(dir);
+    expect(profileConfigPath("desktop-api.operica.ai")).toBe(
       join(dir, "config.json"),
     );
-    expect(profileLogPath("desktop-api.opercia.ai")).toBe(
+    expect(profileLogPath("desktop-api.operica.ai")).toBe(
       join(dir, "daemon.log"),
     );
-    expect(profileUserIdPath("desktop-api.opercia.ai")).toBe(
+    expect(profileUserIdPath("desktop-api.operica.ai")).toBe(
       join(dir, ".desktop-user-id"),
     );
   });
 
-  // Regression: an unresolved profile used to resolve to ~/.opercia, so Desktop
+  // Regression: an unresolved profile used to resolve to ~/.operica, so Desktop
   // could overwrite server_url and token in the user's own CLI config. #6399.
   it("refuses to build a path for an unresolved profile", () => {
     expect(() => profileDir("")).toThrow(/unresolved/);
@@ -59,7 +59,7 @@ describe("profile paths", () => {
   });
 
   it("never yields the default CLI config path for any input", () => {
-    for (const name of ["desktop-api.opercia.ai", "desktop", "x"]) {
+    for (const name of ["desktop-api.operica.ai", "desktop", "x"]) {
       expect(profileConfigPath(name)).not.toBe(DEFAULT_CLI_CONFIG);
     }
     expect(() => profileConfigPath("")).toThrow();
@@ -68,9 +68,9 @@ describe("profile paths", () => {
 
 describe("profileArgs", () => {
   it("selects the Desktop-owned profile", () => {
-    expect(profileArgs("desktop-api.opercia.ai")).toEqual([
+    expect(profileArgs("desktop-api.operica.ai")).toEqual([
       "--profile",
-      "desktop-api.opercia.ai",
+      "desktop-api.operica.ai",
     ]);
   });
 
@@ -90,14 +90,14 @@ describe("healthPortForProfile", () => {
   });
 
   it("never derives the default profile's port", () => {
-    for (const name of ["desktop-api.opercia.ai", "desktop", "x", "a".repeat(50)]) {
+    for (const name of ["desktop-api.operica.ai", "desktop", "x", "a".repeat(50)]) {
       expect(healthPortForProfile(name)).not.toBe(DEFAULT_HEALTH_PORT);
     }
   });
 
   it("derives a stable per-profile port above the default", () => {
-    const port = healthPortForProfile("desktop-api.opercia.ai");
+    const port = healthPortForProfile("desktop-api.operica.ai");
     expect(port).toBeGreaterThan(DEFAULT_HEALTH_PORT);
-    expect(port).toBe(healthPortForProfile("desktop-api.opercia.ai"));
+    expect(port).toBe(healthPortForProfile("desktop-api.operica.ai"));
   });
 });

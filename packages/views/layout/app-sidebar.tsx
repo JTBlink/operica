@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { cn } from "@opercia/ui/lib/utils";
-import { useScrollFade } from "@opercia/ui/hooks/use-scroll-fade";
+import { cn } from "@operica/ui/lib/utils";
+import { useScrollFade } from "@operica/ui/hooks/use-scroll-fade";
 import { AppLink, useNavigation } from "../navigation";
 import { HelpLauncher } from "./help-launcher";
 import { JoinDiscordCard } from "./join-discord-card";
@@ -26,13 +26,13 @@ import { Layers,
   X,
 } from "lucide-react";
 import { WorkspaceAvatar } from "../workspace/workspace-avatar";
-import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@opercia/ui/components/ui/collapsible";
-import { CappedNumberFlow } from "@opercia/ui/components/ui/number-flow";
+import { ActorAvatar } from "@operica/ui/components/common/actor-avatar";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@operica/ui/components/ui/collapsible";
+import { CappedNumberFlow } from "@operica/ui/components/ui/number-flow";
 import { StatusIcon } from "../issues/components/status-icon";
-import { useIssueDraftStore } from "@opercia/core/issues/stores/draft-store";
-import { openCreateIssueWithPreference } from "@opercia/core/issues/stores/create-mode-store";
+import { useIssueDraftStore } from "@operica/core/issues/stores/draft-store";
+import { openCreateIssueWithPreference } from "@operica/core/issues/stores/create-mode-store";
 import {
   Sidebar,
   SidebarContent,
@@ -46,7 +46,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
   useSidebar,
-} from "@opercia/ui/components/ui/sidebar";
+} from "@operica/ui/components/ui/sidebar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -55,35 +55,35 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { useAuthStore } from "@opercia/core/auth";
-import { issueViewDetailOptions } from "@opercia/core/issue-views/queries";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { useAuthStore } from "@operica/core/auth";
+import { issueViewDetailOptions } from "@operica/core/issue-views/queries";
 import {
   issueViewContainerKey,
   useActiveIssueViewStore,
-} from "@opercia/core/issue-views/active-view-store";
-import { useCurrentWorkspace, useWorkspacePaths, paths } from "@opercia/core/paths";
-import { workspaceListOptions, myInvitationListOptions, workspaceKeys } from "@opercia/core/workspace/queries";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
+} from "@operica/core/issue-views/active-view-store";
+import { useCurrentWorkspace, useWorkspacePaths, paths } from "@operica/core/paths";
+import { workspaceListOptions, myInvitationListOptions, workspaceKeys } from "@operica/core/workspace/queries";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { inboxKeys, deduplicateInboxItems, inboxUnreadSummaryOptions, hasOtherWorkspaceUnread, unreadWorkspaceIds } from "@opercia/core/inbox/queries";
-import { chatSessionsOptions } from "@opercia/core/chat/queries";
-import { countUnreadChatMessages } from "@opercia/core/chat/unread";
-import { useChatStore } from "@opercia/core/chat";
-import { api, ApiError } from "@opercia/core/api";
-import { useConfigStore } from "@opercia/core/config";
-import { pinListOptions } from "@opercia/core/pins/queries";
-import { useDeletePin, useReorderPins } from "@opercia/core/pins/mutations";
-import { issueDetailOptions } from "@opercia/core/issues/queries";
-import { projectDetailOptions } from "@opercia/core/projects/queries";
-import type { PinnedItem } from "@opercia/core/types";
+import { inboxKeys, deduplicateInboxItems, inboxUnreadSummaryOptions, hasOtherWorkspaceUnread, unreadWorkspaceIds } from "@operica/core/inbox/queries";
+import { chatSessionsOptions } from "@operica/core/chat/queries";
+import { countUnreadChatMessages } from "@operica/core/chat/unread";
+import { useChatStore } from "@operica/core/chat";
+import { api, ApiError } from "@operica/core/api";
+import { useConfigStore } from "@operica/core/config";
+import { pinListOptions } from "@operica/core/pins/queries";
+import { useDeletePin, useReorderPins } from "@operica/core/pins/mutations";
+import { issueDetailOptions } from "@operica/core/issues/queries";
+import { projectDetailOptions } from "@operica/core/projects/queries";
+import type { PinnedItem } from "@operica/core/types";
 import { useLogout } from "../auth";
 import { ProjectIcon } from "../projects/components/project-icon";
 import { routeIconForPath } from "./route-icon-components";
 import { useT } from "../i18n";
 import {
   useShortcut,
-} from "@opercia/core/shortcuts";
+} from "@operica/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useAppForeground } from "../common/use-app-foreground";
 
@@ -608,7 +608,7 @@ export function AppSidebar({ topSlot, searchSlot, headerClassName, headerStyle }
                         )}
                       </span>
                       <span className="flex-1 truncate font-medium">
-                        {workspace?.name ?? "Opercia"}
+                        {workspace?.name ?? "Operica"}
                       </span>
                       <ChevronDown className="size-3 text-muted-foreground" />
                     </SidebarMenuButton>

@@ -1,4 +1,4 @@
-name: opercia
+name: operica
 
 services:
   postgres:

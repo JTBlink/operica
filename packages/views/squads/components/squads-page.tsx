@@ -16,17 +16,17 @@ import {
 } from "lucide-react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useCurrentWorkspace, useWorkspacePaths } from "@opercia/core/paths";
+import { useCurrentWorkspace, useWorkspacePaths } from "@operica/core/paths";
 import {
   agentListOptions,
   memberListOptions,
   squadListOptions,
   workspaceKeys,
-} from "@opercia/core/workspace/queries";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { useAuthStore } from "@opercia/core/auth";
-import { api } from "@opercia/core/api";
-import { useModalStore } from "@opercia/core/modals";
+} from "@operica/core/workspace/queries";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { useAuthStore } from "@operica/core/auth";
+import { api } from "@operica/core/api";
+import { useModalStore } from "@operica/core/modals";
 import {
   useSquadsViewStore,
   SQUAD_SCOPES,
@@ -35,9 +35,9 @@ import {
   type SquadListFilters,
   type SquadsScope,
   type SquadSortField,
-} from "@opercia/core/squads/stores";
-import type { Agent, MemberWithUser, Squad } from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/squads/stores";
+import type { Agent, MemberWithUser, Squad } from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -45,7 +45,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -58,7 +58,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   ListGrid,
   ListGridCell,
@@ -67,20 +67,20 @@ import {
   ListGridRow,
   LIST_GRID_BOTTOM_CLEARANCE,
   type ListGridSortDirection,
-} from "@opercia/ui/components/ui/list-grid";
+} from "@operica/ui/components/ui/list-grid";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { Switch } from "@opercia/ui/components/ui/switch";
+} from "@operica/ui/components/ui/popover";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { Switch } from "@operica/ui/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
+} from "@operica/ui/components/ui/tooltip";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";
 import { useIntentNavigate, useRowLink } from "../../navigation";

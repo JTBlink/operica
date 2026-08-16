@@ -30,7 +30,7 @@ export const useCreateModeStore = create<CreateModeState>()(
       setLastMode: (mode) => set({ lastMode: mode }),
     }),
     {
-      name: "opercia_create_mode",
+      name: "operica_create_mode",
       storage: createJSONStorage(() => defaultStorage),
     },
   ),

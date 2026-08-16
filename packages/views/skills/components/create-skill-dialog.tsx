@@ -14,30 +14,30 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
-import { api } from "@opercia/core/api";
-import type { Skill } from "@opercia/core/types";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { isImeComposing } from "@opercia/core/utils";
+import { api } from "@operica/core/api";
+import type { Skill } from "@operica/core/types";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { isImeComposing } from "@operica/core/utils";
 import {
   skillDetailOptions,
   workspaceKeys,
-} from "@opercia/core/workspace/queries";
+} from "@operica/core/workspace/queries";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
-import { useScrollFade } from "@opercia/ui/hooks/use-scroll-fade";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/tooltip";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
+import { Textarea } from "@operica/ui/components/ui/textarea";
+import { useScrollFade } from "@operica/ui/hooks/use-scroll-fade";
+import { cn } from "@operica/ui/lib/utils";
 import { openExternal } from "../../platform";
 import { RuntimeLocalSkillImportPanel } from "./runtime-local-skill-import-panel";
 import { useT } from "../../i18n";

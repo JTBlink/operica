@@ -3,8 +3,8 @@
 import * as React from "react"
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog"
 
-import { cn } from "@opercia/ui/lib/utils"
-import { Button } from "@opercia/ui/components/ui/button"
+import { cn } from "@operica/ui/lib/utils"
+import { Button } from "@operica/ui/components/ui/button"
 
 function AlertDialog({ ...props }: AlertDialogPrimitive.Root.Props) {
   return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />

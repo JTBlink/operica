@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { RuntimeDetailPage } from "@opercia/views/runtimes";
+import { RuntimeDetailPage } from "@operica/views/runtimes";
 
 export default function RuntimeDetailRoute({
   params,

@@ -55,7 +55,7 @@ export const useTranscriptViewStore = create<TranscriptViewState>()(
       setDensity: (density) => set({ density }),
     }),
     {
-      name: "opercia_transcript_view",
+      name: "operica_transcript_view",
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({
         sortDirection: state.sortDirection,

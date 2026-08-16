@@ -1,15 +1,15 @@
 "use client";
 
 import { Eye, MoreHorizontal } from "lucide-react";
-import type { IssueStatus } from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
+import type { IssueStatus } from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { useViewStoreApi } from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { useViewStoreApi } from "@operica/core/issues/stores/view-store-context";
 import { StatusIcon } from "./status-icon";
 import { useT } from "../../i18n";
 

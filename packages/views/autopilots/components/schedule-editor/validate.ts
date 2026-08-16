@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQueryClient, type QueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ApiError } from "@opercia/core/api";
-import { cronPreviewOptions } from "@opercia/core/autopilots/queries";
+import { ApiError } from "@operica/core/api";
+import { cronPreviewOptions } from "@operica/core/autopilots/queries";
 import { useT } from "../../../i18n";
 import type { ScheduleConfig } from "./model";
 import { toCron } from "./cron-mapping";

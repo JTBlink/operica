@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "@opercia/core/auth";
-import { paths } from "@opercia/core/paths";
-import { InvitationsPage } from "@opercia/views/invitations";
+import { useAuthStore } from "@operica/core/auth";
+import { paths } from "@operica/core/paths";
+import { InvitationsPage } from "@operica/views/invitations";
 
 export default function InvitationsRoutePage() {
   const router = useRouter();

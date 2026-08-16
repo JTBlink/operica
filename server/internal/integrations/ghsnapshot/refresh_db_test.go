@@ -7,16 +7,16 @@ import (
 	"testing"
 	"time"
 
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
-	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 func testDBPool(t *testing.T) *pgxpool.Pool {
 	t.Helper()
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dbURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 	pool, err := pgxpool.New(context.Background(), dbURL)
 	if err != nil {

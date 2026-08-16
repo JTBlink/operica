@@ -1,4 +1,4 @@
-import type { Agent } from "@opercia/core/types";
+import type { Agent } from "@operica/core/types";
 
 /**
  * Mobile-owned mirror of packages/core/agents/runtime-binding.ts.

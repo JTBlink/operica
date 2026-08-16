@@ -8,11 +8,11 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@opercia/ui/components/ui/dialog";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Button } from "@opercia/ui/components/ui/button";
-import { isImeComposing } from "@opercia/core/utils";
+} from "@operica/ui/components/ui/dialog";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
+import { Button } from "@operica/ui/components/ui/button";
+import { isImeComposing } from "@operica/core/utils";
 import { useT } from "../../i18n";
 
 /**

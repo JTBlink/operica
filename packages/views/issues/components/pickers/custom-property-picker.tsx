@@ -3,24 +3,24 @@
 import { useEffect, useState } from "react";
 import { CalendarDays, Check, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
-import type { Issue, IssueProperty, IssuePropertyValue } from "@opercia/core/types";
+import type { Issue, IssueProperty, IssuePropertyValue } from "@operica/core/types";
 import {
   useSetIssueProperty,
   useUnsetIssueProperty,
-} from "@opercia/core/properties";
+} from "@operica/core/properties";
 import {
   toDateOnly,
   dateOnlyToLocalDate,
   formatDateOnly,
-} from "@opercia/core/issues/date";
-import { Calendar } from "@opercia/ui/components/ui/calendar";
+} from "@operica/core/issues/date";
+import { Calendar } from "@operica/ui/components/ui/calendar";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@opercia/ui/components/ui/popover";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+} from "@operica/ui/components/ui/popover";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import { useT } from "../../../i18n";
 import { PropertyPicker, PickerItem } from "./property-picker";
 

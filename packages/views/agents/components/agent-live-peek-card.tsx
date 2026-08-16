@@ -1,18 +1,18 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { agentListOptions } from "@opercia/core/workspace/queries";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { agentListOptions } from "@operica/core/workspace/queries";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
 import {
   agentTaskSnapshotOptions,
   useAgentPresenceDetail,
-} from "@opercia/core/agents";
-import { issueDetailOptions } from "@opercia/core/issues";
-import type { AgentTask } from "@opercia/core/types";
+} from "@operica/core/agents";
+import { issueDetailOptions } from "@operica/core/issues";
+import type { AgentTask } from "@operica/core/types";
 import { AlertTriangle } from "lucide-react";
 import { AppLink } from "../../navigation";
 import { useT, useTimeAgo } from "../../i18n";

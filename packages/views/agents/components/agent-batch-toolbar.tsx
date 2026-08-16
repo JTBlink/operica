@@ -4,15 +4,15 @@ import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { MemberWithUser } from "@opercia/core/types";
-import { api } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import { Button } from "@opercia/ui/components/ui/button";
+import type { MemberWithUser } from "@operica/core/types";
+import { api } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   UI_EASE_OUT,
   UI_MOTION_DURATION,
-} from "@opercia/ui/lib/motion";
+} from "@operica/ui/lib/motion";
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import { Archive, ArchiveRestore, Loader2, X } from "lucide-react";
 import { useT } from "../../i18n";
 import { AccessPicker, type AccessChange } from "./inspector/access-picker";

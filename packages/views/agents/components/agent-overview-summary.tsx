@@ -5,8 +5,8 @@ import type {
   Agent,
   AgentRuntime,
   MemberWithUser,
-} from "@opercia/core/types";
-import { runtimeDisplayLabel } from "@opercia/core/runtimes";
+} from "@operica/core/types";
+import { runtimeDisplayLabel } from "@operica/core/runtimes";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useT } from "../../i18n";
 import { VisibilityBadge } from "./visibility-badge";

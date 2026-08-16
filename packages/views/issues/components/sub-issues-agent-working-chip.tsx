@@ -6,9 +6,9 @@ import {
   HoverCard,
   HoverCardTrigger,
   HoverCardContent,
-} from "@opercia/ui/components/ui/hover-card";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { workspaceWorkingAgentsOptions } from "@opercia/core/agents";
+} from "@operica/ui/components/ui/hover-card";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { workspaceWorkingAgentsOptions } from "@operica/core/agents";
 import { AgentAvatarStack } from "../../agents/components/agent-avatar-stack";
 import { WorkingAgentsHoverContent } from "./workspace-agent-working-chip";
 import { useT } from "../../i18n";
@@ -20,7 +20,7 @@ interface SubIssuesAgentWorkingChipProps {
 
 /**
  * Aggregate "N agents working" chip for the sub-issues header in issue
- * detail (opercia#5825). The per-row IssueAgentActivityIndicator answers
+ * detail (operica#5825). The per-row IssueAgentActivityIndicator answers
  * "which sub-issue is being worked on"; this chip answers "how many agents
  * are on this parent's children right now" without scanning the rows — and
  * keeps that signal visible while the list is collapsed.

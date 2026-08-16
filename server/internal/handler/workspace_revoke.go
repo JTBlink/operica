@@ -4,9 +4,9 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // revokeAndRemoveMember converges all server-side state that should follow a
@@ -133,7 +133,7 @@ func (h *Handler) revokeAndRemoveMember(ctx context.Context, workspaceID, userID
 	// but pruning stops a stale binding from lingering across a remove/re-add.
 	if err := qtx.DeleteChannelUserBindingsByWorkspaceMember(ctx, db.DeleteChannelUserBindingsByWorkspaceMemberParams{
 		WorkspaceID:   workspaceID,
-		OperciaUserID: userID,
+		OpericaUserID: userID,
 	}); err != nil {
 		return empty, err
 	}

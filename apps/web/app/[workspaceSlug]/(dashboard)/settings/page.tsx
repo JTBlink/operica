@@ -1,4 +1,4 @@
-import { SettingsPage } from "@opercia/views/settings";
+import { SettingsPage } from "@operica/views/settings";
 
 export default function Page() {
   return <SettingsPage />;

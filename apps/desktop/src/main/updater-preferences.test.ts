@@ -11,7 +11,7 @@ import {
 const tempDirs: string[] = [];
 
 async function makePreferencesPath(): Promise<string> {
-  const dir = await mkdtemp(join(tmpdir(), "opercia-updater-preferences-"));
+  const dir = await mkdtemp(join(tmpdir(), "operica-updater-preferences-"));
   tempDirs.push(dir);
   return updaterPreferencesPath(dir);
 }

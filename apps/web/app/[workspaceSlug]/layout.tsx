@@ -3,14 +3,14 @@
 import { use, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { WorkspaceSlugProvider, paths } from "@opercia/core/paths";
-import { workspaceBySlugOptions } from "@opercia/core/workspace";
-import { setCurrentWorkspace } from "@opercia/core/platform";
-import { useAuthStore } from "@opercia/core/auth";
-import { NoAccessPage } from "@opercia/views/workspace/no-access-page";
-import { WelcomeAfterOnboarding } from "@opercia/views/workspace/welcome-after-onboarding";
-import { OperciaIcon } from "@opercia/ui/components/common/opercia-icon";
-import { useWorkspaceSeen } from "@opercia/views/workspace/use-workspace-seen";
+import { WorkspaceSlugProvider, paths } from "@operica/core/paths";
+import { workspaceBySlugOptions } from "@operica/core/workspace";
+import { setCurrentWorkspace } from "@operica/core/platform";
+import { useAuthStore } from "@operica/core/auth";
+import { NoAccessPage } from "@operica/views/workspace/no-access-page";
+import { WelcomeAfterOnboarding } from "@operica/views/workspace/welcome-after-onboarding";
+import { OpericaIcon } from "@operica/ui/components/common/operica-icon";
+import { useWorkspaceSeen } from "@operica/views/workspace/use-workspace-seen";
 
 export default function WorkspaceLayout({
   children,
@@ -76,7 +76,7 @@ export default function WorkspaceLayout({
 
   const loadingIndicator = (
     <div className="flex h-svh items-center justify-center">
-      <OperciaIcon className="size-6 animate-pulse" />
+      <OpericaIcon className="size-6 animate-pulse" />
     </div>
   );
 

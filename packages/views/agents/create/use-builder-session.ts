@@ -8,17 +8,17 @@ import {
   decodeBuilderInput,
   pickBuilderRestore,
   type BuilderRestore,
-} from "@opercia/core/agents";
-import { api, ApiError } from "@opercia/core/api";
+} from "@operica/core/agents";
+import { api, ApiError } from "@operica/core/api";
 import {
   chatKeys,
   chatMessagesOptions,
   pendingChatTaskOptions,
-} from "@opercia/core/chat/queries";
-import { upsertChatMessageToCaches } from "@opercia/core/chat/message-cache";
-import { removeChatMessageFromCaches } from "@opercia/core/realtime";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import type { ChatMessage } from "@opercia/core/types";
+} from "@operica/core/chat/queries";
+import { upsertChatMessageToCaches } from "@operica/core/chat/message-cache";
+import { removeChatMessageFromCaches } from "@operica/core/realtime";
+import { useWorkspaceId } from "@operica/core/hooks";
+import type { ChatMessage } from "@operica/core/types";
 import { useAppForeground } from "../../common/use-app-foreground";
 import { useChatDraftRestore } from "../../chat/components/use-chat-draft-restore";
 import { useT } from "../../i18n";

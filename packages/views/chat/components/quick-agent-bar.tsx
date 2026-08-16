@@ -3,16 +3,16 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { chatPinnedAgentsOptions } from "@opercia/core/chat/queries";
-import { usePinChatAgent, useUnpinChatAgent } from "@opercia/core/chat/mutations";
-import type { Agent } from "@opercia/core/types";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { chatPinnedAgentsOptions } from "@operica/core/chat/queries";
+import { usePinChatAgent, useUnpinChatAgent } from "@operica/core/chat/mutations";
+import type { Agent } from "@operica/core/types";
 import {
   ContextMenu,
   ContextMenuTrigger,
   ContextMenuContent,
   ContextMenuItem,
-} from "@opercia/ui/components/ui/context-menu";
+} from "@operica/ui/components/ui/context-menu";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AgentPicker } from "./new-chat-button";
 import { useT } from "../../i18n";

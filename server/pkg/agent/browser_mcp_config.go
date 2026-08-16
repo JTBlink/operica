@@ -100,7 +100,7 @@ func hardenWindowsPlaywrightMcpArgs(args []string, tempDir string) ([]string, er
 }
 
 func windowsChromiumFallbackExecutable() (string, bool) {
-	if path := strings.TrimSpace(browserMcpEnv("OPERCIA_CHROME_DEVTOOLS_EXECUTABLE_PATH")); path != "" {
+	if path := strings.TrimSpace(browserMcpEnv("OPERICA_CHROME_DEVTOOLS_EXECUTABLE_PATH")); path != "" {
 		return path, true
 	}
 	for _, root := range []string{

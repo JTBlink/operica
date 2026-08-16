@@ -1,5 +1,5 @@
-import type { Attachment } from "@opercia/core/types";
-import { contentReferencesAttachment } from "@opercia/core/types";
+import type { Attachment } from "@operica/core/types";
+import { contentReferencesAttachment } from "@operica/core/types";
 
 /**
  * The attachments to render as standalone cards below a message / comment

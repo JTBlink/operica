@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { paths } from "@opercia/core/paths";
-import { workspaceListOptions } from "@opercia/core/workspace/queries";
-import { InvitePage } from "@opercia/views/invite";
+import { useAuthStore } from "@operica/core/auth";
+import { paths } from "@operica/core/paths";
+import { workspaceListOptions } from "@operica/core/workspace/queries";
+import { InvitePage } from "@operica/views/invite";
 
 export default function InviteAcceptPage() {
   const router = useRouter();

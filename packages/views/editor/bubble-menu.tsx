@@ -33,25 +33,25 @@ import type { Editor } from "@tiptap/core";
 import { posToDOMRect } from "@tiptap/core";
 import { NodeSelection } from "@tiptap/pm/state";
 import { toast } from "sonner";
-import { useCreateIssue } from "@opercia/core/issues/mutations";
+import { useCreateIssue } from "@operica/core/issues/mutations";
 import { useT } from "../i18n";
-import { createShortcutChord, type ShortcutChord } from "@opercia/core/shortcuts";
+import { createShortcutChord, type ShortcutChord } from "@operica/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
-import { Toggle } from "@opercia/ui/components/ui/toggle";
-import { Separator } from "@opercia/ui/components/ui/separator";
+import { Toggle } from "@operica/ui/components/ui/toggle";
+import { Separator } from "@operica/ui/components/ui/separator";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@opercia/ui/components/ui/popover";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/ui/components/ui/popover";
+import { Input } from "@operica/ui/components/ui/input";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Bold,
   Italic,

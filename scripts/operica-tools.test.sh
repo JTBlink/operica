@@ -11,7 +11,8 @@ fail() {
 
 help_output="$(bash scripts/operica-tools.sh help)"
 
-if grep -Fq 'Opercia' <<<"$help_output"; then
+legacy_brand="Oper""cia"
+if grep -Fq "$legacy_brand" <<<"$help_output"; then
   fail "help must use the Operica product name"
 fi
 grep -Fq 'Operica 本地开发与发布工具' <<<"$help_output" ||
@@ -34,7 +35,7 @@ grep -Fq '默认账号: 未设置' <<<"$help_output" ||
   fail "help must not imply that a default account always exists"
 grep -Fq '默认密码: 无' <<<"$help_output" ||
   fail "help must explain that Operica has no password login"
-grep -Fq 'OPERCIA_DEV_VERIFICATION_CODE' <<<"$help_output" ||
+grep -Fq 'OPERICA_DEV_VERIFICATION_CODE' <<<"$help_output" ||
   fail "help must explain how to find the local verification code"
 grep -Fq 'kill [--all]' <<<"$help_output" ||
   fail "help must list the kill command"
@@ -202,6 +203,14 @@ held_launcher_pid=""
 
 grep -Fq '共享 PostgreSQL 保持运行' <<<"$kill_output" ||
   fail "kill --all must report that PostgreSQL was preserved"
+
+ancestor_guard_output="$(
+  cd "$fixture"
+  PATH="$stub_bin:$PATH" TOOLS_TEST_LOG="$log_file" \
+    bash -c 'bash scripts/operica-tools.sh kill --all' 'pnpm dev:desktop'
+)"
+grep -Fq '没有运行中的 Operica 开发进程' <<<"$ancestor_guard_output" ||
+  fail "kill must ignore matching command text in its ancestor processes"
 
 no_process_output="$(
   cd "$fixture"

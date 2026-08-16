@@ -2,23 +2,23 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enAgents from "../../locales/en/agents.json";
 
 const TEST_RESOURCES = { en: { common: enCommon, agents: enAgents } };
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({
     agentDetail: (id: string) => `/test/agents/${id}`,
   }),
 }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     getBaseUrl: () => "http://127.0.0.1:8080",
   },
@@ -73,10 +73,10 @@ vi.mock("@tanstack/react-query", async () => {
   };
 });
 
-vi.mock("@opercia/core/agents", async () => {
+vi.mock("@operica/core/agents", async () => {
   const actual =
-    await vi.importActual<typeof import("@opercia/core/agents")>(
-      "@opercia/core/agents",
+    await vi.importActual<typeof import("@operica/core/agents")>(
+      "@operica/core/agents",
     );
   return {
     ...actual,

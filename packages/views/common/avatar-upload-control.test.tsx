@@ -12,11 +12,11 @@ vi.mock("sonner", () => ({
   toast: { error: toastError, success: toastSuccess },
 }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { getBaseUrl: () => "https://api.test" },
 }));
 
-vi.mock("@opercia/core/hooks/use-file-upload", () => ({
+vi.mock("@operica/core/hooks/use-file-upload", () => ({
   useFileUpload: () => ({ upload: uploadMock }),
 }));
 

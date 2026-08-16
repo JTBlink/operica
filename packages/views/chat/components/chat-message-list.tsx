@@ -4,19 +4,19 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { Virtuoso, type Components } from "react-virtuoso";
-import { cn } from "@opercia/ui/lib/utils";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { Button } from "@opercia/ui/components/ui/button";
+import { cn } from "@operica/ui/lib/utils";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@opercia/ui/components/ui/collapsible";
+} from "@operica/ui/components/ui/collapsible";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import {
   ChevronRight,
   ChevronDown,
@@ -27,23 +27,23 @@ import {
   Copy,
   RotateCw,
 } from "lucide-react";
-import { useScrollFade } from "@opercia/ui/hooks/use-scroll-fade";
-import { isTaskMessageTaskId, taskMessagesOptions } from "@opercia/core/chat/queries";
+import { useScrollFade } from "@operica/ui/hooks/use-scroll-fade";
+import { isTaskMessageTaskId, taskMessagesOptions } from "@operica/core/chat/queries";
 import { RichContent } from "../../rich-content";
 import { RichContentScrollRootProvider } from "../../rich-content/scroll-root";
-import { copyText } from "@opercia/ui/lib/clipboard";
+import { copyText } from "@operica/ui/lib/clipboard";
 import { AttachmentList } from "../../issues/components/comment-card";
 import { ImageSequenceProvider } from "../../editor";
-import { collectImageSequence } from "@opercia/core/attachments/image-sequence";
-import type { AgentAvailability } from "@opercia/core/agents";
-import { resolveFailureReasonKey } from "@opercia/core/agents";
+import { collectImageSequence } from "@operica/core/attachments/image-sequence";
+import type { AgentAvailability } from "@operica/core/agents";
+import { resolveFailureReasonKey } from "@operica/core/agents";
 import type {
   ChatMessage,
   ChatPendingTask,
   ChatQuickAction,
   TaskMessagePayload,
-} from "@opercia/core/types";
-import type { ChatTimelineItem } from "@opercia/core/chat";
+} from "@operica/core/types";
+import type { ChatTimelineItem } from "@operica/core/chat";
 import { buildTimeline } from "../../common/task-transcript";
 import { OnboardingStarterCards } from "./onboarding-starter-cards";
 import { TaskStatusPill } from "./task-status-pill";
@@ -1026,7 +1026,7 @@ function TimelineView({
 }: {
   items: ChatTimelineItem[];
   isStreaming?: boolean;
-  attachments?: import("@opercia/core/types").Attachment[];
+  attachments?: import("@operica/core/types").Attachment[];
   phase?: "streaming" | "settled";
 }) {
   const { preface, middle, final } = splitTimeline(items);
@@ -1071,7 +1071,7 @@ function OuterProcessFold({
 }: {
   items: ChatTimelineItem[];
   isStreaming?: boolean;
-  attachments?: import("@opercia/core/types").Attachment[];
+  attachments?: import("@operica/core/types").Attachment[];
   phase?: "streaming" | "settled";
 }) {
   const { t } = useT("chat");
@@ -1124,7 +1124,7 @@ function MiddleTextRow({
   phase = "settled",
 }: {
   item: ChatTimelineItem;
-  attachments?: import("@opercia/core/types").Attachment[];
+  attachments?: import("@operica/core/types").Attachment[];
   phase?: "streaming" | "settled";
 }) {
   return (

@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   resolvePostAuthDestination,
   useHasOnboarded,
-} from "@opercia/core/paths";
-import { workspaceListOptions } from "@opercia/core/workspace/queries";
+} from "@operica/core/paths";
+import { workspaceListOptions } from "@operica/core/workspace/queries";
 import { useNavigation } from "../navigation";
 import { useLogout } from "../auth";
 import { DragStrip } from "../platform";

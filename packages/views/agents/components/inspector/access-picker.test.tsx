@@ -5,8 +5,8 @@ import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import type {
   AgentInvocationTarget,
   MemberWithUser,
-} from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
+} from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../../locales/en/common.json";
 import enAgents from "../../../locales/en/agents.json";
 import enIssues from "../../../locales/en/issues.json";

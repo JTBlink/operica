@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // addWorkspaceMember joins a user to the test workspace and returns a function
@@ -54,7 +54,7 @@ func TestDelegatedSubscribe_SkipsOriginatorRemovedFromWorkspace(t *testing.T) {
 	bus := events.New()
 	registerSubscriberListeners(bus, testPool)
 
-	const email = "delegated-revoked-originator@opercia.test"
+	const email = "delegated-revoked-originator@operica.test"
 	cleanupTestUser(t, email)
 	userID := createTestUser(t, email)
 	t.Cleanup(func() { cleanupTestUser(t, email) })
@@ -85,7 +85,7 @@ func TestDelegatedSubscribe_SubscribesOriginatorStillInWorkspace(t *testing.T) {
 	bus := events.New()
 	registerSubscriberListeners(bus, testPool)
 
-	const email = "delegated-active-originator@opercia.test"
+	const email = "delegated-active-originator@operica.test"
 	cleanupTestUser(t, email)
 	userID := createTestUser(t, email)
 	t.Cleanup(func() { cleanupTestUser(t, email) })

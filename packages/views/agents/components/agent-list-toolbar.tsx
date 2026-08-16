@@ -12,10 +12,10 @@ import {
   ALL_ACCESS_SCOPES,
   effectiveAccessScope,
   type AgentAvailability,
-} from "@opercia/core/agents";
-import type { MemberWithUser } from "@opercia/core/types";
-import { runtimeDisplayLabel } from "@opercia/core/runtimes";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
+} from "@operica/core/agents";
+import type { MemberWithUser } from "@operica/core/types";
+import { runtimeDisplayLabel } from "@operica/core/runtimes";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
 import {
   AGENT_SCOPES,
   type AgentColumnKey,
@@ -23,9 +23,9 @@ import {
   type AgentsScope,
   type AgentSortDirection,
   type AgentSortField,
-} from "@opercia/core/agents/stores";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+} from "@operica/core/agents/stores";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -36,19 +36,19 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Switch } from "@opercia/ui/components/ui/switch";
+} from "@operica/ui/components/ui/popover";
+import { Switch } from "@operica/ui/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { ActorAvatar } from "@opercia/ui/components/common/actor-avatar";
+} from "@operica/ui/components/ui/tooltip";
+import { ActorAvatar } from "@operica/ui/components/common/actor-avatar";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";
 import { availabilityConfig } from "../presence";
 import { useT } from "../../i18n";

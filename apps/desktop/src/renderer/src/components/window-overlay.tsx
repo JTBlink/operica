@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { InvitePage } from "@opercia/views/invite";
-import { InvitationsPage } from "@opercia/views/invitations";
-import { OnboardingFlow } from "@opercia/views/onboarding";
-import { useNavigation } from "@opercia/views/navigation";
-import { paths } from "@opercia/core/paths";
-import { workspaceListOptions } from "@opercia/core/workspace/queries";
+import { InvitePage } from "@operica/views/invite";
+import { InvitationsPage } from "@operica/views/invitations";
+import { OnboardingFlow } from "@operica/views/onboarding";
+import { useNavigation } from "@operica/views/navigation";
+import { paths } from "@operica/core/paths";
+import { workspaceListOptions } from "@operica/core/workspace/queries";
 import { useWindowOverlayStore } from "@/stores/window-overlay-store";
 import { useLocalRuntimesPending } from "../platform/use-local-runtimes-pending";
 

@@ -180,7 +180,7 @@ func (r *identityResolver) ResolveSender(ctx context.Context, inst engine.Resolv
 	}
 	// Binding existence no longer proves membership (no FK); re-check.
 	if _, err := r.q.GetMemberByUserAndWorkspace(ctx, db.GetMemberByUserAndWorkspaceParams{
-		UserID:      binding.OperciaUserID,
+		UserID:      binding.OpericaUserID,
 		WorkspaceID: inst.WorkspaceID,
 	}); err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -188,7 +188,7 @@ func (r *identityResolver) ResolveSender(ctx context.Context, inst engine.Resolv
 		}
 		return engine.ResolvedIdentity{}, err
 	}
-	return engine.ResolvedIdentity{UserID: binding.OperciaUserID}, nil
+	return engine.ResolvedIdentity{UserID: binding.OpericaUserID}, nil
 }
 
 // ---- dedup ----

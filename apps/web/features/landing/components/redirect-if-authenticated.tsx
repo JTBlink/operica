@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { workspaceListOptions } from "@opercia/core/workspace";
-import { resolvePostAuthDestination, useHasOnboarded } from "@opercia/core/paths";
+import { useAuthStore } from "@operica/core/auth";
+import { workspaceListOptions } from "@operica/core/workspace";
+import { resolvePostAuthDestination, useHasOnboarded } from "@operica/core/paths";
 import { isOfficialMarketingHost } from "@/lib/public-host";
 
 /**

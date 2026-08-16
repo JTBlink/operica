@@ -106,14 +106,14 @@ func (r *feishuIdentityResolver) ResolveSender(ctx context.Context, inst engine.
 		}
 		return engine.ResolvedIdentity{}, err
 	}
-	isMember, err := r.store.IsWorkspaceMember(ctx, inst.WorkspaceID, binding.OperciaUserID)
+	isMember, err := r.store.IsWorkspaceMember(ctx, inst.WorkspaceID, binding.OpericaUserID)
 	if err != nil {
 		return engine.ResolvedIdentity{}, err
 	}
 	if !isMember {
 		return engine.ResolvedIdentity{}, engine.ErrSenderNotMember
 	}
-	return engine.ResolvedIdentity{UserID: binding.OperciaUserID}, nil
+	return engine.ResolvedIdentity{UserID: binding.OpericaUserID}, nil
 }
 
 // ---- dedup ----

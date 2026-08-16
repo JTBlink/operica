@@ -11,11 +11,11 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
-import type { Issue } from "@opercia/core/types";
+import type { Issue } from "@operica/core/types";
 import {
   ContextMenu,
   ContextMenuContent,
-} from "@opercia/ui/components/ui/context-menu";
+} from "@operica/ui/components/ui/context-menu";
 import { useIssueActions } from "./use-issue-actions";
 import {
   IssueActionsMenuItems,

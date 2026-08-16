@@ -4,11 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check, ChevronRight, Copy, Terminal } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { runtimeKeys } from "@opercia/core/runtimes/queries";
-import { useWSEvent } from "@opercia/core/realtime";
-import { paths, useWorkspaceSlug } from "@opercia/core/paths";
-import { useConfigStore } from "@opercia/core/config";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { runtimeKeys } from "@operica/core/runtimes/queries";
+import { useWSEvent } from "@operica/core/realtime";
+import { paths, useWorkspaceSlug } from "@operica/core/paths";
+import { useConfigStore } from "@operica/core/config";
 import {
   Dialog,
   DialogContent,
@@ -16,15 +16,15 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { Button } from "@opercia/ui/components/ui/button";
-import { CODE_LIGATURE_CLASS } from "@opercia/ui/lib/code-style";
-import { copyText } from "@opercia/ui/lib/clipboard";
+} from "@operica/ui/components/ui/dialog";
+import { Button } from "@operica/ui/components/ui/button";
+import { CODE_LIGATURE_CLASS } from "@operica/ui/lib/code-style";
+import { copyText } from "@operica/ui/lib/clipboard";
 import {
   UI_EASE_OUT,
   UI_MOTION_DURATION,
-} from "@opercia/ui/lib/motion";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/lib/motion";
+import { cn } from "@operica/ui/lib/utils";
 import { useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
 
@@ -32,8 +32,8 @@ type Step = "instructions" | "success";
 
 const INSTALL_CMD =
   "curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash";
-const CLOUD_SERVER_URL = "https://api.opercia.ai";
-const CLOUD_APP_URL = "https://opercia.ai";
+const CLOUD_SERVER_URL = "https://api.operica.ai";
+const CLOUD_APP_URL = "https://operica.ai";
 
 function normalizeCommandURL(url: string | undefined) {
   return url?.trim().replace(/\/+$/, "") ?? "";
@@ -44,20 +44,20 @@ function daemonCommands(serverUrl: string | undefined, appUrl: string | undefine
   const normalizedAppUrl = normalizeCommandURL(appUrl);
   if (normalizedServerUrl && normalizedAppUrl) {
     return {
-      setupCmd: `opercia setup self-host --server-url ${normalizedServerUrl} --app-url ${normalizedAppUrl}`,
-      tokenCmd: `opercia config set server_url ${normalizedServerUrl}
-opercia config set app_url ${normalizedAppUrl}
-opercia login --token <YOUR_TOKEN>
-opercia daemon start`,
+      setupCmd: `operica setup self-host --server-url ${normalizedServerUrl} --app-url ${normalizedAppUrl}`,
+      tokenCmd: `operica config set server_url ${normalizedServerUrl}
+operica config set app_url ${normalizedAppUrl}
+operica login --token <YOUR_TOKEN>
+operica daemon start`,
     };
   }
 
   return {
-    setupCmd: "opercia setup",
-    tokenCmd: `opercia config set server_url ${CLOUD_SERVER_URL}
-opercia config set app_url ${CLOUD_APP_URL}
-opercia login --token <YOUR_TOKEN>
-opercia daemon start`,
+    setupCmd: "operica setup",
+    tokenCmd: `operica config set server_url ${CLOUD_SERVER_URL}
+operica config set app_url ${CLOUD_APP_URL}
+operica login --token <YOUR_TOKEN>
+operica daemon start`,
   };
 }
 
@@ -70,7 +70,7 @@ export function ConnectRemoteDialog({ onClose }: { onClose: () => void }) {
   const shouldReduceMotion = useReducedMotion() ?? false;
   const newRuntimeIdRef = useRef<string | null>(null);
 
-  // `opercia setup` is one blocking command that handles config + login
+  // `operica setup` is one blocking command that handles config + login
   // + daemon start; the dialog passively listens for the resulting
   // `daemon:register` WS event and auto-advances to success.
   const handleDaemonRegister = useCallback(
@@ -318,7 +318,7 @@ function TroubleshootingDetails({ tokenCmd }: { tokenCmd: string }) {
                 CODE_LIGATURE_CLASS,
               )}
             >
-              {"opercia daemon status"}
+              {"operica daemon status"}
             </code>
           </li>
           <li className="flex items-center gap-1.5">
@@ -330,7 +330,7 @@ function TroubleshootingDetails({ tokenCmd }: { tokenCmd: string }) {
                 CODE_LIGATURE_CLASS,
               )}
             >
-              {"opercia daemon logs -f"}
+              {"operica daemon logs -f"}
             </code>
           </li>
         </ul>

@@ -1,5 +1,5 @@
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { cn } from "@opercia/ui/lib/utils";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { cn } from "@operica/ui/lib/utils";
 
 const sizeMap = {
   sm: "h-5 w-5 text-caption rounded-full",

@@ -6,12 +6,12 @@ import {
   HoverCard,
   HoverCardTrigger,
   HoverCardContent,
-} from "@opercia/ui/components/ui/hover-card";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { agentTaskSnapshotOptions } from "@opercia/core/agents";
-import type { AgentTask } from "@opercia/core/types";
-import { cn } from "@opercia/ui/lib/utils";
-import type { AvatarSize } from "@opercia/ui/lib/avatar-size";
+} from "@operica/ui/components/ui/hover-card";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { agentTaskSnapshotOptions } from "@operica/core/agents";
+import type { AgentTask } from "@operica/core/types";
+import { cn } from "@operica/ui/lib/utils";
+import type { AvatarSize } from "@operica/ui/lib/avatar-size";
 import { AgentAvatarStack } from "../../agents/components/agent-avatar-stack";
 import { AgentActivityHoverContent } from "../../agents/components/agent-activity-hover-content";
 import { selectIssueTasks, type IssueTaskGroups } from "../surface/activity";

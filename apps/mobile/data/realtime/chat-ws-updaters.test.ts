@@ -5,7 +5,7 @@ import type {
   ChatMessage,
   ChatPendingTask,
   ChatQuickActionsPayload,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 
 import {
   applyChatDoneToCache,

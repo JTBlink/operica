@@ -7,7 +7,7 @@ const { getAttachmentTextContentMock } = vi.hoisted(() => ({
   getAttachmentTextContentMock: vi.fn(),
 }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { getAttachmentTextContent: getAttachmentTextContentMock },
   PreviewTooLargeError: class extends Error {},
   PreviewUnsupportedError: class extends Error {},
@@ -50,10 +50,10 @@ vi.mock("../navigation", () => ({
 }));
 
 // Slug is required for the new-tab path to be built. The component reads
-// it from useWorkspaceSlug() on @opercia/core/paths — stub to return a
+// it from useWorkspaceSlug() on @operica/core/paths — stub to return a
 // fixed slug so the tests do not need a WorkspaceSlugProvider tree.
-vi.mock("@opercia/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@opercia/core/paths")>();
+vi.mock("@operica/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@operica/core/paths")>();
   return {
     ...actual,
     useWorkspaceSlug: () => "acme",

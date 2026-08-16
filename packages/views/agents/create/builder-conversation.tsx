@@ -8,15 +8,15 @@ import {
   stripBuilderDraft,
   type AgentDraft,
   type BuilderRestore,
-} from "@opercia/core/agents";
-import { isRuntimeUsableForUser } from "@opercia/core/runtimes";
+} from "@operica/core/agents";
+import { isRuntimeUsableForUser } from "@operica/core/runtimes";
 import type {
   ChatMessage,
   MemberWithUser,
   RuntimeDevice,
-} from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
+import { cn } from "@operica/ui/lib/utils";
 import { ChatInput } from "../../chat/components/chat-input";
 import {
   ChatMessageList,

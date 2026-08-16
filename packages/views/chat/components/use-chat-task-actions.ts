@@ -3,20 +3,20 @@
 import { useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { api, ApiError } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { chatKeys } from "@opercia/core/chat/queries";
+import { api, ApiError } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { chatKeys } from "@operica/core/chat/queries";
 import {
   prioritizePendingChatTask,
   removePendingChatTask,
-} from "@opercia/core/chat/pending";
-import { removeChatMessageFromCaches } from "@opercia/core/realtime";
-import { createLogger } from "@opercia/core/logger";
+} from "@operica/core/chat/pending";
+import { removeChatMessageFromCaches } from "@operica/core/realtime";
+import { createLogger } from "@operica/core/logger";
 import type {
   Attachment,
   CancelTaskResponse,
   ChatPendingTask,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { useT } from "../../i18n";
 
 const apiLogger = createLogger("chat.api");

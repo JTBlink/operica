@@ -1,8 +1,8 @@
 "use client";
 
 import { Suspense } from "react";
-import { IssuesPage } from "@opercia/views/issues/components";
-import { ErrorBoundary } from "@opercia/ui/components/common/error-boundary";
+import { IssuesPage } from "@operica/views/issues/components";
+import { ErrorBoundary } from "@operica/ui/components/common/error-boundary";
 import { useIssueViewUrlSync } from "../../../../platform/use-issue-view-url-sync";
 
 function IssueViewUrlSync() {

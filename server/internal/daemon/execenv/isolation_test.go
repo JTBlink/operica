@@ -25,7 +25,7 @@ func preparationHelperTestCommand() []string {
 
 // TestPreparationHelperProcess is both a no-op parent-side test and the child
 // entry point used by isolation tests. Keeping it in the package test binary
-// exercises the same stdin/stdout protocol as the real opercia helper.
+// exercises the same stdin/stdout protocol as the real operica helper.
 func TestPreparationHelperProcess(t *testing.T) {
 	if len(os.Args) == 0 || os.Args[len(os.Args)-1] != preparationHelperTestMode {
 		return
@@ -94,7 +94,7 @@ func TestPreparationHelperRoundTripsProjectResources(t *testing.T) {
 					ID:           "resource-helper-project-resource",
 					ResourceType: "github_repo",
 					ResourceRef:  json.RawMessage(`{"url":"https://github.com/JTBlink/operica"}`),
-					Label:        "Opercia",
+					Label:        "Operica",
 				},
 			},
 		},
@@ -106,7 +106,7 @@ func TestPreparationHelperRoundTripsProjectResources(t *testing.T) {
 	}
 	defer env.Cleanup(true)
 
-	data, err := os.ReadFile(filepath.Join(env.WorkDir, ".opercia", "project", "resources.json"))
+	data, err := os.ReadFile(filepath.Join(env.WorkDir, ".operica", "project", "resources.json"))
 	if err != nil {
 		t.Fatalf("read project resources: %v", err)
 	}
@@ -127,7 +127,7 @@ func TestPreparationHelperRoundTripsProjectResources(t *testing.T) {
 	if resource.ID != "resource-helper-project-resource" ||
 		resource.ResourceType != "github_repo" ||
 		ref.URL != "https://github.com/JTBlink/operica" ||
-		resource.Label != "Opercia" {
+		resource.Label != "Operica" {
 		t.Fatalf("project resource = %#v, want all fields preserved", resource)
 	}
 }

@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { cn } from "@opercia/ui/lib/utils";
-import { useScrollFade } from "@opercia/ui/hooks/use-scroll-fade";
-import { DragStrip } from "@opercia/views/platform";
-import type { OnboardingStep } from "@opercia/core/onboarding";
+import { cn } from "@operica/ui/lib/utils";
+import { useScrollFade } from "@operica/ui/hooks/use-scroll-fade";
+import { DragStrip } from "@operica/views/platform";
+import type { OnboardingStep } from "@operica/core/onboarding";
 import { StepProgressBar, StepSidebar } from "./step-sidebar";
 
 /**

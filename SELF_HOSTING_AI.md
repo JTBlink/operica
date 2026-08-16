@@ -1,6 +1,6 @@
 # Self-Hosting Setup (for AI Agents)
 
-This document is designed for AI agents to execute. Follow these steps exactly to deploy a local Opercia instance and connect to it.
+This document is designed for AI agents to execute. Follow these steps exactly to deploy a local Operica instance and connect to it.
 
 ## Prerequisites
 
@@ -15,27 +15,27 @@ This document is designed for AI agents to execute. Follow these steps exactly t
 curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --with-server
 
 # Configure CLI for localhost, authenticate, and start daemon
-opercia setup self-host
+operica setup self-host
 ```
 
-Wait for the server output `✓ Opercia server is running and CLI is ready!` before running `opercia setup self-host`.
+Wait for the server output `✓ Operica server is running and CLI is ready!` before running `operica setup self-host`.
 
 **Expected result:**
 - Frontend at http://localhost:3000
 - Backend at http://localhost:8080
-- `opercia` CLI installed and configured for localhost
+- `operica` CLI installed and configured for localhost
 
 ## Alternative: Manual Setup
 
 ```bash
 git clone https://github.com/JTBlink/operica.git
-cd opercia
+cd operica
 make selfhost
-brew install opercia-ai/tap/opercia
-opercia setup self-host
+brew install operica-ai/tap/operica
+operica setup self-host
 ```
 
-The `opercia setup self-host` command will:
+The `operica setup self-host` command will:
 1. Configure CLI to connect to localhost:8080 / localhost:3000
 2. Open a browser for login — use the emailed code, or the generated code printed in backend logs when Resend is unset
 3. Discover workspaces automatically
@@ -44,7 +44,7 @@ The `opercia setup self-host` command will:
 ## Verification
 
 ```bash
-opercia daemon status
+operica daemon status
 ```
 
 Should show `running` with detected agents.
@@ -53,10 +53,10 @@ Should show `running` with detected agents.
 
 ```bash
 # Stop the daemon
-opercia daemon stop
+operica daemon stop
 
 # Stop all Docker services
-cd opercia
+cd operica
 make selfhost-stop
 ```
 
@@ -67,7 +67,7 @@ If the default ports (8080/3000) are in use:
 1. Edit `.env` and change `PORT` and `FRONTEND_PORT`. These are host ports; the
    containers keep listening on 8080/3000 internally, so no rebuild is needed.
 2. Run `make selfhost`
-3. Run `opercia setup self-host --port <PORT> --frontend-port <FRONTEND_PORT>`
+3. Run `operica setup self-host --port <PORT> --frontend-port <FRONTEND_PORT>`
 
 Edit the file rather than relying on environment variables: `make` `include`s
 `.env`, so a value in the file outranks the same variable from your shell
@@ -84,5 +84,5 @@ one the stack is actually published on.
 
 - **Backend not ready:** `docker compose -f docker-compose.selfhost.yml logs backend`
 - **Frontend not ready:** `docker compose -f docker-compose.selfhost.yml logs frontend`
-- **Daemon issues:** `opercia daemon logs`
+- **Daemon issues:** `operica daemon logs`
 - **Health checks:** `curl http://localhost:8080/health` for liveness, `curl http://localhost:8080/readyz` for dependency-aware readiness

@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { Issue } from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import type { Issue } from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../../locales/en/common.json";
 import enIssues from "../../../locales/en/issues.json";
 
@@ -12,12 +12,12 @@ const TEST_RESOURCES = { en: { common: enCommon, issues: enIssues } };
 // Mocks — same pattern as the issue-detail test suite.
 // ---------------------------------------------------------------------------
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
 const mockOpenModal = vi.fn();
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: Object.assign(
     (selector?: any) => {
       const state = { open: mockOpenModal };
@@ -28,7 +28,7 @@ vi.mock("@opercia/core/modals", () => ({
 }));
 
 const mockAuthState = { user: { id: "user-1" }, isAuthenticated: true };
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: any) => (selector ? selector(mockAuthState) : mockAuthState),
     { getState: () => mockAuthState },
@@ -36,7 +36,7 @@ vi.mock("@opercia/core/auth", () => ({
   registerAuthStore: vi.fn(),
 }));
 
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   memberListOptions: () => ({
     queryKey: ["workspaces", "ws-1", "members"],
     queryFn: () =>
@@ -58,11 +58,11 @@ vi.mock("@opercia/core/workspace/queries", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: (_t: string, _id: string) => "" }),
 }));
 
-vi.mock("@opercia/core/pins", () => ({
+vi.mock("@operica/core/pins", () => ({
   pinListOptions: () => ({
     queryKey: ["pins", "ws-1", "user-1"],
     queryFn: () => Promise.resolve([]),
@@ -71,13 +71,13 @@ vi.mock("@opercia/core/pins", () => ({
   useDeletePin: () => ({ mutate: vi.fn() }),
 }));
 
-vi.mock("@opercia/core/issues/mutations", () => ({
+vi.mock("@operica/core/issues/mutations", () => ({
   useUpdateIssue: () => ({ mutate: vi.fn() }),
 }));
 
-vi.mock("@opercia/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
-    "@opercia/core/paths",
+vi.mock("@operica/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/paths")>(
+    "@operica/core/paths",
   );
   return {
     ...actual,

@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { OperciaLanding } from "@/features/landing/components/opercia-landing";
+import { OpericaLanding } from "@/features/landing/components/operica-landing";
 import { RedirectIfAuthenticated } from "@/features/landing/components/redirect-if-authenticated";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Opercia — Project Management for Human + Agent Teams",
+    absolute: "Operica — Project Management for Human + Agent Teams",
   },
   description:
     "Open-source platform that turns coding agents into real teammates. Assign tasks, track progress, compound skills.",
   openGraph: {
-    title: "Opercia — Project Management for Human + Agent Teams",
+    title: "Operica — Project Management for Human + Agent Teams",
     description:
       "Manage your human + agent workforce in one place.",
     url: "/",
@@ -23,7 +23,7 @@ export default function LandingPage() {
   return (
     <>
       <RedirectIfAuthenticated />
-      <OperciaLanding />
+      <OpericaLanding />
     </>
   );
 }

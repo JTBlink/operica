@@ -6,12 +6,12 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { cn } from "@opercia/ui/lib/utils";
-import { api } from "@opercia/core/api";
-import { issueKeys } from "@opercia/core/issues/queries";
-import type { AgentTask } from "@opercia/core/types";
+} from "@operica/ui/components/ui/popover";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { cn } from "@operica/ui/lib/utils";
+import { api } from "@operica/core/api";
+import { issueKeys } from "@operica/core/issues/queries";
+import type { AgentTask } from "@operica/core/types";
 import { TranscriptButton } from "../../common/task-transcript";
 import { AgentAvatarStack } from "../../agents/components/agent-avatar-stack";
 import { ActiveTaskRow } from "./execution-log-section";

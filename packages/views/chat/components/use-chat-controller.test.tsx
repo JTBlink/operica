@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { act, renderHook, waitFor } from "@testing-library/react";
-import type { Agent, ChatPendingTask, ChatSession, Project } from "@opercia/core/types";
+import type { Agent, ChatPendingTask, ChatSession, Project } from "@operica/core/types";
 
 interface QueuedRestore {
   id: string;
@@ -83,20 +83,20 @@ const h = vi.hoisted(() => {
   };
 });
 
-vi.mock("@opercia/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: (sel: (s: { user: { id: string } }) => unknown) =>
     sel({ user: { id: "user-1" } }),
 }));
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   agentListOptions: () => ({ queryKey: ["agents"] }),
   memberListOptions: () => ({ queryKey: ["members"] }),
 }));
-vi.mock("@opercia/core/projects/queries", () => ({
+vi.mock("@operica/core/projects/queries", () => ({
   projectListOptions: () => ({ queryKey: ["projects"] }),
 }));
-vi.mock("@opercia/views/issues/components", () => ({ canAssignAgent: () => true }));
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/views/issues/components", () => ({ canAssignAgent: () => true }));
+vi.mock("@operica/core/api", () => ({
   ApiError: class ApiError extends Error {
     constructor(
       message: string,
@@ -115,16 +115,16 @@ vi.mock("@opercia/core/api", () => ({
   // failures have no reason code.
   dispatchReasonCode: () => undefined,
 }));
-vi.mock("@opercia/core/agents", () => ({
+vi.mock("@operica/core/agents", () => ({
   isAgentRuntimeBound: (agent: { runtime_id: string; runtime_bound?: boolean }) =>
     agent.runtime_bound !== false && agent.runtime_id.length > 0,
   useAgentPresenceDetail: () => ({ availability: "online" }),
   useWorkspaceAgentAvailability: () => "available",
 }));
-vi.mock("@opercia/core/hooks/use-file-upload", () => ({
+vi.mock("@operica/core/hooks/use-file-upload", () => ({
   useFileUpload: () => ({ uploadWithToast: vi.fn() }),
 }));
-vi.mock("@opercia/core/chat/mutations", () => ({
+vi.mock("@operica/core/chat/mutations", () => ({
   useCreateChatSession: () => ({ mutateAsync: h.createSessionMutate }),
   useMarkChatSessionRead: () => ({ mutate: h.markReadMutate }),
   useSetChatSessionArchived: () => ({ mutate: h.archivedMutate }),
@@ -137,16 +137,16 @@ vi.mock("@opercia/core/chat/mutations", () => ({
 vi.mock("../../common/use-app-foreground", () => ({
   useAppForeground: () => h.appForeground.value,
 }));
-vi.mock("@opercia/core/chat", () => ({
+vi.mock("@operica/core/chat", () => ({
   useChatStore: Object.assign(
     (sel: (s: typeof h.store) => unknown) => sel(h.store),
     { getState: () => h.store },
   ),
 }));
-vi.mock("@opercia/core/realtime", () => ({
+vi.mock("@operica/core/realtime", () => ({
   removeChatMessageFromCaches: h.removeFromCaches,
 }));
-vi.mock("@opercia/core/logger", () => ({
+vi.mock("@operica/core/logger", () => ({
   createLogger: () => ({ info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() }),
 }));
 vi.mock("../../i18n", () => ({ useT: () => ({ t: () => "x" }) }));
@@ -181,7 +181,7 @@ vi.mock("@tanstack/react-query", async (importOriginal) => {
 });
 
 import { useChatController } from "./use-chat-controller";
-import { api, ApiError } from "@opercia/core/api";
+import { api, ApiError } from "@operica/core/api";
 
 // --- Fixtures ---------------------------------------------------------------
 function makeSession(

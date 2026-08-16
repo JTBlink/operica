@@ -5,8 +5,8 @@
  * (react-markdown link component), and link-hover-card (Open button).
  */
 
-import { isGlobalPath, isReservedSlug } from "@opercia/core/paths";
-import { isIssueIdentifier } from "@opercia/ui/markdown";
+import { isGlobalPath, isReservedSlug } from "@operica/core/paths";
+import { isIssueIdentifier } from "@operica/ui/markdown";
 import type { LinkClickIntent } from "../../navigation/click-intent";
 
 /**
@@ -237,7 +237,7 @@ export function parseWorkspaceEntityLink(
 }
 
 /**
- * Open a link — internal paths dispatch opercia:navigate, external open new tab.
+ * Open a link — internal paths dispatch operica:navigate, external open new tab.
  *
  * If `currentSlug` is provided and `href` is a workspace-scoped path lacking a
  * slug (e.g. "/issues/abc" instead of "/{slug}/issues/abc"), the slug is
@@ -248,7 +248,7 @@ export function parseWorkspaceEntityLink(
  * internal route as a relative path.
  *
  * `intent` is how the user clicked (see `resolveClickIntent`); the platform
- * listener answering `opercia:navigate` executes it — in-place navigation for
+ * listener answering `operica:navigate` executes it — in-place navigation for
  * "push", a new tab otherwise. External links ignore it: they always hand off
  * to the browser / system browser.
  */
@@ -274,7 +274,7 @@ export function openLink(
       // the user wrote what they meant.
     }
     window.dispatchEvent(
-      new CustomEvent("opercia:navigate", {
+      new CustomEvent("operica:navigate", {
         detail: { path, disposition: intent },
       }),
     );

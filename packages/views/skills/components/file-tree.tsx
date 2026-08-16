@@ -13,14 +13,14 @@ import {
   PencilLine,
   Trash2,
 } from "lucide-react";
-import { Input } from "@opercia/ui/components/ui/input";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../../i18n";
 
 /**

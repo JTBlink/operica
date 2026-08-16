@@ -23,7 +23,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import {
   enqueuePendingChatTask,
   removePendingChatTask,
-} from "@opercia/core/chat/pending";
+} from "@operica/core/chat/pending";
 import type {
   ChatDonePayload,
   ChatMessage,
@@ -34,7 +34,7 @@ import type {
   TaskMessagePayload,
   TaskQueuedPayload,
   TaskDispatchPayload,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { chatKeys } from "@/data/queries/chat";
 
 // =====================================================

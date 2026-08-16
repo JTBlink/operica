@@ -51,13 +51,13 @@ vi.mock("../i18n", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/paths", () => ({ useCurrentWorkspace: () => ({ id: "ws1" }) }));
-vi.mock("@opercia/core/hooks/use-file-upload", () => ({
+vi.mock("@operica/core/paths", () => ({ useCurrentWorkspace: () => ({ id: "ws1" }) }));
+vi.mock("@operica/core/hooks/use-file-upload", () => ({
   useFileUpload: () => ({ uploadWithToast: vi.fn() }),
 }));
-vi.mock("@opercia/core/api", () => ({ api: {} }));
+vi.mock("@operica/core/api", () => ({ api: {} }));
 vi.mock("sonner", () => ({ toast: { info: vi.fn(), error: vi.fn(), success: vi.fn() } }));
-vi.mock("@opercia/core/feedback", () => ({
+vi.mock("@operica/core/feedback", () => ({
   FEEDBACK_KINDS: ["bug", "feature", "general", "praise"] as const,
   useCreateFeedback: () => ({ isPending: false, mutateAsync: feedbackMocks.mutateAsync }),
   useFeedbackDraftStore: (selector: any) =>

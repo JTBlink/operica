@@ -2,7 +2,7 @@ import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { Project } from "@opercia/core/types";
+import type { Project } from "@operica/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { ProjectDetail } from "./project-detail";
@@ -34,48 +34,48 @@ vi.mock("@tanstack/react-query", () => ({
   },
 }));
 
-vi.mock("@opercia/core/projects/queries", () => ({
+vi.mock("@operica/core/projects/queries", () => ({
   projectDetailOptions: () => ({ queryKey: ["project-detail"] }),
 }));
 
-vi.mock("@opercia/core/projects/mutations", () => ({
+vi.mock("@operica/core/projects/mutations", () => ({
   useUpdateProject: () => ({ mutate: vi.fn() }),
   useDeleteProject: () => ({ mutate: mocks.deleteProject }),
 }));
 
-vi.mock("@opercia/core/pins", () => ({
+vi.mock("@operica/core/pins", () => ({
   pinListOptions: () => ({ queryKey: ["pins"] }),
   useCreatePin: () => ({ mutate: vi.fn() }),
   useDeletePin: () => ({ mutate: vi.fn() }),
 }));
 
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"] }),
   agentListOptions: () => ({ queryKey: ["agents"] }),
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: (selector: (state: { user: { id: string } }) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));
 
-vi.mock("@opercia/core/chat", () => ({
+vi.mock("@operica/core/chat", () => ({
   useRecentContextStore: (
     selector: (state: { recordVisit: typeof mocks.recordVisit }) => unknown,
   ) => selector({ recordVisit: mocks.recordVisit }),
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({
     projects: () => "/test-workspace/projects",
   }),
 }));
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "User One" }),
 }));
 
@@ -97,15 +97,15 @@ vi.mock("react-resizable-panels", () => ({
   }),
 }));
 
-vi.mock("@opercia/ui/hooks/use-mobile", () => ({
+vi.mock("@operica/ui/hooks/use-mobile", () => ({
   useIsMobile: () => false,
 }));
 
-vi.mock("@opercia/ui/components/common/emoji-picker", () => ({
+vi.mock("@operica/ui/components/common/emoji-picker", () => ({
   EmojiPicker: () => null,
 }));
 
-vi.mock("@opercia/ui/components/ui/resizable", () => ({
+vi.mock("@operica/ui/components/ui/resizable", () => ({
   ResizablePanelGroup: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
@@ -115,7 +115,7 @@ vi.mock("@opercia/ui/components/ui/resizable", () => ({
   ResizableHandle: () => null,
 }));
 
-vi.mock("@opercia/ui/components/ui/dropdown-menu", () => ({
+vi.mock("@operica/ui/components/ui/dropdown-menu", () => ({
   DropdownMenu: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   DropdownMenuTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   DropdownMenuContent: ({ children }: { children: React.ReactNode }) => (
@@ -135,7 +135,7 @@ vi.mock("@opercia/ui/components/ui/dropdown-menu", () => ({
   DropdownMenuSeparator: () => <hr />,
 }));
 
-vi.mock("@opercia/ui/components/ui/popover", () => ({
+vi.mock("@operica/ui/components/ui/popover", () => ({
   Popover: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   PopoverTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   PopoverContent: ({ children }: { children: React.ReactNode }) => (
@@ -143,7 +143,7 @@ vi.mock("@opercia/ui/components/ui/popover", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/tooltip", () => ({
+vi.mock("@operica/ui/components/ui/tooltip", () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   TooltipTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   TooltipContent: ({ children }: { children: React.ReactNode }) => (
@@ -151,14 +151,14 @@ vi.mock("@opercia/ui/components/ui/tooltip", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/sheet", () => ({
+vi.mock("@operica/ui/components/ui/sheet", () => ({
   Sheet: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   SheetContent: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/alert-dialog", () => ({
+vi.mock("@operica/ui/components/ui/alert-dialog", () => ({
   AlertDialog: ({
     open,
     children,

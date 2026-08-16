@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import type { ReactNode } from "react";
-import { WorkspaceSlugProvider } from "@opercia/core/paths";
-import type { InboxItem } from "@opercia/core/types";
+import { WorkspaceSlugProvider } from "@operica/core/paths";
+import type { InboxItem } from "@operica/core/types";
 import { NavigationProvider } from "../../navigation";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enInbox from "../../locales/en/inbox.json";
 
 vi.mock("../../issues/components", () => ({ StatusIcon: () => null }));

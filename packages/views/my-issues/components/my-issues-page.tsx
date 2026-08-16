@@ -2,11 +2,11 @@
 
 import { useStore } from "zustand";
 import { ListTodo } from "lucide-react";
-import { useAuthStore } from "@opercia/core/auth";
+import { useAuthStore } from "@operica/core/auth";
 import {
   myIssuesRelationFromScope,
   myIssuesViewStore,
-} from "@opercia/core/issues/stores/my-issues-view-store";
+} from "@operica/core/issues/stores/my-issues-view-store";
 import { PageHeader } from "../../layout/page-header";
 import { IssueSurface } from "../../issues/surface/issue-surface";
 import { useT } from "../../i18n";

@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useAuthStore } from "@opercia/core/auth";
+import { useAuthStore } from "@operica/core/auth";
 import {
   completeOnboarding,
   ONBOARDING_STEP_ORDER,
@@ -12,9 +12,9 @@ import {
   useWelcomeStore,
   type OnboardingStep,
   type QuestionnaireAnswers,
-} from "@opercia/core/onboarding";
-import { workspaceListOptions } from "@opercia/core/workspace/queries";
-import type { AgentRuntime, Workspace } from "@opercia/core/types";
+} from "@operica/core/onboarding";
+import { workspaceListOptions } from "@operica/core/workspace/queries";
+import type { AgentRuntime, Workspace } from "@operica/core/types";
 import { StepWelcome } from "./steps/step-welcome";
 import { StepShell } from "./components/step-shell";
 import { StepAboutYou } from "./steps/step-about-you";
@@ -105,7 +105,7 @@ interface OnboardingFlowProps {
     destination?: OnboardingDestination,
   ) => void;
   /** "new_workspace" is the same flow run by someone who already uses
-   *  Opercia: it starts at the workspace step, because the intro and the
+   *  Operica: it starts at the workspace step, because the intro and the
    *  questionnaire only make sense once per person, and it always creates a
    *  workspace rather than offering to continue with an existing one. */
   mode?: OnboardingMode;

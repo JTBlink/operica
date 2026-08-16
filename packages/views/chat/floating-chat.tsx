@@ -1,7 +1,7 @@
 "use client";
 
-import { useChatStore } from "@opercia/core/chat";
-import { useWorkspacePaths } from "@opercia/core/paths";
+import { useChatStore } from "@operica/core/chat";
+import { useWorkspacePaths } from "@operica/core/paths";
 import { useNavigation } from "../navigation";
 import { ChatFab } from "./components/chat-fab";
 import { ChatWindow } from "./components/chat-window";

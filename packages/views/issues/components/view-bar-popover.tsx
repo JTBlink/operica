@@ -25,7 +25,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,16 +35,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { cn } from "@opercia/ui/lib/utils";
-import type { IssueView } from "@opercia/core/api/schemas";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { cn } from "@operica/ui/lib/utils";
+import type { IssueView } from "@operica/core/api/schemas";
 import { useT } from "../../i18n";
 
 /** One entry on the bar: a built-in tab or a saved view. */

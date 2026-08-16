@@ -15,27 +15,27 @@ import type {
   Agent,
   MemberWithUser,
   RuntimeProfile,
-} from "@opercia/core/types";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { memberListOptions, agentListOptions } from "@opercia/core/workspace/queries";
-import { useUpdateRuntime } from "@opercia/core/runtimes/mutations";
+} from "@operica/core/types";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { memberListOptions, agentListOptions } from "@operica/core/workspace/queries";
+import { useUpdateRuntime } from "@operica/core/runtimes/mutations";
 import {
   deriveRuntimeHealth,
   runtimeDisplayName,
   runtimeProfileListOptions,
-} from "@opercia/core/runtimes";
+} from "@operica/core/runtimes";
 import {
   type AgentPresenceDetail,
   useWorkspacePresenceMap,
-} from "@opercia/core/agents";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/agents";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { BreadcrumbHeader } from "../../layout/breadcrumb-header";
 import { AppLink, useNavigation } from "../../navigation";
@@ -334,7 +334,7 @@ function HeroCard({
         </Fact>
       </dl>
 
-      {/* Diagnostic IDs — opercia CLI git hash + truncated daemon UUID.
+      {/* Diagnostic IDs — operica CLI git hash + truncated daemon UUID.
           Only useful when filing an issue or reading logs; folded by
           default so they don't compete with the user-visible facts above. */}
       {hasTechDetails && (

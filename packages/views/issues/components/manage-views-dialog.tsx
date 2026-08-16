@@ -18,17 +18,17 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { GripVertical, Layers, Pencil, Trash2 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Switch } from "@opercia/ui/components/ui/switch";
+import { Button } from "@operica/ui/components/ui/button";
+import { Switch } from "@operica/ui/components/ui/switch";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { cn } from "@opercia/ui/lib/utils";
-import type { IssueView } from "@opercia/core/api/schemas";
+} from "@operica/ui/components/ui/dialog";
+import { cn } from "@operica/ui/lib/utils";
+import type { IssueView } from "@operica/core/api/schemas";
 import {
   DeleteViewConfirm,
   type ViewBarItem,

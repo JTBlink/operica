@@ -2,11 +2,11 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@opercia/ui/components/ui/sonner";
-import { cn } from "@opercia/ui/lib/utils";
+import { Toaster } from "@operica/ui/components/ui/sonner";
+import { cn } from "@operica/ui/lib/utils";
 import { WebProviders } from "@/components/web-providers";
-import type { SupportedLocale } from "@opercia/core/i18n";
-import { RESOURCES } from "@opercia/views/locales";
+import type { SupportedLocale } from "@operica/core/i18n";
+import { RESOURCES } from "@operica/views/locales";
 import { getRequestLocale } from "@/lib/request-locale";
 import {
   resolveBrowserApiBaseUrl,
@@ -72,10 +72,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.opercia.ai"),
+  metadataBase: new URL("https://www.operica.ai"),
   title: {
-    default: "Opercia — Project Management for Human + Agent Teams",
-    template: "%s | Opercia",
+    default: "Operica — Project Management for Human + Agent Teams",
+    template: "%s | Operica",
   },
   description:
     "Open-source platform that turns coding agents into real teammates. Assign tasks, track progress, compound skills.",
@@ -85,13 +85,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Opercia",
+    siteName: "Operica",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@opercia_hq",
-    creator: "@opercia_hq",
+    site: "@operica_hq",
+    creator: "@operica_hq",
   },
   alternates: {
     canonical: "/",

@@ -1,12 +1,12 @@
-import { propertyIdFromViewKey } from "@opercia/core/issues/stores/view-store";
+import { propertyIdFromViewKey } from "@operica/core/issues/stores/view-store";
 import type {
   TableCalculation,
   TableColumnKey,
-} from "@opercia/core/issues/stores/view-store";
+} from "@operica/core/issues/stores/view-store";
 import type {
   Issue,
   IssuePropertyValue,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 
 /** Export must fail closed when paged Table responses cannot prove that the
  * complete query window was collected. The UI translates this marker instead

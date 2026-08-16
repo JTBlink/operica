@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"sort"
 
+	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	db "github.com/JTBlink/operica/server/pkg/db/generated"
 )
 
 // TimelineEntry represents a single entry in the issue timeline, which can be
@@ -119,7 +119,7 @@ type timelinePaginatedResponse struct {
 // Two response shapes coexist for boundary compatibility (#1929):
 //
 //   - No pagination params → flat ASC `TimelineEntry[]`. Matches the legacy
-//     desktop contract (Opercia.app ≤ v0.2.25) and the new client.
+//     desktop contract (Operica.app ≤ v0.2.25) and the new client.
 //   - Any of `limit` / `before` / `after` / `around` present → wrapped object
 //     with DESC entries + null cursors + has_more_after=false. Matches what a
 //     stale v0.2.26+ build expects when it parses the response with

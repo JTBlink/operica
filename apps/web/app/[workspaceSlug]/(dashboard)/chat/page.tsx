@@ -1,1 +1,1 @@
-export { ChatPage as default } from "@opercia/views/chat";
+export { ChatPage as default } from "@operica/views/chat";

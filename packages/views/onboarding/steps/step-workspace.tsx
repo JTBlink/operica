@@ -3,8 +3,8 @@
 import { type ReactNode, useRef, useEffect, useState } from "react";
 import { Dices, Plus } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   Field,
   FieldDescription,
@@ -12,14 +12,14 @@ import {
   FieldGroup,
   FieldLabel,
   FieldTitle,
-} from "@opercia/ui/components/ui/field";
-import { cn } from "@opercia/ui/lib/utils";
-import { useCreateWorkspace } from "@opercia/core/workspace/mutations";
-import type { Workspace } from "@opercia/core/types";
-import { isImeComposing } from "@opercia/core/utils";
-import { matchLocale } from "@opercia/core/i18n";
-import { useConfigStore } from "@opercia/core/config";
-import { workspaceUrlHost } from "@opercia/core/workspace/workspace-url";
+} from "@operica/ui/components/ui/field";
+import { cn } from "@operica/ui/lib/utils";
+import { useCreateWorkspace } from "@operica/core/workspace/mutations";
+import type { Workspace } from "@operica/core/types";
+import { isImeComposing } from "@operica/core/utils";
+import { matchLocale } from "@operica/core/i18n";
+import { useConfigStore } from "@operica/core/config";
+import { workspaceUrlHost } from "@operica/core/workspace/workspace-url";
 import { useLogout } from "../../auth";
 import {
   StepFooter,
@@ -34,7 +34,7 @@ import {
   nameToWorkspaceSlug,
   randomCelestialWorkspaceIdentity,
 } from "../../workspace/slug";
-import { isReservedSlug } from "@opercia/core/paths";
+import { isReservedSlug } from "@operica/core/paths";
 
 /**
  * Step 2 — create your first workspace, or continue with one set up in

@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // OutcomeReplier reacts to the Dispatcher's verdict by posting the
@@ -90,16 +90,16 @@ type LarkOutcomeReplier struct {
 	bindingSvc   BindingTokenMinter
 	credentials  CredentialsResolver
 	queries      OutcomeReplierQueries
-	appURL       string // e.g. https://opercia.example, trailing slash trimmed
+	appURL       string // e.g. https://operica.example, trailing slash trimmed
 	bindingPath  string // path component of the binding URL, default "/lark/bind"
 	noticeHeader string // header text used by the offline/archived cards
 	log          *slog.Logger
 }
 
-// OutcomeReplierConfig wires the production replier. AppURL is the Opercia web
+// OutcomeReplierConfig wires the production replier. AppURL is the Operica web
 // app host the user clicks into to redeem the binding token or open an issue
-// (e.g. https://opercia.example). It comes from OPERCIA_APP_URL and is
-// intentionally separate from OPERCIA_PUBLIC_URL, which is the backend/API
+// (e.g. https://operica.example). It comes from OPERICA_APP_URL and is
+// intentionally separate from OPERICA_PUBLIC_URL, which is the backend/API
 // public URL used for webhook and daemon-facing endpoints. Empty means the
 // binding flow can only log the open_id, not produce a clickable card. The
 // other fields default at construction.
@@ -129,7 +129,7 @@ func NewLarkOutcomeReplier(cfg OutcomeReplierConfig) OutcomeReplier {
 		return NewNoopOutcomeReplier(log)
 	}
 	if cfg.AppURL == "" {
-		log.Warn("lark outcome replier: OPERCIA_APP_URL not set; binding prompt CTA will not work")
+		log.Warn("lark outcome replier: OPERICA_APP_URL not set; binding prompt CTA will not work")
 	}
 	bindingPath := cfg.BindingPath
 	if bindingPath == "" {
@@ -145,7 +145,7 @@ func NewLarkOutcomeReplier(cfg OutcomeReplierConfig) OutcomeReplier {
 		queries:      cfg.Queries,
 		appURL:       strings.TrimRight(cfg.AppURL, "/"),
 		bindingPath:  bindingPath,
-		noticeHeader: "Opercia",
+		noticeHeader: "Operica",
 		log:          log,
 	}
 }
@@ -288,7 +288,7 @@ func inboundReplyTarget(msg InboundMessage) ReplyTarget {
 // issueCreatedText composes the user-facing confirmation. Identifier
 // always wins over a bare number — DispatchResult.IssueIdentifier
 // already encodes the workspace prefix when available. AppURL is optional:
-// when empty (self-host operators who haven't configured OPERCIA_APP_URL) the
+// when empty (self-host operators who haven't configured OPERICA_APP_URL) the
 // message still confirms the issue, just without a deep link the user can tap.
 func issueCreatedText(res DispatchResult, appURL string) string {
 	identifier := res.IssueIdentifier

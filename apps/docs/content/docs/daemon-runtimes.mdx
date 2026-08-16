@@ -1,22 +1,22 @@
 ---
 title: Daemon and runtimes
-description: How Opercia connects computers, discovers AI coding tools, and executes tasks.
+description: How Operica connects computers, discovers AI coding tools, and executes tasks.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Opercia records and coordinates the work; connected computers execute it. The **daemon** on a computer claims tasks and invokes the AI coding tools installed on that machine.
+Operica records and coordinates the work; connected computers execute it. The **daemon** on a computer claims tasks and invokes the AI coding tools installed on that machine.
 
 ## Daemon vs runtime
 
-- The **daemon** is the Opercia background process running on one computer. It connects to the server, discovers local tools, claims tasks, and reports results back.
+- The **daemon** is the Operica background process running on one computer. It connects to the server, discovers local tools, claims tasks, and reports results back.
 - A **runtime** represents one concrete execution environment available to a workspace. It corresponds to one computer plus one AI coding tool — or one custom runtime profile — on that computer.
 
 For example, a computer has both Claude Code and Codex installed and is connected to two workspaces. The daemon registers Claude Code and Codex runtimes for each workspace. Restarting the daemon updates the existing records; it does not keep creating new runtimes for the same combination.
 
 ## Execution location and data boundaries
 
-The AI coding tools a local runtime invokes, those tools' own login credentials, and your local code directories all stay on the connected computer. The Opercia server does not execute commands on behalf of local tools, and it does not automatically upload your entire working directory.
+The AI coding tools a local runtime invokes, those tools' own login credentials, and your local code directories all stay on the connected computer. The Operica server does not execute commands on behalf of local tools, and it does not automatically upload your entire working directory.
 
 So the team can collaborate, the server stores issues, comments, agent configuration, task context, run records, and the results agents write back. That content can include code snippets or other project context an agent chose to read and include in its replies.
 
@@ -26,23 +26,23 @@ An agent's custom environment variables are stored server-side and sent to the r
 
 ## Starting the daemon
 
-With Opercia Desktop, the app starts the daemon automatically — no extra command needed.
+With Operica Desktop, the app starts the daemon automatically — no extra command needed.
 
-On the web, a remote computer, or a headless environment, [install the Opercia CLI](/cli) first, then run:
+On the web, a remote computer, or a headless environment, [install the Operica CLI](/cli) first, then run:
 
 ```bash
-opercia daemon start
+operica daemon start
 ```
 
 The daemon runs in the background by default. Common commands:
 
 | Command | Purpose |
 | --- | --- |
-| `opercia daemon status` | Show daemon and connection status |
-| `opercia daemon logs -f` | Follow the logs |
-| `opercia daemon restart` | Restart the daemon and re-detect local tools |
-| `opercia daemon stop` | Stop the daemon |
-| `opercia daemon start --foreground` | Run in the current terminal, for debugging |
+| `operica daemon status` | Show daemon and connection status |
+| `operica daemon logs -f` | Follow the logs |
+| `operica daemon restart` | Restart the daemon and re-detect local tools |
+| `operica daemon stop` | Stop the daemon |
+| `operica daemon start --foreground` | Run in the current terminal, for debugging |
 
 On startup, the daemon detects supported AI coding tools on `PATH` and registers runtimes for the workspaces you are allowed to connect. If a tool was just installed or signed in, restart the daemon to detect it again.
 
@@ -69,7 +69,7 @@ Detailed states and retry rules are in [Tasks](/tasks).
 
 One daemon executes at most 20 tasks at a time by default; each agent at most 6. Effective concurrency is the smaller of the two.
 
-Once a limit is reached, new tasks keep queueing. You can adjust a single agent's concurrency in the agent settings, and the machine-wide cap through `OPERCIA_DAEMON_MAX_CONCURRENT_TASKS`. Parallel runs compete for machine capacity, tool account quota, and the same working directory all at once.
+Once a limit is reached, new tasks keep queueing. You can adjust a single agent's concurrency in the agent settings, and the machine-wide cap through `OPERICA_DAEMON_MAX_CONCURRENT_TASKS`. Parallel runs compete for machine capacity, tool account quota, and the same working directory all at once.
 
 ## Private and public runtimes
 
@@ -81,7 +81,7 @@ The runtime owner or an admin can make it **public**. Other workspace members ca
 
 If your team uses an internal wrapper, a version-pinned executable, or needs fixed extra arguments for a compatible tool, create a **custom runtime profile**.
 
-A custom profile does not add a new communication protocol. You still pick one of the protocol families Opercia already supports (the tool's integration protocol type; see [AI coding tools comparison](/providers)), and the command itself must be compatible with that family.
+A custom profile does not add a new communication protocol. You still pick one of the protocol families Operica already supports (the tool's integration protocol type; see [AI coding tools comparison](/providers)), and the command itself must be compatible with that family.
 
 ### Creating a profile
 
@@ -99,13 +99,13 @@ The command field takes an executable and arguments, not a shell script. Plain a
 If a Desktop-launched daemon cannot find a command your terminal can run, set an absolute path for the current computer:
 
 ```bash
-opercia runtime profile set-path <profile-id> --path /absolute/path/to/command
+operica runtime profile set-path <profile-id> --path /absolute/path/to/command
 ```
 
 Remove the path override:
 
 ```bash
-opercia runtime profile unset-path <profile-id>
+operica runtime profile unset-path <profile-id>
 ```
 
 Editing a profile only affects tasks claimed afterwards. Before deleting a profile, deal with the active agents still bound to its runtimes. Deleting only the runtime instance on one computer does not delete the profile — a running daemon will re-register it.
@@ -114,11 +114,11 @@ Editing a profile only affects tasks claimed afterwards. Before deleting a profi
 
 Check in this order:
 
-1. Run `opercia daemon status` to confirm the daemon is running.
-2. Run `opercia daemon logs -f` to look for login, network, or tool-detection errors.
+1. Run `operica daemon status` to confirm the daemon is running.
+2. Run `operica daemon logs -f` to look for login, network, or tool-detection errors.
 3. Run `command -v <tool-command>` in the same environment to confirm the daemon can find it.
-4. Open Opercia's **Runtimes** page and check whether the target computer and the matching AI coding tool show as online.
-5. After a tool install, a path change, or a profile update, run `opercia daemon restart`.
+4. Open Operica's **Runtimes** page and check whether the target computer and the matching AI coding tool show as online.
+5. After a tool install, a path change, or a profile update, run `operica daemon restart`.
 
 If the problem persists, see [Troubleshooting](/troubleshooting).
 

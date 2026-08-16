@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { MemberDetailPage } from "@opercia/views/members";
+import { MemberDetailPage } from "@operica/views/members";
 
 export default function MemberDetailRoute({
   params,

@@ -83,7 +83,7 @@ const (
 // A nil ChatQuickActionsLLM, or one whose Enabled() is false, disables the
 // feature entirely: no pending marker is raised and no pills are generated.
 // That is the expected state for a self-hosted deployment with no
-// OPERCIA_LLM_API_KEY / OPERCIA_LLM_BASE_URL, and matches how chat auto-titling
+// OPERICA_LLM_API_KEY / OPERICA_LLM_BASE_URL, and matches how chat auto-titling
 // already degrades.
 type ChatQuickActionsLLM interface {
 	Enabled() bool
@@ -96,7 +96,7 @@ type ChatQuickActionsLLM interface {
 //
 // The rules are deliberately prescriptive about WHO the suggestions are for.
 // The retired daemon pass ran as a resumed turn inside the agent's own session,
-// so it inherited the Opercia runtime brief's identity and drifted toward
+// so it inherited the Operica runtime brief's identity and drifted toward
 // agent-operations actions; this pass has no such context and must be told the
 // frame explicitly.
 //
@@ -214,7 +214,7 @@ func (s *TaskService) GenerateChatQuickActionsForTask(ctx context.Context, task 
 	}
 
 	raw, err := s.QuickActions.GenerateJSON(ctx,
-		"", // deployment default: OPERCIA_LLM_DEFAULT_MODEL, else llm.FallbackModel
+		"", // deployment default: OPERICA_LLM_DEFAULT_MODEL, else llm.FallbackModel
 		chatQuickActionsSystemPrompt,
 		prompt,
 		chatQuickActionsTemperature,

@@ -3,14 +3,14 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
+import { useAuthStore } from "@operica/core/auth";
 import {
   paths,
   resolvePostAuthDestination,
   useHasOnboarded,
-} from "@opercia/core/paths";
-import { workspaceListOptions } from "@opercia/core/workspace/queries";
-import { CliInstallInstructions, OnboardingFlow } from "@opercia/views/onboarding";
+} from "@operica/core/paths";
+import { workspaceListOptions } from "@operica/core/workspace/queries";
+import { CliInstallInstructions, OnboardingFlow } from "@operica/views/onboarding";
 
 /**
  * Web shell for the onboarding flow. The route is the platform chrome on

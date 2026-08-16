@@ -4,7 +4,7 @@
  * The coordinated-upload engine shared by every composer surface (MUL-5181, L2).
  *
  * Ownership inversion: an upload is owned by the module-level upload
- * coordinator (`@opercia/core/drafts`), not by the React component that
+ * coordinator (`@operica/core/drafts`), not by the React component that
  * started it. On file pick the engine writes a persisted placeholder into the
  * surface's draft IMMEDIATELY (through the {@link UploadDraftBinding}), then
  * hands the file to the coordinator. Closing or scrolling the composer away no
@@ -40,22 +40,22 @@ import {
   type RefObject,
 } from "react";
 import { toast } from "sonner";
-import { api } from "@opercia/core/api";
+import { api } from "@operica/core/api";
 import {
   startUpload,
   abortUpload,
   hasUploadingDraft,
   attachmentToDraftUpload,
   type DraftUpload,
-} from "@opercia/core/drafts";
-import { createSafeId } from "@opercia/core/utils";
-import { contentReferencesAttachment, type Attachment } from "@opercia/core/types";
+} from "@operica/core/drafts";
+import { createSafeId } from "@operica/core/utils";
+import { contentReferencesAttachment, type Attachment } from "@operica/core/types";
 import {
   toUploadResult,
   type UploadContext,
   type UploadResult,
-} from "@opercia/core/hooks/use-file-upload";
-import { MAX_FILE_SIZE } from "@opercia/core/constants/upload";
+} from "@operica/core/hooks/use-file-upload";
+import { MAX_FILE_SIZE } from "@operica/core/constants/upload";
 import { useT } from "../i18n";
 import type { UploadGate } from "./use-upload-gate";
 import type { ContentEditorRef } from "./content-editor";

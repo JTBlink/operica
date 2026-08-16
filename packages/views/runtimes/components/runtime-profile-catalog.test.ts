@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { RuntimeProfile } from "@opercia/core/types";
+import type { RuntimeProfile } from "@operica/core/types";
 import {
   buildRuntimeCatalog,
   formatCommandLine,

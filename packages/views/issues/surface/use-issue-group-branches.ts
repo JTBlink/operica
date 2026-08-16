@@ -17,14 +17,14 @@ import {
   issueKeys,
   issueTableGroupsOptions,
   issueTableRowPageOptions,
-} from "@opercia/core/issues/queries";
+} from "@operica/core/issues/queries";
 import type {
   Issue,
   IssueTableGroupDescriptor,
   IssueTableGroupsRequest,
   IssueTableQuerySpec,
   IssueTableRowsResponse,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 
 export interface IssueGroupPageState {
   total: number;

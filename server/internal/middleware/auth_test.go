@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/JTBlink/operica/server/internal/auth"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -54,7 +54,7 @@ func generateToken(claims jwt.MapClaims, secret []byte) string {
 func validClaims() jwt.MapClaims {
 	return jwt.MapClaims{
 		"sub":   "test-user-id",
-		"email": "test@opercia.ai",
+		"email": "test@operica.ai",
 		"exp":   time.Now().Add(time.Hour).Unix(),
 	}
 }
@@ -191,8 +191,8 @@ func TestAuth_ValidToken(t *testing.T) {
 	if gotUserID != "test-user-id" {
 		t.Fatalf("expected X-User-ID 'test-user-id', got '%s'", gotUserID)
 	}
-	if gotEmail != "test@opercia.ai" {
-		t.Fatalf("expected X-User-Email 'test@opercia.ai', got '%s'", gotEmail)
+	if gotEmail != "test@operica.ai" {
+		t.Fatalf("expected X-User-Email 'test@operica.ai', got '%s'", gotEmail)
 	}
 }
 
@@ -304,7 +304,7 @@ func TestAuth_PATCacheHit(t *testing.T) {
 }
 
 // TestAuth_MCN_NoVerifierConfigured pins the same fail-closed branch
-// as the daemon side: with no OPERCIA_CLOUD_FLEET_URL configured, an
+// as the daemon side: with no OPERICA_CLOUD_FLEET_URL configured, an
 // mcn_ bearer token must be rejected with 401 at the prefix branch.
 // We don't fall through — an mcn_ string can't be a valid mul_ PAT or
 // JWT, so any fall-through would be wasted work.

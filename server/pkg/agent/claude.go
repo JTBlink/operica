@@ -292,7 +292,7 @@ func (b *claudeBackend) Execute(ctx context.Context, prompt string, opts ExecOpt
 
 		completionGuardError := ""
 		if sawAsyncLaunch {
-			completionGuardError = "claude launched an async background task; Opercia-managed runs require foreground execution"
+			completionGuardError = "claude launched an async background task; Operica-managed runs require foreground execution"
 		}
 		finalStatus, finalOutput, finalError := finalizeStreamResult(
 			"claude",
@@ -885,7 +885,7 @@ func claudeRootSudoPreflight(args, env []string) error {
 	if !argsRequestBypassPermissions(args) || os.Geteuid() != 0 || envHasSandbox(env) {
 		return nil
 	}
-	return fmt.Errorf("Claude Code refuses bypassPermissions under root/sudo privileges. Run the Opercia daemon as a non-root user, or set IS_SANDBOX=1 if running in a genuine container/sandbox")
+	return fmt.Errorf("Claude Code refuses bypassPermissions under root/sudo privileges. Run the Operica daemon as a non-root user, or set IS_SANDBOX=1 if running in a genuine container/sandbox")
 }
 
 func argsRequestBypassPermissions(args []string) bool {
@@ -923,10 +923,10 @@ func mergeEnv(base []string, extra map[string]string) []string {
 	env := make([]string, 0, len(base)+len(extra))
 	for _, entry := range base {
 		key, _, _ := strings.Cut(entry, "=")
-		// OPERCIA_* in the daemon's own environment is not task context. Drop
+		// OPERICA_* in the daemon's own environment is not task context. Drop
 		// the inherited namespace for every backend and append only the values
 		// daemon.go explicitly assembled for this task below.
-		if isFilteredChildEnvKey(key) || strings.HasPrefix(strings.ToUpper(key), "OPERCIA_") {
+		if isFilteredChildEnvKey(key) || strings.HasPrefix(strings.ToUpper(key), "OPERICA_") {
 			continue
 		}
 		env = append(env, entry)
@@ -1065,7 +1065,7 @@ func stripSurroundingQuotes(s string) (string, bool) {
 // writeMcpConfigToTemp writes MCP config JSON to a temporary file and returns
 // its path. The caller is responsible for removing it via cleanupMcpConfigTemp.
 func writeMcpConfigToTemp(raw json.RawMessage) (string, error) {
-	dir, err := os.MkdirTemp("", "opercia-mcp-*")
+	dir, err := os.MkdirTemp("", "operica-mcp-*")
 	if err != nil {
 		return "", fmt.Errorf("create mcp config temp dir: %w", err)
 	}
@@ -1087,7 +1087,7 @@ func cleanupMcpConfigTemp(path string) {
 		return
 	}
 	dir := filepath.Dir(path)
-	if strings.HasPrefix(filepath.Base(dir), "opercia-mcp-") {
+	if strings.HasPrefix(filepath.Base(dir), "operica-mcp-") {
 		_ = os.RemoveAll(dir)
 		return
 	}

@@ -8,7 +8,7 @@ import type { TestApiClient } from "./fixtures";
 
 const DATABASE_URL =
   process.env.DATABASE_URL ??
-  "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable";
+  "postgres://operica:operica@localhost:5432/operica?sslmode=disable";
 
 test("renders assistant quick actions and sends the hidden prompt", async ({
   page,
@@ -98,9 +98,9 @@ test("renders assistant quick actions and sends the hidden prompt", async ({
     if (!token) throw new Error("E2E token missing");
     await page.addInitScript(
       ({ authToken, activeSessionId }) => {
-        localStorage.setItem("opercia_token", authToken);
-        localStorage.setItem("opercia:chat:activeSessionId", activeSessionId);
-        localStorage.setItem("opercia:chat:isOpen", "false");
+        localStorage.setItem("operica_token", authToken);
+        localStorage.setItem("operica:chat:activeSessionId", activeSessionId);
+        localStorage.setItem("operica:chat:isOpen", "false");
       },
       { authToken: token, activeSessionId: sessionId },
     );

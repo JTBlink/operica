@@ -1,7 +1,7 @@
 "use client";
 
-import { useWorkspaceId } from "@opercia/core";
-import { useWorkspacePresencePrefetch } from "@opercia/core/agents";
+import { useWorkspaceId } from "@operica/core";
+import { useWorkspacePresencePrefetch } from "@operica/core/agents";
 
 // Mount once inside any subtree that's already gated on "workspace resolved"
 // (DashboardLayout on web, WorkspaceRouteLayout on desktop). useWorkspaceId

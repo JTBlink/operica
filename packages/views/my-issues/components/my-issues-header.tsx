@@ -2,22 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import type {
   Issue,
   IssueTableFacetSpec,
   IssueTableFacetsResponse,
   WorkingAgentSummary,
-} from "@opercia/core/types";
-import { type MyIssuesScope } from "@opercia/core/issues/stores/my-issues-view-store";
-import { useViewStore } from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/core/types";
+import { type MyIssuesScope } from "@operica/core/issues/stores/my-issues-view-store";
+import { useViewStore } from "@operica/core/issues/stores/view-store-context";
 import { useT } from "../../i18n";
 import { WorkspaceAgentWorkingChip } from "../../issues/components/workspace-agent-working-chip";
 import {
@@ -27,11 +27,11 @@ import {
 import { FilterChipsBar } from "../../issues/components/filter-chips-bar";
 import { toast } from "sonner";
 import { SaveViewDialog, type SaveViewScope } from "../../issues/components/save-view-dialog";
-import { useActiveIssueView } from "@opercia/core/issue-views/use-active-view";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { baselineFromQuery } from "@opercia/core/issue-views/baseline";
+import { useActiveIssueView } from "@operica/core/issue-views/use-active-view";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { baselineFromQuery } from "@operica/core/issue-views/baseline";
 import { ViewBar } from "../../issues/components/view-bar";
-import type { IssueView } from "@opercia/core/api/schemas";
+import type { IssueView } from "@operica/core/api/schemas";
 
 /** My Issues tab → saved-view scope_variant (API vocabulary). */
 const SAVE_VARIANT: Record<MyIssuesScope, Extract<SaveViewScope, { kind: "my" }>["variant"]> = {

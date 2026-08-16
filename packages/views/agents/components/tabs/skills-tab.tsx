@@ -16,29 +16,29 @@ import type {
   AgentRuntime,
   DisabledRuntimeSkill,
   RuntimeLocalSkillSummary,
-} from "@opercia/core/types";
-import { api, ApiError } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
+} from "@operica/core/types";
+import { api, ApiError } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
 import {
   runtimeCapabilitiesOptions,
   runtimeDisplayLabel,
-} from "@opercia/core/runtimes";
+} from "@operica/core/runtimes";
 import {
   skillDetailOptions,
   skillListOptions,
   workspaceKeys,
-} from "@opercia/core/workspace/queries";
-import { Badge } from "@opercia/ui/components/ui/badge";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/workspace/queries";
+import { Badge } from "@operica/ui/components/ui/badge";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { Switch } from "@opercia/ui/components/ui/switch";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/dialog";
+import { Switch } from "@operica/ui/components/ui/switch";
+import { cn } from "@operica/ui/lib/utils";
 import { SkillAddDialog } from "../skill-add-dialog";
 import { useT } from "../../../i18n";
 

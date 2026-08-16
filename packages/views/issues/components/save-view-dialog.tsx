@@ -4,9 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createStore, type StoreApi } from "zustand/vanilla";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowDown, ArrowUp, ChevronRight, Plus } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -14,12 +14,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@opercia/ui/components/ui/collapsible";
+} from "@operica/ui/components/ui/collapsible";
 import {
   Select,
   SelectContent,
@@ -27,19 +27,19 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@opercia/ui/components/ui/select";
-import { Toggle } from "@opercia/ui/components/ui/toggle";
+} from "@operica/ui/components/ui/select";
+import { Toggle } from "@operica/ui/components/ui/toggle";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCreateIssueView, useUpdateIssueView } from "@opercia/core/issue-views/mutations";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCreateIssueView, useUpdateIssueView } from "@operica/core/issue-views/mutations";
 import {
   issueViewContainerKey,
   useActiveIssueViewStore,
-} from "@opercia/core/issue-views/active-view-store";
-import { ApiError } from "@opercia/core/api/client";
-import type { CreateIssueViewRequest, IssueView } from "@opercia/core/api/schemas";
-import { projectListOptions } from "@opercia/core/projects/queries";
-import { propertyListOptions } from "@opercia/core/properties";
+} from "@operica/core/issue-views/active-view-store";
+import { ApiError } from "@operica/core/api/client";
+import type { CreateIssueViewRequest, IssueView } from "@operica/core/api/schemas";
+import { projectListOptions } from "@operica/core/projects/queries";
+import { propertyListOptions } from "@operica/core/properties";
 import {
   viewStoreSlice,
   viewStorePersistOptions,
@@ -53,12 +53,12 @@ import {
   type SortField,
   type SwimlaneGrouping,
   type ViewMode,
-} from "@opercia/core/issues/stores/view-store";
+} from "@operica/core/issues/stores/view-store";
 import {
   ViewStoreProvider,
   useViewStore,
   useViewStoreApi,
-} from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/core/issues/stores/view-store-context";
 import { IssueFilterMenu } from "./issues-header";
 import { FilterChipList } from "./filter-chips-bar";
 import { useT } from "../../i18n";

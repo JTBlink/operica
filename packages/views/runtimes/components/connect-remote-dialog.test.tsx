@@ -1,19 +1,19 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import { configStore } from "@opercia/core/config";
+import { I18nProvider } from "@operica/core/i18n/react";
+import { configStore } from "@operica/core/config";
 import enCommon from "../../locales/en/common.json";
 import enRuntimes from "../../locales/en/runtimes.json";
 import { ConnectRemoteDialog } from "./connect-remote-dialog";
 
 const TEST_RESOURCES = { en: { common: enCommon, runtimes: enRuntimes } };
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-test",
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   paths: {
     workspace: () => ({
       agents: () => "/agents",
@@ -27,7 +27,7 @@ const wsEventState = vi.hoisted(() => ({
   handler: null as ((payload: unknown) => void) | null,
 }));
 
-vi.mock("@opercia/core/realtime", () => ({
+vi.mock("@operica/core/realtime", () => ({
   useWSEvent: (_event: string, handler: (payload: unknown) => void) => {
     wsEventState.handler = handler;
   },
@@ -79,13 +79,13 @@ describe("ConnectRemoteDialog", () => {
   it("uses cloud setup commands by default", () => {
     const { baseElement } = renderDialog();
 
-    expect(baseElement).toHaveTextContent("opercia setup");
-    expect(baseElement).not.toHaveTextContent("opercia setup self-host");
+    expect(baseElement).toHaveTextContent("operica setup");
+    expect(baseElement).not.toHaveTextContent("operica setup self-host");
     expect(baseElement).toHaveTextContent(
-      "opercia config set server_url https://api.opercia.ai",
+      "operica config set server_url https://api.operica.ai",
     );
     expect(baseElement).toHaveTextContent(
-      "opercia config set app_url https://opercia.ai",
+      "operica config set app_url https://operica.ai",
     );
   });
 
@@ -96,13 +96,13 @@ describe("ConnectRemoteDialog", () => {
     });
 
     expect(baseElement).toHaveTextContent(
-      "opercia setup self-host --server-url https://api.example.com --app-url https://app.example.com",
+      "operica setup self-host --server-url https://api.example.com --app-url https://app.example.com",
     );
     expect(baseElement).toHaveTextContent(
-      "opercia config set server_url https://api.example.com",
+      "operica config set server_url https://api.example.com",
     );
     expect(baseElement).toHaveTextContent(
-      "opercia config set app_url https://app.example.com",
+      "operica config set app_url https://app.example.com",
     );
   });
 
@@ -110,7 +110,7 @@ describe("ConnectRemoteDialog", () => {
     const { baseElement } = renderDialog();
 
     const setupCode = Array.from(baseElement.querySelectorAll("code")).find((node) =>
-      node.textContent?.includes("opercia setup"),
+      node.textContent?.includes("operica setup"),
     );
 
     expect(setupCode).toHaveClass(...ligatureClasses);
@@ -120,7 +120,7 @@ describe("ConnectRemoteDialog", () => {
     const { baseElement } = renderDialog();
 
     const tokenCode = Array.from(baseElement.querySelectorAll("code")).find((node) =>
-      node.textContent?.includes("opercia login --token <YOUR_TOKEN>"),
+      node.textContent?.includes("operica login --token <YOUR_TOKEN>"),
     );
 
     expect(tokenCode).toHaveClass(...ligatureClasses);
@@ -129,7 +129,7 @@ describe("ConnectRemoteDialog", () => {
   it("transitions from setup instructions to the connected state", async () => {
     const { baseElement } = renderDialog();
 
-    expect(baseElement).toHaveTextContent("opercia setup");
+    expect(baseElement).toHaveTextContent("operica setup");
     act(() => {
       wsEventState.handler?.({ runtime_id: "rt-test" });
     });
@@ -140,6 +140,6 @@ describe("ConnectRemoteDialog", () => {
         screen.getByRole("button", { name: "Create an agent" }),
       ).toBeInTheDocument();
     });
-    expect(baseElement).not.toHaveTextContent("opercia setup");
+    expect(baseElement).not.toHaveTextContent("operica setup");
   });
 });

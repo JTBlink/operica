@@ -1,5 +1,5 @@
 {
-  "extends": "@opercia/tsconfig/react-library.json",
+  "extends": "@operica/tsconfig/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "."

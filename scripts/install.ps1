@@ -1,10 +1,10 @@
-# Opercia installer for Windows — one command to get started.
+# Operica installer for Windows — one command to get started.
 #
-# Install CLI (default): connects to opercia.ai
+# Install CLI (default): connects to operica.ai
 #   irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex
 #
-# Self-host: starts a local Opercia server + installs CLI + configures
-#   $env:OPERCIA_MODE="local"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex
+# Self-host: starts a local Operica server + installs CLI + configures
+#   $env:OPERICA_MODE="local"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex
 #
 
 $ErrorActionPreference = "Stop"
@@ -14,8 +14,8 @@ $ErrorActionPreference = "Stop"
 # ---------------------------------------------------------------------------
 $RepoUrl       = "https://github.com/JTBlink/operica.git"
 $RepoWebUrl    = "https://github.com/JTBlink/operica"
-$DefaultInstallDir = Join-Path $env:USERPROFILE ".opercia\server"
-$InstallDir    = if ($env:OPERCIA_INSTALL_DIR) { $env:OPERCIA_INSTALL_DIR } else { $DefaultInstallDir }
+$DefaultInstallDir = Join-Path $env:USERPROFILE ".operica\server"
+$InstallDir    = if ($env:OPERICA_INSTALL_DIR) { $env:OPERICA_INSTALL_DIR } else { $DefaultInstallDir }
 
 # Host ports Compose reported after `up -d`; set by Setup-Server and reused by
 # the summary so the health check and the printed URLs cannot diverge.
@@ -94,8 +94,8 @@ function Get-LatestVersion {
 }
 
 function Get-SelfHostRef {
-    if ($env:OPERCIA_SELFHOST_REF) {
-        return $env:OPERCIA_SELFHOST_REF
+    if ($env:OPERICA_SELFHOST_REF) {
+        return $env:OPERICA_SELFHOST_REF
     }
 
     $latest = Get-LatestVersion
@@ -216,7 +216,7 @@ function Get-WindowsCliArch {
 
 function Get-InstalledCliVersion {
     try {
-        $firstLine = opercia version 2>$null | Select-Object -First 1
+        $firstLine = operica version 2>$null | Select-Object -First 1
         if ("$firstLine" -match '\b(v?\d+(?:\.\d+)+)\b') {
             $version = $Matches[1]
             if ($version -notlike 'v*') {
@@ -233,10 +233,10 @@ function Get-InstalledCliVersion {
 # CLI Installation
 # ---------------------------------------------------------------------------
 function Install-CliBinary {
-    Write-Info "Installing Opercia CLI from GitHub Releases..."
+    Write-Info "Installing Operica CLI from GitHub Releases..."
 
     if (-not [Environment]::Is64BitOperatingSystem) {
-        Write-Fail "Opercia requires a 64-bit Windows installation."
+        Write-Fail "Operica requires a 64-bit Windows installation."
     }
 
     $arch = Get-WindowsCliArch
@@ -247,15 +247,15 @@ function Install-CliBinary {
     }
 
     $version = $latest.TrimStart('v')
-    $url = "https://github.com/JTBlink/operica/releases/download/$latest/opercia-cli-$version-windows-$arch.zip"
-    $tmpDir = Join-Path ([System.IO.Path]::GetTempPath()) "opercia-install"
+    $url = "https://github.com/JTBlink/operica/releases/download/$latest/operica-cli-$version-windows-$arch.zip"
+    $tmpDir = Join-Path ([System.IO.Path]::GetTempPath()) "operica-install"
 
     if (Test-Path $tmpDir) { Remove-Item $tmpDir -Recurse -Force }
     New-Item -ItemType Directory -Path $tmpDir | Out-Null
 
     Write-Info "Downloading $url ..."
     try {
-        Invoke-WebRequest -Uri $url -OutFile (Join-Path $tmpDir "opercia.zip") -UseBasicParsing
+        Invoke-WebRequest -Uri $url -OutFile (Join-Path $tmpDir "operica.zip") -UseBasicParsing
     } catch {
         Remove-Item $tmpDir -Recurse -Force
         Write-Fail "Failed to download CLI binary: $_"
@@ -270,10 +270,10 @@ function Install-CliBinary {
         } else {
             [string]$checksums.Content
         }
-        $zipFile = Join-Path $tmpDir "opercia.zip"
+        $zipFile = Join-Path $tmpDir "operica.zip"
         $actualHash = (Get-FileHash -Path $zipFile -Algorithm SHA256).Hash.ToLower()
-        $releaseAsset = "opercia-cli-$version-windows-$arch.zip"
-        $legacyAsset = "opercia_windows_$arch.zip"
+        $releaseAsset = "operica-cli-$version-windows-$arch.zip"
+        $legacyAsset = "operica_windows_$arch.zip"
         $expectedLine = ($checksumContent -split "`r?`n") |
             Where-Object {
                 $_ -match [regex]::Escape($releaseAsset) -or
@@ -294,27 +294,27 @@ function Install-CliBinary {
         Write-Warn "Could not download checksums.txt — skipping verification."
     }
 
-    Expand-Archive -Path (Join-Path $tmpDir "opercia.zip") -DestinationPath $tmpDir -Force
+    Expand-Archive -Path (Join-Path $tmpDir "operica.zip") -DestinationPath $tmpDir -Force
 
-    $binDir = Join-Path $env:USERPROFILE ".opercia\bin"
+    $binDir = Join-Path $env:USERPROFILE ".operica\bin"
     if (-not (Test-Path $binDir)) {
         New-Item -ItemType Directory -Path $binDir -Force | Out-Null
     }
 
-    $exeSrc = Join-Path $tmpDir "opercia.exe"
+    $exeSrc = Join-Path $tmpDir "operica.exe"
     if (-not (Test-Path $exeSrc)) {
-        $exeSrc = Get-ChildItem -Path $tmpDir -Filter "opercia.exe" -Recurse | Select-Object -First 1 -ExpandProperty FullName
+        $exeSrc = Get-ChildItem -Path $tmpDir -Filter "operica.exe" -Recurse | Select-Object -First 1 -ExpandProperty FullName
     }
     if (-not $exeSrc -or -not (Test-Path $exeSrc)) {
         Remove-Item $tmpDir -Recurse -Force
-        Write-Fail "opercia.exe not found in downloaded archive."
+        Write-Fail "operica.exe not found in downloaded archive."
     }
 
-    Copy-Item $exeSrc (Join-Path $binDir "opercia.exe") -Force
+    Copy-Item $exeSrc (Join-Path $binDir "operica.exe") -Force
     Remove-Item $tmpDir -Recurse -Force
 
     Add-ToUserPath $binDir
-    Write-Ok "Opercia CLI installed to $binDir\opercia.exe"
+    Write-Ok "Operica CLI installed to $binDir\operica.exe"
 }
 
 function Add-ToUserPath {
@@ -333,7 +333,7 @@ function Add-ToUserPath {
 }
 
 function Install-Cli {
-    if (Test-CommandExists "opercia") {
+    if (Test-CommandExists "operica") {
         $currentVer = Get-InstalledCliVersion
         $latestVer = Get-LatestVersion
 
@@ -350,22 +350,22 @@ function Install-Cli {
         }
 
         if ($isUpToDate) {
-            Write-Ok "Opercia CLI is up to date ($currentVer)"
+            Write-Ok "Operica CLI is up to date ($currentVer)"
             return
         }
 
-        Write-Info "Opercia CLI $currentVer installed, latest is $latestVer - upgrading..."
+        Write-Info "Operica CLI $currentVer installed, latest is $latestVer - upgrading..."
         Install-CliBinary
 
         $newVer = Get-InstalledCliVersion
-        Write-Ok "Opercia CLI upgraded ($currentVer -> $newVer)"
+        Write-Ok "Operica CLI upgraded ($currentVer -> $newVer)"
         return
     }
 
     Install-CliBinary
 
-    if (-not (Test-CommandExists "opercia")) {
-        Write-Fail "CLI installed but 'opercia' not found on PATH. Restart your terminal and try again."
+    if (-not (Test-CommandExists "operica")) {
+        Write-Fail "CLI installed but 'operica' not found on PATH. Restart your terminal and try again."
     }
 }
 
@@ -375,12 +375,12 @@ function Install-Cli {
 function Test-Docker {
     if (-not (Test-CommandExists "docker")) {
         Write-Fail @"
-Docker is not installed. Opercia self-hosting requires Docker and Docker Compose.
+Docker is not installed. Operica self-hosting requires Docker and Docker Compose.
 
 Install Docker Desktop for Windows:
   https://docs.docker.com/desktop/install/windows-install/
 
-After installing Docker, re-run this script with `$env:OPERCIA_MODE="local"`.
+After installing Docker, re-run this script with `$env:OPERICA_MODE="local"`.
 "@
     }
 
@@ -397,7 +397,7 @@ After installing Docker, re-run this script with `$env:OPERCIA_MODE="local"`.
 # Server setup (self-host / local)
 # ---------------------------------------------------------------------------
 function Install-Server {
-    Write-Info "Setting up Opercia server..."
+    Write-Info "Setting up Operica server..."
     $serverRef = Get-SelfHostRef
     Write-Info "Using self-host assets from $serverRef..."
 
@@ -405,7 +405,7 @@ function Install-Server {
         Write-Info "Updating existing installation at $InstallDir..."
         Write-Warn "Any local changes in $InstallDir will be overwritten."
     } else {
-        Write-Info "Cloning Opercia repository..."
+        Write-Info "Cloning Operica repository..."
         if (-not (Test-CommandExists "git")) {
             Write-Fail "Git is not installed. Please install git and re-run."
         }
@@ -439,9 +439,9 @@ function Install-Server {
         Write-Ok "Using existing .env"
     }
 
-    Write-Info "Pulling official Opercia images..."
+    Write-Info "Pulling official Operica images..."
     Pull-OfficialSelfHostImages
-    Write-Info "Starting Opercia services (this may take a few minutes on first run)..."
+    Write-Info "Starting Operica services (this may take a few minutes on first run)..."
     docker compose -f docker-compose.selfhost.yml up -d
 
     # Read the ports Compose actually published, once, and reuse them for both
@@ -468,7 +468,7 @@ function Install-Server {
     }
 
     if ($ready) {
-        Write-Ok "Opercia server is running"
+        Write-Ok "Operica server is running"
     } else {
         Write-Warn "Server is still starting. Check logs with:"
         Write-Host "  cd $InstallDir; docker compose -f docker-compose.selfhost.yml logs"
@@ -483,23 +483,23 @@ function Install-Server {
 # ---------------------------------------------------------------------------
 function Start-DefaultInstall {
     Write-Host ""
-    Write-Host "  Opercia - Installer" -ForegroundColor White
+    Write-Host "  Operica - Installer" -ForegroundColor White
     Write-Host ""
 
     Install-Cli
 
     Write-Host ""
     Write-Host "  ============================================" -ForegroundColor Green
-    Write-Host "  [OK] Opercia CLI is ready!" -ForegroundColor Green
+    Write-Host "  [OK] Operica CLI is ready!" -ForegroundColor Green
     Write-Host "  ============================================" -ForegroundColor Green
     Write-Host ""
     Write-Host "  Next: configure your environment"
     Write-Host ""
-    Write-Host "     opercia setup               " -NoNewline; Write-Host "# Connect to Opercia Cloud (opercia.ai)" -ForegroundColor DarkGray
-    Write-Host "     opercia setup self-host      " -NoNewline; Write-Host "# Connect to a self-hosted server" -ForegroundColor DarkGray
+    Write-Host "     operica setup               " -NoNewline; Write-Host "# Connect to Operica Cloud (operica.ai)" -ForegroundColor DarkGray
+    Write-Host "     operica setup self-host      " -NoNewline; Write-Host "# Connect to a self-hosted server" -ForegroundColor DarkGray
     Write-Host ""
     Write-Host "  Self-hosting? Install the server first:"
-    Write-Host '     $env:OPERCIA_MODE="with-server"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex'
+    Write-Host '     $env:OPERICA_MODE="with-server"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex'
     Write-Host ""
 }
 
@@ -508,7 +508,7 @@ function Start-DefaultInstall {
 # ---------------------------------------------------------------------------
 function Start-LocalInstall {
     Write-Host ""
-    Write-Host "  Opercia - Self-Host Installer" -ForegroundColor White
+    Write-Host "  Operica - Self-Host Installer" -ForegroundColor White
     Write-Host "  Provisioning server infrastructure + installing CLI"
     Write-Host ""
 
@@ -518,7 +518,7 @@ function Start-LocalInstall {
 
     Write-Host ""
     Write-Host "  ============================================" -ForegroundColor Green
-    Write-Host "  [OK] Opercia server is running and CLI is ready!" -ForegroundColor Green
+    Write-Host "  [OK] Operica server is running and CLI is ready!" -ForegroundColor Green
     Write-Host "  ============================================" -ForegroundColor Green
     Write-Host ""
     Write-Host "  Frontend:  http://localhost:$($script:SelfHostFrontendPort)"
@@ -527,13 +527,13 @@ function Start-LocalInstall {
     Write-Host ""
     Write-Host "  Next: configure your CLI to connect"
     Write-Host ""
-    Write-Host "     opercia setup self-host  " -NoNewline; Write-Host "# Configure + authenticate + start daemon" -ForegroundColor DarkGray
+    Write-Host "     operica setup self-host  " -NoNewline; Write-Host "# Configure + authenticate + start daemon" -ForegroundColor DarkGray
     Write-Host ""
     Write-Host "  Login: configure RESEND_API_KEY in .env for email codes,"
     Write-Host "  or read the generated code from backend logs when Resend is unset."
     Write-Host ""
     Write-Host "  To stop all services:"
-    Write-Host '     $env:OPERCIA_MODE="stop"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex'
+    Write-Host '     $env:OPERICA_MODE="stop"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex'
     Write-Host ""
 }
 
@@ -542,7 +542,7 @@ function Start-LocalInstall {
 # ---------------------------------------------------------------------------
 function Start-Stop {
     Write-Host ""
-    Write-Info "Stopping Opercia services..."
+    Write-Info "Stopping Operica services..."
 
     if (Test-Path $InstallDir) {
         Push-Location $InstallDir
@@ -554,12 +554,12 @@ function Start-Stop {
         }
         Pop-Location
     } else {
-        Write-Warn "No Opercia installation found at $InstallDir"
+        Write-Warn "No Operica installation found at $InstallDir"
     }
 
-    if (Test-CommandExists "opercia") {
+    if (Test-CommandExists "operica") {
         try {
-            opercia daemon stop 2>$null
+            operica daemon stop 2>$null
             Write-Ok "Daemon stopped"
         } catch {}
     }
@@ -570,7 +570,7 @@ function Start-Stop {
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
-$mode = if ($env:OPERCIA_MODE) { $env:OPERCIA_MODE.ToLower() } else { "default" }
+$mode = if ($env:OPERICA_MODE) { $env:OPERICA_MODE.ToLower() } else { "default" }
 
 switch ($mode) {
     "with-server" { Start-LocalInstall }

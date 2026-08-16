@@ -110,12 +110,12 @@ describe("deriveVersion (real git describe)", () => {
   const repos = [];
 
   function initRepo() {
-    const dir = mkdtempSync(join(tmpdir(), "opercia-desktop-ver-"));
+    const dir = mkdtempSync(join(tmpdir(), "operica-desktop-ver-"));
     repos.push(dir);
     const run = (...args) =>
       execFileSync("git", args, { cwd: dir, encoding: "utf-8" });
     run("init", "-q");
-    run("config", "user.email", "test@opercia.ai");
+    run("config", "user.email", "test@operica.ai");
     run("config", "user.name", "test");
     run("config", "commit.gpgsign", "false");
     run("commit", "-q", "--allow-empty", "-m", "root");

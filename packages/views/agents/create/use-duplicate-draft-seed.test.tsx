@@ -2,8 +2,8 @@
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, renderHook } from "@testing-library/react";
-import type { Agent, RuntimeDevice } from "@opercia/core/types";
-import type { AgentDraft } from "@opercia/core/agents";
+import type { Agent, RuntimeDevice } from "@operica/core/types";
+import type { AgentDraft } from "@operica/core/agents";
 import { useDuplicateDraftSeed } from "./use-duplicate-draft-seed";
 
 const SOURCE_RUNTIME = {

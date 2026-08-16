@@ -1,1 +1,1 @@
-export { SkillsPage as default } from "@opercia/views/skills";
+export { SkillsPage as default } from "@operica/views/skills";

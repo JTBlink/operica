@@ -58,7 +58,7 @@ func TestHermesMemoryStorePathLayout(t *testing.T) {
 
 	agent := "11111111-2222-3333-4444-555555555555"
 	got := HermesMemoryStorePath("", agent, filepath.Join(platformDefaultHermesHome(), "profiles", "research"))
-	want := filepath.Join(home, ".opercia", hermesMemoryStoreRoot, agent, "research")
+	want := filepath.Join(home, ".operica", hermesMemoryStoreRoot, agent, "research")
 	if got != want {
 		t.Fatalf("store path = %q, want %q", got, want)
 	}
@@ -75,7 +75,7 @@ func TestHermesMemoryStorePathDisabled(t *testing.T) {
 		t.Fatalf("store path without an agent = %q, want empty", got)
 	}
 
-	t.Setenv(OperciaHermesTaskMemoryEnv, "1")
+	t.Setenv(OpericaHermesTaskMemoryEnv, "1")
 	if got := HermesMemoryStorePath("", "agent-1", ""); got != "" {
 		t.Fatalf("store path with the rollback switch on = %q, want empty", got)
 	}
@@ -186,7 +186,7 @@ func TestPrepareHermesHomeRollbackDetachesExistingStoreLink(t *testing.T) {
 	}
 	mustWrite(t, filepath.Join(hermesHome, "memories", "MEMORY.md"), "persistent memory")
 
-	// Operator flips OPERCIA_HERMES_TASK_MEMORY=1; the same overlay is reused.
+	// Operator flips OPERICA_HERMES_TASK_MEMORY=1; the same overlay is reused.
 	if err := prepareHermesHome(hermesHome, sharedHome, false, skills, nil, "", testLogger()); err != nil {
 		t.Fatalf("prepare after rollback: %v", err)
 	}
@@ -550,7 +550,7 @@ func TestPruneHermesMemoryStores(t *testing.T) {
 	t.Setenv("HOME", home)
 	t.Setenv("USERPROFILE", home)
 
-	root := filepath.Join(home, ".opercia", hermesMemoryStoreRoot)
+	root := filepath.Join(home, ".operica", hermesMemoryStoreRoot)
 	idle := filepath.Join(root, "agent-idle", "default")
 	fresh := filepath.Join(root, "agent-fresh", "default")
 	held := filepath.Join(root, "agent-held", "default")
@@ -601,7 +601,7 @@ func TestPruneHermesMemoryStoresDisabled(t *testing.T) {
 	t.Setenv("HOME", home)
 	t.Setenv("USERPROFILE", home)
 
-	store := filepath.Join(home, ".opercia", hermesMemoryStoreRoot, "agent-1", "default")
+	store := filepath.Join(home, ".operica", hermesMemoryStoreRoot, "agent-1", "default")
 	mustWrite(t, filepath.Join(store, "MEMORY.md"), "remembered")
 	old := time.Now().Add(-365 * 24 * time.Hour)
 	if err := os.Chtimes(store, old, old); err != nil {

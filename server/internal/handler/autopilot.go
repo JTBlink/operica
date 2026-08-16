@@ -12,15 +12,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/analytics"
 	obsmetrics "github.com/JTBlink/operica/server/internal/metrics"
 	"github.com/JTBlink/operica/server/internal/service"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // computeNextRun delegates to the shared cron helper in the service package.
@@ -116,7 +116,7 @@ type AutopilotTriggerResponse struct {
 	// triggers; nil for schedule/api. Not stored — see triggerToResponse.
 	WebhookPath *string `json:"webhook_path"`
 	// WebhookURL is the absolute URL composed from the server's
-	// OPERCIA_PUBLIC_URL setting. Nil when the server has no public URL
+	// OPERICA_PUBLIC_URL setting. Nil when the server has no public URL
 	// configured; clients then build the URL themselves from webhook_path
 	// plus their API base / current origin.
 	WebhookURL *string `json:"webhook_url"`

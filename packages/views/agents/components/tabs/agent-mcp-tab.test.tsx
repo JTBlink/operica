@@ -4,10 +4,10 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { Agent } from "@opercia/core/types";
-import { configStore } from "@opercia/core/config";
-import { COMPOSIO_MCP_APPS_FLAG } from "@opercia/core/feature-flags";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import type { Agent } from "@operica/core/types";
+import { configStore } from "@operica/core/config";
+import { COMPOSIO_MCP_APPS_FLAG } from "@operica/core/feature-flags";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../../locales/en/common.json";
 import enAgents from "../../../locales/en/agents.json";
 
@@ -47,19 +47,19 @@ vi.mock("@tanstack/react-query", () => ({
   queryOptions: <T,>(opts: T) => opts,
 }));
 
-vi.mock("@opercia/core/composio", () => ({
+vi.mock("@operica/core/composio", () => ({
   composioConnectionsOptions: () => ({ queryKey: ["composio", "connections"] }),
   composioToolkitsOptions: () => ({ queryKey: ["composio", "toolkits"] }),
 }));
 
-vi.mock("@opercia/core/agents", () => ({
+vi.mock("@operica/core/agents", () => ({
   useUpdateAgentAllowlist: () => ({
     mutate: mutateSpy,
     isPending: isPendingRef.current,
   }),
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({ settings: () => "/ws/settings" }),
 }));
 

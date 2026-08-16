@@ -15,7 +15,7 @@ const state = vi.hoisted(() => ({
   modalAriaLabel: "source-backfill-modal-marker",
 }));
 
-vi.mock("@opercia/core/auth", () => {
+vi.mock("@operica/core/auth", () => {
   const useAuthStore = (selector: (s: typeof state) => unknown) => {
     if (selector.toString().includes("isLoading"))
       return state.isAuthLoading;
@@ -24,13 +24,13 @@ vi.mock("@opercia/core/auth", () => {
   return { useAuthStore };
 });
 
-vi.mock("@opercia/core/platform", () => ({
+vi.mock("@operica/core/platform", () => ({
   setCurrentWorkspace: vi.fn(),
 }));
 
-vi.mock("@opercia/core/workspace", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/workspace")>(
-    "@opercia/core/workspace",
+vi.mock("@operica/core/workspace", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/workspace")>(
+    "@operica/core/workspace",
   );
   return {
     ...actual,
@@ -45,9 +45,9 @@ vi.mock("@opercia/core/workspace", async () => {
   };
 });
 
-vi.mock("@opercia/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
-    "@opercia/core/paths",
+vi.mock("@operica/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/paths")>(
+    "@operica/core/paths",
   );
   return {
     ...actual,
@@ -61,15 +61,15 @@ vi.mock("@opercia/core/paths", async () => {
   };
 });
 
-vi.mock("@opercia/views/workspace/use-workspace-seen", () => ({
+vi.mock("@operica/views/workspace/use-workspace-seen", () => ({
   useWorkspaceSeen: () => state.workspaceSeen,
 }));
 
-vi.mock("@opercia/views/workspace/welcome-after-onboarding", () => ({
+vi.mock("@operica/views/workspace/welcome-after-onboarding", () => ({
   WelcomeAfterOnboarding: () => null,
 }));
 
-vi.mock("@opercia/views/layout", () => ({
+vi.mock("@operica/views/layout", () => ({
   WorkspacePresencePrefetch: () => null,
 }));
 
@@ -77,7 +77,7 @@ vi.mock("@opercia/views/layout", () => ({
 // SourceBackfillModal. We stub the real component with a marker that
 // renders only when the layout actually rendered it (and not e.g.
 // suppressed by overlayActive).
-vi.mock("@opercia/views/onboarding", () => ({
+vi.mock("@operica/views/onboarding", () => ({
   SourceBackfillModal: () => {
     state.modalRenders += 1;
     return <div data-testid={state.modalAriaLabel} />;

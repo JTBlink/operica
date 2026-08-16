@@ -5,12 +5,12 @@ import type {
   DashboardRunTimeDaily,
   DashboardFailureDaily,
   DashboardFailureByAgent,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   FAILURE_CLASSES,
   failureClassOf,
   type FailureClass,
-} from "@opercia/core/dashboard";
+} from "@operica/core/dashboard";
 import {
   addDaysIso,
   estimateCost,
@@ -488,7 +488,7 @@ export function formatDuration(seconds: number, lessThanMinuteLabel: string): st
 // expired in the queue never started.
 //
 // Everything here folds raw reasons into the seven display classes from
-// `@opercia/core/dashboard`; the raw reason survives only in
+// `@operica/core/dashboard`; the raw reason survives only in
 // `aggregateFailureReasons`, which powers the detail rows under the class
 // summary.
 // ---------------------------------------------------------------------------

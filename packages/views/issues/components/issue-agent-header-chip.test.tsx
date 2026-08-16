@@ -3,10 +3,10 @@
 import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { api } from "@opercia/core/api";
-import { chatKeys } from "@opercia/core/chat/queries";
-import type { AgentTask } from "@opercia/core/types";
-import type { TaskMessagePayload } from "@opercia/core/types/events";
+import { api } from "@operica/core/api";
+import { chatKeys } from "@operica/core/chat/queries";
+import type { AgentTask } from "@operica/core/types";
+import type { TaskMessagePayload } from "@operica/core/types/events";
 import { renderWithI18n } from "../../test/i18n";
 
 const mockState = vi.hoisted(() => ({
@@ -17,13 +17,13 @@ const mockState = vi.hoisted(() => ({
   triggerProps: undefined as Record<string, unknown> | undefined,
 }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     listTaskMessages: vi.fn(),
   },
 }));
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({
     getActorName: (_type: string, id: string) =>
       ({
@@ -39,9 +39,9 @@ vi.mock("@opercia/core/workspace/hooks", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/chat/queries", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/chat/queries")>(
-    "@opercia/core/chat/queries",
+vi.mock("@operica/core/chat/queries", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/chat/queries")>(
+    "@operica/core/chat/queries",
   );
   return {
     ...actual,
@@ -52,7 +52,7 @@ vi.mock("@opercia/core/chat/queries", async () => {
   };
 });
 
-vi.mock("@opercia/ui/components/ui/popover", async () => {
+vi.mock("@operica/ui/components/ui/popover", async () => {
   const React = await vi.importActual<typeof import("react")>("react");
   return {
     Popover: ({ children }: { children: React.ReactNode }) => (

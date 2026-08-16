@@ -1,4 +1,4 @@
-import { cn } from "@opercia/ui/lib/utils"
+import { cn } from "@operica/ui/lib/utils"
 
 function Kbd({ className, ...props }: React.ComponentProps<"kbd">) {
   return (

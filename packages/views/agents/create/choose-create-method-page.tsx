@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronRight, FileText, MessageSquare } from "lucide-react";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { cn } from "@opercia/ui/lib/utils";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { cn } from "@operica/ui/lib/utils";
 import { AppLink, useBackOrReplace, useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
 import { AgentCreateShell } from "./create-shell";

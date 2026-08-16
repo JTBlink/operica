@@ -35,8 +35,8 @@ func TestHTTPMiddlewareUsesRoutePatternLabels(t *testing.T) {
 	body := metricsRec.Body.String()
 
 	for _, want := range []string{
-		`opercia_http_requests_total{method="GET",route="/api/issues/{id}",status="201"} 1`,
-		`opercia_build_info{commit="abc123",version="v-test"} 1`,
+		`operica_http_requests_total{method="GET",route="/api/issues/{id}",status="201"} 1`,
+		`operica_build_info{commit="abc123",version="v-test"} 1`,
 	} {
 		if !strings.Contains(body, want) {
 			t.Fatalf("metrics body missing %q\n%s", want, body)
@@ -72,10 +72,10 @@ func TestHTTPMiddlewareRecordsDaemonWorkspaceResponseSizeByStatus(t *testing.T) 
 	NewHandler(registry.Gatherer).ServeHTTP(metricsRec, httptest.NewRequest(http.MethodGet, "/metrics", nil))
 	body := metricsRec.Body.String()
 	for _, want := range []string{
-		`opercia_http_daemon_workspace_response_size_bytes_count{status="200"} 1`,
-		`opercia_http_daemon_workspace_response_size_bytes_sum{status="200"} 2`,
-		`opercia_http_daemon_workspace_response_size_bytes_count{status="304"} 1`,
-		`opercia_http_daemon_workspace_response_size_bytes_sum{status="304"} 0`,
+		`operica_http_daemon_workspace_response_size_bytes_count{status="200"} 1`,
+		`operica_http_daemon_workspace_response_size_bytes_sum{status="200"} 2`,
+		`operica_http_daemon_workspace_response_size_bytes_count{status="304"} 1`,
+		`operica_http_daemon_workspace_response_size_bytes_sum{status="304"} 0`,
 	} {
 		if !strings.Contains(body, want) {
 			t.Fatalf("metrics body missing %q\n%s", want, body)
@@ -92,7 +92,7 @@ func TestMetricsHandlerOnlyServesMetricsPath(t *testing.T) {
 	if rec.Code != http.StatusOK {
 		t.Fatalf("/metrics status = %d, want %d", rec.Code, http.StatusOK)
 	}
-	if body, _ := io.ReadAll(rec.Body); !strings.Contains(string(body), "opercia_build_info") {
+	if body, _ := io.ReadAll(rec.Body); !strings.Contains(string(body), "operica_build_info") {
 		t.Fatalf("/metrics body missing build info: %s", body)
 	}
 

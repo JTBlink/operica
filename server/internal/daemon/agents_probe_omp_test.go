@@ -37,8 +37,8 @@ func TestProbeAgentCLIs_DiscoversPiAndOmpSeparately(t *testing.T) {
 	resetShellResolveCacheForTest(t)
 
 	t.Setenv("PATH", fakeDir)
-	t.Setenv("OPERCIA_PI_PATH", "")
-	t.Setenv("OPERCIA_OMP_PATH", "")
+	t.Setenv("OPERICA_PI_PATH", "")
+	t.Setenv("OPERICA_OMP_PATH", "")
 
 	agents := probeAgentCLIs()
 
@@ -112,8 +112,8 @@ func TestRegisterRuntimes_PiAndOmpBothReachTheServer(t *testing.T) {
 	resetShellResolveCacheForTest(t)
 
 	t.Setenv("PATH", fakeDir)
-	t.Setenv("OPERCIA_PI_PATH", "")
-	t.Setenv("OPERCIA_OMP_PATH", "")
+	t.Setenv("OPERICA_PI_PATH", "")
+	t.Setenv("OPERICA_OMP_PATH", "")
 
 	agents := probeAgentCLIs()
 	piEntry, ok := agents["pi"]

@@ -20,7 +20,7 @@ import (
 func TestExecuteBackfillUpdatesOnlyEligibleCodexRowsAndRebuildsRollup(t *testing.T) {
 	adminURL := os.Getenv("DATABASE_URL")
 	if adminURL == "" {
-		adminURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		adminURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 
 	ctx := context.Background()
@@ -28,7 +28,7 @@ func TestExecuteBackfillUpdatesOnlyEligibleCodexRowsAndRebuildsRollup(t *testing
 		t.Skip("integration test requires Postgres at DATABASE_URL")
 	}
 
-	tmpDB := fmt.Sprintf("opercia_codex_usage_backfill_%d", time.Now().UnixNano())
+	tmpDB := fmt.Sprintf("operica_codex_usage_backfill_%d", time.Now().UnixNano())
 	if err := testCreateDatabase(ctx, adminURL, tmpDB); err != nil {
 		t.Fatalf("create temp database %s: %v", tmpDB, err)
 	}

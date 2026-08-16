@@ -41,10 +41,10 @@ describe("worktree-dev-env", () => {
   });
 
   it("never reuses 5173 even when the offset is 0", () => {
-    // POSIX cksum("/tmp/opercia-171") === 542803000, % 1000 === 0
-    expect(offsetForPath("/tmp/opercia-171")).toBe(0);
-    expect(rendererPortForPath("/tmp/opercia-171")).toBe(5174);
-    expect(rendererPortForPath("/tmp/opercia-171")).not.toBe(5173);
+    // POSIX cksum("/tmp/operica-143") === 211362000, % 1000 === 0
+    expect(offsetForPath("/tmp/operica-143")).toBe(0);
+    expect(rendererPortForPath("/tmp/operica-143")).toBe(5174);
+    expect(rendererPortForPath("/tmp/operica-143")).not.toBe(5173);
   });
 
   it("skips 6000, which Chromium refuses to load (ERR_UNSAFE_PORT)", () => {
@@ -84,11 +84,11 @@ describe("worktree-dev-env", () => {
   });
 
   it("disambiguates worktrees that share a folder name at different paths", () => {
-    // Same basename "opercia", different parent dirs → different offsets/suffixes,
+    // Same basename "operica", different parent dirs → different offsets/suffixes,
     // so each gets its own single-instance lock.
-    expect(offsetForPath("/tmp/a/opercia")).not.toBe(offsetForPath("/tmp/b/opercia"));
-    expect(appSuffixForPath("/tmp/a/opercia")).not.toBe(
-      appSuffixForPath("/tmp/b/opercia"),
+    expect(offsetForPath("/tmp/a/operica")).not.toBe(offsetForPath("/tmp/b/operica"));
+    expect(appSuffixForPath("/tmp/a/operica")).not.toBe(
+      appSuffixForPath("/tmp/b/operica"),
     );
   });
 

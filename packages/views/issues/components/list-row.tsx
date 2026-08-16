@@ -7,15 +7,15 @@ import { CSS } from "@dnd-kit/utilities";
 import { AppLink } from "../../navigation";
 import type { Issue, Project,
   IssueProperty,
-} from "@opercia/core/types";
-import { formatDateOnly } from "@opercia/core/issues/date";
+} from "@operica/core/types";
+import { formatDateOnly } from "@operica/core/issues/date";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { PropertyIcon } from "../../common/property-icon";
-import { useWorkspacePaths } from "@opercia/core/paths";
+import { useWorkspacePaths } from "@operica/core/paths";
 import { useQuery } from "@tanstack/react-query";
-import { useViewStore } from "@opercia/core/issues/stores/view-store-context";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { propertyListOptions } from "@opercia/core/properties";
+import { useViewStore } from "@operica/core/issues/stores/view-store-context";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { propertyListOptions } from "@operica/core/properties";
 import { CustomPropertyValueDisplay } from "./pickers/custom-property-picker";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { PriorityIcon } from "./priority-icon";

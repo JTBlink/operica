@@ -62,14 +62,14 @@ func privateAgentTestFixture(t *testing.T) (agentID, ownerID, memberID string) {
 	ctx := context.Background()
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Private Agent Owner', 'private-agent-owner@opercia.test')
+		VALUES ('Private Agent Owner', 'private-agent-owner@operica.test')
 		RETURNING id
 	`).Scan(&ownerID); err != nil {
 		t.Fatalf("create owner user: %v", err)
 	}
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'private-agent-owner@opercia.test'`)
+			`DELETE FROM "user" WHERE email = 'private-agent-owner@operica.test'`)
 	})
 
 	if _, err := testPool.Exec(ctx, `
@@ -81,14 +81,14 @@ func privateAgentTestFixture(t *testing.T) (agentID, ownerID, memberID string) {
 
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Plain Member', 'plain-member@opercia.test')
+		VALUES ('Plain Member', 'plain-member@operica.test')
 		RETURNING id
 	`).Scan(&memberID); err != nil {
 		t.Fatalf("create plain member user: %v", err)
 	}
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'plain-member@opercia.test'`)
+			`DELETE FROM "user" WHERE email = 'plain-member@operica.test'`)
 	})
 
 	if _, err := testPool.Exec(ctx, `
@@ -398,14 +398,14 @@ func TestMentionAgent_RejectsCrossWorkspaceAgentUUID(t *testing.T) {
 	var foreignWorkspaceID, foreignUserID, foreignRuntimeID, foreignAgentID string
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Foreign Owner', 'cross-ws-foreign@opercia.test')
+		VALUES ('Foreign Owner', 'cross-ws-foreign@operica.test')
 		RETURNING id
 	`).Scan(&foreignUserID); err != nil {
 		t.Fatalf("create foreign user: %v", err)
 	}
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'cross-ws-foreign@opercia.test'`)
+			`DELETE FROM "user" WHERE email = 'cross-ws-foreign@operica.test'`)
 	})
 
 	if err := testPool.QueryRow(ctx, `
@@ -457,7 +457,7 @@ func TestMentionAgent_RejectsCrossWorkspaceAgentUUID(t *testing.T) {
 		testPool.Exec(context.Background(), `DELETE FROM issue WHERE id = $1`, issueID)
 	})
 
-	// Opercia's mention format is markdown-linked: [@Name](mention://agent/<uuid>).
+	// Operica's mention format is markdown-linked: [@Name](mention://agent/<uuid>).
 	mention := "[@Foreign](mention://agent/" + foreignAgentID + ")"
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO comment (workspace_id, issue_id, author_type, author_id, content)
@@ -587,7 +587,7 @@ func TestShouldEnqueueOnComment_PrivateAgentGate(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-				got := testHandler.shouldEnqueueAssigneeFallback(ctx, issue, tc.actorType, tc.actorID, commentTriggerComputeOptions{})
+			got := testHandler.shouldEnqueueAssigneeFallback(ctx, issue, tc.actorType, tc.actorID, commentTriggerComputeOptions{})
 			if got != tc.want {
 				t.Fatalf("%s\n  actor=%s/%s got=%v want=%v",
 					tc.reason, tc.actorType, tc.actorID, got, tc.want)

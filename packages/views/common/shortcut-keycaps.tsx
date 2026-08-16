@@ -19,9 +19,9 @@ import {
   getShortcutPlatform,
   type ShortcutChord,
   type ShortcutPlatform,
-} from "@opercia/core/shortcuts";
-import { Kbd } from "@opercia/ui/components/ui/kbd";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/core/shortcuts";
+import { Kbd } from "@operica/ui/components/ui/kbd";
+import { cn } from "@operica/ui/lib/utils";
 
 type ShortcutToken = {
   id: string;

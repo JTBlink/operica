@@ -1,13 +1,13 @@
 ---
 title: モバイルアプリ (iOS)
-description: ソースコードから Opercia を iPhone にインストールし、Cloud またはセルフホストインスタンスに接続します。
+description: ソースコードから Operica を iPhone にインストールし、Cloud またはセルフホストインスタンスに接続します。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Opercia の iOS クライアントはまだ App Store にありません。Mac でオープンソースリポジトリから Release 版をビルドし、自分の iPhone にインストールできます。Android クライアントはまだ提供されていません。
+Operica の iOS クライアントはまだ App Store にありません。Mac でオープンソースリポジトリから Release 版をビルドし、自分の iPhone にインストールできます。Android クライアントはまだ提供されていません。
 
-インストールしたアプリはデフォルトで Opercia Cloud に接続し、既存のアカウントでそのままサインインできます。ワークスペース、イシュー、コメント、実行履歴はすべてサーバー側に保存されるため、Web や Desktop から手動で同期する必要はありません。
+インストールしたアプリはデフォルトで Operica Cloud に接続し、既存のアカウントでそのままサインインできます。ワークスペース、イシュー、コメント、実行履歴はすべてサーバー側に保存されるため、Web や Desktop から手動で同期する必要はありません。
 
 ## 事前準備
 
@@ -27,7 +27,7 @@ Xcode や実機の開発環境がまだ設定されていない場合は、先�
 
 ```bash
 git clone https://github.com/JTBlink/operica.git
-cd opercia
+cd operica
 pnpm install
 ```
 
@@ -52,11 +52,11 @@ Apple Developer Program アカウントで署名すると有効期間が長く�
 Xcode が `No matching provisioning profiles found` と報告する場合、デフォルトの bundle identifier があなたの Apple ID に属していない可能性があります。自分が管理する逆ドメイン名に切り替えて再ビルドしてください:
 
 ```bash
-export EXPO_BUNDLE_IDENTIFIER_PROD=com.yourname.opercia
+export EXPO_BUNDLE_IDENTIFIER_PROD=com.yourname.operica
 pnpm ios:mobile:device:prod:release
 ```
 
-この値はあなたの Apple Developer team で利用できれば十分で、Opercia のアカウントやワークスペースには影響しません。
+この値はあなたの Apple Developer team で利用できれば十分で、Operica のアカウントやワークスペースには影響しません。
 
 ## 更新
 

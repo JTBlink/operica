@@ -6,10 +6,10 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/popover";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../i18n";
 import {
   type Hsv,

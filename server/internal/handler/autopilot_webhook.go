@@ -931,7 +931,7 @@ func writeWebhookRateLimit(w http.ResponseWriter, r *http.Request, limiter Webho
 //
 // Default behaviour: use the host portion of r.RemoteAddr. Forwarded
 // headers (X-Forwarded-For, X-Real-IP) are IGNORED unless the operator
-// has explicitly opted in via OPERCIA_TRUSTED_PROXIES — and even then
+// has explicitly opted in via OPERICA_TRUSTED_PROXIES — and even then
 // only when r.RemoteAddr is itself inside one of the listed CIDRs.
 func (h *Handler) clientIPForRateLimit(r *http.Request) string {
 	remoteIP := remoteAddrHost(r.RemoteAddr)

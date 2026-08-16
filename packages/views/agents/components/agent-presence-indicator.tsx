@@ -1,7 +1,7 @@
 "use client";
 
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import type { AgentPresenceDetail } from "@opercia/core/agents";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import type { AgentPresenceDetail } from "@operica/core/agents";
 import { availabilityConfig, workloadConfig } from "../presence";
 import { useT } from "../../i18n";
 

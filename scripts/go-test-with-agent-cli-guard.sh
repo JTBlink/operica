@@ -3,7 +3,7 @@ set -eu
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 NAMES_FILE="$SCRIPT_DIR/agent-cli-command-names.txt"
-GUARD_DIR=$(mktemp -d "${TMPDIR:-/tmp}/opercia-agent-cli-guard.XXXXXX")
+GUARD_DIR=$(mktemp -d "${TMPDIR:-/tmp}/operica-agent-cli-guard.XXXXXX")
 BIN_DIR="$GUARD_DIR/bin"
 MARKER_FILE="$GUARD_DIR/invocations.log"
 
@@ -31,7 +31,7 @@ line=$(basename "$0")
 if [ "$#" -gt 0 ]; then
   line="$line [arguments redacted]"
 fi
-printf '%s\n' "$line" >>"$OPERCIA_AGENT_CLI_GUARD_MARKER"
+printf '%s\n' "$line" >>"$OPERICA_AGENT_CLI_GUARD_MARKER"
 exit 126
 EOF
   chmod 755 "$sentinel"
@@ -46,7 +46,7 @@ if [ "$#" -eq 0 ]; then
 fi
 
 set +e
-PATH="$BIN_DIR:$PATH" OPERCIA_AGENT_CLI_GUARD_MARKER="$MARKER_FILE" "$@"
+PATH="$BIN_DIR:$PATH" OPERICA_AGENT_CLI_GUARD_MARKER="$MARKER_FILE" "$@"
 command_status=$?
 set -e
 

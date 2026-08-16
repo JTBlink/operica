@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // child builds a sibling row with the given stage (0 = unstaged/NULL) and
@@ -179,7 +179,7 @@ func TestStageAdvanceInstruction(t *testing.T) {
 		if !strings.Contains(got, "next stage") {
 			t.Fatalf("expected create-next-stage guidance, got %q", got)
 		}
-		if !strings.Contains(got, "opercia issue status "+parentID+" in_review") {
+		if !strings.Contains(got, "operica issue status "+parentID+" in_review") {
 			t.Fatalf("expected explicit in_review instruction for confirmed completion, got %q", got)
 		}
 	})

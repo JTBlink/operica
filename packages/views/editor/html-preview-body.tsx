@@ -19,11 +19,11 @@
  * just slot HtmlPreviewBody as the body.
  */
 
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import {
   PreviewTooLargeError,
   PreviewUnsupportedError,
-} from "@opercia/core/api";
+} from "@operica/core/api";
 import { useT } from "../i18n";
 import { CodeBlockIframe } from "./code-block-iframe";
 import { withFragmentNavShim } from "./utils/iframe-fragment-nav";

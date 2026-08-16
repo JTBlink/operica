@@ -147,10 +147,10 @@ func releaseAssetCandidates(targetVersion, goos, goarch string) []string {
 	version := strings.TrimPrefix(tag, "v")
 	ext := releaseArchiveExtension(goos)
 	// Prefer the versioned name (current scheme); fall back to the legacy
-	// `opercia_{os}_{arch}` name for releases that still ship it.
+	// `operica_{os}_{arch}` name for releases that still ship it.
 	return []string{
-		fmt.Sprintf("opercia-cli-%s-%s-%s.%s", version, goos, goarch, ext),
-		fmt.Sprintf("opercia_%s_%s.%s", goos, goarch, ext),
+		fmt.Sprintf("operica-cli-%s-%s-%s.%s", version, goos, goarch, ext),
+		fmt.Sprintf("operica_%s_%s.%s", goos, goarch, ext),
 	}
 }
 
@@ -249,7 +249,7 @@ func fetchReleaseByTag(tag string) (*GitHubRelease, error) {
 	return &release, nil
 }
 
-// FetchLatestRelease fetches the latest release tag from the opercia GitHub repo.
+// FetchLatestRelease fetches the latest release tag from the operica GitHub repo.
 func FetchLatestRelease() (*GitHubRelease, error) {
 	client := &http.Client{Timeout: 10 * time.Second}
 	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/JTBlink/operica/releases/latest", nil)
@@ -292,7 +292,7 @@ func MatchKnownBrewPrefix(path string) string {
 	return ""
 }
 
-// IsBrewInstall checks whether the running opercia binary was installed via Homebrew.
+// IsBrewInstall checks whether the running operica binary was installed via Homebrew.
 func IsBrewInstall() bool {
 	exePath, err := selfexec.Resolve()
 	if err != nil {
@@ -326,10 +326,10 @@ func GetBrewPrefix() string {
 	return strings.TrimSpace(string(out))
 }
 
-// UpdateViaBrew runs `brew upgrade opercia-ai/tap/opercia`.
+// UpdateViaBrew runs `brew upgrade operica-ai/tap/operica`.
 // Returns the combined output and any error.
 func UpdateViaBrew() (string, error) {
-	cmd := exec.Command("brew", "upgrade", "opercia-ai/tap/opercia")
+	cmd := exec.Command("brew", "upgrade", "operica-ai/tap/operica")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		return string(out), fmt.Errorf("brew upgrade failed: %w", err)
@@ -428,9 +428,9 @@ func UpdateViaDownloadWithTimeout(targetVersion string, downloadTimeout time.Dur
 	}
 
 	// Extract the binary from the archive.
-	binaryName := "opercia"
+	binaryName := "operica"
 	if runtime.GOOS == "windows" {
-		binaryName = "opercia.exe"
+		binaryName = "operica.exe"
 	}
 	var binaryData []byte
 	if runtime.GOOS == "windows" {
@@ -444,7 +444,7 @@ func UpdateViaDownloadWithTimeout(targetVersion string, downloadTimeout time.Dur
 
 	// Atomic replace: write to temp file, then rename over the original.
 	dir := filepath.Dir(exePath)
-	tmpFile, err := os.CreateTemp(dir, "opercia-update-*")
+	tmpFile, err := os.CreateTemp(dir, "operica-update-*")
 	if err != nil {
 		return "", fmt.Errorf("create temp file: %w", err)
 	}

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { AlertCircle, Check, Loader2 } from "lucide-react";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { cn } from "@opercia/ui/lib/utils";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { cn } from "@operica/ui/lib/utils";
 
 export type SettingsSaveStatus = "idle" | "saving" | "saved" | "error";
 

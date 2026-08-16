@@ -2,7 +2,7 @@
 
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area"
 
-import { cn } from "@opercia/ui/lib/utils"
+import { cn } from "@operica/ui/lib/utils"
 
 function ScrollArea({
   className,

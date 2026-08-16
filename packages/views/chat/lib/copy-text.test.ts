@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import type { ChatMessage } from "@opercia/core/types";
-import type { ChatTimelineItem } from "@opercia/core/chat";
+import type { ChatMessage } from "@operica/core/types";
+import type { ChatTimelineItem } from "@operica/core/chat";
 import { splitTimeline, extractCopyText } from "./copy-text";
 
 const text = (seq: number, content: string): ChatTimelineItem => ({

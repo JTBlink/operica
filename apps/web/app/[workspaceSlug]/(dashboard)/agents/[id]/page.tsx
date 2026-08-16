@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { AgentDetailPage } from "@opercia/views/agents";
+import { AgentDetailPage } from "@operica/views/agents";
 
 export default function AgentDetailRoute({
   params,

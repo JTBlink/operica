@@ -2,13 +2,13 @@
 
 import { ChevronRight, UserRound } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import type { MemberRole } from "@opercia/core/types";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { memberListOptions } from "@opercia/core/workspace/queries";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+import type { MemberRole } from "@operica/core/types";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { memberListOptions } from "@operica/core/workspace/queries";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import { PageHeader } from "../layout/page-header";
 import { WorkspaceAvatar } from "../workspace/workspace-avatar";
 import { ActorIssuesPanel } from "../common/actor-issues-panel";

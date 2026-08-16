@@ -9,8 +9,8 @@ import type {
   Issue,
   SearchIssueResult,
   SearchProjectResult,
-} from "@opercia/core/types";
-import { partitionAggregatedSearchResults } from "@opercia/core/search/cancelled-rank";
+} from "@operica/core/types";
+import { partitionAggregatedSearchResults } from "@operica/core/search/cancelled-rank";
 
 export type RowItem =
   | { kind: "header"; key: string; title: string }

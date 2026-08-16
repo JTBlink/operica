@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { InboxItem } from "@opercia/core/types";
+import type { InboxItem } from "@operica/core/types";
 import {
   getInboxDisplayTitle,
   getQuickCreateOutcomeDetail,

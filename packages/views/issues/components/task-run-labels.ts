@@ -1,4 +1,4 @@
-import type { AgentTask } from "@opercia/core/types";
+import type { AgentTask } from "@operica/core/types";
 import { useT } from "../../i18n";
 import { stripMentionMarkdown } from "../utils/strip-mention-markdown";
 

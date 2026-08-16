@@ -76,12 +76,12 @@ func cachedShellResolvedAgents() map[string]string {
 // This is pure discovery: no version detection and no minimum-version gate
 // (detectBuiltinRuntimes owns those, per registration round). The result is
 // therefore the machine's *availability* set, which is exactly what
-// /health.agents reports and what `opercia daemon probe-runtimes` prints.
+// /health.agents reports and what `operica daemon probe-runtimes` prints.
 //
 // It is called once from LoadConfig at startup and again from the periodic
 // workspace sync (refreshAgentAvailability), so a CLI the user installs while
 // the daemon is already running gets picked up without a restart (MUL-5439).
-// Everything it reads is process-external (PATH, OPERCIA_*_PATH, OPERCIA_*_MODEL),
+// Everything it reads is process-external (PATH, OPERICA_*_PATH, OPERICA_*_MODEL),
 // so re-running it is the only way to observe such an install.
 //
 // A var so tests can stub discovery without installing real CLIs.
@@ -97,7 +97,7 @@ var probeAgentCLIs = func() map[string]AgentEntry {
 	// resolveAgentsViaLoginShell for the details and constraints.
 	//
 	// Laziness matters: the happy path (every agent on the daemon's PATH or
-	// pinned to an explicit OPERCIA_*_PATH) must not pay the cost of
+	// pinned to an explicit OPERICA_*_PATH) must not pay the cost of
 	// spawning the user's login shell — that touches their rc files and
 	// adds startup latency that scales with whatever they put in there. We
 	// only fork a shell when a bare command name actually missed LookPath.
@@ -119,7 +119,7 @@ var probeAgentCLIs = func() map[string]AgentEntry {
 			}, true
 		}
 		// The shell fallback only rescues bare command names. An operator
-		// who pinned OPERCIA_*_PATH to an absolute or relative path that
+		// who pinned OPERICA_*_PATH to an absolute or relative path that
 		// doesn't exist should hard-miss, not silently get a different
 		// binary.
 		if strings.ContainsAny(cmd, "/\\") {
@@ -149,25 +149,25 @@ var probeAgentCLIs = func() map[string]AgentEntry {
 	}
 
 	agents := map[string]AgentEntry{}
-	if e, ok := probe("OPERCIA_CLAUDE_PATH", "claude", "OPERCIA_CLAUDE_MODEL"); ok {
+	if e, ok := probe("OPERICA_CLAUDE_PATH", "claude", "OPERICA_CLAUDE_MODEL"); ok {
 		agents["claude"] = e
 	}
-	if e, ok := probe("OPERCIA_CODEX_PATH", "codex", "OPERCIA_CODEX_MODEL"); ok {
+	if e, ok := probe("OPERICA_CODEX_PATH", "codex", "OPERICA_CODEX_MODEL"); ok {
 		agents["codex"] = e
 	}
-	if e, ok := probe("OPERCIA_OPENCODE_PATH", "opencode", "OPERCIA_OPENCODE_MODEL"); ok {
+	if e, ok := probe("OPERICA_OPENCODE_PATH", "opencode", "OPERICA_OPENCODE_MODEL"); ok {
 		agents["opencode"] = e
 	}
-	if e, ok := probe("OPERCIA_DEVECO_PATH", "deveco", "OPERCIA_DEVECO_MODEL"); ok {
+	if e, ok := probe("OPERICA_DEVECO_PATH", "deveco", "OPERICA_DEVECO_MODEL"); ok {
 		agents["deveco"] = e
 	}
-	if e, ok := probe("OPERCIA_OPENCLAW_PATH", "openclaw", "OPERCIA_OPENCLAW_MODEL"); ok {
+	if e, ok := probe("OPERICA_OPENCLAW_PATH", "openclaw", "OPERICA_OPENCLAW_MODEL"); ok {
 		agents["openclaw"] = e
 	}
-	if e, ok := probe("OPERCIA_HERMES_PATH", "hermes", "OPERCIA_HERMES_MODEL"); ok {
+	if e, ok := probe("OPERICA_HERMES_PATH", "hermes", "OPERICA_HERMES_MODEL"); ok {
 		agents["hermes"] = e
 	}
-	if e, ok := probe("OPERCIA_PI_PATH", "pi", "OPERCIA_PI_MODEL"); ok {
+	if e, ok := probe("OPERICA_PI_PATH", "pi", "OPERICA_PI_MODEL"); ok {
 		agents["pi"] = e
 	}
 	// Built-in runtime identities (e.g. omp) are derived from the descriptor
@@ -182,29 +182,29 @@ var probeAgentCLIs = func() map[string]AgentEntry {
 			agents[desc.ID] = e
 		}
 	}
-	if e, ok := probe("OPERCIA_CURSOR_PATH", "cursor-agent", "OPERCIA_CURSOR_MODEL"); ok {
+	if e, ok := probe("OPERICA_CURSOR_PATH", "cursor-agent", "OPERICA_CURSOR_MODEL"); ok {
 		agents["cursor"] = e
 	}
-	if e, ok := probe("OPERCIA_COPILOT_PATH", "copilot", "OPERCIA_COPILOT_MODEL"); ok {
+	if e, ok := probe("OPERICA_COPILOT_PATH", "copilot", "OPERICA_COPILOT_MODEL"); ok {
 		agents["copilot"] = e
 	}
-	if e, ok := probe("OPERCIA_KIMI_PATH", "kimi", "OPERCIA_KIMI_MODEL"); ok {
+	if e, ok := probe("OPERICA_KIMI_PATH", "kimi", "OPERICA_KIMI_MODEL"); ok {
 		agents["kimi"] = e
 	}
-	if e, ok := probe("OPERCIA_REASONIX_PATH", "reasonix", "OPERCIA_REASONIX_MODEL"); ok {
+	if e, ok := probe("OPERICA_REASONIX_PATH", "reasonix", "OPERICA_REASONIX_MODEL"); ok {
 		agents["reasonix"] = e
 	}
-	if e, ok := probe("OPERCIA_KIRO_PATH", "kiro-cli", "OPERCIA_KIRO_MODEL"); ok {
+	if e, ok := probe("OPERICA_KIRO_PATH", "kiro-cli", "OPERICA_KIRO_MODEL"); ok {
 		agents["kiro"] = e
 	}
-	if e, ok := probe("OPERCIA_CODEBUDDY_PATH", "codebuddy", "OPERCIA_CODEBUDDY_MODEL"); ok {
+	if e, ok := probe("OPERICA_CODEBUDDY_PATH", "codebuddy", "OPERICA_CODEBUDDY_MODEL"); ok {
 		agents["codebuddy"] = e
 	}
 	// agy 1.0.6 added a `--model` flag (MUL-3125), so Antigravity now takes a
-	// model env like every other backend. OPERCIA_ANTIGRAVITY_MODEL seeds the
+	// model env like every other backend. OPERICA_ANTIGRAVITY_MODEL seeds the
 	// daemon-wide default; its value is the exact `agy models` display string
 	// (e.g. "Claude Opus 4.6 (Thinking)"), not a provider/model slug.
-	if e, ok := probe("OPERCIA_ANTIGRAVITY_PATH", "agy", "OPERCIA_ANTIGRAVITY_MODEL"); ok {
+	if e, ok := probe("OPERICA_ANTIGRAVITY_PATH", "agy", "OPERICA_ANTIGRAVITY_MODEL"); ok {
 		agents["antigravity"] = e
 	}
 	// Qoder CLI ships as the `qodercli` binary (Qoder Desktop does not put it
@@ -213,32 +213,32 @@ var probeAgentCLIs = func() map[string]AgentEntry {
 	// fallback applies: a GUI/Launchpad-started daemon does not inherit the
 	// interactive shell PATH, and without the fallback a perfectly good
 	// qodercli install stayed invisible across restarts (MUL-5524).
-	if e, ok := probe("OPERCIA_QODER_PATH", "qodercli", "OPERCIA_QODER_MODEL"); ok {
+	if e, ok := probe("OPERICA_QODER_PATH", "qodercli", "OPERICA_QODER_MODEL"); ok {
 		agents["qoder"] = e
 	}
 	// Qoder CN CLI exposes the same ACP transport as Qoder CLI under a
 	// separate `qoderclicn` binary and account/config root. Register it as an
 	// independent provider so hosts with either or both editions get the
 	// matching runtime without a custom profile.
-	if e, ok := probe("OPERCIA_QODERCLICN_PATH", "qoderclicn", "OPERCIA_QODERCLICN_MODEL"); ok {
+	if e, ok := probe("OPERICA_QODERCLICN_PATH", "qoderclicn", "OPERICA_QODERCLICN_MODEL"); ok {
 		agents["qoderclicn"] = e
 	}
 	// ByteDance official TRAE CLI (the `traecli` binary from https://docs.trae.cn/cli),
-	// driven over ACP via `traecli acp serve --yolo`. OPERCIA_TRAECLI_MODEL seeds
+	// driven over ACP via `traecli acp serve --yolo`. OPERICA_TRAECLI_MODEL seeds
 	// the daemon-wide default model (a model id from the user's logged-in traecli
 	// catalog).
-	if e, ok := probe("OPERCIA_TRAECLI_PATH", "traecli", "OPERCIA_TRAECLI_MODEL"); ok {
+	if e, ok := probe("OPERICA_TRAECLI_PATH", "traecli", "OPERICA_TRAECLI_MODEL"); ok {
 		agents["traecli"] = e
 	}
 	// xAI Grok Build CLI (`grok`), driven over ACP via
-	// `grok agent --always-approve stdio`. OPERCIA_GROK_MODEL seeds the
+	// `grok agent --always-approve stdio`. OPERICA_GROK_MODEL seeds the
 	// daemon-wide default (e.g. grok-4.5).
-	if e, ok := probe("OPERCIA_GROK_PATH", "grok", "OPERCIA_GROK_MODEL"); ok {
+	if e, ok := probe("OPERICA_GROK_PATH", "grok", "OPERICA_GROK_MODEL"); ok {
 		agents["grok"] = e
 	}
 	// Qwen Code (`qwen`) runs headlessly with -p and stream-json. Its native
 	// QWEN.md and .qwen/skills task context is prepared by execenv.
-	if e, ok := probe("OPERCIA_QWEN_PATH", "qwen", "OPERCIA_QWEN_MODEL"); ok {
+	if e, ok := probe("OPERICA_QWEN_PATH", "qwen", "OPERICA_QWEN_MODEL"); ok {
 		agents["qwen"] = e
 	}
 	// QwenPaw (`qwenpaw`) is the QwenPaw CLI agent, driven over ACP via
@@ -246,7 +246,7 @@ var probeAgentCLIs = func() map[string]AgentEntry {
 	// session/set_model (it would rewrite QwenPaw's shared agent config), so
 	// ExecOptions.Model is ignored — see ModelSelectionSupported. Reading one
 	// here would only advertise a knob that silently does nothing.
-	if e, ok := probe("OPERCIA_QWENPAW_PATH", "qwenpaw", ""); ok {
+	if e, ok := probe("OPERICA_QWENPAW_PATH", "qwenpaw", ""); ok {
 		agents["qwenpaw"] = e
 	}
 	return agents

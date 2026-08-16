@@ -1,10 +1,10 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createRef, type ReactNode } from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import { issueKeys, PAGINATED_STATUSES } from "@opercia/core/issues/queries";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import type { IssueStatus, ListIssuesCache } from "@opercia/core/types";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import { issueKeys, PAGINATED_STATUSES } from "@operica/core/issues/queries";
+import { I18nProvider } from "@operica/core/i18n/react";
+import type { IssueStatus, ListIssuesCache } from "@operica/core/types";
 import type { QueryClient } from "@tanstack/react-query";
 import enCommon from "../../locales/en/common.json";
 import enAuth from "../../locales/en/auth.json";
@@ -31,14 +31,14 @@ function I18nWrapper({ children }: { children: ReactNode }) {
 }
 
 // Mock the workspace id singleton — items() reads it imperatively.
-vi.mock("@opercia/core/platform", () => ({
+vi.mock("@operica/core/platform", () => ({
   getCurrentWsId: () => "ws-1",
 }));
 
 // Mock the API so we control search responses + observe calls.
 const searchIssuesMock = vi.fn();
 const searchProjectsMock = vi.fn();
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     get searchIssues() {
       return searchIssuesMock;
@@ -52,7 +52,7 @@ vi.mock("@opercia/core/api", () => ({
 // Mock the auth store: items() reads `useAuthStore.getState()` imperatively
 // to identify the current user when filtering personal agents.
 const authState = { user: { id: "u1" } as { id: string } | null };
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: { getState: () => authState },
 }));
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { AgentRuntime, RuntimeProfile } from "@opercia/core/types";
+import type { AgentRuntime, RuntimeProfile } from "@operica/core/types";
 import {
   PENDING_RUNTIME_WARNING_MS,
   isDisabledCustomRuntime,

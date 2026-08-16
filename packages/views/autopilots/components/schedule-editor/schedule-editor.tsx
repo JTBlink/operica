@@ -12,8 +12,8 @@ import {
 } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Clock, Pencil } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
-import { Input } from "@opercia/ui/components/ui/input";
+import { cn } from "@operica/ui/lib/utils";
+import { Input } from "@operica/ui/components/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
@@ -21,17 +21,17 @@ import {
   InputGroupSelectTrigger,
   InputGroupText,
   InputGroupTimeInput,
-} from "@opercia/ui/components/ui/input-group";
+} from "@operica/ui/components/ui/input-group";
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "@opercia/ui/components/ui/select";
-import { TimeInput } from "@opercia/ui/components/ui/time-input";
-import { cronPreviewOptions } from "@opercia/core/autopilots/queries";
-import { ApiError } from "@opercia/core/api";
+} from "@operica/ui/components/ui/select";
+import { TimeInput } from "@operica/ui/components/ui/time-input";
+import { cronPreviewOptions } from "@operica/core/autopilots/queries";
+import { ApiError } from "@operica/core/api";
 import { timezoneOptions } from "../../../common/timezone-select";
 import { useDebouncedValue } from "../../../common/use-debounced-value";
 import { SegmentedToggle } from "../../../common/segmented-toggle";

@@ -11,13 +11,13 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
-import type { Autopilot } from "@opercia/core/types";
+import type { Autopilot } from "@operica/core/types";
 import {
   useDeleteAutopilot,
   useUpdateAutopilot,
-} from "@opercia/core/autopilots";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/autopilots";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -25,14 +25,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import { useT } from "../../i18n";
 import { useIntentNavigate } from "../../navigation";
 

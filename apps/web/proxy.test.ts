@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { NextRequest } from "next/server";
-import { OPERCIA_LOCALE_HEADER } from "./lib/locale-routing";
+import { OPERICA_LOCALE_HEADER } from "./lib/locale-routing";
 import { proxy } from "./proxy";
 
 function makeRequest(
   path: string,
   cookies: Record<string, string> = {},
-  host = "app.opercia.test",
+  host = "app.operica.test",
 ) {
   const cookieHeader = Object.entries(cookies)
     .map(([key, value]) => `${key}=${value}`)
@@ -52,7 +52,7 @@ function withoutRuntimeUpstreams(run: () => void) {
 
 describe("proxy legacy workspace route redirects", () => {
   const sessionCookies = {
-    opercia_logged_in: "1",
+    operica_logged_in: "1",
     last_workspace_slug: "acme",
   };
 
@@ -72,7 +72,7 @@ describe("proxy legacy workspace route redirects", () => {
     "redirects legacy /%s URLs through the last workspace slug",
     (segment, expectedPath) => {
       expect(redirectLocation(`/${segment}?tab=all`, sessionCookies)).toBe(
-        `https://app.opercia.test${expectedPath}?tab=all`,
+        `https://app.operica.test${expectedPath}?tab=all`,
       );
     },
   );
@@ -80,19 +80,19 @@ describe("proxy legacy workspace route redirects", () => {
   it("preserves nested legacy paths and query strings", () => {
     expect(
       redirectLocation("/squads/squad-123?view=members", sessionCookies),
-    ).toBe("https://app.opercia.test/acme/squads/squad-123?view=members");
+    ).toBe("https://app.operica.test/acme/squads/squad-123?view=members");
   });
 
   it("sends logged-out legacy URLs to login", () => {
     expect(redirectLocation("/usage?tab=billing")).toBe(
-      "https://app.opercia.test/login?tab=billing",
+      "https://app.operica.test/login?tab=billing",
     );
   });
 
   it("sends logged-in legacy URLs without a last workspace cookie to root", () => {
     expect(
-      redirectLocation("/squads", { opercia_logged_in: "1" }),
-    ).toBe("https://app.opercia.test/");
+      redirectLocation("/squads", { operica_logged_in: "1" }),
+    ).toBe("https://app.operica.test/");
   });
 
   it("does not redirect workspace-scoped URLs whose first segment is already a slug", () => {
@@ -101,11 +101,11 @@ describe("proxy legacy workspace route redirects", () => {
 
   it("redirects app-host root URLs to the last workspace", () => {
     expect(redirectLocation("/", sessionCookies)).toBe(
-      "https://app.opercia.test/acme/issues",
+      "https://app.operica.test/acme/issues",
     );
   });
 
-  it.each(["opercia.ai", "www.opercia.ai"])(
+  it.each(["operica.ai", "www.operica.ai"])(
     "does not redirect public marketing root on %s",
     (host) => {
       expect(redirectLocation("/", sessionCookies, host)).toBeNull();
@@ -113,8 +113,8 @@ describe("proxy legacy workspace route redirects", () => {
   );
 
   it("still redirects explicit legacy app routes on the public marketing host", () => {
-    expect(redirectLocation("/issues/ABC-123", sessionCookies, "opercia.ai")).toBe(
-      "https://opercia.ai/acme/issues/ABC-123",
+    expect(redirectLocation("/issues/ABC-123", sessionCookies, "operica.ai")).toBe(
+      "https://operica.ai/acme/issues/ABC-123",
     );
   });
 });
@@ -127,7 +127,7 @@ describe("proxy runtime upstream rewrites", () => {
       expect(res.status).toBe(200);
       expect(res.headers.get("x-middleware-rewrite")).toBeNull();
       expect(
-        res.headers.get(`x-middleware-request-${OPERCIA_LOCALE_HEADER}`),
+        res.headers.get(`x-middleware-request-${OPERICA_LOCALE_HEADER}`),
       ).toBe("en");
     });
   });
@@ -139,7 +139,7 @@ describe("proxy runtime upstream rewrites", () => {
       expect(res.status).toBe(200);
       expect(res.headers.get("x-middleware-rewrite")).toBeNull();
       expect(
-        res.headers.get(`x-middleware-request-${OPERCIA_LOCALE_HEADER}`),
+        res.headers.get(`x-middleware-request-${OPERICA_LOCALE_HEADER}`),
       ).toBe("en");
     });
   });
@@ -198,7 +198,7 @@ describe("proxy runtime upstream rewrites", () => {
       expect(res.status).toBe(200);
       expect(res.headers.get("x-middleware-rewrite")).toBeNull();
       expect(
-        res.headers.get(`x-middleware-request-${OPERCIA_LOCALE_HEADER}`),
+        res.headers.get(`x-middleware-request-${OPERICA_LOCALE_HEADER}`),
       ).toBe("en");
     } finally {
       restoreEnv("REMOTE_API_URL", previous);
@@ -210,24 +210,24 @@ describe("proxy root and locale handling", () => {
   it("redirects logged-in root visits to the last workspace", () => {
     const res = proxy(
       makeRequest("/", {
-        opercia_logged_in: "1",
+        operica_logged_in: "1",
         last_workspace_slug: "acme",
       }),
     );
 
     expect(res.status).toBe(307);
     expect(res.headers.get("location")).toBe(
-      "https://app.opercia.test/acme/issues",
+      "https://app.operica.test/acme/issues",
     );
   });
 
   it("forwards locale on login requests", () => {
-    const res = proxy(makeRequest("/login", { "opercia-locale": "zh-Hans" }));
+    const res = proxy(makeRequest("/login", { "operica-locale": "zh-Hans" }));
 
     expect(res.status).toBe(200);
     expect(res.headers.get("location")).toBeNull();
     expect(
-      res.headers.get(`x-middleware-request-${OPERCIA_LOCALE_HEADER}`),
+      res.headers.get(`x-middleware-request-${OPERICA_LOCALE_HEADER}`),
     ).toBe("zh-Hans");
   });
 });

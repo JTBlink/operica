@@ -17,24 +17,24 @@ import {
   Zap,
 } from "lucide-react";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@opercia/core/hooks";
+import { useWorkspaceId } from "@operica/core/hooks";
 import {
   quickActionListOptions,
   useCreateQuickAction,
   useDeleteQuickAction,
   useUpdateQuickAction,
-} from "@opercia/core/quick-actions";
+} from "@operica/core/quick-actions";
 import type {
   QuickAction,
   QuickActionAssigneeType,
   QuickActionVisibility,
-} from "@opercia/core/types";
-import { findQuickActionTemplateToken } from "@opercia/core/types";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Badge } from "@opercia/ui/components/ui/badge";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
-import { Label as FieldLabel } from "@opercia/ui/components/ui/label";
+} from "@operica/core/types";
+import { findQuickActionTemplateToken } from "@operica/core/types";
+import { Button } from "@operica/ui/components/ui/button";
+import { Badge } from "@operica/ui/components/ui/badge";
+import { Input } from "@operica/ui/components/ui/input";
+import { Textarea } from "@operica/ui/components/ui/textarea";
+import { Label as FieldLabel } from "@operica/ui/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -42,7 +42,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -52,14 +52,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { cn } from "@operica/ui/lib/utils";
 import { AgentPicker } from "../../autopilots/components/pickers/agent-picker";
 import { useT } from "../../i18n";
 import { SettingsTab } from "./settings-layout";

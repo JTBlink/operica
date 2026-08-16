@@ -3,7 +3,7 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@opercia/ui/components/ui/chart";
+} from "@operica/ui/components/ui/chart";
 import { useT } from "../../../i18n";
 import {
   activeFailureClasses,

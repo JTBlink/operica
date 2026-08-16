@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { OperciaLanding } from "@/features/landing/components/opercia-landing";
+import { OpericaLanding } from "@/features/landing/components/operica-landing";
 
 export const metadata: Metadata = {
   title: "Homepage",
   description:
-    "Opercia — open-source platform that turns coding agents into real teammates. Assign tasks, track progress, compound skills.",
+    "Operica — open-source platform that turns coding agents into real teammates. Assign tasks, track progress, compound skills.",
   openGraph: {
-    title: "Opercia — Project Management for Human + Agent Teams",
+    title: "Operica — Project Management for Human + Agent Teams",
     description:
       "Manage your human + agent workforce in one place.",
     url: "/homepage",
@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomepagePage() {
-  return <OperciaLanding />;
+  return <OpericaLanding />;
 }

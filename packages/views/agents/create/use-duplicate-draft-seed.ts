@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { buildDuplicateDraft, type AgentDraft } from "@opercia/core/agents";
-import type { Agent, RuntimeDevice } from "@opercia/core/types";
+import { buildDuplicateDraft, type AgentDraft } from "@operica/core/agents";
+import type { Agent, RuntimeDevice } from "@operica/core/types";
 
 /**
  * Seeds the duplicate draft exactly once, and only from a runtime list that has

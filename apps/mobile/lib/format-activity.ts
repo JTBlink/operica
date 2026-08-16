@@ -14,8 +14,8 @@ import type {
   IssuePriority,
   IssueStatus,
   TimelineEntry,
-} from "@opercia/core/types";
-import { formatDateOnly } from "@opercia/core/issues/date";
+} from "@operica/core/types";
+import { formatDateOnly } from "@operica/core/issues/date";
 
 const STATUS_LABEL: Record<IssueStatus, string> = {
   backlog: "Backlog",

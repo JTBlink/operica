@@ -3,17 +3,17 @@ import { workspaceUrlHost } from "./workspace-url";
 
 describe("workspaceUrlHost", () => {
   it("returns the host of a full app URL", () => {
-    expect(workspaceUrlHost("https://opercia.example.com")).toBe(
-      "opercia.example.com",
+    expect(workspaceUrlHost("https://operica.example.com")).toBe(
+      "operica.example.com",
     );
   });
 
   it("ignores scheme, path, and trailing slash", () => {
-    expect(workspaceUrlHost("https://opercia.example.com/")).toBe(
-      "opercia.example.com",
+    expect(workspaceUrlHost("https://operica.example.com/")).toBe(
+      "operica.example.com",
     );
-    expect(workspaceUrlHost("http://opercia.example.com/app/onboarding")).toBe(
-      "opercia.example.com",
+    expect(workspaceUrlHost("http://operica.example.com/app/onboarding")).toBe(
+      "operica.example.com",
     );
   });
 
@@ -22,16 +22,16 @@ describe("workspaceUrlHost", () => {
   });
 
   it("accepts a bare host without a scheme", () => {
-    expect(workspaceUrlHost("opercia.example.com")).toBe("opercia.example.com");
-    expect(workspaceUrlHost("opercia.example.com/path")).toBe(
-      "opercia.example.com",
+    expect(workspaceUrlHost("operica.example.com")).toBe("operica.example.com");
+    expect(workspaceUrlHost("operica.example.com/path")).toBe(
+      "operica.example.com",
     );
   });
 
   it("falls back to the brand host when no app URL is configured", () => {
-    expect(workspaceUrlHost("")).toBe("opercia.ai");
-    expect(workspaceUrlHost("   ")).toBe("opercia.ai");
-    expect(workspaceUrlHost(null)).toBe("opercia.ai");
-    expect(workspaceUrlHost(undefined)).toBe("opercia.ai");
+    expect(workspaceUrlHost("")).toBe("operica.ai");
+    expect(workspaceUrlHost("   ")).toBe("operica.ai");
+    expect(workspaceUrlHost(null)).toBe("operica.ai");
+    expect(workspaceUrlHost(undefined)).toBe("operica.ai");
   });
 });

@@ -1,7 +1,7 @@
 "use client";
 
 import { CalendarClock } from "lucide-react";
-import type { UpdateIssueRequest } from "@opercia/core/types";
+import type { UpdateIssueRequest } from "@operica/core/types";
 import { DateOnlyPicker } from "../../../common/date-only-picker";
 import { useT } from "../../../i18n";
 

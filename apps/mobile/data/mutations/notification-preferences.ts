@@ -18,12 +18,12 @@ import { useCallback, useRef } from "react";
 import type {
   NotificationPreferenceResponse,
   NotificationPreferences,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   applyNotificationPreferencePatch,
   deriveNotificationPreferencePatch,
   rollbackNotificationPreferencePatch,
-} from "@opercia/core/notification-preferences/patch";
+} from "@operica/core/notification-preferences/patch";
 import { api } from "@/data/api";
 import { useWorkspaceStore } from "@/data/workspace-store";
 import { notificationPreferenceKeys } from "@/data/queries/notification-preferences";

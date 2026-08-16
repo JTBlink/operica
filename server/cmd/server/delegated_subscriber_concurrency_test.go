@@ -151,7 +151,7 @@ func TestDelegatedSubscribe_BlocksOnConcurrentMemberRevoke(t *testing.T) {
 	bus := events.New()
 	registerSubscriberListeners(bus, testPool)
 
-	const email = "delegated-concurrent-revoke@opercia.test"
+	const email = "delegated-concurrent-revoke@operica.test"
 	cleanupTestUser(t, email)
 	userID := createTestUser(t, email)
 	t.Cleanup(func() { cleanupTestUser(t, email) })

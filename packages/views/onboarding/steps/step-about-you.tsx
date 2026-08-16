@@ -17,8 +17,8 @@ import {
   Settings2,
   User,
 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import type { QuestionnaireAnswers, Role, UseCase } from "@opercia/core/onboarding";
+import { Button } from "@operica/ui/components/ui/button";
+import type { QuestionnaireAnswers, Role, UseCase } from "@operica/core/onboarding";
 import {
   StepFooter,
   StepHeading,

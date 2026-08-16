@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Opercia installer — installs the CLI and optionally provisions a self-host server.
+# Operica installer — installs the CLI and optionally provisions a self-host server.
 #
 # Install / upgrade CLI only:
 #   curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash
@@ -7,7 +7,7 @@
 # Install CLI + provision self-host server:
 #   curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --with-server
 #
-# After installation, run `opercia setup` to configure your environment.
+# After installation, run `operica setup` to configure your environment.
 #
 set -euo pipefail
 
@@ -16,8 +16,8 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 REPO_URL="https://github.com/JTBlink/operica.git"
 REPO_WEB_URL="https://github.com/JTBlink/operica"  # without .git, for GitHub web APIs
-INSTALL_DIR="${OPERCIA_INSTALL_DIR:-$HOME/.opercia/server}"
-BREW_PACKAGE="opercia-ai/tap/opercia"
+INSTALL_DIR="${OPERICA_INSTALL_DIR:-$HOME/.operica/server}"
+BREW_PACKAGE="operica-ai/tap/operica"
 
 # Host ports Compose reported after `up -d`; set by setup_server and reused by
 # the summary so the health check and the printed URLs cannot diverge.
@@ -57,11 +57,11 @@ print_remote_server_token_hint() {
 
   printf "  ${BOLD}Looks like a remote/SSH session.${RESET} Browser login may not be able to call back to this machine's localhost.\n"
   printf "  Token login is usually simpler here:\n"
-  printf "     1. On your local computer, open ${CYAN}https://opercia.ai/settings?tab=tokens${RESET}\n"
+  printf "     1. On your local computer, open ${CYAN}https://operica.ai/settings?tab=tokens${RESET}\n"
   printf "        and create a token under ${BOLD}Settings > API Tokens${RESET}.\n"
   printf "     2. On this server, run:\n"
-  printf "        ${CYAN}opercia login --token <YOUR_TOKEN>${RESET}\n"
-  printf "        ${CYAN}opercia daemon start${RESET}\n"
+  printf "        ${CYAN}operica login --token <YOUR_TOKEN>${RESET}\n"
+  printf "        ${CYAN}operica daemon start${RESET}\n"
   printf "\n"
 }
 
@@ -94,7 +94,7 @@ detect_os() {
     MINGW*|MSYS*|CYGWIN*)
             fail "This script does not support Windows. Use the PowerShell installer instead:
   irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex" ;;
-    *)      fail "Unsupported operating system: $(uname -s). Opercia supports macOS, Linux, and Windows." ;;
+    *)      fail "Unsupported operating system: $(uname -s). Operica supports macOS, Linux, and Windows." ;;
   esac
 
   ARCH="$(uname -m)"
@@ -118,10 +118,10 @@ _dump_brew_log() {
 }
 
 install_cli_brew() {
-  info "Installing Opercia CLI via Homebrew..."
+  info "Installing Operica CLI via Homebrew..."
   local brew_log
   brew_log=$(mktemp)
-  if ! brew tap opercia-ai/tap >"$brew_log" 2>&1; then
+  if ! brew tap operica-ai/tap >"$brew_log" 2>&1; then
     warn "Failed to add Homebrew tap. Falling back to GitHub Releases binary install."
     _dump_brew_log "$brew_log"
     rm -f "$brew_log"
@@ -131,21 +131,21 @@ install_cli_brew() {
   if ! brew install "$BREW_PACKAGE" >"$brew_log" 2>&1; then
     if brew list "$BREW_PACKAGE" >/dev/null 2>&1; then
       rm -f "$brew_log"
-      ok "Opercia CLI already installed via Homebrew"
+      ok "Operica CLI already installed via Homebrew"
     else
-      warn "Failed to install opercia via Homebrew. Falling back to GitHub Releases binary install."
+      warn "Failed to install operica via Homebrew. Falling back to GitHub Releases binary install."
       _dump_brew_log "$brew_log"
       rm -f "$brew_log"
       return 1
     fi
   else
     rm -f "$brew_log"
-    ok "Opercia CLI installed via Homebrew"
+    ok "Operica CLI installed via Homebrew"
   fi
 }
 
 install_cli_binary() {
-  info "Installing Opercia CLI from GitHub Releases..."
+  info "Installing Operica CLI from GitHub Releases..."
 
   # Get latest release tag
   local latest
@@ -155,30 +155,30 @@ install_cli_binary() {
   fi
 
   local version="${latest#v}"
-  local url="https://github.com/JTBlink/operica/releases/download/${latest}/opercia-cli-${version}-${OS}-${ARCH}.tar.gz"
+  local url="https://github.com/JTBlink/operica/releases/download/${latest}/operica-cli-${version}-${OS}-${ARCH}.tar.gz"
   local tmp_dir
   tmp_dir=$(mktemp -d)
 
   info "Downloading $url ..."
-  if ! curl -fsSL "$url" -o "$tmp_dir/opercia.tar.gz"; then
+  if ! curl -fsSL "$url" -o "$tmp_dir/operica.tar.gz"; then
     rm -rf "$tmp_dir"
     fail "Failed to download CLI binary."
   fi
 
-  tar -xzf "$tmp_dir/opercia.tar.gz" -C "$tmp_dir" opercia
+  tar -xzf "$tmp_dir/operica.tar.gz" -C "$tmp_dir" operica
 
   # Try /usr/local/bin first, fall back to ~/.local/bin. Tests and scripted
-  # installs can override the first choice with OPERCIA_BIN_DIR.
-  local bin_dir="${OPERCIA_BIN_DIR:-/usr/local/bin}"
+  # installs can override the first choice with OPERICA_BIN_DIR.
+  local bin_dir="${OPERICA_BIN_DIR:-/usr/local/bin}"
   if [ -w "$bin_dir" ]; then
-    mv "$tmp_dir/opercia" "$bin_dir/opercia"
+    mv "$tmp_dir/operica" "$bin_dir/operica"
   elif command_exists sudo; then
-    sudo mv "$tmp_dir/opercia" "$bin_dir/opercia"
+    sudo mv "$tmp_dir/operica" "$bin_dir/operica"
   else
     bin_dir="$HOME/.local/bin"
     mkdir -p "$bin_dir"
-    mv "$tmp_dir/opercia" "$bin_dir/opercia"
-    chmod +x "$bin_dir/opercia"
+    mv "$tmp_dir/operica" "$bin_dir/operica"
+    chmod +x "$bin_dir/operica"
     # Add to PATH if not already there
     if ! echo "$PATH" | tr ':' '\n' | grep -q "^$bin_dir$"; then
       export PATH="$bin_dir:$PATH"
@@ -187,7 +187,7 @@ install_cli_binary() {
   fi
 
   rm -rf "$tmp_dir"
-  ok "Opercia CLI installed to $bin_dir/opercia"
+  ok "Operica CLI installed to $bin_dir/operica"
 }
 
 add_to_path() {
@@ -195,7 +195,7 @@ add_to_path() {
   local line="export PATH=\"$dir:\$PATH\""
   for rc in "$HOME/.bashrc" "$HOME/.zshrc"; do
     if [ -f "$rc" ] && ! grep -qF "$dir" "$rc"; then
-      printf '\n# Added by Opercia installer\n%s\n' "$line" >> "$rc"
+      printf '\n# Added by Operica installer\n%s\n' "$line" >> "$rc"
     fi
   done
 }
@@ -206,8 +206,8 @@ get_latest_version() {
 }
 
 get_selfhost_ref() {
-  if [ -n "${OPERCIA_SELFHOST_REF:-}" ]; then
-    printf '%s' "$OPERCIA_SELFHOST_REF"
+  if [ -n "${OPERICA_SELFHOST_REF:-}" ]; then
+    printf '%s' "$OPERICA_SELFHOST_REF"
     return
   fi
 
@@ -255,21 +255,21 @@ pull_official_selfhost_images() {
 }
 
 upgrade_cli_brew() {
-  info "Upgrading Opercia CLI via Homebrew..."
+  info "Upgrading Operica CLI via Homebrew..."
   brew update 2>/dev/null || true
   if brew upgrade "$BREW_PACKAGE" 2>/dev/null; then
-    ok "Opercia CLI upgraded via Homebrew"
+    ok "Operica CLI upgraded via Homebrew"
   else
     # brew upgrade exits non-zero if already up to date
-    ok "Opercia CLI is already the latest version"
+    ok "Operica CLI is already the latest version"
   fi
 }
 
 install_cli() {
-  if command_exists opercia; then
+  if command_exists operica; then
     local current_ver
-    # `opercia version` outputs "opercia 0.3.23 (commit: f46b929eb, built: 2026-06-16T10:11:56Z)" — extract just the version
-    current_ver=$(opercia version 2>/dev/null | awk 'NR==1{print $2}' || echo "unknown")
+    # `operica version` outputs "operica 0.3.23 (commit: f46b929eb, built: 2026-06-16T10:11:56Z)" — extract just the version
+    current_ver=$(operica version 2>/dev/null | awk 'NR==1{print $2}' || echo "unknown")
 
     local latest_ver
     latest_ver=$(get_latest_version)
@@ -279,11 +279,11 @@ install_cli() {
     local latest_cmp="${latest_ver#v}"
 
     if [ -z "$latest_ver" ] || [ "$current_cmp" = "$latest_cmp" ]; then
-      ok "Opercia CLI is up to date ($current_ver)"
+      ok "Operica CLI is up to date ($current_ver)"
       return 0
     fi
 
-    info "Opercia CLI $current_ver installed, latest is $latest_ver — upgrading..."
+    info "Operica CLI $current_ver installed, latest is $latest_ver — upgrading..."
     if command_exists brew && brew list "$BREW_PACKAGE" >/dev/null 2>&1; then
       upgrade_cli_brew
     else
@@ -291,8 +291,8 @@ install_cli() {
     fi
 
     local new_ver
-    new_ver=$(opercia version 2>/dev/null | awk 'NR==1{print $2}' || echo "unknown")
-    ok "Opercia CLI upgraded ($current_ver → $new_ver)"
+    new_ver=$(operica version 2>/dev/null | awk 'NR==1{print $2}' || echo "unknown")
+    ok "Operica CLI upgraded ($current_ver → $new_ver)"
     return 0
   fi
 
@@ -303,8 +303,8 @@ install_cli() {
   fi
 
   # Verify
-  if ! command_exists opercia; then
-    fail "CLI installed but 'opercia' not found on PATH. You may need to restart your shell."
+  if ! command_exists operica; then
+    fail "CLI installed but 'operica' not found on PATH. You may need to restart your shell."
   fi
 }
 
@@ -314,7 +314,7 @@ install_cli() {
 check_docker() {
   if ! command_exists docker; then
     printf "\n"
-    fail "Docker is not installed. Opercia self-hosting requires Docker and Docker Compose.
+    fail "Docker is not installed. Operica self-hosting requires Docker and Docker Compose.
 
 Install Docker:
   macOS:  https://docs.docker.com/desktop/install/mac-install/
@@ -334,7 +334,7 @@ After installing Docker, re-run this script with --with-server."
 # Server setup (self-host / --with-server)
 # ---------------------------------------------------------------------------
 setup_server() {
-  info "Setting up Opercia server..."
+  info "Setting up Operica server..."
   local server_ref
   server_ref=$(get_selfhost_ref)
   info "Using self-host assets from ${server_ref}..."
@@ -343,7 +343,7 @@ setup_server() {
     info "Updating existing installation at $INSTALL_DIR..."
     cd "$INSTALL_DIR"
   else
-    info "Cloning Opercia repository..."
+    info "Cloning Operica repository..."
     if ! command_exists git; then
       fail "Git is not installed. Please install git and re-run."
     fi
@@ -383,9 +383,9 @@ setup_server() {
   fi
 
   # Start Docker Compose
-  info "Pulling official Opercia images..."
+  info "Pulling official Operica images..."
   pull_official_selfhost_images
-  info "Starting Opercia services (this may take a few minutes on first run)..."
+  info "Starting Operica services (this may take a few minutes on first run)..."
   docker compose -f docker-compose.selfhost.yml up -d
 
   # Read the ports Compose actually published, once, and reuse them for both the
@@ -411,7 +411,7 @@ setup_server() {
   done
 
   if [ "$ready" = true ]; then
-    ok "Opercia server is running"
+    ok "Operica server is running"
   else
     warn "Server is still starting. You can check logs with:"
     echo "  cd $INSTALL_DIR && docker compose -f docker-compose.selfhost.yml logs"
@@ -425,7 +425,7 @@ setup_server() {
 # ---------------------------------------------------------------------------
 run_default() {
   printf "\n"
-  printf "${BOLD}  Opercia — Installer${RESET}\n"
+  printf "${BOLD}  Operica — Installer${RESET}\n"
   printf "\n"
 
   detect_os
@@ -433,13 +433,13 @@ run_default() {
 
   printf "\n"
   printf "${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
-  printf "${BOLD}${GREEN}  ✓ Opercia CLI is ready!${RESET}\n"
+  printf "${BOLD}${GREEN}  ✓ Operica CLI is ready!${RESET}\n"
   printf "${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
   printf "\n"
   printf "  ${BOLD}Next: configure your environment${RESET}\n"
   printf "\n"
-  printf "     ${CYAN}opercia setup${RESET}                # Connect to Opercia Cloud (opercia.ai)\n"
-  printf "     ${CYAN}opercia setup self-host${RESET}       # Connect to a self-hosted server\n"
+  printf "     ${CYAN}operica setup${RESET}                # Connect to Operica Cloud (operica.ai)\n"
+  printf "     ${CYAN}operica setup self-host${RESET}       # Connect to a self-hosted server\n"
   printf "\n"
   print_remote_server_token_hint
   printf "  ${BOLD}Self-hosting?${RESET} Install the server first:\n"
@@ -452,7 +452,7 @@ run_default() {
 # ---------------------------------------------------------------------------
 run_with_server() {
   printf "\n"
-  printf "${BOLD}  Opercia — Self-Host Installer${RESET}\n"
+  printf "${BOLD}  Operica — Self-Host Installer${RESET}\n"
   printf "  Provisioning server infrastructure + installing CLI\n"
   printf "\n"
 
@@ -463,7 +463,7 @@ run_with_server() {
 
   printf "\n"
   printf "${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
-  printf "${BOLD}${GREEN}  ✓ Opercia server is running and CLI is ready!${RESET}\n"
+  printf "${BOLD}${GREEN}  ✓ Operica server is running and CLI is ready!${RESET}\n"
   printf "${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
   printf "\n"
   printf "  ${BOLD}Frontend:${RESET}  http://localhost:%s\n" "$SELFHOST_FRONTEND_PORT"
@@ -472,7 +472,7 @@ run_with_server() {
   printf "\n"
   printf "  ${BOLD}Next: configure your CLI to connect${RESET}\n"
   printf "\n"
-  printf "     ${CYAN}opercia setup self-host${RESET}   # Configure + authenticate + start daemon\n"
+  printf "     ${CYAN}operica setup self-host${RESET}   # Configure + authenticate + start daemon\n"
   printf "\n"
   printf "  ${BOLD}Login:${RESET} configure ${CYAN}RESEND_API_KEY${RESET} in .env for email codes,\n"
   printf "  or read the generated code from backend logs when Resend is unset.\n"
@@ -487,7 +487,7 @@ run_with_server() {
 # ---------------------------------------------------------------------------
 run_stop() {
   printf "\n"
-  info "Stopping Opercia services..."
+  info "Stopping Operica services..."
 
   if [ -d "$INSTALL_DIR" ]; then
     cd "$INSTALL_DIR"
@@ -498,11 +498,11 @@ run_stop() {
       warn "No docker-compose.selfhost.yml found at $INSTALL_DIR"
     fi
   else
-    warn "No Opercia installation found at $INSTALL_DIR"
+    warn "No Operica installation found at $INSTALL_DIR"
   fi
 
-  if command_exists opercia; then
-    opercia daemon stop 2>/dev/null && ok "Daemon stopped" || true
+  if command_exists operica; then
+    operica daemon stop 2>/dev/null && ok "Daemon stopped" || true
   fi
 
   printf "\n"
@@ -522,20 +522,20 @@ main() {
       --help|-h)
         echo "Usage: install.sh [--with-server | --stop]"
         echo ""
-        echo "  (default)       Install / upgrade the Opercia CLI"
+        echo "  (default)       Install / upgrade the Operica CLI"
         echo "  --with-server   Install CLI + provision a self-host server (Docker)"
         echo "  --stop          Stop a self-hosted installation"
         echo ""
         echo "Environment variables:"
-        echo "  OPERCIA_INSTALL_DIR   Self-host server install directory"
-        echo "                        (default: \$HOME/.opercia/server)"
-        echo "  OPERCIA_BIN_DIR       Target directory for the CLI binary when"
+        echo "  OPERICA_INSTALL_DIR   Self-host server install directory"
+        echo "                        (default: \$HOME/.operica/server)"
+        echo "  OPERICA_BIN_DIR       Target directory for the CLI binary when"
         echo "                        installing from GitHub Releases"
         echo "                        (default: /usr/local/bin, then \$HOME/.local/bin)"
-        echo "  OPERCIA_SELFHOST_REF  Git ref to check out for self-host assets"
+        echo "  OPERICA_SELFHOST_REF  Git ref to check out for self-host assets"
         echo "                        (default: latest release tag, falling back to main)"
         echo ""
-        echo "After installation, run 'opercia setup' to configure your environment."
+        echo "After installation, run 'operica setup' to configure your environment."
         exit 0
         ;;
       *) warn "Unknown option: $1" ;;

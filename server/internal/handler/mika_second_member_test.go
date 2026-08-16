@@ -75,7 +75,7 @@ func TestStartMikaOnboarding_AllowsAnyMemberNotJustTheOwner(t *testing.T) {
 		t.Fatalf("provision mika: expected 201, got %d: %s", owner.Code, owner.Body.String())
 	}
 
-	second := addSecondWorkspaceMember(t, "mika-second-member@opercia.test")
+	second := addSecondWorkspaceMember(t, "mika-second-member@operica.test")
 	joined := createMikaAs(t, second, map[string]any{
 		"runtime_id":    handlerTestRuntimeID(t),
 		"language":      "en",
@@ -197,7 +197,7 @@ func TestCreateMikaAgent_SessionIsPerMemberAndStable(t *testing.T) {
 
 	// Another member of the same workspace gets their own conversation with
 	// the same Mika, not the first member's.
-	other := addSecondWorkspaceMember(t, "mika-session-owner@opercia.test")
+	other := addSecondWorkspaceMember(t, "mika-session-owner@operica.test")
 	otherResp := decodeMika(t, createMikaAs(t, other, map[string]any{
 		"runtime_id": runtimeID, "language": "en", "session_title": "Getting started with Mika",
 	}))

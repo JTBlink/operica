@@ -725,7 +725,7 @@ func anyModelSupportsThinkingValue(models []Model, value string) bool {
 // providerThinkingEnums is the server-side accept-list for runtimes with a
 // fixed reasoning-effort vocabulary. Codex and OpenCode are deliberately
 // absent because their values come from daemon-local model catalogs, which can
-// gain new tokens without a Opercia release.
+// gain new tokens without a Operica release.
 //
 // The server doesn't have local CLI binaries, so it cannot do per-model
 // discovery the way the daemon can. Fixed-catalog providers use this enum;
@@ -784,7 +784,7 @@ var thinkingDynamicCatalogProviders = map[string]bool{
 	"kimi":     true,
 }
 
-// ThinkingControlSupported reports whether Opercia can deliver a per-agent
+// ThinkingControlSupported reports whether Operica can deliver a per-agent
 // reasoning effort to this runtime at all. False means the answer to any
 // thinking_level is "no", regardless of the token: the runtime exposes no
 // effort dial on the surface the daemon speaks to it over, so there is nothing
@@ -793,7 +793,7 @@ var thinkingDynamicCatalogProviders = map[string]bool{
 // Hermes is the instructive case (MUL-5770). The Hermes CLI does support
 // reasoning effort — `agent.reasoning_effort` in `<HERMES_HOME>/config.yaml`,
 // checked against its own `minimal|low|medium|high|xhigh|max|ultra` set — but
-// Opercia drives Hermes over ACP (`hermes acp`), and its ACP adapter does not
+// Operica drives Hermes over ACP (`hermes acp`), and its ACP adapter does not
 // carry that setting onto the session:
 //   - `session/new` advertises `models` and `modes` only, no `configOptions`,
 //     so there is no effort catalog to discover;

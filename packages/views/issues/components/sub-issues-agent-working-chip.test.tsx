@@ -1,17 +1,17 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { WorkspaceWorkingAgent } from "@opercia/core/types";
+import type { WorkspaceWorkingAgent } from "@operica/core/types";
 
 const mockState = vi.hoisted(() => ({
   agents: [] as WorkspaceWorkingAgent[],
   optionsCalls: [] as unknown[][],
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@opercia/core/agents", () => ({
+vi.mock("@operica/core/agents", () => ({
   workspaceWorkingAgentsOptions: (...args: unknown[]) => {
     mockState.optionsCalls.push(args);
     return { queryKey: ["working-agents", ...args] };
@@ -55,7 +55,7 @@ vi.mock("../../i18n", () => ({
 // The hover card only portals its content once open, so absence of the body
 // cannot distinguish "closed" from "not wired up". Mock the primitive and
 // assert on the wrapper itself (same approach as the row indicator's test).
-vi.mock("@opercia/ui/components/ui/hover-card", () => ({
+vi.mock("@operica/ui/components/ui/hover-card", () => ({
   HoverCard: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="hover-card">{children}</div>
   ),

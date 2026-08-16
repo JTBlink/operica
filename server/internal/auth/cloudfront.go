@@ -26,8 +26,8 @@ import (
 type CloudFrontSigner struct {
 	keyPairID    string
 	privateKey   *rsa.PrivateKey
-	domain       string // CDN domain, e.g. "static.opercia.ai"
-	cookieDomain string // cookie scope, e.g. ".opercia.ai"
+	domain       string // CDN domain, e.g. "static.operica.ai"
+	cookieDomain string // cookie scope, e.g. ".operica.ai"
 }
 
 // NewCloudFrontSignerFromEnv creates a signer from environment variables.
@@ -39,8 +39,8 @@ type CloudFrontSigner struct {
 //
 // Other required environment variables:
 //   - CLOUDFRONT_KEY_PAIR_ID
-//   - CLOUDFRONT_DOMAIN       (e.g. "static.opercia.ai")
-//   - COOKIE_DOMAIN           (e.g. ".opercia.ai")
+//   - CLOUDFRONT_DOMAIN       (e.g. "static.operica.ai")
+//   - COOKIE_DOMAIN           (e.g. ".operica.ai")
 func NewCloudFrontSignerFromEnv() *CloudFrontSigner {
 	keyPairID := os.Getenv("CLOUDFRONT_KEY_PAIR_ID")
 	if keyPairID == "" {

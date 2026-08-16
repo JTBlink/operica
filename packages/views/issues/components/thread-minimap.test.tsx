@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { act, fireEvent, screen } from "@testing-library/react";
-import type { TimelineEntry } from "@opercia/core/types";
+import type { TimelineEntry } from "@operica/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { ThreadMinimap, commentPreview, waveScale } from "./thread-minimap";
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({
     getActorName: (type: string, id: string) => `${type}:${id}`,
   }),

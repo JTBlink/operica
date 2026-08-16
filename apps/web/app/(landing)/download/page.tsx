@@ -9,13 +9,13 @@ import { DownloadClient } from "./download-client";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Download Opercia",
+  title: "Download Operica",
   description:
-    "Download Opercia for macOS, Windows, or Linux — or install the CLI for servers and remote dev boxes.",
+    "Download Operica for macOS, Windows, or Linux — or install the CLI for servers and remote dev boxes.",
   openGraph: {
-    title: "Download Opercia",
+    title: "Download Operica",
     description:
-      "Get the Opercia desktop app with a bundled daemon, or install the CLI for servers and remote dev boxes.",
+      "Get the Operica desktop app with a bundled daemon, or install the CLI for servers and remote dev boxes.",
     url: "/download",
   },
   alternates: {

@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import { Check, Copy, Terminal } from "lucide-react";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { CODE_LIGATURE_CLASS } from "@opercia/ui/lib/code-style";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { CODE_LIGATURE_CLASS } from "@operica/ui/lib/code-style";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
 import { useT } from "../../i18n";
 
 const INSTALL_CMD =
   "curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash";
-const SETUP_CMD = "opercia setup";
+const SETUP_CMD = "operica setup";
 
 function CopyButton({ text }: { text: string }) {
   const { t } = useT("onboarding");
@@ -65,7 +65,7 @@ function Step({ n, label, cmd }: { n: number; label: string; cmd: string }) {
 /**
  * CLI install instructions — two copy-and-run commands. Hardcoded because
  * there's nothing environmental to infer: step 1 is the public install
- * script, step 2 is the cloud `opercia setup` which the CLI itself knows
+ * script, step 2 is the cloud `operica setup` which the CLI itself knows
  * the endpoints for. Local development tests a self-host variant by
  * typing the extended command directly in the terminal; no need to
  * thread env vars through React.

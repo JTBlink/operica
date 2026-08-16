@@ -105,21 +105,21 @@ func TestBusinessSamplerCollectorEmitsExpectedMetrics(t *testing.T) {
 	body := rec.Body.String()
 
 	wantSubstrings := []string{
-		`opercia_active_users{window="5m"} 7`,
-		`opercia_active_workspaces{window="5m"} 3`,
-		`opercia_agent_task_queued{source="chat"} 5`,
-		`opercia_agent_task_queued{source="issue"} 2`,
+		`operica_active_users{window="5m"} 7`,
+		`operica_active_workspaces{window="5m"} 3`,
+		`operica_agent_task_queued{source="chat"} 5`,
+		`operica_agent_task_queued{source="issue"} 2`,
 		// Zero series for sources that didn't appear in the snapshot.
-		`opercia_agent_task_queued{source="autopilot"} 0`,
-		`opercia_agent_task_queued{source="other"} 0`,
-		`opercia_agent_task_running{runtime_mode="cloud",source="chat"} 3`,
-		`opercia_agent_task_running{runtime_mode="local",source="issue"} 1`,
-		`opercia_agent_task_stuck_total{source="issue"} 1`,
-		`opercia_runtime_online{provider="claude",runtime_mode="local"} 4`,
-		`opercia_runtime_online{provider="kiro",runtime_mode="cloud"} 2`,
-		`opercia_runtime_heartbeat_age_seconds_count{runtime_mode="local"} 3`,
-		`opercia_runtime_heartbeat_age_seconds_sum{runtime_mode="local"} 45`,
-		`opercia_workspace_total 250`,
+		`operica_agent_task_queued{source="autopilot"} 0`,
+		`operica_agent_task_queued{source="other"} 0`,
+		`operica_agent_task_running{runtime_mode="cloud",source="chat"} 3`,
+		`operica_agent_task_running{runtime_mode="local",source="issue"} 1`,
+		`operica_agent_task_stuck_total{source="issue"} 1`,
+		`operica_runtime_online{provider="claude",runtime_mode="local"} 4`,
+		`operica_runtime_online{provider="kiro",runtime_mode="cloud"} 2`,
+		`operica_runtime_heartbeat_age_seconds_count{runtime_mode="local"} 3`,
+		`operica_runtime_heartbeat_age_seconds_sum{runtime_mode="local"} 45`,
+		`operica_workspace_total 250`,
 	}
 	for _, want := range wantSubstrings {
 		if !strings.Contains(body, want) {
@@ -127,10 +127,10 @@ func TestBusinessSamplerCollectorEmitsExpectedMetrics(t *testing.T) {
 		}
 	}
 	for _, removed := range []string{
-		`opercia_active_users{window="1h"}`,
-		`opercia_active_users{window="24h"}`,
-		`opercia_active_workspaces{window="1h"}`,
-		`opercia_active_workspaces{window="24h"}`,
+		`operica_active_users{window="1h"}`,
+		`operica_active_users{window="24h"}`,
+		`operica_active_workspaces{window="1h"}`,
+		`operica_active_workspaces{window="24h"}`,
 	} {
 		if strings.Contains(body, removed) {
 			t.Errorf("metrics body still exposes removed long DB window %q\nbody:\n%s", removed, body)
@@ -154,7 +154,7 @@ func TestBusinessSamplerSelfIntrospectionHistogramIsExposed(t *testing.T) {
 	rec := httptest.NewRecorder()
 	NewHandler(registry).ServeHTTP(rec, httptest.NewRequest(http.MethodGet, "/metrics", nil))
 	body := rec.Body.String()
-	if !strings.Contains(body, `opercia_business_sampler_query_seconds_count{name="active_users"} 1`) {
+	if !strings.Contains(body, `operica_business_sampler_query_seconds_count{name="active_users"} 1`) {
 		t.Fatalf("query duration histogram missing\n%s", body)
 	}
 }
@@ -223,14 +223,14 @@ func TestBusinessSamplerCollectorBoundedCardinality(t *testing.T) {
 	registry := prometheus.NewRegistry()
 	registry.MustRegister(c.Collectors()...)
 
-	if got := testutil.CollectAndCount(c, "opercia_agent_task_queued"); got != len(knownSourceLabels()) {
+	if got := testutil.CollectAndCount(c, "operica_agent_task_queued"); got != len(knownSourceLabels()) {
 		t.Fatalf("agent_task_queued series = %d, want %d", got, len(knownSourceLabels()))
 	}
 	expectedRunning := len(knownSourceLabels()) * len(knownRuntimeModeLabels())
-	if got := testutil.CollectAndCount(c, "opercia_agent_task_running"); got != expectedRunning {
+	if got := testutil.CollectAndCount(c, "operica_agent_task_running"); got != expectedRunning {
 		t.Fatalf("agent_task_running series = %d, want %d", got, expectedRunning)
 	}
-	if got := testutil.CollectAndCount(c, "opercia_runtime_online"); got != 1 {
+	if got := testutil.CollectAndCount(c, "operica_runtime_online"); got != 1 {
 		t.Fatalf("runtime_online series = %d, want 1 (collapsed by normalizers)", got)
 	}
 }
@@ -247,10 +247,10 @@ func TestBusinessSamplerCollectorDisabledWithoutOptions(t *testing.T) {
 	NewHandler(registry.Gatherer).ServeHTTP(rec, httptest.NewRequest(http.MethodGet, "/metrics", nil))
 	body := rec.Body.String()
 	for _, forbidden := range []string{
-		"opercia_active_users",
-		"opercia_agent_task_queued",
-		"opercia_runtime_online",
-		"opercia_business_sampler_query_seconds",
+		"operica_active_users",
+		"operica_agent_task_queued",
+		"operica_runtime_online",
+		"operica_business_sampler_query_seconds",
 	} {
 		if strings.Contains(body, forbidden) {
 			t.Errorf("/metrics leaked sampler family %q when sampler disabled", forbidden)

@@ -1,7 +1,7 @@
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 
 export const githubUrl = "https://github.com/JTBlink/operica";
-export const twitterUrl = "https://x.com/OperciaAI";
+export const twitterUrl = "https://x.com/OpericaAI";
 export const discordUrl = "https://discord.gg/W8gYBn226t";
 
 export function GitHubMark({ className }: { className?: string }) {

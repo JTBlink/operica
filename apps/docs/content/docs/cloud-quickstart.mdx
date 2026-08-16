@@ -6,12 +6,12 @@ description: Connect a computer, create your first agent, and have it complete i
 import { Callout } from "fumadocs-ui/components/callout";
 
 <Callout type="info">
-Before an agent can execute, the computer that runs it needs at least one [supported AI coding tool](/providers) installed and signed in — for example Claude Code, Codex, or Cursor. Opercia does not ship these tools.
+Before an agent can execute, the computer that runs it needs at least one [supported AI coding tool](/providers) installed and signed in — for example Claude Code, Codex, or Cursor. Operica does not ship these tools.
 </Callout>
 
 ## 1. Sign in and open your workspace
 
-Sign in on the web ([opercia.ai](https://opercia.ai)) or with [Opercia Desktop](https://opercia.ai/download). Email verification codes and Google are both supported.
+Sign in on the web ([operica.ai](https://operica.ai)) or with [Operica Desktop](https://operica.ai/download). Email verification codes and Google are both supported.
 
 - **Desktop**: can connect this computer automatically.
 - **Web**: connect from the command line in the next step.
@@ -27,17 +27,17 @@ Agents execute work on the computers you connect. Open **Configure → Runtimes*
 
   ```bash
   curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash
-  opercia setup
+  operica setup
   ```
 
   **Windows PowerShell**
 
   ```powershell
   irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex
-  opercia setup
+  operica setup
   ```
 
-  `opercia setup` opens a browser to complete sign-in, then leaves the daemon running in the background. Once the daemon is online, the dialog usually detects the computer within a minute.
+  `operica setup` opens a browser to complete sign-in, then leaves the daemon running in the background. Once the daemon is online, the dialog usually detects the computer within a minute.
 
 **Success check**: an online computer appears in the runtime list.
 
@@ -66,9 +66,9 @@ Click **New Issue** at the top of the sidebar (or press `C`). In the default age
 
 1. Under **Created by**, select the agent you just created.
 2. Describe the work in a sentence or two, for example "Explain how this workspace can be used."
-3. Submit. Opercia creates the issue, sets the agent as the assignee, and starts executing immediately.
+3. Submit. Operica creates the issue, sets the agent as the assignee, and starts executing immediately.
 
-![New issue dialog in agent mode: Created by set to Opercia Assistant](/images/docs/quickstart-new-issue.png)
+![New issue dialog in agent mode: Created by set to Operica Assistant](/images/docs/quickstart-new-issue.png)
 
 ## 5. Watch progress and results
 
@@ -82,14 +82,14 @@ After submitting, open the issue: the execution log shows the run status, and th
 
 | Symptom | Check first |
 |---|---|
-| No runtime found | Confirm the AI coding tool is installed and runs in a terminal. On Desktop, click **Refresh**; on the CLI path, rerun `opercia setup`. |
-| Runtime shows offline | Keep Desktop open; on the CLI path, run `opercia daemon status`, and `opercia daemon start` if it is not running. |
+| No runtime found | Confirm the AI coding tool is installed and runs in a terminal. On Desktop, click **Refresh**; on the CLI path, rerun `operica setup`. |
+| Runtime shows offline | Keep Desktop open; on the CLI path, run `operica daemon status`, and `operica daemon start` if it is not running. |
 | Issue stays queued | Confirm the runtime the agent uses is online. When a runtime hits its concurrency limit, new tasks keep queueing. |
 
 For more cases, see [Troubleshooting](/troubleshooting).
 
 ## Next steps
 
-- [Core concepts](/concepts) — meet all of Opercia's core objects in three minutes.
-- [How Opercia works](/how-opercia-works) — how issues, agents, runtimes, and each run relate.
+- [Core concepts](/concepts) — meet all of Operica's core objects in three minutes.
+- [How Operica works](/how-operica-works) — how issues, agents, runtimes, and each run relate.
 - [Put agents to work](/triggering-agents) — beyond assignment: @-mentions, chat, and Autopilots.

@@ -3,16 +3,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   bucketDiagnosticPath,
   setDiagnosticRoute,
-} from "@opercia/core/diagnostics";
+} from "@operica/core/diagnostics";
 import {
   NavigationProvider,
   type LinkClickIntent,
   type NavigationAdapter,
-} from "@opercia/views/navigation";
+} from "@operica/views/navigation";
 import { parseIssueWindowPath } from "../../../shared/issue-window";
 
 /**
- * Answer the `opercia:navigate` event inside a dedicated issue window (MUL-5208).
+ * Answer the `operica:navigate` event inside a dedicated issue window (MUL-5208).
  *
  * The event is what a link in content (comment, description) fires once it
  * resolves to an in-app destination, including an absolute URL on this
@@ -55,8 +55,8 @@ function useContentLinkHandler(
         `${runtimeConfig.config.appUrl}${path}`,
       );
     };
-    window.addEventListener("opercia:navigate", handler);
-    return () => window.removeEventListener("opercia:navigate", handler);
+    window.addEventListener("operica:navigate", handler);
+    return () => window.removeEventListener("operica:navigate", handler);
   }, [navigate, runtimeConfig]);
 }
 

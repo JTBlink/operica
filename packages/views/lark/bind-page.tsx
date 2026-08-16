@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { Button } from "@opercia/ui/components/ui/button";
-import { api } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { Button } from "@operica/ui/components/ui/button";
+import { api } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
 import { AppLink } from "../navigation";
 import { useT } from "../i18n";
 
@@ -17,7 +17,7 @@ type RedeemState =
 
 // LarkBindPage is the destination the Bot's "you need to bind" reply
 // card points at. The user lands here logged out OR logged in; we
-// require auth before redeeming because the redeemer's Opercia
+// require auth before redeeming because the redeemer's Operica
 // identity is taken from the session (the token alone never proves
 // who is binding — see lark.BindingTokenService.RedeemAndBind).
 //

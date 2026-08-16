@@ -9,7 +9,7 @@ const navigateActiveSession = vi.fn();
 
 let activeWorkspaceSlug: string | null = "acme";
 
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: {
     getState: () => ({ open: openModal }),
   },

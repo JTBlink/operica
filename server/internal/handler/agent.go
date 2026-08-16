@@ -13,9 +13,6 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5/pgconn"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/analytics"
 	"github.com/JTBlink/operica/server/internal/attribution"
 	"github.com/JTBlink/operica/server/internal/logger"
@@ -26,6 +23,9 @@ import (
 	"github.com/JTBlink/operica/server/pkg/agent"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5/pgconn"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // Mirrors AGENT_DESCRIPTION_MAX_LENGTH in packages/core/agents/constants.ts
@@ -55,7 +55,7 @@ type AgentResponse struct {
 	Instructions string `json:"instructions"`
 	// SystemKey identifies a product-defined agent (e.g. "mika"). Empty for
 	// every user- or template-created agent. The UI keys "this is maintained
-	// by Opercia" off this rather than off the display name, which owners may
+	// by Operica" off this rather than off the display name, which owners may
 	// change.
 	SystemKey string `json:"system_key,omitempty"`
 	// SystemInstructions is the read-only product half of a system agent's
@@ -359,11 +359,11 @@ type AgentTaskResponse struct {
 	NewCommentCount          int                    `json:"new_comment_count,omitempty"`           // trigger-thread comments since last run; excludes injected trigger + own comments; omitempty so old daemons ignore it
 	NewCommentsSince         string                 `json:"new_comments_since,omitempty"`          // RFC3339 anchor (last run's started_at) the count is measured from; omitempty so old daemons ignore it
 	ChatSessionID            string                 `json:"chat_session_id,omitempty"`             // non-empty for chat tasks
-	ChatChannelType          string                 `json:"chat_channel_type,omitempty"`           // "slack" when the chat session is backed by an IM channel; empty for a web-only chat. Makes the agent channel-aware (read history from the channel, not Opercia)
+	ChatChannelType          string                 `json:"chat_channel_type,omitempty"`           // "slack" when the chat session is backed by an IM channel; empty for a web-only chat. Makes the agent channel-aware (read history from the channel, not Operica)
 	ChatType                 string                 `json:"chat_type,omitempty"`                   // channel_chat_session_binding.chat_type — "group" for a shared room, "p2p" for a 1:1 with the bot. Lets the per-turn prompt tell the agent who else can read its replies; empty for a web-only chat
-	ChatInThread             bool                   `json:"chat_in_thread,omitempty"`              // true when the latest @mention was a thread reply; tells the agent to start with `opercia chat thread` vs `opercia chat history`
+	ChatInThread             bool                   `json:"chat_in_thread,omitempty"`              // true when the latest @mention was a thread reply; tells the agent to start with `operica chat thread` vs `operica chat history`
 	ChatMessage              string                 `json:"chat_message,omitempty"`                // user message for chat tasks
-	ChatMessageAttachments   []ChatAttachmentMeta   `json:"chat_message_attachments,omitempty"`    // attachments on the user message — agent calls `opercia attachment download <id>` per entry
+	ChatMessageAttachments   []ChatAttachmentMeta   `json:"chat_message_attachments,omitempty"`    // attachments on the user message — agent calls `operica attachment download <id>` per entry
 	ChatIntro                bool                   `json:"chat_intro,omitempty"`                  // legacy compatibility for historical is_agent_intro sessions; new agent creation no longer creates these chats
 	AutopilotRunID           string                 `json:"autopilot_run_id,omitempty"`            // non-empty for autopilot-spawned tasks
 	AutopilotID              string                 `json:"autopilot_id,omitempty"`                // autopilot that spawned this task
@@ -399,7 +399,7 @@ type AgentTaskResponse struct {
 	// daemon emits these into the brief under `## Task Initiator` so a
 	// workspace-visible, multi-user agent can attribute the request and apply
 	// per-person privacy / access rules instead of seeing every requester as
-	// the owner. The agent's effective Opercia credentials stay owner-scoped —
+	// the owner. The agent's effective Operica credentials stay owner-scoped —
 	// this is an attested identity, not a credential. See MUL-2645.
 	InitiatorType  string `json:"initiator_type,omitempty"`  // "member" or "agent"
 	InitiatorID    string `json:"initiator_id,omitempty"`    // user UUID (member) or agent UUID
@@ -424,7 +424,7 @@ type AgentTaskResponse struct {
 	// free. omitempty keeps both off the wire.
 	Usage []TaskUsageData `json:"usage,omitempty"`
 	// AuthToken is the task-scoped `mat_` token the daemon must inject as
-	// OPERCIA_TOKEN in the agent process environment. The server binds it to
+	// OPERICA_TOKEN in the agent process environment. The server binds it to
 	// this (agent_id, task_id) pair at claim time and treats any request
 	// authenticated with it as actor=agent, regardless of headers — so the
 	// agent process cannot use it to read another agent's secrets via the
@@ -572,7 +572,7 @@ func attributionsOf(resps []AgentTaskResponse) []*TaskAttribution {
 
 // ChatAttachmentMeta is the structured attachment metadata embedded in
 // claim responses for chat tasks. The agent uses these to run
-// `opercia attachment download <id>` rather than guessing from the
+// `operica attachment download <id>` rather than guessing from the
 // markdown URL (which is signed and 30-min expiring on private CDN).
 // The mirror struct on the daemon side lives in internal/daemon/types.go
 // and uses the same JSON field names.
@@ -1541,7 +1541,7 @@ func (h *Handler) UpdateAgent(w http.ResponseWriter, r *http.Request) {
 	// workspace owner/admin, denies agent actors, and writes a queryable
 	// audit row.
 	if _, ok := rawFields["custom_env"]; ok {
-		writeError(w, http.StatusBadRequest, "custom_env is no longer accepted on this endpoint; use PUT /api/agents/{id}/env (or `opercia agent env set`)")
+		writeError(w, http.StatusBadRequest, "custom_env is no longer accepted on this endpoint; use PUT /api/agents/{id}/env (or `operica agent env set`)")
 		return
 	}
 
@@ -2016,7 +2016,7 @@ func (h *Handler) ArchiveAgent(w http.ResponseWriter, r *http.Request) {
 	// the bootstrap endpoint, since its lookup skips archived rows but the
 	// unique index does not.
 	if agent.SystemKey.Valid && agent.SystemKey.String != "" {
-		writeError(w, http.StatusBadRequest, "this agent is built into Opercia and cannot be archived")
+		writeError(w, http.StatusBadRequest, "this agent is built into Operica and cannot be archived")
 		return
 	}
 

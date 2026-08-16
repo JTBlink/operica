@@ -14,7 +14,7 @@ type EvalContext struct {
 	// the framework never parses it.
 	UserID string
 
-	// WorkspaceID identifies the opercia workspace that issued the
+	// WorkspaceID identifies the operica workspace that issued the
 	// request. Useful for workspace-scoped rollouts.
 	WorkspaceID string
 

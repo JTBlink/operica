@@ -2,14 +2,14 @@ import * as React from 'react'
 import { codeToHtml, bundledLanguages, type BundledLanguage } from 'shiki'
 import { Copy, Check } from "lucide-react"
 import { useTranslation } from "react-i18next"
-import { Button } from "@opercia/ui/components/ui/button"
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip"
-import { cn } from '@opercia/ui/lib/utils'
+import { Button } from "@operica/ui/components/ui/button"
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip"
+import { cn } from '@operica/ui/lib/utils'
 import { copyText } from '../lib/clipboard'
 import {
   CODE_LIGATURE_CLASS,
   CODE_LIGATURE_DESCENDANT_CLASS,
-} from '@opercia/ui/lib/code-style'
+} from '@operica/ui/lib/code-style'
 
 export interface CodeBlockProps {
   code: string

@@ -1,4 +1,4 @@
-import type { RuntimeModel } from "@opercia/core/types";
+import type { RuntimeModel } from "@operica/core/types";
 
 /**
  * The exact per-model catalog for the agent's runtime, or `null` when it is not

@@ -1,6 +1,6 @@
-import type { LocaleAdapter, SupportedLocale } from "@opercia/core/i18n";
+import type { LocaleAdapter, SupportedLocale } from "@operica/core/i18n";
 
-const STORAGE_KEY = "opercia-locale";
+const STORAGE_KEY = "operica-locale";
 
 // Desktop adapter:
 //   - User choice: localStorage (set by Settings switcher).

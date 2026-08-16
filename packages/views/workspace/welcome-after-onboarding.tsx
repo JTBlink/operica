@@ -3,20 +3,20 @@
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { api } from "@opercia/core/api";
-import { useAuthStore } from "@opercia/core/auth";
-import { issueKeys } from "@opercia/core/issues/queries";
-import { useWelcomeStore } from "@opercia/core/onboarding";
-import { paths, useCurrentWorkspace } from "@opercia/core/paths";
-import type { CreateIssueRequest, Issue } from "@opercia/core/types";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import { Button } from "@opercia/ui/components/ui/button";
+import { api } from "@operica/core/api";
+import { useAuthStore } from "@operica/core/auth";
+import { issueKeys } from "@operica/core/issues/queries";
+import { useWelcomeStore } from "@operica/core/onboarding";
+import { paths, useCurrentWorkspace } from "@operica/core/paths";
+import type { CreateIssueRequest, Issue } from "@operica/core/types";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import { useT } from "../i18n";
 import { useNavigation } from "../navigation";
 import {

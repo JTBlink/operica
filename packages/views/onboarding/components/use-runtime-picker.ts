@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useWSEvent } from "@opercia/core/realtime";
+import { useWSEvent } from "@operica/core/realtime";
 import {
   runtimeKeys,
   runtimeListOptions,
-} from "@opercia/core/runtimes/queries";
-import type { AgentRuntime } from "@opercia/core/types";
+} from "@operica/core/runtimes/queries";
+import type { AgentRuntime } from "@operica/core/types";
 
 /**
  * Step 3's runtime data layer, shared by Desktop (`StepRuntimeConnect`)

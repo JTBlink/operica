@@ -10,13 +10,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	composio "github.com/JTBlink/operica/server/internal/integrations/composio"
 	"github.com/JTBlink/operica/server/internal/util"
 	sdk "github.com/JTBlink/operica/server/pkg/composio"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const composioTestUserID = "22222222-2222-2222-2222-222222222222"
@@ -139,8 +139,8 @@ func newComposioTestHandler(t *testing.T, sdkFake composio.SDK, store composio.S
 	t.Helper()
 	svc, err := composio.NewService(sdkFake, store, composio.Config{
 		StateSecret:     []byte("handler-test-secret"),
-		CallbackBaseURL: "https://opercia.ai",
-		FrontendBaseURL: "https://opercia.ai",
+		CallbackBaseURL: "https://operica.ai",
+		FrontendBaseURL: "https://operica.ai",
 	})
 	if err != nil {
 		t.Fatalf("NewService: %v", err)

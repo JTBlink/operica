@@ -19,28 +19,28 @@ import type {
   RuntimeLocalSkillImportConflict,
   RuntimeLocalSkillSummary,
   Skill,
-} from "@opercia/core/types";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
+} from "@operica/core/types";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
 import {
   runtimeDisplayLabel,
   runtimeListOptions,
   runtimeLocalSkillsKeys,
   runtimeLocalSkillsOptions,
   resolveRuntimeLocalSkillImport,
-} from "@opercia/core/runtimes";
+} from "@operica/core/runtimes";
 import {
   memberListOptions,
   skillDetailOptions,
   workspaceKeys,
-} from "@opercia/core/workspace/queries";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Badge } from "@opercia/ui/components/ui/badge";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Progress } from "@opercia/ui/components/ui/progress";
-import { Textarea } from "@opercia/ui/components/ui/textarea";
+} from "@operica/core/workspace/queries";
+import { Button } from "@operica/ui/components/ui/button";
+import { Badge } from "@operica/ui/components/ui/badge";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
+import { Progress } from "@operica/ui/components/ui/progress";
+import { Textarea } from "@operica/ui/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -49,13 +49,13 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@opercia/ui/components/ui/select";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { useScrollFade } from "@opercia/ui/hooks/use-scroll-fade";
+} from "@operica/ui/components/ui/select";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { useScrollFade } from "@operica/ui/hooks/use-scroll-fade";
 import {
   UI_EASE_OUT,
   UI_MOTION_DURATION,
-} from "@opercia/ui/lib/motion";
+} from "@operica/ui/lib/motion";
 import { useT } from "../../i18n";
 import { HighlightText } from "../../search/highlight-text";
 import { ProviderLogo } from "../../runtimes/components/provider-logo";

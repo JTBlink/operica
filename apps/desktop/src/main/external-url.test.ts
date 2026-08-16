@@ -9,7 +9,7 @@ import { isSafeExternalHttpUrl, openExternalSafely } from "./external-url";
 
 describe("isSafeExternalHttpUrl", () => {
   it("allows http and https URLs", () => {
-    expect(isSafeExternalHttpUrl("https://opercia.ai")).toBe(true);
+    expect(isSafeExternalHttpUrl("https://operica.ai")).toBe(true);
     expect(isSafeExternalHttpUrl("http://localhost:3000/auth")).toBe(true);
   });
 
@@ -60,8 +60,8 @@ describe("openExternalSafely", () => {
   });
 
   it("forwards http/https URLs to shell.openExternal", () => {
-    openExternalSafely("https://opercia.ai");
-    expect(shell.openExternal).toHaveBeenCalledWith("https://opercia.ai");
+    openExternalSafely("https://operica.ai");
+    expect(shell.openExternal).toHaveBeenCalledWith("https://operica.ai");
   });
 
   it("does not call shell.openExternal for rejected schemes", () => {

@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-table";
 import * as React from "react";
 import { describe, expect, it, vi } from "vitest";
-import { DataTable } from "@opercia/ui/components/ui/data-table";
+import { DataTable } from "@operica/ui/components/ui/data-table";
 
 type Row = { status: string; owner: string };
 

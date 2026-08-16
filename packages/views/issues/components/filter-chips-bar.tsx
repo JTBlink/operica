@@ -12,23 +12,23 @@ import {
   X,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@opercia/ui/components/ui/button";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { memberListOptions, agentListOptions, squadListOptions } from "@opercia/core/workspace/queries";
-import { projectListOptions } from "@opercia/core/projects/queries";
-import { labelListOptions } from "@opercia/core/labels/queries";
-import { propertyListOptions } from "@opercia/core/properties";
+import { Button } from "@operica/ui/components/ui/button";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { memberListOptions, agentListOptions, squadListOptions } from "@operica/core/workspace/queries";
+import { projectListOptions } from "@operica/core/projects/queries";
+import { labelListOptions } from "@operica/core/labels/queries";
+import { propertyListOptions } from "@operica/core/properties";
 import {
   type ActorFilterValue,
   type FilterDimension,
   type FilterSnapshot,
   type IssueDateFilter,
-} from "@opercia/core/issues/stores/view-store";
+} from "@operica/core/issues/stores/view-store";
 import {
   actorFilterKey,
   type IssueViewBaseline,
-} from "@opercia/core/issue-views/baseline";
-import { useViewStore, useViewStoreApi } from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/core/issue-views/baseline";
+import { useViewStore, useViewStoreApi } from "@operica/core/issues/stores/view-store-context";
 import { StatusIcon } from "./status-icon";
 import { PriorityIcon } from "./priority-icon";
 import { ActorAvatar } from "../../common/actor-avatar";

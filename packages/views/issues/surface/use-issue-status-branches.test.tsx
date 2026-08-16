@@ -5,14 +5,14 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@opercia/core/api";
-import type { ApiClient } from "@opercia/core/api/client";
+import { setApiInstance } from "@operica/core/api";
+import type { ApiClient } from "@operica/core/api/client";
 import type {
   Issue,
   IssueStatus,
   IssueTableQuerySpec,
   IssueTableRowsRequest,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { useIssueStatusBranches } from "./use-issue-status-branches";
 
 function makeIssue(id: string): Issue {

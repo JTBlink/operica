@@ -1,7 +1,7 @@
 "use client";
 
-import { useIsMobile } from "@opercia/ui/hooks/use-mobile";
-import { useCommentComposerStore } from "@opercia/core/issues/stores";
+import { useIsMobile } from "@operica/ui/hooks/use-mobile";
+import { useCommentComposerStore } from "@operica/core/issues/stores";
 
 /**
  * Whether the bottom comment composer is pinned to the scroll viewport.

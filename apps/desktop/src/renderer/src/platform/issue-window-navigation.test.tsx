@@ -1,7 +1,7 @@
 /**
  * MUL-5208 — a dedicated issue window must answer content-link navigation.
  *
- * `opercia:navigate` is fired by the shared link handler for every in-app
+ * `operica:navigate` is fired by the shared link handler for every in-app
  * destination, including an absolute URL on this deployment's own origin. Only
  * the main shell listened for it, so a link clicked inside an issue window did
  * nothing at all. This window hosts exactly one issue route: another issue opens
@@ -13,7 +13,7 @@ import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 
 const APP_URL = "https://app.example";
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useCurrentWorkspace: () => ({ slug: "acme", id: "ws-1" }),
 }));
 
@@ -63,7 +63,7 @@ function navigate(path: string) {
   // state update it triggers.
   act(() => {
     window.dispatchEvent(
-      new CustomEvent("opercia:navigate", { detail: { path } }),
+      new CustomEvent("operica:navigate", { detail: { path } }),
     );
   });
 }

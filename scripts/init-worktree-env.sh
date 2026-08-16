@@ -11,13 +11,13 @@ fi
 worktree_name="${WORKTREE_NAME:-$(basename "$PWD")}"
 slug="$(printf '%s' "$worktree_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/_/g; s/__*/_/g; s/^_//; s/_$//')"
 if [ -z "$slug" ]; then
-  slug="opercia"
+  slug="operica"
 fi
 
 hash_value="$(printf '%s' "$PWD" | cksum | awk '{print $1}')"
 offset=$((hash_value % 1000))
 
-postgres_db="opercia_${slug}_${offset}"
+postgres_db="operica_${slug}_${offset}"
 postgres_port=5432
 backend_port=$((18080 + offset))
 frontend_port=$((13000 + offset))
@@ -25,17 +25,17 @@ frontend_origin="http://localhost:${frontend_port}"
 
 cat > "$ENV_FILE" <<EOF
 POSTGRES_DB=${postgres_db}
-POSTGRES_USER=opercia
-POSTGRES_PASSWORD=opercia
+POSTGRES_USER=operica
+POSTGRES_PASSWORD=operica
 POSTGRES_PORT=${postgres_port}
-DATABASE_URL=postgres://opercia:opercia@localhost:${postgres_port}/${postgres_db}?sslmode=disable
+DATABASE_URL=postgres://operica:operica@localhost:${postgres_port}/${postgres_db}?sslmode=disable
 
 PORT=${backend_port}
 JWT_SECRET=change-me-in-production
-OPERCIA_DEV_VERIFICATION_CODE=888888
-OPERCIA_SERVER_URL=ws://localhost:${backend_port}/ws
-OPERCIA_PUBLIC_URL=http://localhost:${backend_port}
-OPERCIA_APP_URL=${frontend_origin}
+OPERICA_DEV_VERIFICATION_CODE=888888
+OPERICA_SERVER_URL=ws://localhost:${backend_port}/ws
+OPERICA_PUBLIC_URL=http://localhost:${backend_port}
+OPERICA_APP_URL=${frontend_origin}
 
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=

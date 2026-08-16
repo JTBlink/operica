@@ -1,4 +1,4 @@
-export const ISSUE_WINDOW_ARGUMENT_PREFIX = "--opercia-issue-window=";
+export const ISSUE_WINDOW_ARGUMENT_PREFIX = "--operica-issue-window=";
 
 const MAX_ISSUE_WINDOW_PATH_LENGTH = 2_048;
 const MAX_ISSUE_WINDOW_TITLE_LENGTH = 256;
@@ -59,11 +59,11 @@ export function parseIssueWindowPath(
 
   let url: URL;
   try {
-    url = new URL(value, "https://desktop.opercia.invalid");
+    url = new URL(value, "https://desktop.operica.invalid");
   } catch {
     return null;
   }
-  if (url.origin !== "https://desktop.opercia.invalid") return null;
+  if (url.origin !== "https://desktop.operica.invalid") return null;
 
   const segments = url.pathname.split("/");
   if (segments.length !== 4 || segments[0] !== "" || segments[2] !== "issues") {

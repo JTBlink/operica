@@ -3,9 +3,9 @@
 import { useCallback, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { Virtuoso, type VirtuosoHandle } from "react-virtuoso";
 import { Archive, ChevronRight, Inbox } from "lucide-react";
-import { isEditableShortcutTarget } from "@opercia/core/shortcuts";
-import { isImeComposing } from "@opercia/core/utils";
-import type { InboxItem } from "@opercia/core/types";
+import { isEditableShortcutTarget } from "@operica/core/shortcuts";
+import { isImeComposing } from "@operica/core/utils";
+import type { InboxItem } from "@operica/core/types";
 import type { InboxView } from "./inbox-view";
 import { InboxListItem } from "./inbox-list-item";
 import { VirtuosoSeed, VIRTUOSO_SEED_COUNT } from "../../common/virtuoso-seed";

@@ -2,8 +2,8 @@
 
 import React, { useMemo, useState } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
+import { Button } from "@operica/ui/components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip";
 import { ActorAvatar } from "../../common/actor-avatar";
 import {
   PickerEmpty,
@@ -12,8 +12,8 @@ import {
   PropertyPicker,
 } from "../../issues/components/pickers/property-picker";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
-import type { Agent } from "@opercia/core/types";
-import { isAgentRuntimeBound } from "@opercia/core/agents";
+import type { Agent } from "@operica/core/types";
+import { isAgentRuntimeBound } from "@operica/core/agents";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 

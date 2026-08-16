@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { AgentRuntime } from "@opercia/core/types";
+import type { AgentRuntime } from "@operica/core/types";
 import { resolveRuntimeSettingsTarget } from "./runtime-settings-page";
 
 function runtime(

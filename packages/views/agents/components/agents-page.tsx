@@ -13,7 +13,7 @@ import type {
   Agent,
   AgentRuntime,
   MemberWithUser,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   type AgentActivity,
   agentRunCounts30dOptions,
@@ -23,7 +23,7 @@ import {
   useWorkspacePresenceMap,
   VISIBILITY_TOOLTIP,
   type AgentPresenceDetail,
-} from "@opercia/core/agents";
+} from "@operica/core/agents";
 import {
   type AgentListFilters,
   useAgentsViewStore,
@@ -32,17 +32,17 @@ import {
   type AgentColumnKey,
   type AgentsScope,
   type AgentSortField,
-} from "@opercia/core/agents/stores";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
+} from "@operica/core/agents/stores";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
 import {
   agentListOptions,
   memberListOptions,
-} from "@opercia/core/workspace/queries";
-import { runtimeDisplayLabel, runtimeListOptions } from "@opercia/core/runtimes";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
+} from "@operica/core/workspace/queries";
+import { runtimeDisplayLabel, runtimeListOptions } from "@operica/core/runtimes";
+import { Button } from "@operica/ui/components/ui/button";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
 import {
   LIST_GRID_BOTTOM_CLEARANCE,
   ListGrid,
@@ -52,13 +52,13 @@ import {
   ListGridHeaderCell,
   ListGridRow,
   type ListGridSortDirection,
-} from "@opercia/ui/components/ui/list-grid";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+} from "@operica/ui/components/ui/list-grid";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
+} from "@operica/ui/components/ui/tooltip";
 import { useNavigation, useRowLink } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { ProviderLogo } from "../../runtimes/components/provider-logo";
@@ -227,11 +227,11 @@ export function rowMatchesFilters(
 
 /**
  * Bulk-access dialog confirm-button enablement is centralized in
- * `@opercia/core/agents` as `isAccessChangeReady` (MUL-3963). The dialog
+ * `@operica/core/agents` as `isAccessChangeReady` (MUL-3963). The dialog
  * consumes it; the picker also gates its internal Save button on the same
  * predicate (its own Save button is hidden via `hideFooter` in the bulk flow).
  */
-import { isAccessChangeReady } from "@opercia/core/agents";
+import { isAccessChangeReady } from "@operica/core/agents";
 import { AgentBatchToolbar } from "./agent-batch-toolbar";
 export { isAccessChangeReady };
 
@@ -263,7 +263,7 @@ function PageHeaderBar({
       count={totalCount}
       description={t(($) => $.page.tagline)}
       learnMore={{
-        href: "https://opercia.ai/docs/agents",
+        href: "https://operica.ai/docs/agents",
         label: t(($) => $.page.learn_more),
       }}
       actions={

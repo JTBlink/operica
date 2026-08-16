@@ -2,22 +2,22 @@
 
 import { useCallback, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import type { IssueSubscriber } from "@opercia/core/types";
+import type { IssueSubscriber } from "@operica/core/types";
 import type {
   SubscriberAddedPayload,
   SubscriberRemovedPayload,
-} from "@opercia/core/types";
-import { issueSubscribersOptions, issueKeys } from "@opercia/core/issues/queries";
+} from "@operica/core/types";
+import { issueSubscribersOptions, issueKeys } from "@operica/core/issues/queries";
 import {
   useToggleIssueSubscriber,
   useUnsubscribeFromIssueSubtree,
-} from "@opercia/core/issues/mutations";
-import { useWSEvent, useWSReconnect } from "@opercia/core/realtime";
-// Imported from the defining module, not the "@opercia/core/api" barrel: the
+} from "@operica/core/issues/mutations";
+import { useWSEvent, useWSReconnect } from "@operica/core/realtime";
+// Imported from the defining module, not the "@operica/core/api" barrel: the
 // barrel drags the client singleton and ws-client into the module graph of
 // every consumer of this hook, which measurably slowed test startup and tipped
 // an unrelated timing-sensitive suite over its waitFor budget.
-import { ApiError } from "@opercia/core/api/client";
+import { ApiError } from "@operica/core/api/client";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 

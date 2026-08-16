@@ -1,11 +1,11 @@
 ---
 title: 使用 CLI
-description: 安装并登录 Opercia CLI，在终端中管理工作区、issue、智能体和运行时。
+description: 安装并登录 Operica CLI，在终端中管理工作区、issue、智能体和运行时。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Opercia CLI 既负责连接本机运行时，也可以在终端中管理工作区、issue、智能体和自动化。这里介绍常用路径；当前版本支持的参数始终以命令自身的 `--help` 为准。
+Operica CLI 既负责连接本机运行时，也可以在终端中管理工作区、issue、智能体和自动化。这里介绍常用路径；当前版本支持的参数始终以命令自身的 `--help` 为准。
 
 ## 安装
 
@@ -18,7 +18,7 @@ curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/instal
 安装了 Homebrew 时也可以运行：
 
 ```bash
-brew install opercia-ai/tap/opercia
+brew install operica-ai/tap/operica
 ```
 
 **Windows PowerShell**
@@ -30,21 +30,21 @@ irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 |
 确认安装成功：
 
 ```bash
-opercia version
+operica version
 ```
 
 ## 第一次连接
 
-连接 Opercia Cloud：
+连接 Operica Cloud：
 
 ```bash
-opercia setup
+operica setup
 ```
 
 连接自托管实例：
 
 ```bash
-opercia setup self-host \
+operica setup self-host \
   --server-url https://api.example.com \
   --app-url https://app.example.com
 ```
@@ -52,14 +52,14 @@ opercia setup self-host \
 `setup` 会保存服务地址、打开浏览器完成登录，并启动守护进程。完成后检查：
 
 ```bash
-opercia auth status
-opercia daemon status
+operica auth status
+operica daemon status
 ```
 
-如果只需要重新登录，不想覆盖其他配置，运行 `opercia login`。没有浏览器的环境可以先在 Web 设置中创建个人访问令牌，再输入：
+如果只需要重新登录，不想覆盖其他配置，运行 `operica login`。没有浏览器的环境可以先在 Web 设置中创建个人访问令牌，再输入：
 
 ```bash
-opercia login --token
+operica login --token
 ```
 
 命令会在终端中提示粘贴令牌，避免把完整值留在 shell history 中。
@@ -69,72 +69,72 @@ opercia login --token
 列出并切换默认工作区：
 
 ```bash
-opercia workspace list
-opercia workspace switch <slug>
+operica workspace list
+operica workspace switch <slug>
 ```
 
-之后的命令会使用这个工作区。单次命令可以通过 `--workspace-id` 临时覆盖，也可以设置 `OPERCIA_WORKSPACE_ID`。
+之后的命令会使用这个工作区。单次命令可以通过 `--workspace-id` 临时覆盖，也可以设置 `OPERICA_WORKSPACE_ID`。
 
 邀请成员：
 
 ```bash
-opercia workspace member invite teammate@example.com
-opercia workspace member invite admin@example.com --role admin
+operica workspace member invite teammate@example.com
+operica workspace member invite admin@example.com --role admin
 ```
 
 ## 常用 issue 操作
 
 ```bash
 # 查看和搜索
-opercia issue list
-opercia issue get MUL-123
-opercia issue search "登录失败"
+operica issue list
+operica issue get MUL-123
+operica issue search "登录失败"
 
 # 创建和修改
-opercia issue create --title "修复登录失败"
-opercia issue status MUL-123 in_progress
-opercia issue assign MUL-123 --to "Backend Agent"
+operica issue create --title "修复登录失败"
+operica issue status MUL-123 in_progress
+operica issue assign MUL-123 --to "Backend Agent"
 
 # 评论和执行记录
-opercia issue comment list MUL-123
-opercia issue comment add MUL-123 --content "请先检查回归测试"
-opercia issue runs MUL-123
+operica issue comment list MUL-123
+operica issue comment add MUL-123 --content "请先检查回归测试"
+operica issue runs MUL-123
 ```
 
 长描述或评论从 stdin 读取，避免处理换行和引号：
 
 ```bash
-opercia issue create --title "升级说明" --description-stdin < notes.md
-opercia issue comment add MUL-123 --content-stdin < review.md
+operica issue create --title "升级说明" --description-stdin < notes.md
+operica issue comment add MUL-123 --content-stdin < review.md
 ```
 
 查看某次执行的消息，或停止 task：
 
 ```bash
-opercia issue run-messages <task-id> --issue MUL-123
-opercia issue cancel-task <task-id> --issue MUL-123
+operica issue run-messages <task-id> --issue MUL-123
+operica issue cancel-task <task-id> --issue MUL-123
 ```
 
 ## 智能体和 skill
 
 ```bash
-opercia agent list
-opercia agent get <agent-id>
-opercia agent create --help
-opercia agent update <agent-id> --help
+operica agent list
+operica agent get <agent-id>
+operica agent create --help
+operica agent update <agent-id> --help
 
-opercia skill list
-opercia skill get <skill-id>
-opercia skill import --url <skill-url>
-opercia agent skills add <agent-id> --skill-ids <skill-id>
+operica skill list
+operica skill get <skill-id>
+operica skill import --url <skill-url>
+operica agent skills add <agent-id> --skill-ids <skill-id>
 ```
 
 导入时遇到同名 skill，默认会停止且不修改现有内容。按意图选择：
 
 ```bash
-opercia skill import --url <skill-url> --on-conflict overwrite
-opercia skill import --url <skill-url> --on-conflict rename
-opercia skill import --url <skill-url> --on-conflict skip
+operica skill import --url <skill-url> --on-conflict overwrite
+operica skill import --url <skill-url> --on-conflict rename
+operica skill import --url <skill-url> --on-conflict skip
 ```
 
 `overwrite` 只允许 skill 的创建者使用，并保留原来的 ID 与智能体绑定关系。
@@ -142,19 +142,19 @@ opercia skill import --url <skill-url> --on-conflict skip
 ## 守护进程和运行时
 
 ```bash
-opercia daemon start
-opercia daemon stop
-opercia daemon restart
-opercia daemon status --output json
-opercia daemon logs --follow
+operica daemon start
+operica daemon stop
+operica daemon restart
+operica daemon status --output json
+operica daemon logs --follow
 
-opercia runtime list
-opercia runtime rename <runtime-id> "Office Mac"
-opercia runtime usage <runtime-id>
-opercia runtime activity <runtime-id>
+operica runtime list
+operica runtime rename <runtime-id> "Office Mac"
+operica runtime usage <runtime-id>
+operica runtime activity <runtime-id>
 ```
 
-删除仍绑定活跃智能体的运行时时，命令默认拒绝。`opercia runtime delete <id> --cascade` 会解绑这些智能体、保留其配置与历史记录，并取消它们的活动 task。
+删除仍绑定活跃智能体的运行时时，命令默认拒绝。`operica runtime delete <id> --cascade` 会解绑这些智能体、保留其配置与历史记录，并取消它们的活动 task。
 
 运行机制和自定义 profile 见[守护进程与运行时](/daemon-runtimes)。
 
@@ -176,7 +176,7 @@ opercia runtime activity <runtime-id>
 | `config` | 查看或修改当前 CLI profile 的本地配置 |
 | `update`、`version` | 更新 CLI 或查看版本 |
 
-`opercia chat` 读取的是**智能体当前正在处理的外部聊天会话**，主要供聊天集成中的智能体使用；它不是用于浏览任意工作区对话的通用命令。
+`operica chat` 读取的是**智能体当前正在处理的外部聊天会话**，主要供聊天集成中的智能体使用；它不是用于浏览任意工作区对话的通用命令。
 
 ## ID 和输出格式
 
@@ -187,38 +187,38 @@ Issue 使用 `MUL-123` 这样的 key 或完整 UUID，不接受 UUID 短前缀�
 许多命令支持结构化输出：
 
 ```bash
-opercia issue list --output json
-opercia agent list --output json
+operica issue list --output json
+operica agent list --output json
 ```
 
-脚本使用 JSON 输出，不解析面向终端的表格。各命令支持的输出格式和分页参数以 `opercia <command> --help` 为准。
+脚本使用 JSON 输出，不解析面向终端的表格。各命令支持的输出格式和分页参数以 `operica <command> --help` 为准。
 
 ## Profile 与配置
 
-默认配置保存在 `~/.opercia/config.json`。使用 `--profile <name>` 可以隔离另一套服务地址、令牌、默认工作区和守护进程状态：
+默认配置保存在 `~/.operica/config.json`。使用 `--profile <name>` 可以隔离另一套服务地址、令牌、默认工作区和守护进程状态：
 
 ```bash
-opercia setup self-host --profile staging \
+operica setup self-host --profile staging \
   --server-url https://api.staging.example.com \
   --app-url https://app.staging.example.com
 
-opercia issue list --profile staging
+operica issue list --profile staging
 ```
 
-命名 profile 保存在 `~/.opercia/profiles/<name>/config.json`。查看当前值：
+命名 profile 保存在 `~/.operica/profiles/<name>/config.json`。查看当前值：
 
 ```bash
-opercia config show
-opercia config show --profile staging
+operica config show
+operica config show --profile staging
 ```
 
 <Callout type="warning">
-CLI 配置文件包含可代表你访问 Opercia 的令牌。不要提交到仓库、上传到日志或与他人共享。
+CLI 配置文件包含可代表你访问 Operica 的令牌。不要提交到仓库、上传到日志或与他人共享。
 </Callout>
 
 ## 命令参考
 
-下表覆盖当前全部顶层命令，按 CLI 自身的分组排列。所有命令都接受全局 flag `--server-url`、`--workspace-id`、`--profile` 和 `--debug`。`--output` 是逐命令注册的 flag，默认格式因命令而异：`list` 类默认表格，`get`、`create` 类多默认 JSON。完整参数以 `opercia <command> --help` 为准。
+下表覆盖当前全部顶层命令，按 CLI 自身的分组排列。所有命令都接受全局 flag `--server-url`、`--workspace-id`、`--profile` 和 `--debug`。`--output` 是逐命令注册的 flag，默认格式因命令而异：`list` 类默认表格，`get`、`create` 类多默认 JSON。完整参数以 `operica <command> --help` 为准。
 
 ### Core
 
@@ -275,7 +275,7 @@ CLI 配置文件包含可代表你访问 Opercia 的令牌。不要提交到仓�
 
 | 命令 | 子命令 | 用途 | 关键 flag |
 | --- | --- | --- | --- |
-| `daemon` | `start` | 启动本机守护进程 | `--foreground`、`--device-name`、`--runtime-name`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` 表示不设上限）、`--max-concurrent-tasks`、`--no-auto-update`；均有对应的 `OPERCIA_*` 环境变量 |
+| `daemon` | `start` | 启动本机守护进程 | `--foreground`、`--device-name`、`--runtime-name`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` 表示不设上限）、`--max-concurrent-tasks`、`--no-auto-update`；均有对应的 `OPERICA_*` 环境变量 |
 | | `stop` / `status` / `restart` | 停止、查看状态、重启（`restart` 与 `start` 同一套 flag） | |
 | | `logs` | 查看守护进程日志 | `--follow`、`--lines` |
 | | `disk-usage` | 查看本机磁盘占用 | `--by-workspace`、`--by-task`、`--top` |

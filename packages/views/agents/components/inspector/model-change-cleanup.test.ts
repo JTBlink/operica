@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { RuntimeModel } from "@opercia/core/types";
+import type { RuntimeModel } from "@operica/core/types";
 import { buildModelChangeUpdate } from "./model-change-cleanup";
 
 const FAST_HIGH: RuntimeModel = {

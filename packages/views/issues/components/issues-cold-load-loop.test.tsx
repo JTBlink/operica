@@ -21,22 +21,22 @@ import type { ReactNode } from "react";
 import { BoardView } from "./board-view";
 import { SwimLaneView } from "./swimlane-view";
 import { IssueContextMenuProvider } from "../actions";
-import { setApiInstance } from "@opercia/core/api";
-import type { ApiClient } from "@opercia/core/api/client";
-import type { Issue } from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import { setApiInstance } from "@operica/core/api";
+import type { ApiClient } from "@operica/core/api/client";
+import type { Issue } from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enIssues from "../../locales/en/issues.json";
 
 const TEST_RESOURCES = { en: { common: enCommon, issues: enIssues } };
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@opercia/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
-    "@opercia/core/paths",
+vi.mock("@operica/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/paths")>(
+    "@operica/core/paths",
   );
   return {
     ...actual,
@@ -47,7 +47,7 @@ vi.mock("@opercia/core/paths", async () => {
 });
 
 const mockAuthUser = { id: "user-1", email: "test@test.com", name: "Test User" };
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: any) => {
       const state = { user: mockAuthUser, isAuthenticated: true };
@@ -71,7 +71,7 @@ vi.mock("../../navigation", () => ({
   NavigationProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
-vi.mock("@opercia/core/issues/config", () => ({
+vi.mock("@operica/core/issues/config", () => ({
   ALL_STATUSES: ["backlog", "todo", "in_progress", "in_review", "done", "blocked", "cancelled"],
   STATUS_ORDER: ["backlog", "todo", "in_progress", "in_review", "done", "blocked", "cancelled"],
   STATUS_CONFIG: {
@@ -94,15 +94,15 @@ vi.mock("@opercia/core/issues/config", () => ({
   },
 }));
 
-vi.mock("@opercia/core/issues/mutations", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@opercia/core/issues/mutations")>();
+vi.mock("@operica/core/issues/mutations", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@operica/core/issues/mutations")>();
   return {
     ...actual,
   };
 });
 
-vi.mock("@opercia/core/properties", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@opercia/core/properties")>();
+vi.mock("@operica/core/properties", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@operica/core/properties")>();
   return {
     ...actual,
     useSetIssueProperty: () => ({ mutate: vi.fn(), mutateAsync: vi.fn() }),
@@ -135,13 +135,13 @@ const mockViewState: Record<string, unknown> = {
   cardPropertyIds: [],
   agentRunningFilter: false,
 };
-vi.mock("@opercia/core/issues/stores/view-store-context", () => ({
+vi.mock("@operica/core/issues/stores/view-store-context", () => ({
   ViewStoreProvider: ({ children }: { children: ReactNode }) => children,
   useViewStore: (selector?: any) => (selector ? selector(mockViewState) : mockViewState),
   useViewStoreApi: () => ({ getState: () => mockViewState, setState: vi.fn(), subscribe: vi.fn() }),
 }));
 
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: Object.assign(
     () => ({ open: vi.fn() }),
     { getState: () => ({ open: vi.fn() }) },

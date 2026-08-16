@@ -2,14 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { Lock, UserMinus } from "lucide-react";
-import type { Agent, IssueAssigneeType, UpdateIssueRequest } from "@opercia/core/types";
+import type { Agent, IssueAssigneeType, UpdateIssueRequest } from "@operica/core/types";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { isAgentRuntimeBound } from "@opercia/core/agents";
-import { canAssignAgentToIssue } from "@opercia/core/permissions";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { memberListOptions, agentListOptions, squadListOptions, assigneeFrequencyOptions } from "@opercia/core/workspace/queries";
+import { useAuthStore } from "@operica/core/auth";
+import { isAgentRuntimeBound } from "@operica/core/agents";
+import { canAssignAgentToIssue } from "@operica/core/permissions";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { memberListOptions, agentListOptions, squadListOptions, assigneeFrequencyOptions } from "@operica/core/workspace/queries";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import { DeferredPopup } from "../../../common/deferred-popup";
 import {

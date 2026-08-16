@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { createRef, useState } from "react";
-import type { Attachment } from "@opercia/core/types";
-import type { UploadResult } from "@opercia/core/hooks/use-file-upload";
+import type { Attachment } from "@operica/core/types";
+import type { UploadResult } from "@operica/core/hooks/use-file-upload";
 
 const mockFocus = vi.hoisted(() => vi.fn());
 const mockSetContent = vi.hoisted(() => vi.fn());
@@ -641,7 +641,7 @@ function makeAttachment(id: string, overrides: Partial<Attachment> = {}): Attach
     filename: `${id}.png`,
     url: `/uploads/${id}.png`,
     download_url: `/api/attachments/${id}/download`,
-    markdown_url: `https://api.opercia.test/api/attachments/${id}/download`,
+    markdown_url: `https://api.operica.test/api/attachments/${id}/download`,
     content_type: "image/png",
     size_bytes: 1,
     created_at: "2026-06-10T00:00:00Z",

@@ -4,8 +4,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { Skill } from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import type { Skill } from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enSkills from "../../locales/en/skills.json";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
@@ -17,8 +17,8 @@ const agentsRef = vi.hoisted(() => ({ current: [] as unknown[] }));
 const membersRef = vi.hoisted(() => ({ current: [] as unknown[] }));
 const canEditRef = vi.hoisted(() => ({ current: true }));
 
-vi.mock("@opercia/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@operica/core/workspace/queries", () => ({
   skillDetailOptions: (wsId: string, id: string) => ({
     queryKey: ["skill", wsId, id],
     queryFn: () => Promise.resolve(skillRef.current),
@@ -37,14 +37,14 @@ vi.mock("@opercia/core/workspace/queries", () => ({
     agents: (wsId: string) => ["agents", wsId],
   },
 }));
-vi.mock("@opercia/core/runtimes", () => ({
+vi.mock("@operica/core/runtimes", () => ({
   runtimeListOptions: (wsId: string) => ({
     queryKey: ["runtimes", wsId],
     queryFn: () => Promise.resolve([]),
   }),
   runtimeDisplayLabel: (r: { name?: string }) => r.name ?? "runtime",
 }));
-vi.mock("@opercia/core/auth", () => {
+vi.mock("@operica/core/auth", () => {
   const state = () => ({ user: { id: "user-1" } });
   return {
     useAuthStore: Object.assign(
@@ -56,17 +56,17 @@ vi.mock("@opercia/core/auth", () => {
 });
 // Partial: `WORKSPACE_PAGES` also comes from here and backs the shared
 // SkillIcon, so the real module has to stay reachable.
-vi.mock("@opercia/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@opercia/core/paths")>()),
+vi.mock("@operica/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@operica/core/paths")>()),
   useWorkspacePaths: () => ({ skills: () => "/acme/skills" }),
 }));
-vi.mock("@opercia/core/permissions", () => ({
+vi.mock("@operica/core/permissions", () => ({
   useSkillPermissions: () => ({ canEdit: { allowed: true, reason: null } }),
 }));
-vi.mock("@opercia/core/workspace/avatar-url", () => ({
+vi.mock("@operica/core/workspace/avatar-url", () => ({
   resolvePublicFileUrl: (v: string | null) => v,
 }));
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { updateSkill: vi.fn(), deleteSkill: vi.fn() },
 }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
@@ -84,10 +84,10 @@ vi.mock("../../labels/resource-label-picker", () => ({
   ResourceLabelPicker: () => <div data-testid="labels" />,
 }));
 vi.mock("./skill-list-actions", () => ({ AddToAgentDialog: () => null }));
-vi.mock("@opercia/ui/components/common/capability-banner", () => ({
+vi.mock("@operica/ui/components/common/capability-banner", () => ({
   CapabilityBanner: () => <div data-testid="capability-banner" />,
 }));
-vi.mock("@opercia/ui/components/common/actor-avatar", () => ({
+vi.mock("@operica/ui/components/common/actor-avatar", () => ({
   ActorAvatar: () => <div />,
 }));
 

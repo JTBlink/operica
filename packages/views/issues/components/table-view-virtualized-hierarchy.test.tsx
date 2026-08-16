@@ -29,27 +29,27 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, screen, waitFor } from "@testing-library/react";
 import { Profiler } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@opercia/core/api";
-import type { ApiClient } from "@opercia/core/api/client";
-import { ViewStoreProvider } from "@opercia/core/issues/stores/view-store-context";
-import { getIssueSurfaceViewStore } from "@opercia/core/issues/stores/surface-view-store";
+import { setApiInstance } from "@operica/core/api";
+import type { ApiClient } from "@operica/core/api/client";
+import { ViewStoreProvider } from "@operica/core/issues/stores/view-store-context";
+import { getIssueSurfaceViewStore } from "@operica/core/issues/stores/surface-view-store";
 import type {
   Issue,
   IssueTableQuerySpec,
   IssueTableRowsRequest,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { IssueSurfaceSelectionProvider } from "../surface/selection-context";
 import type { IssueSurfaceSelection } from "../surface/selection-context";
 import { TableView } from "./table-view";
 
-vi.mock("@opercia/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@operica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
 
 const actorNames = vi.hoisted(() => {
   const getActorName = () => "Someone";
   return { getActorName, result: { getActorName } };
 });
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => actorNames.result,
   buildActorNameResolver: () => actorNames.getActorName,
 }));
@@ -60,7 +60,7 @@ const authState = vi.hoisted(() => ({
     isAuthenticated: true,
   },
 }));
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: (state: unknown) => unknown) =>
       selector ? selector(authState.value) : authState.value,
@@ -85,10 +85,10 @@ vi.mock("../../navigation", () => ({
   useIntentNavigate: () => () => {},
 }));
 
-vi.mock("@opercia/core/paths", async () => {
+vi.mock("@operica/core/paths", async () => {
   const actual =
-    await vi.importActual<typeof import("@opercia/core/paths")>(
-      "@opercia/core/paths",
+    await vi.importActual<typeof import("@operica/core/paths")>(
+      "@operica/core/paths",
     );
   const workspacePaths = actual.paths.workspace("test");
   return { ...actual, useWorkspacePaths: () => workspacePaths };

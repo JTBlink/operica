@@ -29,43 +29,43 @@ import {
   Settings2,
   Trash2,
 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
-} from "@opercia/ui/components/ui/context-menu";
+} from "@operica/ui/components/ui/context-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@opercia/ui/components/ui/tooltip";
-import { cn } from "@opercia/ui/lib/utils";
-import type { IssueView } from "@opercia/core/api/schemas";
+} from "@operica/ui/components/ui/popover";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@operica/ui/components/ui/tooltip";
+import { cn } from "@operica/ui/lib/utils";
+import type { IssueView } from "@operica/core/api/schemas";
 import {
   canManageIssueView,
   type IssueViewScope,
-} from "@opercia/core/issue-views/queries";
+} from "@operica/core/issue-views/queries";
 import {
   applyViewBarPrefs,
   issueViewPreferenceOptions,
   useUpdateIssueViewPreference,
   EMPTY_VIEW_BAR_PREFS,
-} from "@opercia/core/issue-views/preferences";
-import { useDeleteIssueView } from "@opercia/core/issue-views/mutations";
-import { useAuthStore } from "@opercia/core/auth";
-import { memberListOptions } from "@opercia/core/workspace/queries";
-import { pinListOptions } from "@opercia/core/pins/queries";
-import { useCreatePin, useDeletePin } from "@opercia/core/pins/mutations";
+} from "@operica/core/issue-views/preferences";
+import { useDeleteIssueView } from "@operica/core/issue-views/mutations";
+import { useAuthStore } from "@operica/core/auth";
+import { memberListOptions } from "@operica/core/workspace/queries";
+import { pinListOptions } from "@operica/core/pins/queries";
+import { useCreatePin, useDeletePin } from "@operica/core/pins/mutations";
 import { useSingleRowFit } from "../../common/single-row-fit";
 import { ManageViewsDialog } from "./manage-views-dialog";
 import {

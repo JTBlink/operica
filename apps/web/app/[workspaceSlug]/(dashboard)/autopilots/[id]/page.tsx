@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { AutopilotDetailPage } from "@opercia/views/autopilots/components";
+import { AutopilotDetailPage } from "@operica/views/autopilots/components";
 
 export default function Page({
   params,

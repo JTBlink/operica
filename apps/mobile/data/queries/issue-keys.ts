@@ -7,7 +7,7 @@
  * workspace flips wsId and the cache moves automatically (root CLAUDE.md
  * "Workspace-scoped queries must key on wsId").
  */
-import type { ListIssuesParams } from "@opercia/core/types";
+import type { ListIssuesParams } from "@operica/core/types";
 
 export type MyIssuesScope = "assigned" | "created" | "agents";
 

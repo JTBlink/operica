@@ -1,9 +1,9 @@
 "use client";
 
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { AVATAR_SIZE_PX, type AvatarSize } from "@opercia/ui/lib/avatar-size";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { cn } from "@opercia/ui/lib/utils";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { AVATAR_SIZE_PX, type AvatarSize } from "@operica/ui/lib/avatar-size";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { cn } from "@operica/ui/lib/utils";
 
 interface AgentAvatarStackProps {
   // Agent ids to render, in display order. The component does NOT dedupe —

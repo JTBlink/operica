@@ -1,5 +1,5 @@
-import type { Project } from "@opercia/core/types";
-import { cn } from "@opercia/ui/lib/utils";
+import type { Project } from "@operica/core/types";
+import { cn } from "@operica/ui/lib/utils";
 
 export type ProjectIconSize = "sm" | "md" | "lg";
 

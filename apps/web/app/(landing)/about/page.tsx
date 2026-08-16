@@ -4,11 +4,11 @@ import { AboutPageClient } from "@/features/landing/components/about-page-client
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about Opercia — multiplexed information and computing agent. An open-source project management platform for human + agent teams.",
+    "Learn about Operica — multiplexed information and computing agent. An open-source project management platform for human + agent teams.",
   openGraph: {
-    title: "About Opercia",
+    title: "About Operica",
     description:
-      "The story behind Opercia and why we're building project management for human + agent teams.",
+      "The story behind Operica and why we're building project management for human + agent teams.",
     url: "/about",
   },
   alternates: {

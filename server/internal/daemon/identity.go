@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/google/uuid"
 	"github.com/JTBlink/operica/server/internal/cli"
+	"github.com/google/uuid"
 )
 
 // daemonIDFileName is the file that stores this machine's stable daemon
@@ -19,7 +19,7 @@ const daemonIDFileName = "daemon.id"
 
 // EnsureDaemonID returns a stable UUID for this daemon instance, persisting
 // it to disk on first call. Identity is machine-scoped: every profile on the
-// same machine shares one UUID stored at `~/.opercia/daemon.id`. Profile
+// same machine shares one UUID stored at `~/.operica/daemon.id`. Profile
 // boundaries are about which backend/account a daemon is talking to, not
 // about the physical machine's identity, so a single host running both the
 // CLI-spawned daemon and the desktop-spawned daemon (or toggling profiles)
@@ -182,7 +182,7 @@ func LegacyDaemonIDs(hostname, profile string) []string {
 	return out
 }
 
-// LegacyDaemonUUIDs scans `~/.opercia/profiles/*/daemon.id` and returns every
+// LegacyDaemonUUIDs scans `~/.operica/profiles/*/daemon.id` and returns every
 // UUID that survives parsing. These are identities that were minted per
 // profile before daemon identity became machine-scoped; runtime rows
 // registered under them — potentially on multiple backends (prod/dev/self-
@@ -226,7 +226,7 @@ func LegacyDaemonUUIDs() ([]string, error) {
 }
 
 // filterLegacyIDs removes any entry equal to current (e.g. when the user
-// explicitly pins OPERCIA_DAEMON_ID to the hostname itself, there's nothing
+// explicitly pins OPERICA_DAEMON_ID to the hostname itself, there's nothing
 // to migrate — the row is already keyed on the current id).
 func filterLegacyIDs(ids []string, current string) []string {
 	if current == "" {

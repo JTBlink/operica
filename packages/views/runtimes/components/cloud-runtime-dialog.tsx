@@ -5,15 +5,15 @@ import type { FormEvent, HTMLAttributes } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Cloud, Loader2, RefreshCw, Rocket, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import type { CloudRuntimeNode } from "@opercia/core/runtimes";
+import type { CloudRuntimeNode } from "@operica/core/runtimes";
 import {
   cloudRuntimeNodeListOptions,
   useCreateCloudRuntimeNode,
   useDeleteCloudRuntimeNode,
-} from "@opercia/core/runtimes";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { Badge } from "@opercia/ui/components/ui/badge";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/runtimes";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { Badge } from "@operica/ui/components/ui/badge";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -21,17 +21,17 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
+} from "@operica/ui/components/ui/dialog";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@opercia/ui/components/ui/select";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/select";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../../i18n";
 
 const CLOUD_RUNTIME_INSTANCE_TYPES = ["t4g.medium", "t4g.large"] as const;

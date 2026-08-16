@@ -1,6 +1,6 @@
 "use client";
 
-import { useModalStore } from "@opercia/core/modals";
+import { useModalStore } from "@operica/core/modals";
 import { CreateIssueDialog } from "./create-issue-dialog";
 import { CreateProjectModal } from "./create-project";
 import { CreateSquadModal } from "./create-squad";

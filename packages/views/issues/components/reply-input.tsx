@@ -2,14 +2,14 @@
 
 import { useRef, useState, useCallback, useEffect } from "react";
 import { ContentEditor, type ContentEditorRef, useFileDropZone, FileDropOverlay, useLazyEditor, useUploadGate, useComposerSubmit } from "../../editor";
-import { FileUploadButton } from "@opercia/ui/components/common/file-upload-button";
-import { SubmitButton } from "@opercia/ui/components/common/submit-button";
+import { FileUploadButton } from "@operica/ui/components/common/file-upload-button";
+import { SubmitButton } from "@operica/ui/components/common/submit-button";
 import { ActorAvatar } from "../../common/actor-avatar";
-import { contentReferencesAttachment } from "@opercia/core/types";
-import { formatShortcut, useShortcut } from "@opercia/core/shortcuts";
-import { useCommentDraftStore, type CommentDraftKey } from "@opercia/core/issues/stores";
-import { cn } from "@opercia/ui/lib/utils";
-import type { AvatarSize } from "@opercia/ui/lib/avatar-size";
+import { contentReferencesAttachment } from "@operica/core/types";
+import { formatShortcut, useShortcut } from "@operica/core/shortcuts";
+import { useCommentDraftStore, type CommentDraftKey } from "@operica/core/issues/stores";
+import { cn } from "@operica/ui/lib/utils";
+import type { AvatarSize } from "@operica/ui/lib/avatar-size";
 import { useT } from "../../i18n";
 import { CommentTriggerChips } from "./comment-trigger-chips";
 import { useCommentTriggerPreview } from "../hooks/use-comment-trigger-preview";

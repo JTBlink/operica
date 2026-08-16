@@ -39,8 +39,8 @@ const (
 	// Refusals for dropped /issue commands, carried over from the deleted
 	// pre-engine IssueCommandProcessor: without them the user's command
 	// vanishes with no signal that it will never be handled.
-	issueNotMemberText = "You're not a member of this Opercia workspace, so I can't file an issue for you. Ask a workspace admin to invite you, then send the command again."
-	issueDisabledText  = "This DingTalk robot isn't connected to Opercia (or was disconnected). Ask a workspace admin to reconnect it."
+	issueNotMemberText = "You're not a member of this Operica workspace, so I can't file an issue for you. Ask a workspace admin to invite you, then send the command again."
+	issueDisabledText  = "This DingTalk robot isn't connected to Operica (or was disconnected). Ask a workspace admin to reconnect it."
 )
 
 // bindingMinter is the binding-token surface the replier needs.
@@ -66,8 +66,8 @@ type OutboundReplierConfig struct {
 	Binding bindingMinter
 	Decrypt Decrypter
 	Client  *Client
-	// AppURL is the Opercia web app host the user clicks into to redeem the
-	// binding token (e.g. https://opercia.example). The bind page (/dingtalk/bind)
+	// AppURL is the Operica web app host the user clicks into to redeem the
+	// binding token (e.g. https://operica.example). The bind page (/dingtalk/bind)
 	// is served by the web app, so the link must point at the app host, not the
 	// API host. Mirrors the Slack replier's AppURL.
 	AppURL      string
@@ -180,7 +180,7 @@ func (r *OutboundReplier) sendBindingPrompt(ctx context.Context, inst engine.Res
 		return fmt.Errorf("mint binding token: %w", err)
 	}
 	bindURL := r.appURL + r.bindingPath + "?token=" + url.QueryEscape(token.Raw)
-	text := "👋 To start chatting with me, link your DingTalk account to Opercia: [link your account](" +
+	text := "👋 To start chatting with me, link your DingTalk account to Operica: [link your account](" +
 		bindURL + ")\n\n(This link expires in 15 minutes.)"
 	// Deliver the single-use binding link privately (1:1) to the sender, never
 	// via targetFromMessage: in a group that would post the token into the whole

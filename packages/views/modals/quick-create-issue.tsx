@@ -15,60 +15,60 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { DialogTitle } from "@opercia/ui/components/ui/dialog";
+import { DialogTitle } from "@operica/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Switch } from "@opercia/ui/components/ui/switch";
-import { api, ApiError } from "@opercia/core/api";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCurrentWorkspace, useWorkspacePaths } from "@opercia/core/paths";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { Button } from "@operica/ui/components/ui/button";
+import { Switch } from "@operica/ui/components/ui/switch";
+import { api, ApiError } from "@operica/core/api";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCurrentWorkspace, useWorkspacePaths } from "@operica/core/paths";
 import { AppLink, resolveClickIntent } from "../navigation";
-import { agentListOptions, squadListOptions } from "@opercia/core/workspace/queries";
-import { projectListOptions } from "@opercia/core/projects/queries";
+import { agentListOptions, squadListOptions } from "@operica/core/workspace/queries";
+import { projectListOptions } from "@operica/core/projects/queries";
 import {
   useQuickCreateStore,
   type QuickCreateActorType,
-} from "@opercia/core/issues/stores/quick-create-store";
+} from "@operica/core/issues/stores/quick-create-store";
 import {
   useIssueCreateSettingsStore,
   type QuickCreateField,
-} from "@opercia/core/issues/stores/issue-create-settings-store";
-import { useIssueDraftStore, type IssueCreateDraft } from "@opercia/core/issues/stores/draft-store";
-import { useCreateModeStore } from "@opercia/core/issues/stores/create-mode-store";
+} from "@operica/core/issues/stores/issue-create-settings-store";
+import { useIssueDraftStore, type IssueCreateDraft } from "@operica/core/issues/stores/draft-store";
+import { useCreateModeStore } from "@operica/core/issues/stores/create-mode-store";
 import {
   runtimeListOptions,
   checkQuickCreateCliVersion,
   checkQuickCreateFieldsCliVersion,
   readRuntimeCliVersion,
-} from "@opercia/core/runtimes";
-import { useShortcut } from "@opercia/core/shortcuts";
+} from "@operica/core/runtimes";
+import { useShortcut } from "@operica/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import {
   contentReferencesAttachment,
   type Agent,
   type IssuePriority,
   type Squad,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { ActorAvatar } from "../common/actor-avatar";
 import { ClearablePillButton, PillButton } from "../common/pill-button";
 import { ProjectPicker } from "../projects/components/project-picker";
 import { DueDatePicker, PriorityIcon, PriorityPicker } from "../issues/components";
 import { canAssignAgent } from "../issues/components/pickers/assignee-picker";
-import { isAgentRuntimeBound } from "@opercia/core/agents";
+import { isAgentRuntimeBound } from "@operica/core/agents";
 import {
   PropertyPicker,
   PickerItem,
   PickerSection,
   PickerEmpty,
 } from "../issues/components/pickers/property-picker";
-import { useAuthStore } from "@opercia/core/auth";
-import { memberListOptions } from "@opercia/core/workspace/queries";
+import { useAuthStore } from "@operica/core/auth";
+import { memberListOptions } from "@operica/core/workspace/queries";
 import {
   ContentEditor,
   type ContentEditorRef,
@@ -78,7 +78,7 @@ import {
   useComposerSubmit,
 } from "../editor";
 import { useIssueCreateUploads } from "./use-issue-create-uploads";
-import { FileUploadButton } from "@opercia/ui/components/common/file-upload-button";
+import { FileUploadButton } from "@operica/ui/components/common/file-upload-button";
 import { useT } from "../i18n";
 import { matchesPinyin } from "../editor/extensions/pinyin-match";
 
@@ -305,7 +305,7 @@ export function AgentCreatePanel({
   }, [setActiveMode]);
 
   // Daemon CLI version gate. The agent-create flow needs the runtime's
-  // bundled opercia CLI to be ≥ MIN_QUICK_CREATE_CLI_VERSION; older
+  // bundled operica CLI to be ≥ MIN_QUICK_CREATE_CLI_VERSION; older
   // daemons handle attachments and partial-failure retries incorrectly
   // (see PR #1851 / MUL-1496). Pre-check on the picker so the user gets
   // immediate feedback instead of waiting for the inbox failure; the

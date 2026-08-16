@@ -1,4 +1,4 @@
-import type { IssueStatus } from "@opercia/core/types";
+import type { IssueStatus } from "@operica/core/types";
 import { StatusIcon } from "./status-icon";
 import { useT } from "../../i18n";
 

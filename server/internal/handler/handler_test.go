@@ -12,15 +12,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/JTBlink/operica/server/internal/analytics"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/realtime"
 	"github.com/JTBlink/operica/server/internal/service"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 var testHandler *Handler
@@ -30,7 +30,7 @@ var testWorkspaceID string
 var testRuntimeID string
 
 const (
-	handlerTestEmail         = "handler-test@opercia.ai"
+	handlerTestEmail         = "handler-test@operica.ai"
 	handlerTestName          = "Handler Test User"
 	handlerTestWorkspaceSlug = "handler-tests"
 )
@@ -39,7 +39,7 @@ func TestMain(m *testing.M) {
 	ctx := context.Background()
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dbURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 
 	pool, err := pgxpool.New(ctx, dbURL)
@@ -2618,7 +2618,7 @@ func TestCreateWorkspaceInvalidSlugReturnsBadRequest(t *testing.T) {
 
 func TestSendCode(t *testing.T) {
 	w := httptest.NewRecorder()
-	body := map[string]string{"email": "sendcode-test@opercia.ai"}
+	body := map[string]string{"email": "sendcode-test@operica.ai"}
 	var buf bytes.Buffer
 	json.NewEncoder(&buf).Encode(body)
 	req := httptest.NewRequest("POST", "/auth/send-code", &buf)
@@ -2635,7 +2635,7 @@ func TestSendCode(t *testing.T) {
 	}
 
 	t.Cleanup(func() {
-		testPool.Exec(context.Background(), `DELETE FROM verification_code WHERE email = $1`, "sendcode-test@opercia.ai")
+		testPool.Exec(context.Background(), `DELETE FROM verification_code WHERE email = $1`, "sendcode-test@operica.ai")
 	})
 }
 
@@ -2650,7 +2650,7 @@ func TestSendCodeDbError(t *testing.T) {
 	cancel()
 
 	w := httptest.NewRecorder()
-	body := map[string]string{"email": "dberror-test@opercia.ai"}
+	body := map[string]string{"email": "dberror-test@operica.ai"}
 	var buf bytes.Buffer
 	json.NewEncoder(&buf).Encode(body)
 	req := httptest.NewRequest("POST", "/auth/send-code", &buf)
@@ -2673,7 +2673,7 @@ func TestSendCodeDbError(t *testing.T) {
 }
 
 func TestSendCodeRateLimit(t *testing.T) {
-	const email = "ratelimit-test@opercia.ai"
+	const email = "ratelimit-test@operica.ai"
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(), `DELETE FROM verification_code WHERE email = $1`, email)
 	})
@@ -2703,7 +2703,7 @@ func TestSendCodeRateLimit(t *testing.T) {
 }
 
 func TestVerifyCode(t *testing.T) {
-	const email = "verify-test@opercia.ai"
+	const email = "verify-test@operica.ai"
 	ctx := context.Background()
 
 	t.Cleanup(func() {
@@ -2774,7 +2774,7 @@ func TestVerifyCodeRejectsDevCodeUnlessExplicitlyConfigured(t *testing.T) {
 	t.Setenv(devVerificationCodeEnv, "")
 	t.Setenv("APP_ENV", "")
 
-	const email = "dev-code-disabled-test@opercia.ai"
+	const email = "dev-code-disabled-test@operica.ai"
 	ctx := context.Background()
 
 	t.Cleanup(func() {
@@ -2798,7 +2798,7 @@ func TestVerifyCodeAcceptsConfiguredDevCodeOutsideProduction(t *testing.T) {
 	t.Setenv(devVerificationCodeEnv, "888888")
 	t.Setenv("APP_ENV", "development")
 
-	const email = "dev-code-enabled-test@opercia.ai"
+	const email = "dev-code-enabled-test@operica.ai"
 	ctx := context.Background()
 
 	t.Cleanup(func() {
@@ -2823,7 +2823,7 @@ func TestVerifyCodeRejectsConfiguredDevCodeInProduction(t *testing.T) {
 	t.Setenv(devVerificationCodeEnv, "888888")
 	t.Setenv("APP_ENV", "production")
 
-	const email = "dev-code-production-test@opercia.ai"
+	const email = "dev-code-production-test@operica.ai"
 	ctx := context.Background()
 
 	t.Cleanup(func() {
@@ -2846,7 +2846,7 @@ func TestVerifyCodeRejectsConfiguredDevCodeInProduction(t *testing.T) {
 func TestVerifyCodeWrongCode(t *testing.T) {
 	t.Setenv(devVerificationCodeEnv, "")
 
-	const email = "wrong-code-test@opercia.ai"
+	const email = "wrong-code-test@operica.ai"
 	ctx := context.Background()
 
 	t.Cleanup(func() {
@@ -2876,7 +2876,7 @@ func TestVerifyCodeWrongCode(t *testing.T) {
 func TestVerifyCodeBruteForceProtection(t *testing.T) {
 	t.Setenv(devVerificationCodeEnv, "")
 
-	const email = "bruteforce-test@opercia.ai"
+	const email = "bruteforce-test@operica.ai"
 	ctx := context.Background()
 
 	t.Cleanup(func() {
@@ -2926,7 +2926,7 @@ func TestVerifyCodeBruteForceProtection(t *testing.T) {
 }
 
 func TestVerifyCodeNewUserHasNoWorkspace(t *testing.T) {
-	const email = "workspace-verify-test@opercia.ai"
+	const email = "workspace-verify-test@operica.ai"
 	ctx := context.Background()
 
 	t.Cleanup(func() {

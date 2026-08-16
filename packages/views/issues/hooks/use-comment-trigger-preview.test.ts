@@ -2,15 +2,15 @@ import { createElement, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { api } from "@opercia/core/api";
-import type { CommentTriggerPreviewAgent } from "@opercia/core/types";
+import { api } from "@operica/core/api";
+import type { CommentTriggerPreviewAgent } from "@operica/core/types";
 import {
   commentTriggerPreviewSignature,
   isNoteCommentDraft,
   useCommentTriggerPreview,
 } from "./use-comment-trigger-preview";
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     previewCommentTriggers: vi.fn(),
   },

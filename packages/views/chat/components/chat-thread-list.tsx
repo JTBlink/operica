@@ -14,23 +14,23 @@ import {
   Square,
   Trash2,
 } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { paths, useWorkspaceSlug } from "@opercia/core/paths";
-import { useWorkspacePresenceMap } from "@opercia/core/agents";
-import { api } from "@opercia/core/api";
-import { pendingChatTasksOptions, chatKeys, sortChatSessions } from "@opercia/core/chat/queries";
+import { cn } from "@operica/ui/lib/utils";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { paths, useWorkspaceSlug } from "@operica/core/paths";
+import { useWorkspacePresenceMap } from "@operica/core/agents";
+import { api } from "@operica/core/api";
+import { pendingChatTasksOptions, chatKeys, sortChatSessions } from "@operica/core/chat/queries";
 import {
   useDeleteChatSession,
   useSetChatSessionArchived,
   useSetChatSessionPinned,
-} from "@opercia/core/chat/mutations";
-import { useChatStore } from "@opercia/core/chat";
-import type { Agent, ChatSession, PendingChatTasksResponse } from "@opercia/core/types";
+} from "@operica/core/chat/mutations";
+import { useChatStore } from "@operica/core/chat";
+import type { Agent, ChatSession, PendingChatTasksResponse } from "@operica/core/types";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { resolveClickIntent, useOptionalNavigation } from "../../navigation";
-import { createLogger } from "@opercia/core/logger";
-import { removeChatMessageFromCaches } from "@opercia/core/realtime";
+import { createLogger } from "@operica/core/logger";
+import { removeChatMessageFromCaches } from "@operica/core/realtime";
 import { useT } from "../../i18n";
 
 const apiLogger = createLogger("chat.api");

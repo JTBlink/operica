@@ -12,7 +12,7 @@ import {
   Users,
 } from "lucide-react";
 import { toast } from "sonner";
-import { useAuthStore } from "@opercia/core/auth";
+import { useAuthStore } from "@operica/core/auth";
 import {
   agentCompletedIssueCountOptions,
   needsSourceBackfill,
@@ -20,13 +20,13 @@ import {
   SOURCE_BACKFILL_MIN_AGENT_DONE_ISSUES,
   type QuestionnaireAnswers,
   type Source,
-} from "@opercia/core/onboarding";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/core/onboarding";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   GitHubIcon,
   GoogleIcon,
@@ -67,7 +67,7 @@ const EMPTY_BACKFILL: Pick<
  *      source recorded, never declined, dismiss cap not reached.
  *   2. Workspace-level: agents (or squads) have completed at least
  *      SOURCE_BACKFILL_MIN_AGENT_DONE_ISSUES issues here. Attribution
- *      is a zero-payoff ask for the user, so it waits until Opercia
+ *      is a zero-payoff ask for the user, so it waits until Operica
  *      has visibly delivered value. The count query only runs while
  *      gate 1 passes, so settled users never pay for it.
  *

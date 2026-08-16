@@ -20,13 +20,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/golang-jwt/jwt/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/middleware"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/go-chi/chi/v5"
+	"github.com/golang-jwt/jwt/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 func TestExtractIdentifiers(t *testing.T) {
@@ -300,7 +300,7 @@ func TestStateRoundTripWithRepositoryReturnTarget(t *testing.T) {
 }
 
 func TestGitHubConnectRepositoryReturnTarget(t *testing.T) {
-	t.Setenv("GITHUB_APP_SLUG", "opercia-test")
+	t.Setenv("GITHUB_APP_SLUG", "operica-test")
 	t.Setenv("GITHUB_WEBHOOK_SECRET", "test-secret-123")
 	wsID := "11111111-2222-3333-4444-555555555555"
 
@@ -343,7 +343,7 @@ func TestGitHubConnectRepositoryReturnTarget(t *testing.T) {
 
 func TestGitHubSetupCallbackRepositoryReturnTarget(t *testing.T) {
 	t.Setenv("GITHUB_WEBHOOK_SECRET", "test-secret-123")
-	t.Setenv("FRONTEND_ORIGIN", "https://app.opercia.test/")
+	t.Setenv("FRONTEND_ORIGIN", "https://app.operica.test/")
 	wsID := "11111111-2222-3333-4444-555555555555"
 	state, err := signStateForReturn(wsID, githubReturnToRepositories)
 	if err != nil {
@@ -360,7 +360,7 @@ func TestGitHubSetupCallbackRepositoryReturnTarget(t *testing.T) {
 	if rec.Code != http.StatusFound {
 		t.Fatalf("GitHubSetupCallback: got %d, want 302", rec.Code)
 	}
-	if got := rec.Header().Get("Location"); got != "https://app.opercia.test/settings?tab=repositories&github_error=bad_installation_id" {
+	if got := rec.Header().Get("Location"); got != "https://app.operica.test/settings?tab=repositories&github_error=bad_installation_id" {
 		t.Fatalf("redirect = %q, want repository settings error", got)
 	}
 }
@@ -1906,7 +1906,7 @@ RETURNING id
 	mkUser := func(t *testing.T, label string) string {
 		t.Helper()
 		var id string
-		email := fmt.Sprintf("github-routes-%s-%s@opercia.ai", slug, label)
+		email := fmt.Sprintf("github-routes-%s-%s@operica.ai", slug, label)
 		if err := testPool.QueryRow(ctx, `
 INSERT INTO "user" (name, email) VALUES ($1, $2) RETURNING id
 `, "GHR "+label, email).Scan(&id); err != nil {

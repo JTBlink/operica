@@ -47,7 +47,7 @@ type HealthResponse struct {
 	// render as an absent runtime, which is what made GH #6077 unactionable for
 	// the reporter (MUL-5439).
 	SkippedAgents map[string]string `json:"skipped_agents,omitempty"`
-	// ReloadPendingReason explains why the daemon has confirmed a opercia
+	// ReloadPendingReason explains why the daemon has confirmed a operica
 	// version change on disk but hasn't restarted into it yet — it was busy at
 	// the last barrier check and will retry when idle. Omitted when empty, so
 	// older consumers see no change. Diagnostic only: nothing keys off it.
@@ -137,7 +137,7 @@ func (d *Daemon) healthHandler(startedAt time.Time) http.HandlerFunc {
 }
 
 // shutdownHandler triggers a graceful daemon shutdown by cancelling the
-// top-level context. Used by `opercia daemon stop` so we don't depend on
+// top-level context. Used by `operica daemon stop` so we don't depend on
 // OS-signal delivery, which is unreliable on Windows once the daemon is
 // spawned with DETACHED_PROCESS (no shared console with the stop caller).
 // The listener is bound to 127.0.0.1 only, so only local processes can hit

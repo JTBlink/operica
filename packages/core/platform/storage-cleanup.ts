@@ -17,15 +17,15 @@ import "../drafts/register-all-drafts";
  * or call `registerDraftCleanup` directly.
  */
 const WORKSPACE_SCOPED_KEYS = [
-  "opercia_issue_surface_views",
-  "opercia_issues_view",
-  "opercia_issues_scope",
-  "opercia_my_issues_view",
-  "opercia:chat:selectedAgentId",
-  "opercia:chat:selectedProjectId",
-  "opercia:chat:activeSessionId",
-  "opercia:chat:expanded",
-  "opercia_navigation",
+  "operica_issue_surface_views",
+  "operica_issues_view",
+  "operica_issues_scope",
+  "operica_my_issues_view",
+  "operica:chat:selectedAgentId",
+  "operica:chat:selectedProjectId",
+  "operica:chat:activeSessionId",
+  "operica:chat:expanded",
+  "operica_navigation",
 ];
 
 /** Remove all workspace-scoped storage entries for the given workspace slug. */

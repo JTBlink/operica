@@ -7,7 +7,7 @@
  * QueryClient + query keys.
  *
  * Pure derivation is shared though — `deriveAgentPresenceDetail` /
- * `buildPresenceMap` are imported from `@opercia/core/agents` (pure functions,
+ * `buildPresenceMap` are imported from `@operica/core/agents` (pure functions,
  * on the whitelist). Don't re-implement the three-state logic locally; the
  * web/desktop/mobile semantics MUST agree (apps/mobile/CLAUDE.md
  * "State enums and transitions must agree").
@@ -29,7 +29,7 @@ import {
   buildPresenceMap,
   deriveAgentPresenceDetail,
   type AgentPresenceDetail,
-} from "@opercia/core/agents";
+} from "@operica/core/agents";
 import { agentListOptions } from "@/data/queries/agents";
 import { runtimeListOptions } from "@/data/queries/runtimes";
 import { agentTaskSnapshotOptions } from "@/data/queries/agent-task-snapshot";

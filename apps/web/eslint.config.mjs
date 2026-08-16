@@ -1,4 +1,4 @@
-import nextConfig from "@opercia/eslint-config/next";
+import nextConfig from "@operica/eslint-config/next";
 
 export default [
   ...nextConfig,

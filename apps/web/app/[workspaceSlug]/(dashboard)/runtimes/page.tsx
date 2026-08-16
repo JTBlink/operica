@@ -1,4 +1,4 @@
-import { RuntimesPage } from "@opercia/views/runtimes";
+import { RuntimesPage } from "@operica/views/runtimes";
 
 const cloudRuntimeEnabled =
   process.env.NEXT_PUBLIC_ENABLE_CLOUD_RUNTIME === "true";

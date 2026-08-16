@@ -2,7 +2,7 @@
 
 import { Fragment, type ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import { PageHeader } from "./page-header";
 import { AppLink } from "../navigation";
 

@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, fireEvent, render as rtlRender, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, type ReactElement } from "react";
-import type { Attachment } from "@opercia/core/types";
+import type { Attachment } from "@operica/core/types";
 
 const openExternalMock = vi.hoisted(() => vi.fn());
 
@@ -44,7 +44,7 @@ const {
   };
 });
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     getAttachmentTextContent: getAttachmentTextContentMock,
     getBaseUrl: getBaseUrlMock,
@@ -80,8 +80,8 @@ vi.mock("../navigation", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@opercia/core/paths")>();
+vi.mock("@operica/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@operica/core/paths")>();
   return {
     ...actual,
     useWorkspaceSlug: () => slugState.value,

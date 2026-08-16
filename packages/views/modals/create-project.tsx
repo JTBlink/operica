@@ -22,31 +22,31 @@ function GithubIcon({ className }: { className?: string }) {
   );
 }
 import { useQuery } from "@tanstack/react-query";
-import { useCreateProject } from "@opercia/core/projects/mutations";
-import { useProjectDraftStore } from "@opercia/core/projects";
+import { useCreateProject } from "@operica/core/projects/mutations";
+import { useProjectDraftStore } from "@operica/core/projects";
 import {
   PROJECT_STATUS_CONFIG,
   PROJECT_STATUS_ORDER,
   PROJECT_PRIORITY_ORDER,
-} from "@opercia/core/projects/config";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCurrentWorkspace, useWorkspacePaths } from "@opercia/core/paths";
-import { memberListOptions, agentListOptions } from "@opercia/core/workspace/queries";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import type { ProjectStatus, ProjectPriority } from "@opercia/core/types";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/core/projects/config";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCurrentWorkspace, useWorkspacePaths } from "@operica/core/paths";
+import { memberListOptions, agentListOptions } from "@operica/core/workspace/queries";
+import { useActorName } from "@operica/core/workspace/hooks";
+import type { ProjectStatus, ProjectPriority } from "@operica/core/types";
+import { cn } from "@operica/ui/lib/utils";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogTitle } from "@opercia/ui/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@operica/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import { Popover, PopoverTrigger, PopoverContent } from "@opercia/ui/components/ui/popover";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
-import { Button } from "@opercia/ui/components/ui/button";
-import { EmojiPicker } from "@opercia/ui/components/common/emoji-picker";
+} from "@operica/ui/components/ui/dropdown-menu";
+import { Popover, PopoverTrigger, PopoverContent } from "@operica/ui/components/ui/popover";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip";
+import { Button } from "@operica/ui/components/ui/button";
+import { EmojiPicker } from "@operica/ui/components/common/emoji-picker";
 import { ContentEditor, type ContentEditorRef, TitleEditor } from "../editor";
 import { PriorityIcon } from "../issues/components/priority-icon";
 import { ActorAvatar } from "../common/actor-avatar";

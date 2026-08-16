@@ -3,10 +3,10 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Bot } from "lucide-react";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { isAgentRuntimeBound } from "@opercia/core/agents";
-import { agentListOptions, squadListOptions } from "@opercia/core/workspace/queries";
-import type { AutopilotAssigneeType } from "@opercia/core/types";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { isAgentRuntimeBound } from "@operica/core/agents";
+import { agentListOptions, squadListOptions } from "@operica/core/workspace/queries";
+import type { AutopilotAssigneeType } from "@operica/core/types";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import {
   PropertyPicker,

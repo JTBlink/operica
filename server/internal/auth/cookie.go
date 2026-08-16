@@ -18,8 +18,8 @@ import (
 )
 
 const (
-	AuthCookieName      = "opercia_auth"
-	CSRFCookieName      = "opercia_csrf"
+	AuthCookieName      = "operica_auth"
+	CSRFCookieName      = "operica_csrf"
 	defaultAuthTokenTTL = 30 * 24 * time.Hour // 30 days
 )
 

@@ -13,7 +13,7 @@ import {
   toStoredAgentDraft,
   useManualAgentDraftStore,
   type AgentDraft,
-} from "@opercia/core/agents";
+} from "@operica/core/agents";
 
 /**
  * Keeps the manual creation form across navigation (#6287).

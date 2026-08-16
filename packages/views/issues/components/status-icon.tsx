@@ -1,5 +1,5 @@
-import type { IssueStatus } from "@opercia/core/types";
-import { STATUS_CONFIG } from "@opercia/core/issues/config";
+import type { IssueStatus } from "@operica/core/types";
+import { STATUS_CONFIG } from "@operica/core/issues/config";
 
 // ---------------------------------------------------------------------------
 // Geometry constants (viewBox 0 0 14 14, center 7,7)

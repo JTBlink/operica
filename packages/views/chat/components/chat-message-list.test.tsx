@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import { chatKeys } from "@opercia/core/chat/queries";
-import type { TaskMessagePayload } from "@opercia/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
+import { chatKeys } from "@operica/core/chat/queries";
+import type { TaskMessagePayload } from "@operica/core/types";
 import type { ReactElement } from "react";
 import enChat from "../../locales/en/chat.json";
 

@@ -15,7 +15,7 @@
  */
 
 import { memo } from "react";
-import type { Attachment } from "@opercia/core/types";
+import type { Attachment } from "@operica/core/types";
 import { RichContent } from "../rich-content";
 
 interface ReadonlyContentProps {

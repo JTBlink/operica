@@ -11,13 +11,13 @@ import {
 import type { QueryClient } from "@tanstack/react-query";
 import type { SuggestionOptions } from "@tiptap/suggestion";
 import { PluginKey } from "@tiptap/pm/state";
-import { useAuthStore } from "@opercia/core/auth";
-import { useChatStore } from "@opercia/core/chat";
-import { getCurrentWsId } from "@opercia/core/platform";
-import { canAssignAgentToIssue } from "@opercia/core/permissions";
-import { isImeComposing } from "@opercia/core/utils";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import type { Agent, MemberWithUser } from "@opercia/core/types";
+import { useAuthStore } from "@operica/core/auth";
+import { useChatStore } from "@operica/core/chat";
+import { getCurrentWsId } from "@operica/core/platform";
+import { canAssignAgentToIssue } from "@operica/core/permissions";
+import { isImeComposing } from "@operica/core/utils";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import type { Agent, MemberWithUser } from "@operica/core/types";
 import { useT } from "../../i18n";
 import {
   createSuggestionPopupRender,

@@ -20,7 +20,7 @@ import (
 // This file is the DingTalk user-binding token flow: an unbound DingTalk user
 // who messages the bot gets a "link your account" prompt (minted here, delivered
 // by the OutboundReplier), clicks through to the in-product redeem page, and
-// their DingTalk staff id is bound to their Opercia account. It mirrors
+// their DingTalk staff id is bound to their Operica account. It mirrors
 // slack.BindingTokenService but runs on the generic channel_* queries with
 // channel_type='dingtalk'.
 
@@ -33,7 +33,7 @@ var (
 	// opaque error for all three avoids a replay timing oracle.
 	ErrBindingTokenInvalid = errors.New("dingtalk: binding token invalid or expired")
 	// ErrBindingAlreadyAssigned: this DingTalk user id is already bound to a
-	// different Opercia user (account transfer must go through explicit unbind).
+	// different Operica user (account transfer must go through explicit unbind).
 	ErrBindingAlreadyAssigned = errors.New("dingtalk: user id is already bound to a different user")
 	// ErrBindingNotWorkspaceMember: the redeemer is not a member of the token's
 	// workspace. Translated to 403 at the HTTP boundary.
@@ -92,9 +92,9 @@ func (s *BindingTokenService) Mint(ctx context.Context, workspaceID, installatio
 }
 
 // RedeemAndBind atomically consumes a raw token and binds the DingTalk user id
-// to operciaUserID (taken from the session, never from the token). Returns
+// to opericaUserID (taken from the session, never from the token). Returns
 // ErrBindingTokenInvalid / ErrBindingAlreadyAssigned / ErrBindingNotWorkspaceMember.
-func (s *BindingTokenService) RedeemAndBind(ctx context.Context, raw string, operciaUserID pgtype.UUID) (RedeemedBindingToken, error) {
+func (s *BindingTokenService) RedeemAndBind(ctx context.Context, raw string, opericaUserID pgtype.UUID) (RedeemedBindingToken, error) {
 	if s.tx == nil {
 		return RedeemedBindingToken{}, errors.New("dingtalk: BindingTokenService missing TxStarter")
 	}
@@ -122,7 +122,7 @@ func (s *BindingTokenService) RedeemAndBind(ctx context.Context, raw string, ope
 	// Explicit membership gate (no member FK): returning before Commit rolls the
 	// consume back, so a non-member's attempt does not burn the token.
 	if _, err := qtx.GetMemberByUserAndWorkspace(ctx, db.GetMemberByUserAndWorkspaceParams{
-		UserID:      operciaUserID,
+		UserID:      opericaUserID,
 		WorkspaceID: row.WorkspaceID,
 	}); err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -133,14 +133,14 @@ func (s *BindingTokenService) RedeemAndBind(ctx context.Context, raw string, ope
 
 	if _, err := qtx.CreateChannelUserBinding(ctx, db.CreateChannelUserBindingParams{
 		WorkspaceID:    row.WorkspaceID,
-		OperciaUserID:  operciaUserID,
+		OpericaUserID:  opericaUserID,
 		InstallationID: row.InstallationID,
 		ChannelType:    string(TypeDingTalk),
 		ChannelUserID:  row.ChannelUserID,
 		Config:         []byte(`{}`),
 	}); err != nil {
 		// pgx.ErrNoRows means the existing binding points at a different user —
-		// the ON CONFLICT DO UPDATE WHERE opercia_user_id=… gating rejected it.
+		// the ON CONFLICT DO UPDATE WHERE operica_user_id=… gating rejected it.
 		if errors.Is(err, pgx.ErrNoRows) {
 			return RedeemedBindingToken{}, ErrBindingAlreadyAssigned
 		}

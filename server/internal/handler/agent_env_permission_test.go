@@ -80,7 +80,7 @@ func TestAgentEnv_AgentOwnerMemberCanRevealAndUpdate(t *testing.T) {
 	}
 	ctx := context.Background()
 
-	agentID, ownerUserID := agentEnvOwnerFixture(t, "env-owner-member-agent", "env-owner-member@opercia.test")
+	agentID, ownerUserID := agentEnvOwnerFixture(t, "env-owner-member-agent", "env-owner-member@operica.test")
 
 	req := withURLParam(newRequestAs(ownerUserID, http.MethodGet, "/api/agents/"+agentID+"/env", nil), "id", agentID)
 	w := httptest.NewRecorder()
@@ -143,8 +143,8 @@ func TestAgentEnv_UnrelatedMemberForbidden(t *testing.T) {
 		t.Skip("database not available")
 	}
 
-	agentID, _ := agentEnvOwnerFixture(t, "env-unrelated-target-agent", "env-target-owner@opercia.test")
-	strangerID := createPermissionTestMember(t, "env-stranger@opercia.test")
+	agentID, _ := agentEnvOwnerFixture(t, "env-unrelated-target-agent", "env-target-owner@operica.test")
+	strangerID := createPermissionTestMember(t, "env-stranger@operica.test")
 
 	cases := []struct {
 		name string
@@ -188,9 +188,9 @@ func TestAgentEnv_WorkspaceRolesUnchanged(t *testing.T) {
 	}
 	ctx := context.Background()
 
-	agentID, _ := agentEnvOwnerFixture(t, "env-role-check-agent", "env-role-check-owner@opercia.test")
+	agentID, _ := agentEnvOwnerFixture(t, "env-role-check-agent", "env-role-check-owner@operica.test")
 
-	adminID := createPermissionTestMember(t, "env-admin@opercia.test")
+	adminID := createPermissionTestMember(t, "env-admin@operica.test")
 	if _, err := testPool.Exec(ctx, `
 		UPDATE member SET role = 'admin' WHERE workspace_id = $1 AND user_id = $2
 	`, testWorkspaceID, adminID); err != nil {
@@ -219,7 +219,7 @@ func TestAgentEnv_AgentActorRejectedForOwnedAgent(t *testing.T) {
 	}
 	ctx := context.Background()
 
-	targetID, ownerUserID := agentEnvOwnerFixture(t, "env-actor-target-agent", "env-actor-owner@opercia.test")
+	targetID, ownerUserID := agentEnvOwnerFixture(t, "env-actor-target-agent", "env-actor-owner@operica.test")
 
 	// The calling agent runs on behalf of the same human who owns the
 	// target agent, so the owner check alone would let it through.

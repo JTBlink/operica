@@ -3,28 +3,28 @@
 import { Suspense, lazy, useRef, useState } from "react";
 import { Bot, Camera, ImagePlus, Loader2, Users, X } from "lucide-react";
 import { toast } from "sonner";
-import { api } from "@opercia/core/api";
-import { useFileUpload } from "@opercia/core/hooks/use-file-upload";
-import { resolvePublicFileUrl } from "@opercia/core/workspace/avatar-url";
+import { api } from "@operica/core/api";
+import { useFileUpload } from "@operica/core/hooks/use-file-upload";
+import { resolvePublicFileUrl } from "@operica/core/workspace/avatar-url";
 import {
   AVATAR_EMOJI_SUGGESTIONS,
   formatAvatarEmoji,
   parseAvatarEmoji,
-} from "@opercia/ui/lib/avatar-emoji";
+} from "@operica/ui/lib/avatar-emoji";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@opercia/ui/components/ui/popover";
-import { Separator } from "@opercia/ui/components/ui/separator";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/popover";
+import { Separator } from "@operica/ui/components/ui/separator";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../i18n";
 import { AvatarCropDialog } from "./avatar-crop-dialog";
 
 // The full emoji-mart picker is ~1MB of emoji data. Only the handful of
 // suggestions render eagerly; the searchable set loads when asked for.
 const EmojiPicker = lazy(() =>
-  import("@opercia/ui/components/common/emoji-picker").then((m) => ({
+  import("@operica/ui/components/common/emoji-picker").then((m) => ({
     default: m.EmojiPicker,
   })),
 );

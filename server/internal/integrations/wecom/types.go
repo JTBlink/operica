@@ -19,7 +19,7 @@
 //
 // Maintenance: this package is COMMUNITY-MAINTAINED. @leroy-chen contributed it
 // and co-owns it with @seacen — they are the first stop for WeCom-specific bugs
-// and behavior questions, on a best-effort volunteer basis. The Opercia team
+// and behavior questions, on a best-effort volunteer basis. The Operica team
 // keeps this package compiling and its tests green through shared-layer
 // refactors, but does not use WeCom and cannot verify behavior against the real
 // platform; that part depends on the code owners. If the integration breaks in a
@@ -91,7 +91,7 @@ type Installation struct {
 	SecretEncrypted []byte
 
 	// BotDisplayName is what the bot is called in a chat. A WeCom group
-	// mention arrives as literal text — "@Opercia Bot /new 重新分析" — with no
+	// mention arrives as literal text — "@Operica Bot /new 重新分析" — with no
 	// structured mention list anywhere in the payload, so recognising where
 	// the mention ends is the only way a name containing a space does not
 	// swallow the command after it.

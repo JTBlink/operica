@@ -3,8 +3,8 @@
 import type { ReactNode } from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import type { AgentRuntime } from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import type { AgentRuntime } from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enRuntimes from "../../locales/en/runtimes.json";
 
@@ -26,16 +26,16 @@ vi.mock("../../common/use-viewing-timezone", () => ({
   useViewingTimezone: () => VIEWER_TZ,
 }));
 
-vi.mock("@opercia/core/runtimes/queries", () => ({
+vi.mock("@operica/core/runtimes/queries", () => ({
   runtimeUsageOptions,
   runtimeUsageByAgentOptions,
 }));
 
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   agentListOptions: () => ({ kind: "agents" as const }),
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
@@ -49,7 +49,7 @@ const pricingState = vi.hoisted(() => ({
   pricings: {} as Record<string, unknown>,
 }));
 
-vi.mock("@opercia/core/runtimes/custom-pricing-store", () => {
+vi.mock("@operica/core/runtimes/custom-pricing-store", () => {
   const useCustomPricingStore = Object.assign(
     (sel?: (s: typeof pricingState) => unknown) =>
       sel ? sel(pricingState) : pricingState,

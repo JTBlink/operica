@@ -1,7 +1,7 @@
 "use client";
 
-import { Input } from "@opercia/ui/components/ui/input";
-import { cn } from "@opercia/ui/lib/utils";
+import { Input } from "@operica/ui/components/ui/input";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../../i18n";
 
 const OTHER_INPUT_MAX_LENGTH = 80;

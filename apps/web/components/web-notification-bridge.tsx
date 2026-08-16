@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import {
   registerSystemNotificationClickHandler,
   type SystemNotificationPayload,
-} from "@opercia/core/platform";
-import { paths } from "@opercia/core/paths";
-import { useNavigation } from "@opercia/views/navigation";
+} from "@operica/core/platform";
+import { paths } from "@operica/core/paths";
+import { useNavigation } from "@operica/views/navigation";
 
 /**
  * Routes browser notification clicks to the source workspace's inbox, focused

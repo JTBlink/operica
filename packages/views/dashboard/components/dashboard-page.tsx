@@ -3,18 +3,18 @@
 import { useMemo, useState } from "react";
 import { BarChart3, RefreshCw } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@opercia/ui/components/ui/tabs";
+import { Button } from "@operica/ui/components/ui/button";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@operica/ui/components/ui/tabs";
 import {
   CompactNumberFlow,
   CurrencyNumberFlow,
   NumberFlow,
-} from "@opercia/ui/components/ui/number-flow";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import type { Agent } from "@opercia/core/types";
-import { agentListOptions } from "@opercia/core/workspace/queries";
-import { projectListOptions } from "@opercia/core/projects/queries";
+} from "@operica/ui/components/ui/number-flow";
+import { useWorkspaceId } from "@operica/core/hooks";
+import type { Agent } from "@operica/core/types";
+import { agentListOptions } from "@operica/core/workspace/queries";
+import { projectListOptions } from "@operica/core/projects/queries";
 import {
   dashboardKeys,
   dashboardUsageDailyOptions,
@@ -23,8 +23,8 @@ import {
   dashboardRunTimeDailyOptions,
   dashboardFailuresDailyOptions,
   dashboardFailuresByAgentOptions,
-} from "@opercia/core/dashboard";
-import { useCustomPricingStore } from "@opercia/core/runtimes/custom-pricing-store";
+} from "@operica/core/dashboard";
+import { useCustomPricingStore } from "@operica/core/runtimes/custom-pricing-store";
 import { useViewingTimezone } from "../../common/use-viewing-timezone";
 import { PageHeader } from "../../layout/page-header";
 import { KpiCard } from "../../runtimes/components/shared";
@@ -70,12 +70,12 @@ import { ErrorsTab } from "./errors-tab";
 // Stable references — `data ?? []` would create a new empty array on
 // every render while the query is loading, which breaks useMemo's
 // reference-equality dep check and trips the exhaustive-deps lint rule.
-const EMPTY_DAILY: import("@opercia/core/types").DashboardUsageDaily[] = [];
-const EMPTY_BY_AGENT: import("@opercia/core/types").DashboardUsageByAgent[] = [];
-const EMPTY_RUNTIME: import("@opercia/core/types").DashboardAgentRunTime[] = [];
-const EMPTY_RUNTIME_DAILY: import("@opercia/core/types").DashboardRunTimeDaily[] = [];
-const EMPTY_FAILURE_DAILY: import("@opercia/core/types").DashboardFailureDaily[] = [];
-const EMPTY_FAILURE_BY_AGENT: import("@opercia/core/types").DashboardFailureByAgent[] =
+const EMPTY_DAILY: import("@operica/core/types").DashboardUsageDaily[] = [];
+const EMPTY_BY_AGENT: import("@operica/core/types").DashboardUsageByAgent[] = [];
+const EMPTY_RUNTIME: import("@operica/core/types").DashboardAgentRunTime[] = [];
+const EMPTY_RUNTIME_DAILY: import("@operica/core/types").DashboardRunTimeDaily[] = [];
+const EMPTY_FAILURE_DAILY: import("@operica/core/types").DashboardFailureDaily[] = [];
+const EMPTY_FAILURE_BY_AGENT: import("@operica/core/types").DashboardFailureByAgent[] =
   [];
 const EMPTY_AGENTS: Agent[] = [];
 

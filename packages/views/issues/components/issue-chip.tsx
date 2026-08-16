@@ -1,8 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { issueListOptions, issueDetailOptions } from "@opercia/core/issues/queries";
-import { useWorkspaceId } from "@opercia/core/hooks";
+import { issueListOptions, issueDetailOptions } from "@operica/core/issues/queries";
+import { useWorkspaceId } from "@operica/core/hooks";
 import { StatusIcon } from "./status-icon";
 
 /**

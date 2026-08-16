@@ -59,10 +59,10 @@ type OutboundReplier struct {
 type OutboundReplierConfig struct {
 	Binding bindingMinter
 	Decrypt Decrypter
-	// AppURL is the Opercia web app host the user clicks into to redeem the
-	// binding token (e.g. https://opercia.example). It comes from OPERCIA_APP_URL
+	// AppURL is the Operica web app host the user clicks into to redeem the
+	// binding token (e.g. https://operica.example). It comes from OPERICA_APP_URL
 	// (falling back to FRONTEND_ORIGIN) and is intentionally separate from
-	// OPERCIA_PUBLIC_URL, which is the backend/API public URL used for webhook and
+	// OPERICA_PUBLIC_URL, which is the backend/API public URL used for webhook and
 	// daemon-facing endpoints — the bind page (/slack/bind) is served by the web
 	// app, so the link must point at the app host, not the API host. Mirrors the
 	// Lark replier's AppURL.
@@ -167,7 +167,7 @@ func (r *OutboundReplier) sendBindingPrompt(ctx context.Context, inst engine.Res
 	// Wrap the URL as an explicit Slack link <url|label>: formatMrkdwn protects
 	// these from its markdown passes, so the base64url token's `_`/`-` chars are
 	// not mangled into italics.
-	text := "👋 To start chatting with me, link your Slack account to Opercia: <" +
+	text := "👋 To start chatting with me, link your Slack account to Operica: <" +
 		bindURL + "|link your account>\n(This link expires in 15 minutes.)"
 	return r.post(ctx, inst, msg, text)
 }

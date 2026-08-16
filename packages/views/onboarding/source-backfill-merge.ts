@@ -2,7 +2,7 @@ import type {
   QuestionnaireAnswers,
   Role,
   UseCase,
-} from "@opercia/core/onboarding";
+} from "@operica/core/onboarding";
 
 /**
  * `PATCH /api/me/onboarding` overwrites the JSONB column wholesale —

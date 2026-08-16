@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { IssueStatus, UpdateIssueRequest } from "@opercia/core/types";
-import { ALL_STATUSES, STATUS_CONFIG } from "@opercia/core/issues/config";
+import type { IssueStatus, UpdateIssueRequest } from "@operica/core/types";
+import { ALL_STATUSES, STATUS_CONFIG } from "@operica/core/issues/config";
 import { StatusIcon } from "../status-icon";
 import { PropertyPicker, PickerItem } from "./property-picker";
 import { useT } from "../../../i18n";

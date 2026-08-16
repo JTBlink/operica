@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isAccessChangeReady } from "@opercia/core/agents";
+import { isAccessChangeReady } from "@operica/core/agents";
 import type { AccessChange } from "./inspector/access-picker";
 
 function change(

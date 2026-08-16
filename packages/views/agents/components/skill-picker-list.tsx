@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { SkillIcon } from "../../skills/lib/skill-icon";
-import type { SkillSummary } from "@opercia/core/types";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
-import { Input } from "@opercia/ui/components/ui/input";
-import { cn } from "@opercia/ui/lib/utils";
+import type { SkillSummary } from "@operica/core/types";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
+import { Input } from "@operica/ui/components/ui/input";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../../i18n";
 
 interface SkillPickerListProps {

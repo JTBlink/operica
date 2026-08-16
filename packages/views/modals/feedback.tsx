@@ -7,9 +7,9 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@opercia/ui/components/ui/dialog";
-import { Button } from "@opercia/ui/components/ui/button";
-import { FileUploadButton } from "@opercia/ui/components/common/file-upload-button";
+} from "@operica/ui/components/ui/dialog";
+import { Button } from "@operica/ui/components/ui/button";
+import { FileUploadButton } from "@operica/ui/components/common/file-upload-button";
 import {
   ContentEditor,
   type ContentEditorRef,
@@ -23,10 +23,10 @@ import {
   useFeedbackDraftStore,
   FEEDBACK_KINDS,
   type FeedbackKind,
-} from "@opercia/core/feedback";
-import { useCurrentWorkspace } from "@opercia/core/paths";
+} from "@operica/core/feedback";
+import { useCurrentWorkspace } from "@operica/core/paths";
 import { useT } from "../i18n";
-import { useShortcut } from "@opercia/core/shortcuts";
+import { useShortcut } from "@operica/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 
 const MAX_MESSAGE_LEN = 10000;

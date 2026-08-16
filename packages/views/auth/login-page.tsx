@@ -9,19 +9,19 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@opercia/ui/components/ui/card";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Label } from "@opercia/ui/components/ui/label";
+} from "@operica/ui/components/ui/card";
+import { Input } from "@operica/ui/components/ui/input";
+import { Button } from "@operica/ui/components/ui/button";
+import { Label } from "@operica/ui/components/ui/label";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@opercia/ui/components/ui/input-otp";
-import { useAuthStore } from "@opercia/core/auth";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import { api } from "@opercia/core/api";
-import type { User } from "@opercia/core/types";
+} from "@operica/ui/components/ui/input-otp";
+import { useAuthStore } from "@operica/core/auth";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import { api } from "@operica/core/api";
+import type { User } from "@operica/core/types";
 import { useT } from "../i18n";
 
 // ---------------------------------------------------------------------------
@@ -137,7 +137,7 @@ export function LoginPage({
       })
       .catch(() => {
         // Cookie auth failed — fall back to localStorage token
-        const token = localStorage.getItem("opercia_token");
+        const token = localStorage.getItem("operica_token");
         if (!token) return;
 
         api.setToken(token);
@@ -150,7 +150,7 @@ export function LoginPage({
           })
           .catch(() => {
             api.setToken(null);
-            localStorage.removeItem("opercia_token");
+            localStorage.removeItem("operica_token");
           });
       });
   }, [cliCallback]);
@@ -198,7 +198,7 @@ export function LoginPage({
         if (cliCallback) {
           // CLI path: get token directly for the redirect URL
           const { token } = await api.verifyCode(email, value);
-          localStorage.setItem("opercia_token", token);
+          localStorage.setItem("operica_token", token);
           api.setToken(token);
           onTokenObtained?.();
           redirectToCliCallback(cliCallback.url, token, cliCallback.state);
@@ -249,7 +249,7 @@ export function LoginPage({
 
       if (authSourceRef.current === "localStorage") {
         // Session was detected via localStorage — reuse that token directly.
-        const stored = localStorage.getItem("opercia_token");
+        const stored = localStorage.getItem("operica_token");
         if (!stored) throw new Error("token missing");
         token = stored;
       } else {

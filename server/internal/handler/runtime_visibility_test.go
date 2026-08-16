@@ -76,14 +76,14 @@ func runtimeVisibilityFixture(t *testing.T) (runtimeID, runtimeOwnerID, plainMem
 
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Runtime Owner', 'runtime-owner@opercia.test')
+		VALUES ('Runtime Owner', 'runtime-owner@operica.test')
 		RETURNING id
 	`).Scan(&runtimeOwnerID); err != nil {
 		t.Fatalf("create runtime owner user: %v", err)
 	}
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'runtime-owner@opercia.test'`)
+			`DELETE FROM "user" WHERE email = 'runtime-owner@operica.test'`)
 	})
 
 	if _, err := testPool.Exec(ctx, `
@@ -95,14 +95,14 @@ func runtimeVisibilityFixture(t *testing.T) (runtimeID, runtimeOwnerID, plainMem
 
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Plain Runtime Member', 'plain-runtime-member@opercia.test')
+		VALUES ('Plain Runtime Member', 'plain-runtime-member@operica.test')
 		RETURNING id
 	`).Scan(&plainMemberID); err != nil {
 		t.Fatalf("create plain member user: %v", err)
 	}
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'plain-runtime-member@opercia.test'`)
+			`DELETE FROM "user" WHERE email = 'plain-runtime-member@operica.test'`)
 	})
 
 	if _, err := testPool.Exec(ctx, `

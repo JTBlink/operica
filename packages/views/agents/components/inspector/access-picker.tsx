@@ -8,10 +8,10 @@ import type {
   AgentPermissionMode,
   AgentVisibility,
   MemberWithUser,
-} from "@opercia/core/types";
-import { effectiveAccessScope } from "@opercia/core/agents";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
+} from "@operica/core/types";
+import { effectiveAccessScope } from "@operica/core/agents";
+import { Button } from "@operica/ui/components/ui/button";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import { useT } from "../../../i18n";
 

@@ -109,7 +109,7 @@ func newReplierWithConn(t *testing.T) (*OutboundReplier, engine.ResolvedInstalla
 	inst := engine.ResolvedInstallation{ID: mustTestUUID(t)}
 	conn := &recordingConn{}
 	reg.set(inst.ID, conn.autoAck(newWSSender(conn, nil)))
-	r := NewOutboundReplier(OutboundReplierConfig{Senders: reg, AppURL: "https://opercia.example"})
+	r := NewOutboundReplier(OutboundReplierConfig{Senders: reg, AppURL: "https://operica.example"})
 	return r, inst, conn
 }
 
@@ -118,7 +118,7 @@ func TestPostPrivate_AddressesUserWithSingleChatType(t *testing.T) {
 	r, inst, conn := newReplierWithConn(t)
 
 	const senderUserID = "SENDER_USERID"
-	const secretURL = "https://opercia.example/wecom/bind?token=SECRET_TOKEN"
+	const secretURL = "https://operica.example/wecom/bind?token=SECRET_TOKEN"
 	if err := r.postPrivate(context.Background(), inst, senderUserID, secretURL); err != nil {
 		t.Fatalf("postPrivate: %v", err)
 	}
@@ -197,7 +197,7 @@ func TestSendBindingPrompt_GroupNeverLeaksToken(t *testing.T) {
 	r := NewOutboundReplier(OutboundReplierConfig{
 		Binding: nil, // set the interface field directly with the fake below
 		Senders: reg,
-		AppURL:  "https://opercia.example",
+		AppURL:  "https://operica.example",
 	})
 	r.binding = fakeBinder{raw: rawToken}
 
@@ -266,7 +266,7 @@ func TestSendBindingPrompt_P2PSendsOnlyPrivately(t *testing.T) {
 	inst := engine.ResolvedInstallation{ID: mustTestUUID(t)}
 	conn := &recordingConn{}
 	reg.set(inst.ID, conn.autoAck(newWSSender(conn, nil)))
-	r := NewOutboundReplier(OutboundReplierConfig{Senders: reg, AppURL: "https://opercia.example"})
+	r := NewOutboundReplier(OutboundReplierConfig{Senders: reg, AppURL: "https://operica.example"})
 	r.binding = fakeBinder{raw: rawToken}
 
 	msg := channel.InboundMessage{Source: channel.Source{ChatID: "USER_A", ChatType: channel.ChatTypeP2P, SenderID: "USER_A"}}
@@ -302,7 +302,7 @@ func TestSendBindingPrompt_ThrottledSendsNoURL(t *testing.T) {
 	reg.set(inst.ID, conn.autoAck(newWSSender(conn, nil)))
 	r := NewOutboundReplier(OutboundReplierConfig{
 		Senders: reg,
-		AppURL:  "https://opercia.example",
+		AppURL:  "https://operica.example",
 	})
 	r.binding = fakeBinder{reused: true}
 
@@ -335,7 +335,7 @@ func TestSendBindingPrompt_ThrottledSendsNoURL(t *testing.T) {
 		if strings.Contains(content, "token=") {
 			t.Errorf("a throttled prompt built a URL with no token in it: %q", content)
 		}
-		if strings.Contains(content, "https://opercia.example") {
+		if strings.Contains(content, "https://operica.example") {
 			t.Errorf("a throttled prompt must not carry a bind link at all: %q", content)
 		}
 		if chatID, _ := body["chatid"].(string); chatID == senderID {

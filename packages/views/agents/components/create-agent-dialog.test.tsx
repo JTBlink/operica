@@ -3,11 +3,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import type { Agent, MemberWithUser, RuntimeDevice } from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
-import { WorkspaceSlugProvider } from "@opercia/core/paths";
-import { configStore } from "@opercia/core/config";
-import { COMPOSIO_MCP_APPS_FLAG } from "@opercia/core/feature-flags";
+import type { Agent, MemberWithUser, RuntimeDevice } from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
+import { WorkspaceSlugProvider } from "@operica/core/paths";
+import { configStore } from "@operica/core/config";
+import { COMPOSIO_MCP_APPS_FLAG } from "@operica/core/feature-flags";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import enCommon from "../../locales/en/common.json";
 import enAgents from "../../locales/en/agents.json";
@@ -23,7 +23,7 @@ const navigationStub: NavigationAdapter = {
 
 const TEST_RESOURCES = { en: { common: enCommon, agents: enAgents } };
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 

@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 // TestFinalizeTaskClaimFailureRollsBackTokenThenRequeue is the regression for
@@ -80,7 +80,7 @@ func dispatchedCommentTaskFixture(t *testing.T, ctx context.Context, pool *pgxpo
 	suffix := time.Now().UnixNano()
 
 	if err := pool.QueryRow(ctx, `INSERT INTO "user" (name, email) VALUES ($1,$2) RETURNING id`,
-		"Finalize Fail Test", fmt.Sprintf("finalize-fail-%d@opercia.ai", suffix)).Scan(&userID); err != nil {
+		"Finalize Fail Test", fmt.Sprintf("finalize-fail-%d@operica.ai", suffix)).Scan(&userID); err != nil {
 		t.Fatalf("create user: %v", err)
 	}
 	if err := pool.QueryRow(ctx, `INSERT INTO workspace (name, slug, description, issue_prefix) VALUES ($1,$2,$3,$4) RETURNING id`,

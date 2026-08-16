@@ -7,14 +7,14 @@ import type {
   Issue,
   IssueTableFacetSpec,
   IssueTableFacetsResponse,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   actorIssuesViewStore,
   type ActorIssuesScope,
-} from "@opercia/core/issues/stores/actor-issues-view-store";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@opercia/ui/components/ui/tooltip";
+} from "@operica/core/issues/stores/actor-issues-view-store";
+import { Button } from "@operica/ui/components/ui/button";
+import { Input } from "@operica/ui/components/ui/input";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@operica/ui/components/ui/tooltip";
 import {
   IssueDisplayControls,
   ViewRefreshIndicator,

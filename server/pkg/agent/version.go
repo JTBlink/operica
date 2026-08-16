@@ -19,10 +19,10 @@ var MinVersions = map[string]string{
 }
 
 // MinQuickCreateCLIVersion gates the agent-create (quick-create) flow against
-// the opercia CLI version reported by the daemon at registration time. The
+// the operica CLI version reported by the daemon at registration time. The
 // quick-create prompt that the agent runs depends on CLI behavior introduced
 // after this version (attachment URL handling, quick-create attachment
-// binding, no-retry semantics on `opercia issue create` failure — see PR
+// binding, no-retry semantics on `operica issue create` failure — see PR
 // #1851); older daemons would either double-create issues or mishandle pasted
 // screenshot URLs. Treated as a hard requirement: missing / unparsable / below
 // this threshold all fail closed.
@@ -34,7 +34,7 @@ const MinQuickCreateCLIVersion = "0.2.21"
 // older floor above; only requests using these optional fields need this gate.
 const MinQuickCreateFieldsCLIVersion = "0.4.3"
 
-// MinHandoffCLIVersion is the lowest opercia CLI version whose daemon renders
+// MinHandoffCLIVersion is the lowest operica CLI version whose daemon renders
 // the assignment handoff note into the run's opening prompt + issue_context.md
 // (MUL-3375). Unlike quick-create this is a SOFT gate: assigning an issue with
 // a note never fails on an old daemon — the assignment still takes effect, the
@@ -69,8 +69,8 @@ func HandoffSupported(cliVersion string) bool {
 // Errors returned by CheckMinCLIVersion. Callers branch on these to surface
 // "needs upgrade" vs "version not reported" with the right user message.
 var (
-	ErrCLIVersionMissing = errors.New("opercia CLI version not reported by daemon")
-	ErrCLIVersionTooOld  = errors.New("opercia CLI version is below required minimum")
+	ErrCLIVersionMissing = errors.New("operica CLI version not reported by daemon")
+	ErrCLIVersionTooOld  = errors.New("operica CLI version is below required minimum")
 )
 
 // devDescribeRe matches the `git describe --tags --always --dirty` output for

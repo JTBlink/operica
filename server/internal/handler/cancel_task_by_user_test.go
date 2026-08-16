@@ -626,7 +626,7 @@ func TestCancelTaskByUser_ChatTask_NonCreator_Returns403(t *testing.T) {
 
 	agentID := createHandlerTestAgent(t, "CancelChatAgent", []byte("[]"))
 	sessionID := createHandlerTestChatSession(t, agentID) // creator = testUserID
-	otherUserID := createWorkspaceMemberUser(t, "Chat Bystander", "cancel-chat-bystander@opercia.test")
+	otherUserID := createWorkspaceMemberUser(t, "Chat Bystander", "cancel-chat-bystander@operica.test")
 
 	var taskID string
 	if err := testPool.QueryRow(context.Background(), `

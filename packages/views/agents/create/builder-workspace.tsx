@@ -12,12 +12,12 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
+} from "@operica/ui/components/ui/alert-dialog";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@opercia/ui/components/ui/resizable";
+} from "@operica/ui/components/ui/resizable";
 import {
   applyDraftRuntimeChange,
   decodeBuilderInput,
@@ -25,12 +25,12 @@ import {
   mergeBuilderDraft,
   parseBuilderDraft,
   stripBuilderDraft,
-} from "@opercia/core/agents";
+} from "@operica/core/agents";
 import {
   runtimeDisplayLabel,
   runtimeModelsOptions,
-} from "@opercia/core/runtimes";
-import type { AgentBuilderSessionSummary } from "@opercia/core/types";
+} from "@operica/core/runtimes";
+import type { AgentBuilderSessionSummary } from "@operica/core/types";
 import { AgentConfigurationPanel } from "./agent-configuration-panel";
 import { BuilderConversation } from "./builder-conversation";
 import { CreateAgentFooter } from "./create-agent-footer";
@@ -76,7 +76,7 @@ export function BuilderWorkspace({
 }) {
   const { t } = useT("agents");
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({
-    id: "opercia_agent_builder_layout",
+    id: "operica_agent_builder_layout",
   });
 
   // Resuming: the conversation already runs somewhere, and only the server

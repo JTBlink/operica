@@ -1,5 +1,5 @@
 /**
- * Public surface for @opercia/core/feature-flags.
+ * Public surface for @operica/core/feature-flags.
  *
  * Keep this list minimal — every new export becomes a contract we have to
  * preserve across the monorepo. Add to it only when a real caller appears.

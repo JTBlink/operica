@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func newCancelFinalizePool(t *testing.T) *pgxpool.Pool {
@@ -20,7 +20,7 @@ func newCancelFinalizePool(t *testing.T) *pgxpool.Pool {
 
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dbURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -54,7 +54,7 @@ func createCancelFinalizeFixture(t *testing.T, ctx context.Context, pool *pgxpoo
 	t.Helper()
 
 	suffix := time.Now().UnixNano()
-	email := fmt.Sprintf("cancel-finalize-%d@opercia.ai", suffix)
+	email := fmt.Sprintf("cancel-finalize-%d@operica.ai", suffix)
 	slug := fmt.Sprintf("cancel-finalize-%d", suffix)
 
 	var userID string
@@ -616,7 +616,7 @@ func (f cancelFinalizeFixture) unbindChannelSession(t *testing.T, ctx context.Co
 }
 
 // Channel-ingested user messages are the durable record of what the platform
-// sender wrote — the sender has no Opercia composer to restore a draft into.
+// sender wrote — the sender has no Operica composer to restore a draft into.
 // The gate is the immutable per-message channel_ingested stamp, so it must
 // hold even after archiving/rebinding deleted the session binding: cancelling
 // the sealed queued task keeps the messages and settles as "Stopped.".

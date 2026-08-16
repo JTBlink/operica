@@ -1,11 +1,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { notificationPreferenceOptions } from "@opercia/core/notification-preferences/queries";
-import { useUpdateNotificationPreferences } from "@opercia/core/notification-preferences/mutations";
-import type { NotificationGroupKey, NotificationPreferences } from "@opercia/core/types";
-import { Switch } from "@opercia/ui/components/ui/switch";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { notificationPreferenceOptions } from "@operica/core/notification-preferences/queries";
+import { useUpdateNotificationPreferences } from "@operica/core/notification-preferences/mutations";
+import type { NotificationGroupKey, NotificationPreferences } from "@operica/core/types";
+import { Switch } from "@operica/ui/components/ui/switch";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 import { BrowserNotificationSetting } from "./browser-notification-setting";

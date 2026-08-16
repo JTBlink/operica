@@ -1,6 +1,6 @@
-// Mirrors the opercia-cloud Billing module response shapes
-// (opercia-cloud/docs/api/billing.md). These types are the contract our
-// frontend consumes via /api/cloud-billing/* — opercia-api itself does
+// Mirrors the operica-cloud Billing module response shapes
+// (operica-cloud/docs/api/billing.md). These types are the contract our
+// frontend consumes via /api/cloud-billing/* — operica-api itself does
 // not own the schema, it just proxies bytes. Keep field names verbatim
 // with what the cloud sends.
 //

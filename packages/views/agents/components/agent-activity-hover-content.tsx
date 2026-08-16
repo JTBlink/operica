@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ActorAvatar as ActorAvatarBase } from "@opercia/ui/components/common/actor-avatar";
-import { useActorName } from "@opercia/core/workspace/hooks";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { runtimeListOptions } from "@opercia/core/runtimes/queries";
-import { agentListOptions } from "@opercia/core/workspace/queries";
-import { deriveAgentAvailability } from "@opercia/core/agents";
-import type { AgentTask, Issue } from "@opercia/core/types";
+import { ActorAvatar as ActorAvatarBase } from "@operica/ui/components/common/actor-avatar";
+import { useActorName } from "@operica/core/workspace/hooks";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { runtimeListOptions } from "@operica/core/runtimes/queries";
+import { agentListOptions } from "@operica/core/workspace/queries";
+import { deriveAgentAvailability } from "@operica/core/agents";
+import type { AgentTask, Issue } from "@operica/core/types";
 import { workloadConfig } from "../presence";
 import { useT } from "../../i18n";
 

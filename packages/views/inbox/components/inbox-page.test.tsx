@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import type { InboxItem } from "@opercia/core/types";
+import type { InboxItem } from "@operica/core/types";
 import { InboxPage } from "./inbox-page";
 
 vi.mock("react-resizable-panels", () => ({
@@ -23,26 +23,26 @@ vi.mock("@tanstack/react-query", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useWorkspacePaths: () => ({
     inbox: () => "/acme/inbox",
     issueDetail: (id: string) => `/acme/issues/${id}`,
   }),
 }));
 
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: { getState: () => ({ open: vi.fn() }) },
 }));
 
-vi.mock("@opercia/core/issues/stores/draft-store", () => ({
+vi.mock("@operica/core/issues/stores/draft-store", () => ({
   useIssueDraftStore: { getState: () => ({ setDraft: vi.fn() }) },
 }));
 
-vi.mock("@opercia/core/inbox/queries", () => ({
+vi.mock("@operica/core/inbox/queries", () => ({
   inboxListOptions: () => ({ queryKey: ["inbox", "workspace-1", "list"] }),
   archivedInboxListOptions: () => ({ queryKey: ["inbox", "workspace-1", "archived"] }),
   deduplicateInboxItems: (items: InboxItem[]) => items.filter((i) => !i.archived),
@@ -55,7 +55,7 @@ vi.mock("@opercia/core/inbox/queries", () => ({
 const markReadMutate = vi.fn();
 const markUnreadMutate = vi.fn();
 
-vi.mock("@opercia/core/inbox/mutations", () => {
+vi.mock("@operica/core/inbox/mutations", () => {
   const mutation = () => ({ mutate: vi.fn() });
   return {
     useMarkInboxRead: () => ({ mutate: markReadMutate }),
@@ -101,11 +101,11 @@ const FOLD_INNER = 851;
 const TABLET = 1024;
 const DESKTOP = 1440;
 const layout = { width: PHONE };
-vi.mock("@opercia/ui/hooks/use-mobile", () => ({
+vi.mock("@operica/ui/hooks/use-mobile", () => ({
   useIsMobile: () => layout.width < 768,
   useIsCompact: () => layout.width < 1024,
 }));
-vi.mock("@opercia/ui/components/ui/resizable", () => ({
+vi.mock("@operica/ui/components/ui/resizable", () => ({
   ResizablePanelGroup: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),

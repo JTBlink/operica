@@ -1,11 +1,11 @@
 ---
 title: 개발 참여
-description: Opercia 로컬 개발 환경을 설정하고 테스트를 실행하며 저장소 규칙에 따라 변경 사항을 제출합니다.
+description: Operica 로컬 개발 환경을 설정하고 테스트를 실행하며 저장소 규칙에 따라 변경 사항을 제출합니다.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-Opercia는 Go backend와 pnpm monorepo로 구성됩니다. 로컬에서 시작하는 가장 간단한 방법은 `make dev`입니다. 현재 checkout의 환경, 데이터베이스, migration을 준비한 뒤 Web과 API를 시작합니다.
+Operica는 Go backend와 pnpm monorepo로 구성됩니다. 로컬에서 시작하는 가장 간단한 방법은 `make dev`입니다. 현재 checkout의 환경, 데이터베이스, migration을 준비한 뒤 Web과 API를 시작합니다.
 
 ## 환경 요구 사항
 
@@ -21,7 +21,7 @@ Opercia는 Go backend와 pnpm monorepo로 구성됩니다. 로컬에서 시작�
 
 ```bash
 git clone https://github.com/JTBlink/operica.git
-cd opercia
+cd operica
 make dev
 ```
 
@@ -41,8 +41,8 @@ API: http://localhost:8080
 저장소는 기본 checkout과 여러 worktree를 동시에 실행할 수 있습니다. 하나의 PostgreSQL 컨테이너를 공유하지만 서로 다른 데이터베이스와 port를 사용합니다.
 
 ```bash
-git worktree add ../opercia-feature -b feat/my-change main
-cd ../opercia-feature
+git worktree add ../operica-feature -b feat/my-change main
+cd ../operica-feature
 make setup-worktree
 make start-worktree
 ```
@@ -148,7 +148,7 @@ Migration은 `server/migrations/`에 있고 query는 `server/pkg/db/queries/`에
 변경 사항과 가장 가까운 검사를 먼저 실행한 뒤 범위를 넓히세요. Docs만 변경한 경우:
 
 ```bash
-pnpm --filter @opercia/docs typecheck
+pnpm --filter @operica/docs typecheck
 ```
 
 공유 프런트엔드 변경:

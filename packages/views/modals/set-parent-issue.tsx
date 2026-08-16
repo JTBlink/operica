@@ -2,9 +2,9 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { childIssuesOptions } from "@opercia/core/issues/queries";
-import { useUpdateIssue } from "@opercia/core/issues/mutations";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { childIssuesOptions } from "@operica/core/issues/queries";
+import { useUpdateIssue } from "@operica/core/issues/mutations";
 import { IssuePickerModal } from "./issue-picker-modal";
 import { useT } from "../i18n";
 

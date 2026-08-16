@@ -5,13 +5,13 @@ description: 排查连接、执行、实时更新、邮件和自托管服务中�
 
 import { Callout } from "fumadocs-ui/components/callout";
 
-先确认问题发生在哪一层：Opercia 服务、守护进程、运行时，还是 AI 编程工具。下面几条命令通常足以找到第一条有效错误：
+先确认问题发生在哪一层：Operica 服务、守护进程、运行时，还是 AI 编程工具。下面几条命令通常足以找到第一条有效错误：
 
 ```bash
-opercia version
-opercia auth status
-opercia daemon status --output json
-opercia daemon logs --lines 100
+operica version
+operica auth status
+operica daemon status --output json
+operica daemon logs --lines 100
 ```
 
 自托管实例还可以直接检查服务：
@@ -28,15 +28,15 @@ curl -i https://api.example.com/readyz
 先运行：
 
 ```bash
-opercia auth status
-opercia daemon status --output json
-opercia daemon logs --lines 100
+operica auth status
+operica daemon status --output json
+operica daemon logs --lines 100
 ```
 
 常见原因包括：
 
 - CLI 尚未登录，或本机保存的令牌已经失效；
-- 守护进程连接了错误的 Opercia 服务；
+- 守护进程连接了错误的 Operica 服务；
 - 执行电脑无法访问 API，或 DNS、TLS、防火墙拦截了连接；
 - 当前账号已经不在目标工作区中；
 - 本机没有安装任何受支持的 AI 编程工具，守护进程因此无法启动。
@@ -44,14 +44,14 @@ opercia daemon logs --lines 100
 重新登录并重启守护进程：
 
 ```bash
-opercia login
-opercia daemon restart
+operica login
+operica daemon restart
 ```
 
-自托管部署还需要从**执行电脑**请求 API 的 `/health`——服务器本机测试无法暴露执行电脑侧的 DNS、TLS 或防火墙问题。需要修改地址时，重新运行 `opercia setup self-host`，或检查当前 profile 的 `server_url`：
+自托管部署还需要从**执行电脑**请求 API 的 `/health`——服务器本机测试无法暴露执行电脑侧的 DNS、TLS 或防火墙问题。需要修改地址时，重新运行 `operica setup self-host`，或检查当前 profile 的 `server_url`：
 
 ```bash
-opercia config show
+operica config show
 ```
 
 ## Issue 未开始执行
@@ -70,18 +70,18 @@ opercia config show
 智能体默认最多同时执行 6 条执行任务；单个守护进程默认最多同时执行 20 条。达到上限时，新执行任务会留在队列中，等已有执行结束后再开始。运行时离线时，执行任务也会继续排队；超过 2 小时仍未领取才会失败。
 
 ```bash
-opercia daemon status --output json
-opercia agent get <agent-id>
-opercia issue runs <issue-id>
+operica daemon status --output json
+operica agent get <agent-id>
+operica issue runs <issue-id>
 ```
 
-如果运行时列表缺少预期工具，先在同一个系统账号和 `PATH` 中确认工具可以运行并且已经登录，再执行 `opercia daemon restart`。
+如果运行时列表缺少预期工具，先在同一个系统账号和 `PATH` 中确认工具可以运行并且已经登录，再执行 `operica daemon restart`。
 
 ### `waiting_local_directory` 状态
 
-这表示另一条在途执行任务正在使用同一个本地目录。Opercia 会等待目录锁释放，避免两个智能体同时修改同一份文件。
+这表示另一条在途执行任务正在使用同一个本地目录。Operica 会等待目录锁释放，避免两个智能体同时修改同一份文件。
 
-通常只需等前一条执行任务结束。若前一条已经卡住，可以从它的执行日志中停止；也可以为当前智能体选择其他本地目录。这个目录互斥由守护进程在内存中维护，不写磁盘锁文件；怀疑锁状态异常时运行 `opercia daemon restart` 即可释放，没有需要手动删除的文件。
+通常只需等前一条执行任务结束。若前一条已经卡住，可以从它的执行日志中停止；也可以为当前智能体选择其他本地目录。这个目录互斥由守护进程在内存中维护，不写磁盘锁文件；怀疑锁状态异常时运行 `operica daemon restart` 即可释放，没有需要手动删除的文件。
 
 ## AI 编程工具启动失败
 
@@ -127,7 +127,7 @@ docker compose -f docker-compose.selfhost.yml logs backend \
 - **Resend**：确认 API key 有效，且发件地址的域名已经验证；
 - **SMTP**：确认主机、端口、凭据和发件地址，并从错误日志判断失败发生在连接、TLS、认证还是投递阶段。
 
-`SMTP_HOST` 和 Resend 同时配置时，Opercia 会优先使用 SMTP。配置方式见[登录与注册](/auth-setup#邮箱验证码)。
+`SMTP_HOST` 和 Resend 同时配置时，Operica 会优先使用 SMTP。配置方式见[登录与注册](/auth-setup#邮箱验证码)。
 
 <Callout type="warning">
 生产环境不要依赖日志中的验证码，也不要启用固定本地测试验证码。
@@ -189,25 +189,25 @@ lsof -nP -iTCP:8080 -sTCP:LISTEN   # macOS / Linux
 netstat -ano | findstr :8080       # Windows
 ```
 
-如果它是另一个 Opercia checkout，先在那个目录运行 `make stop`。否则正常停止占用端口的程序，或修改当前服务端口。公网 80/443 由 Caddy、Nginx 等反向代理监听。
+如果它是另一个 Operica checkout，先在那个目录运行 `make stop`。否则正常停止占用端口的程序，或修改当前服务端口。公网 80/443 由 Caddy、Nginx 等反向代理监听。
 
 ## 日志位置
 
 | 组件 | 查看方式 |
 | --- | --- |
-| 后台守护进程 | `opercia daemon logs --lines 100` |
-| 实时跟随守护进程日志 | `opercia daemon logs --follow` |
-| 默认 profile 的日志文件 | `~/.opercia/daemon.log` |
-| 默认 profile 的启动或崩溃日志 | `~/.opercia/daemon.err.log` |
-| 命名 profile | `~/.opercia/profiles/<name>/` 下的对应日志 |
+| 后台守护进程 | `operica daemon logs --lines 100` |
+| 实时跟随守护进程日志 | `operica daemon logs --follow` |
+| 默认 profile 的日志文件 | `~/.operica/daemon.log` |
+| 默认 profile 的启动或崩溃日志 | `~/.operica/daemon.err.log` |
+| 命名 profile | `~/.operica/profiles/<name>/` 下的对应日志 |
 | Docker backend | `docker compose -f docker-compose.selfhost.yml logs -f backend` |
 | 浏览器 | 开发者工具中的 Console 和 Network |
 
 需要直接观察守护进程启动过程时，可以改为前台运行：
 
 ```bash
-opercia daemon stop
-opercia daemon start --foreground
+operica daemon stop
+operica daemon start --foreground
 ```
 
 仍然无法定位时，到 [GitHub Issues](https://github.com/JTBlink/operica/issues) 搜索已有问题或提交新的 issue。

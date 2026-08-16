@@ -95,10 +95,10 @@ func kimiSmokeModel() string {
 }
 
 // TestKimiRealMcpConfigReachesSessionSmoke drives the real `kimi acp` binary
-// through this package's own backend with a Opercia-shaped agent.mcp_config
+// through this package's own backend with a Operica-shaped agent.mcp_config
 // and asserts the server is actually connected and callable.
 //
-// Users reported that MCP configured in Opercia "never reaches kimi", pointing
+// Users reported that MCP configured in Operica "never reaches kimi", pointing
 // at the bare `kimi acp` launch line as evidence (MUL-5846). That line carries
 // no MCP flags because the CLI has none — kimi takes MCP over ACP session/new
 // instead — so only an end-to-end run against the real binary can settle it.
@@ -132,12 +132,12 @@ func TestKimiRealMcpConfigReachesSessionSmoke(t *testing.T) {
 	}
 
 	// Exactly the shape the daemon forwards from agent.mcp_config.
-	mcpConfig := fmt.Sprintf(`{"mcpServers":{"operciaprobe":{"command":%q,"args":[],"env":{}}}}`, serverPath)
+	mcpConfig := fmt.Sprintf(`{"mcpServers":{"opericaprobe":{"command":%q,"args":[],"env":{}}}}`, serverPath)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 240*time.Second)
 	defer cancel()
 	session, err := backend.Execute(ctx,
-		"Call the opercia_probe_ping tool and reply with exactly what it returned. Do nothing else.",
+		"Call the operica_probe_ping tool and reply with exactly what it returned. Do nothing else.",
 		ExecOptions{
 			Timeout:   210 * time.Second,
 			Cwd:       dir,
@@ -164,7 +164,7 @@ func TestKimiRealMcpConfigReachesSessionSmoke(t *testing.T) {
 	if !bytes.Contains(spawned, []byte("tools/list")) {
 		t.Fatalf("kimi started the MCP server but never listed its tools: %q", spawned)
 	}
-	if !strings.Contains(result.Output, "OPERCIA_MCP_OK") {
+	if !strings.Contains(result.Output, "OPERICA_MCP_OK") {
 		t.Fatalf("agent output does not contain the tool's sentinel: %q", result.Output)
 	}
 }
@@ -181,13 +181,13 @@ while IFS= read -r line; do
   id=` + "`" + `printf '%s' "$line" | sed -n 's/.*"id":\([0-9][0-9]*\).*/\1/p'` + "`" + `
   case "$line" in
     *'"method":"initialize"'*)
-      printf '{"jsonrpc":"2.0","id":%s,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":false}},"serverInfo":{"name":"opercia-probe","version":"1.0.0"}}}\n' "$id"
+      printf '{"jsonrpc":"2.0","id":%s,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":false}},"serverInfo":{"name":"operica-probe","version":"1.0.0"}}}\n' "$id"
       ;;
     *'"method":"tools/list"'*)
-      printf '{"jsonrpc":"2.0","id":%s,"result":{"tools":[{"name":"opercia_probe_ping","description":"Returns OPERCIA_MCP_OK.","inputSchema":{"type":"object","properties":{},"additionalProperties":false}}]}}\n' "$id"
+      printf '{"jsonrpc":"2.0","id":%s,"result":{"tools":[{"name":"operica_probe_ping","description":"Returns OPERICA_MCP_OK.","inputSchema":{"type":"object","properties":{},"additionalProperties":false}}]}}\n' "$id"
       ;;
     *'"method":"tools/call"'*)
-      printf '{"jsonrpc":"2.0","id":%s,"result":{"content":[{"type":"text","text":"OPERCIA_MCP_OK"}],"isError":false}}\n' "$id"
+      printf '{"jsonrpc":"2.0","id":%s,"result":{"content":[{"type":"text","text":"OPERICA_MCP_OK"}],"isError":false}}\n' "$id"
       ;;
     *'"method":"resources/list"'*)
       printf '{"jsonrpc":"2.0","id":%s,"result":{"resources":[]}}\n' "$id"

@@ -3,18 +3,18 @@
 import { useEffect, useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
-import type { RuntimeProfile } from "@opercia/core/types";
+import type { RuntimeProfile } from "@operica/core/types";
 import {
   parseRuntimeProfileBoundConflict,
   useDeleteRuntimeProfile,
-} from "@opercia/core/runtimes";
+} from "@operica/core/runtimes";
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/ui/components/ui/alert-dialog";
+import { Button } from "@operica/ui/components/ui/button";
 import { useT } from "../../i18n";
 
 // Confirmation dialog for deleting a custom runtime profile. The server

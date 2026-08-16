@@ -2,27 +2,27 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Trash2, Copy, Check, Info } from "lucide-react";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@opercia/ui/components/ui/tooltip";
-import type { PersonalAccessToken } from "@opercia/core/types";
-import { Alert, AlertDescription } from "@opercia/ui/components/ui/alert";
-import { Checkbox } from "@opercia/ui/components/ui/checkbox";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@operica/ui/components/ui/tooltip";
+import type { PersonalAccessToken } from "@operica/core/types";
+import { Alert, AlertDescription } from "@operica/ui/components/ui/alert";
+import { Checkbox } from "@operica/ui/components/ui/checkbox";
+import { Input } from "@operica/ui/components/ui/input";
+import { Button } from "@operica/ui/components/ui/button";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "@opercia/ui/components/ui/select";
+} from "@operica/ui/components/ui/select";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@opercia/ui/components/ui/dialog";
+} from "@operica/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,11 +32,11 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
-import { copyText } from "@opercia/ui/lib/clipboard";
+} from "@operica/ui/components/ui/alert-dialog";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
+import { copyText } from "@operica/ui/lib/clipboard";
 import { toast } from "sonner";
-import { api } from "@opercia/core/api";
+import { api } from "@operica/core/api";
 import { useT } from "../../i18n";
 import { SettingsSection, SettingsTab } from "./settings-layout";
 
@@ -115,7 +115,7 @@ export function TokensTab() {
 
   const handleCopyCommand = async () => {
     if (!newToken) return;
-    if (await copyText(`opercia login --token ${newToken}`)) {
+    if (await copyText(`operica login --token ${newToken}`)) {
       setCommandCopied(true);
       setTimeout(() => setCommandCopied(false), 2000);
     }
@@ -300,7 +300,7 @@ export function TokensTab() {
             <p className="text-caption text-muted-foreground">{t(($) => $.tokens.created_dialog.cli_hint)}</p>
             <div className="flex min-w-0 items-center gap-2">
               <code className="min-w-0 flex-1 truncate rounded-md border bg-muted/50 px-3 py-2 text-body select-all">
-                {`opercia login --token ${newToken}`}
+                {`operica login --token ${newToken}`}
               </code>
               <Tooltip>
                 <TooltipTrigger

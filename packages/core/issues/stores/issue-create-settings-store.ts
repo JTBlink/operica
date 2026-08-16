@@ -73,7 +73,7 @@ export const useIssueCreateSettingsStore = create<IssueCreateSettingsState>()(
         })),
     }),
     {
-      name: "opercia_issue_create_settings",
+      name: "operica_issue_create_settings",
       storage: createJSONStorage(() => createWorkspaceAwareStorage(defaultStorage)),
       merge: (persistedState, currentState) => {
         const persisted = (persistedState ?? {}) as Partial<IssueCreateSettingsState>;

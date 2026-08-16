@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { AgentDetailPage as SharedAgentDetailPage } from "@opercia/views/agents";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { agentListOptions } from "@opercia/core/workspace/queries";
+import { AgentDetailPage as SharedAgentDetailPage } from "@operica/views/agents";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { agentListOptions } from "@operica/core/workspace/queries";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export function AgentDetailPage() {

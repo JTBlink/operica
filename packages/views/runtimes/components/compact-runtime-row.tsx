@@ -1,6 +1,6 @@
-import { cn } from "@opercia/ui/lib/utils";
-import type { AgentRuntime } from "@opercia/core/types";
-import { runtimeDisplayName } from "@opercia/core/runtimes";
+import { cn } from "@operica/ui/lib/utils";
+import type { AgentRuntime } from "@operica/core/types";
+import { runtimeDisplayName } from "@operica/core/runtimes";
 import { ProviderLogo } from "./provider-logo";
 import { useT } from "../../i18n";
 

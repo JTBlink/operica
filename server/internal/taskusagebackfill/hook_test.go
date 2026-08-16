@@ -39,7 +39,7 @@ import (
 func TestHook_DirectV034Upgrade(t *testing.T) {
 	adminURL := os.Getenv("DATABASE_URL")
 	if adminURL == "" {
-		adminURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		adminURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 
 	ctx := context.Background()
@@ -47,7 +47,7 @@ func TestHook_DirectV034Upgrade(t *testing.T) {
 		t.Skip("integration test requires Postgres at DATABASE_URL")
 	}
 
-	tmpDB := fmt.Sprintf("opercia_v034_upgrade_%d", time.Now().UnixNano())
+	tmpDB := fmt.Sprintf("operica_v034_upgrade_%d", time.Now().UnixNano())
 	if err := createDatabase(ctx, adminURL, tmpDB); err != nil {
 		t.Fatalf("create temp database %s: %v", tmpDB, err)
 	}
@@ -159,14 +159,14 @@ func TestHook_DirectV034Upgrade(t *testing.T) {
 func TestHook_FreshDatabaseStampsWatermarkOnly(t *testing.T) {
 	adminURL := os.Getenv("DATABASE_URL")
 	if adminURL == "" {
-		adminURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		adminURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 	ctx := context.Background()
 	if !databaseReachable(ctx, adminURL) {
 		t.Skip("integration test requires Postgres at DATABASE_URL")
 	}
 
-	tmpDB := fmt.Sprintf("opercia_v034_fresh_%d", time.Now().UnixNano())
+	tmpDB := fmt.Sprintf("operica_v034_fresh_%d", time.Now().UnixNano())
 	if err := createDatabase(ctx, adminURL, tmpDB); err != nil {
 		t.Fatalf("create temp database: %v", err)
 	}

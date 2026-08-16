@@ -21,12 +21,12 @@ import {
   Info,
   Coins,
 } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
-import { copyText } from "@opercia/ui/lib/clipboard";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Dialog, DialogContent, DialogTitle } from "@opercia/ui/components/ui/dialog";
-import { Popover, PopoverContent, PopoverTrigger } from "@opercia/ui/components/ui/popover";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@opercia/ui/components/ui/collapsible";
+import { cn } from "@operica/ui/lib/utils";
+import { copyText } from "@operica/ui/lib/clipboard";
+import { Button } from "@operica/ui/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@operica/ui/components/ui/dialog";
+import { Popover, PopoverContent, PopoverTrigger } from "@operica/ui/components/ui/popover";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@operica/ui/components/ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -36,20 +36,20 @@ import {
   DropdownMenuItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-} from "@opercia/ui/components/ui/dropdown-menu";
+} from "@operica/ui/components/ui/dropdown-menu";
 import { ActorAvatar } from "../actor-avatar";
 import { AttributionBadge } from "../../issues/components/attribution-badge";
 import { RichContent } from "../../rich-content";
-import { api } from "@opercia/core/api";
+import { api } from "@operica/core/api";
 import {
   useTranscriptViewStore,
   type TranscriptDetailDensity,
   type TranscriptFilterKey,
   type TranscriptSortDirection,
-} from "@opercia/core/agents/stores";
-import type { AgentTask, Agent, AgentRuntime } from "@opercia/core/types/agent";
-import { runtimeDisplayName, providerDisplayName } from "@opercia/core/runtimes";
-import { useCustomPricingStore } from "@opercia/core/runtimes/custom-pricing-store";
+} from "@operica/core/agents/stores";
+import type { AgentTask, Agent, AgentRuntime } from "@operica/core/types/agent";
+import { runtimeDisplayName, providerDisplayName } from "@operica/core/runtimes";
+import { useCustomPricingStore } from "@operica/core/runtimes/custom-pricing-store";
 import { redactSecrets } from "./redact";
 import {
   createNewestFirstFollow,

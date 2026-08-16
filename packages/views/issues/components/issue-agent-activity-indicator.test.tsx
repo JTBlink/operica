@@ -1,16 +1,16 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { AgentTask } from "@opercia/core/types";
+import type { AgentTask } from "@operica/core/types";
 
 const mockState = vi.hoisted(() => ({
   snapshot: [] as unknown[],
 }));
 
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@opercia/core/agents", () => ({
+vi.mock("@operica/core/agents", () => ({
   agentTaskSnapshotOptions: (wsId: string) => ({
     queryKey: ["agents", "task-snapshot", wsId],
   }),
@@ -33,7 +33,7 @@ vi.mock("../../i18n", () => ({
 // The hover card only portals its content once open, so absence of the body
 // cannot distinguish "closed" from "not wired up". Mock the primitive instead
 // and assert on the wrapper itself.
-vi.mock("@opercia/ui/components/ui/hover-card", () => ({
+vi.mock("@operica/ui/components/ui/hover-card", () => ({
   HoverCard: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="hover-card">{children}</div>
   ),

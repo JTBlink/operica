@@ -4,7 +4,7 @@ import { descriptionPreview } from "./board-card";
 
 const ATTACHMENT_ID = "0f8a1b2c-3d4e-4f50-9a6b-7c8d9e0f1a2b";
 const IMAGE = `![](/api/attachments/${ATTACHMENT_ID}/download)`;
-const MARKER = `<!-- opercia:channel-media:${ATTACHMENT_ID} -->`;
+const MARKER = `<!-- operica:channel-media:${ATTACHMENT_ID} -->`;
 
 describe("descriptionPreview", () => {
   // A `/issue` message carrying an image materializes into image Markdown plus

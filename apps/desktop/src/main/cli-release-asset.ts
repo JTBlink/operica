@@ -1,4 +1,4 @@
-const RELEASE_ARCHIVE_PREFIX = "opercia-cli-";
+const RELEASE_ARCHIVE_PREFIX = "operica-cli-";
 
 function platformArchiveDescriptor(
   platform: NodeJS.Platform = process.platform,
@@ -35,8 +35,8 @@ export function selectPlatformReleaseAssetName(
   );
   const names = [...assetNames];
 
-  // Prefer the versioned `opercia-cli-<v>-<os>-<arch>.<ext>` name; fall
-  // back to the legacy `opercia_<os>_<arch>.<ext>` so older releases that
+  // Prefer the versioned `operica-cli-<v>-<os>-<arch>.<ext>` name; fall
+  // back to the legacy `operica_<os>_<arch>.<ext>` so older releases that
   // only ship the legacy archive keep working.
   const suffix = `-${os}-${mappedArch}.${ext}`;
   const matches = names.filter(
@@ -53,7 +53,7 @@ export function selectPlatformReleaseAssetName(
     );
   }
 
-  const legacyName = `opercia_${os}_${mappedArch}.${ext}`;
+  const legacyName = `operica_${os}_${mappedArch}.${ext}`;
   if (names.includes(legacyName)) {
     return legacyName;
   }

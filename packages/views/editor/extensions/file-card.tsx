@@ -17,7 +17,7 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react";
 import type { NodeViewProps } from "@tiptap/react";
-import { FILE_CARD_URL_PATTERN } from "@opercia/ui/markdown";
+import { FILE_CARD_URL_PATTERN } from "@operica/ui/markdown";
 import { escapeMarkdownLabel } from "../utils/escape-markdown-label";
 import { Attachment } from "../attachment";
 

@@ -4,17 +4,17 @@ import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Copy, GitBranch, RefreshCw, Trash2 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { Input } from "@opercia/ui/components/ui/input";
-import { Label } from "@opercia/ui/components/ui/label";
+import { Button } from "@operica/ui/components/ui/button";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { Input } from "@operica/ui/components/ui/input";
+import { Label } from "@operica/ui/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@opercia/ui/components/ui/select";
+} from "@operica/ui/components/ui/select";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,11 +24,11 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { vcsConnectionsOptions } from "@opercia/core/vcs";
-import { api } from "@opercia/core/api";
-import type { ConnectVCSResponse, VCSProvider } from "@opercia/core/types";
+} from "@operica/ui/components/ui/alert-dialog";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { vcsConnectionsOptions } from "@operica/core/vcs";
+import { api } from "@operica/core/api";
+import type { ConnectVCSResponse, VCSProvider } from "@operica/core/types";
 import { useT } from "../../i18n";
 
 const PROVIDERS: VCSProvider[] = ["forgejo", "gitea", "gitlab"];
@@ -206,7 +206,7 @@ export function VCSTab() {
               <p className="text-caption text-muted-foreground">
                 {t(($) => $.vcs.not_configured)}{" "}
                 <code className="rounded bg-muted px-1 py-0.5 text-micro">
-                  OPERCIA_VCS_SECRET_KEY
+                  OPERICA_VCS_SECRET_KEY
                 </code>
                 .
               </p>

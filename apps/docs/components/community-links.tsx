@@ -24,7 +24,7 @@ export function CommunityLinks({
     },
     {
       label: "X（Twitter）",
-      href: "https://x.com/OperciaAI",
+      href: "https://x.com/OpericaAI",
       description: xDescription,
       Icon: XMark,
     },

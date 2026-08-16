@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgtype"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 func TestRuntimeHandlersRejectMalformedRuntimeID(t *testing.T) {
@@ -376,7 +376,7 @@ func TestResolveViewingTZ(t *testing.T) {
 	var userID string
 	if err := testPool.QueryRow(ctx,
 		`INSERT INTO "user" (name, email, timezone)
-		 VALUES ('TZ Resolve', 'tz-resolve@opercia.ai', 'Asia/Tokyo') RETURNING id`,
+		 VALUES ('TZ Resolve', 'tz-resolve@operica.ai', 'Asia/Tokyo') RETURNING id`,
 	).Scan(&userID); err != nil {
 		t.Fatalf("insert user: %v", err)
 	}
@@ -407,7 +407,7 @@ func TestResolveViewingTZ(t *testing.T) {
 	var bareUserID string
 	if err := testPool.QueryRow(ctx,
 		`INSERT INTO "user" (name, email)
-		 VALUES ('TZ Bare', 'tz-bare@opercia.ai') RETURNING id`,
+		 VALUES ('TZ Bare', 'tz-bare@operica.ai') RETURNING id`,
 	).Scan(&bareUserID); err != nil {
 		t.Fatalf("insert bare user: %v", err)
 	}
@@ -425,7 +425,7 @@ func TestResolveViewingTZ(t *testing.T) {
 	var badTZUserID string
 	if err := testPool.QueryRow(ctx,
 		`INSERT INTO "user" (name, email, timezone)
-		 VALUES ('TZ Bad', 'tz-bad@opercia.ai', 'Bad/Zone') RETURNING id`,
+		 VALUES ('TZ Bad', 'tz-bad@operica.ai', 'Bad/Zone') RETURNING id`,
 	).Scan(&badTZUserID); err != nil {
 		t.Fatalf("insert bad-tz user: %v", err)
 	}

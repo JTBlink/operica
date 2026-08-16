@@ -48,7 +48,7 @@ export function createAuthStore(options: AuthStoreOptions) {
       }
 
       // Token mode: read from localStorage (Electron / legacy).
-      const token = storage.getItem("opercia_token");
+      const token = storage.getItem("operica_token");
       if (!token) {
         // No stored token — try getMe() anyway in case the server has
         // AUTO_LOGIN_EMAIL configured (auto-login bypass for local dev).
@@ -89,7 +89,7 @@ export function createAuthStore(options: AuthStoreOptions) {
       const { token, user } = await api.verifyCode(email, code);
       if (!cookieAuth) {
         // Token mode: persist for Electron / legacy.
-        storage.setItem("opercia_token", token);
+        storage.setItem("operica_token", token);
         api.setToken(token);
       }
       onLogin?.();
@@ -101,7 +101,7 @@ export function createAuthStore(options: AuthStoreOptions) {
     loginWithGoogle: async (code: string, redirectUri: string) => {
       const { token, user } = await api.googleLogin(code, redirectUri);
       if (!cookieAuth) {
-        storage.setItem("opercia_token", token);
+        storage.setItem("operica_token", token);
         api.setToken(token);
       }
       onLogin?.();
@@ -111,7 +111,7 @@ export function createAuthStore(options: AuthStoreOptions) {
     },
 
     loginWithToken: async (token: string) => {
-      storage.setItem("opercia_token", token);
+      storage.setItem("operica_token", token);
       api.setToken(token);
       const user = await api.getMe();
       onLogin?.();
@@ -125,7 +125,7 @@ export function createAuthStore(options: AuthStoreOptions) {
         // Clear server-side HttpOnly cookie.
         api.logout().catch(() => {});
       }
-      storage.removeItem("opercia_token");
+      storage.removeItem("operica_token");
       api.setToken(null);
       setCurrentWorkspace(null, null);
       resetAnalytics();

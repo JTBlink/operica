@@ -6,11 +6,11 @@ describe("preprocessMarkdown channel-media provenance", () => {
   it("keeps the image visible while hiding its merge marker", () => {
     const id = "22222222-2222-4222-8222-222222222222";
     const image = `![](/api/attachments/${id}/download)`;
-    const marker = `<!-- opercia:channel-media:${id} -->`;
+    const marker = `<!-- operica:channel-media:${id} -->`;
 
     const result = preprocessMarkdown(`${image}\n\n${marker}`, { cdnDomain: "" });
 
     expect(result).toContain(image);
-    expect(result).not.toContain("opercia:channel-media");
+    expect(result).not.toContain("operica:channel-media");
   });
 });

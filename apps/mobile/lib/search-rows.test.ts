@@ -3,7 +3,7 @@ import type {
   Issue,
   SearchIssueResult,
   SearchProjectResult,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import { buildSearchRows } from "./search-rows";
 
 function issue(

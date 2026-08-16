@@ -1,1 +1,1 @@
-export { SquadsPage as default } from "@opercia/views/squads";
+export { SquadsPage as default } from "@operica/views/squads";

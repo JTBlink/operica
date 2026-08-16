@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { AgentTask } from "@opercia/core/types";
+import type { AgentTask } from "@operica/core/types";
 import { deriveIssueSurfaceActivity, selectIssueTasks } from "./activity";
 
 function task(overrides: Partial<AgentTask>): AgentTask {

@@ -84,7 +84,7 @@ jobs:
           fi
 
   # The frontend validation is split across two runners on purpose. Both
-  # `@opercia/web:build` (a webpack production build) and `@opercia/views:test`
+  # `@operica/web:build` (a webpack production build) and `@operica/views:test`
   # (259 jsdom files) are CPU-saturating, and a standard runner only has
   # 4 vCPUs. Running them in one job made them starve each other: the views
   # suite needs ~104s wall when it owns 4 cores but took ~500s sharing them,
@@ -166,8 +166,8 @@ jobs:
         # to apps/mobile/** + packages/core/**) so it doesn't add
         # ~50s of expo-lint + tsc to every web/desktop PR. Keep this
         # filter in sync with the root package.json scripts, which also
-        # exclude @opercia/mobile.
-        run: pnpm exec turbo build typecheck lint --filter='!@opercia/docs' --filter='!@opercia/mobile'
+        # exclude @operica/mobile.
+        run: pnpm exec turbo build typecheck lint --filter='!@operica/docs' --filter='!@operica/mobile'
 
   frontend-test:
     needs: changes
@@ -218,7 +218,7 @@ jobs:
         # job's responsibility -- frontend-build owns the `typecheck` task.
         # `test` reaches dependency sources through the hash-only
         # `^cache-inputs` edge (see turbo.json), so no `tsc` runs here.
-        run: pnpm exec turbo test --filter='!@opercia/docs' --filter='!@opercia/mobile'
+        run: pnpm exec turbo test --filter='!@operica/docs' --filter='!@operica/mobile'
 
   # Aggregate gate. `frontend` is the status-check name the repository's
   # branch rules refer to, so it has to survive the split above: this job
@@ -252,13 +252,13 @@ jobs:
       postgres:
         image: pgvector/pgvector:pg17
         env:
-          POSTGRES_DB: opercia
-          POSTGRES_USER: opercia
-          POSTGRES_PASSWORD: opercia
+          POSTGRES_DB: operica
+          POSTGRES_USER: operica
+          POSTGRES_PASSWORD: operica
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U opercia -d opercia"
+          --health-cmd "pg_isready -U operica -d operica"
           --health-interval 5s
           --health-timeout 5s
           --health-retries 20
@@ -272,7 +272,7 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     env:
-      DATABASE_URL: postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable
+      DATABASE_URL: postgres://operica:operica@localhost:5432/operica?sslmode=disable
       # Wires up the RedisLocalSkill*_test.go suite. Distinct from REDIS_URL
       # (which would flip the server binary itself onto the Redis-backed
       # realtime relay + request stores); the tests talk to this Redis
@@ -411,7 +411,7 @@ jobs:
 
       - name: Build Windows CLI helper entrypoint
         working-directory: server
-        run: go build ./cmd/opercia
+        run: go build ./cmd/operica
 
   installer:
     # Stub-driven shell tests for scripts/install.sh and scripts/install.ps1.

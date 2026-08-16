@@ -1,4 +1,4 @@
-.PHONY: help makehelp dev server daemon cli opercia build test migrate-up migrate-down sqlc seed clean setup start stop check worktree-env setup-main start-main stop-main check-main setup-worktree start-worktree stop-worktree check-worktree db-up db-down db-reset selfhost selfhost-build selfhost-stop
+.PHONY: help makehelp dev server daemon cli operica build test migrate-up migrate-down sqlc seed clean setup start stop check worktree-env setup-main start-main stop-main check-main setup-worktree start-worktree stop-worktree check-worktree db-up db-down db-reset selfhost selfhost-build selfhost-stop
 
 MAIN_ENV_FILE ?= .env
 WORKTREE_ENV_FILE ?= .env.worktree
@@ -8,27 +8,27 @@ ifneq ($(wildcard $(ENV_FILE)),)
 include $(ENV_FILE)
 endif
 
-POSTGRES_DB ?= opercia
-POSTGRES_USER ?= opercia
-POSTGRES_PASSWORD ?= opercia
+POSTGRES_DB ?= operica
+POSTGRES_USER ?= operica
+POSTGRES_PASSWORD ?= operica
 POSTGRES_PORT ?= 5432
 PORT := $(or $(BACKEND_PORT),$(API_PORT),$(SERVER_PORT),$(PORT),8080)
-ifeq ($(origin OPERCIA_PUBLIC_URL), undefined)
-OPERCIA_PUBLIC_URL := http://localhost:$(PORT)
+ifeq ($(origin OPERICA_PUBLIC_URL), undefined)
+OPERICA_PUBLIC_URL := http://localhost:$(PORT)
 endif
 FRONTEND_PORT ?= 3000
 FRONTEND_ORIGIN ?= http://localhost:$(FRONTEND_PORT)
-OPERCIA_APP_URL ?= $(FRONTEND_ORIGIN)
+OPERICA_APP_URL ?= $(FRONTEND_ORIGIN)
 DATABASE_URL ?= postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@localhost:$(POSTGRES_PORT)/$(POSTGRES_DB)?sslmode=disable
 NEXT_PUBLIC_API_URL ?= http://localhost:$(PORT)
 NEXT_PUBLIC_WS_URL ?= ws://localhost:$(PORT)/ws
 GOOGLE_REDIRECT_URI ?= $(FRONTEND_ORIGIN)/auth/callback
-OPERCIA_SERVER_URL ?= ws://localhost:$(PORT)/ws
+OPERICA_SERVER_URL ?= ws://localhost:$(PORT)/ws
 LOCAL_UPLOAD_BASE_URL ?= http://localhost:$(PORT)
 
 export
 
-OPERCIA_ARGS ?= $(ARGS)
+OPERICA_ARGS ?= $(ARGS)
 
 COMPOSE := docker compose
 
@@ -91,24 +91,24 @@ selfhost: ## Create .env if needed, then pull and start the official self-hosted
 			sed -i '' "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i '' "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i '' -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i '' "s#^OPERCIA_VCS_SECRET_KEY=.*#OPERCIA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i '' "s#^OPERICA_VCS_SECRET_KEY=.*#OPERICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		else \
 			sed -i "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i "s#^OPERCIA_VCS_SECRET_KEY=.*#OPERCIA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i "s#^OPERICA_VCS_SECRET_KEY=.*#OPERICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		fi; \
-		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and OPERCIA_VCS_SECRET_KEY"; \
+		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and OPERICA_VCS_SECRET_KEY"; \
 	fi
-	@echo "==> Pulling official Opercia images..."
+	@echo "==> Pulling official Operica images..."
 	@if ! $(COMPOSE) -f docker-compose.selfhost.yml pull; then \
 		echo ""; \
-		echo "Official images for tag '$${OPERCIA_IMAGE_TAG:-latest}' are not published yet."; \
+		echo "Official images for tag '$${OPERICA_IMAGE_TAG:-latest}' are not published yet."; \
 		echo "If this is before the first GHCR release, build from the current checkout:"; \
 		echo "  make selfhost-build"; \
 		exit 1; \
 	fi
-	@echo "==> Starting Opercia via Docker Compose..."
+	@echo "==> Starting Operica via Docker Compose..."
 	$(COMPOSE) -f docker-compose.selfhost.yml up -d
 	@bash scripts/selfhost-wait.sh official
 
@@ -124,22 +124,22 @@ selfhost-build: ## Build backend/web from the current checkout and start the sel
 			sed -i '' "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i '' "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i '' -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i '' "s#^OPERCIA_VCS_SECRET_KEY=.*#OPERCIA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i '' "s#^OPERICA_VCS_SECRET_KEY=.*#OPERICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		else \
 			sed -i "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i "s#^OPERCIA_VCS_SECRET_KEY=.*#OPERCIA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i "s#^OPERICA_VCS_SECRET_KEY=.*#OPERICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		fi; \
-		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and OPERCIA_VCS_SECRET_KEY"; \
+		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and OPERICA_VCS_SECRET_KEY"; \
 	fi
-	@echo "==> Building Opercia from the current checkout..."
+	@echo "==> Building Operica from the current checkout..."
 	$(COMPOSE) -f docker-compose.selfhost.yml -f docker-compose.selfhost.build.yml up -d --build
 	@bash scripts/selfhost-wait.sh build
 
 selfhost-stop: ## Stop the self-hosted Docker Compose stack
 	$(REQUIRE_COMPOSE)
-	@echo "==> Stopping Opercia services..."
+	@echo "==> Stopping Operica services..."
 	$(COMPOSE) -f docker-compose.selfhost.yml down
 	@echo "✓ All services stopped."
 
@@ -258,13 +258,13 @@ server: ## Run only the Go server for the current checkout
 	cd server && go run ./cmd/server
 
 daemon: ## Restart the local agent daemon using the CLI's stored auth/session
-	@$(MAKE) opercia OPERCIA_ARGS="daemon restart --profile local"
+	@$(MAKE) operica OPERICA_ARGS="daemon restart --profile local"
 
-cli: ## Run the opercia CLI with ARGS or OPERCIA_ARGS from source
-	@$(MAKE) opercia OPERCIA_ARGS="$(OPERCIA_ARGS)"
+cli: ## Run the operica CLI with ARGS or OPERICA_ARGS from source
+	@$(MAKE) operica OPERICA_ARGS="$(OPERICA_ARGS)"
 
-opercia: ## Run the opercia CLI entrypoint directly from the Go source tree
-	cd server && go run -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.date=$(DATE)" ./cmd/opercia $(OPERCIA_ARGS)
+operica: ## Run the operica CLI entrypoint directly from the Go source tree
+	cd server && go run -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.date=$(DATE)" ./cmd/operica $(OPERICA_ARGS)
 
 VERSION ?= $(shell git describe --tags --match 'v[0-9]*' --always --dirty 2>/dev/null || echo dev)
 COMMIT  ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo unknown)
@@ -272,7 +272,7 @@ DATE    ?= $(shell date -u '+%Y-%m-%dT%H:%M:%SZ')
 
 build: ## Build the server, CLI, and migrate binaries into server/bin
 	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT)" -o bin/server ./cmd/server
-	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.date=$(DATE)" -o bin/opercia ./cmd/opercia
+	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.date=$(DATE)" -o bin/operica ./cmd/operica
 	cd server && go build -o bin/migrate ./cmd/migrate
 
 release: ## Package the Desktop app for the current platform (default, no Web/Go server)

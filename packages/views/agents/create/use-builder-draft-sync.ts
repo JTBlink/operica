@@ -14,8 +14,8 @@ import {
   toStoredAgentDraft,
   type AgentDraft,
   type StoredAgentDraft,
-} from "@opercia/core/agents";
-import { api } from "@opercia/core/api";
+} from "@operica/core/agents";
+import { api } from "@operica/core/api";
 
 /** How long editing pauses before the configuration is written back. */
 const AUTOSAVE_DELAY_MS = 800;

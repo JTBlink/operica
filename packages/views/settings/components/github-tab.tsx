@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ExternalLink, GitCommitHorizontal, Link2, PanelRight } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Card, CardContent } from "@opercia/ui/components/ui/card";
-import { Label } from "@opercia/ui/components/ui/label";
-import { Switch } from "@opercia/ui/components/ui/switch";
+import { Button } from "@operica/ui/components/ui/button";
+import { Card, CardContent } from "@operica/ui/components/ui/card";
+import { Label } from "@operica/ui/components/ui/label";
+import { Switch } from "@operica/ui/components/ui/switch";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,17 +17,17 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { memberListOptions, workspaceKeys } from "@opercia/core/workspace/queries";
+} from "@operica/ui/components/ui/alert-dialog";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { memberListOptions, workspaceKeys } from "@operica/core/workspace/queries";
 import {
   deriveGitHubSettings,
   githubInstallationsOptions,
-} from "@opercia/core/github";
-import { api } from "@opercia/core/api";
-import type { Workspace } from "@opercia/core/types";
+} from "@operica/core/github";
+import { api } from "@operica/core/api";
+import type { Workspace } from "@operica/core/types";
 import { AppLink, useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
 import { SettingsTab } from "./settings-layout";
@@ -280,7 +280,7 @@ export function GitHubTab() {
                 <p className="text-body text-muted-foreground">
                   {t(($) => $.github.feature_co_author_description_prefix)}{" "}
                   <code className="rounded bg-muted px-1 py-0.5 text-caption">
-                    {"Co-authored-by: opercia-agent <github@opercia.ai>"}
+                    {"Co-authored-by: operica-agent <github@operica.ai>"}
                   </code>{" "}
                   {t(($) => $.github.feature_co_author_description_suffix)}
                 </p>

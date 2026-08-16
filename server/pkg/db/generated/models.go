@@ -363,7 +363,7 @@ type ChannelOutboundCardMessage struct {
 type ChannelUserBinding struct {
 	ID             pgtype.UUID        `json:"id"`
 	WorkspaceID    pgtype.UUID        `json:"workspace_id"`
-	OperciaUserID  pgtype.UUID        `json:"opercia_user_id"`
+	OpericaUserID  pgtype.UUID        `json:"operica_user_id"`
 	InstallationID pgtype.UUID        `json:"installation_id"`
 	ChannelType    string             `json:"channel_type"`
 	ChannelUserID  string             `json:"channel_user_id"`
@@ -828,7 +828,7 @@ type LarkOutboundCardMessage struct {
 type LarkUserBinding struct {
 	ID             pgtype.UUID        `json:"id"`
 	WorkspaceID    pgtype.UUID        `json:"workspace_id"`
-	OperciaUserID  pgtype.UUID        `json:"opercia_user_id"`
+	OpericaUserID  pgtype.UUID        `json:"operica_user_id"`
 	InstallationID pgtype.UUID        `json:"installation_id"`
 	LarkOpenID     string             `json:"lark_open_id"`
 	UnionID        pgtype.Text        `json:"union_id"`

@@ -1,6 +1,6 @@
 # Self-Hosting Guide
 
-Deploy Opercia on your own infrastructure in minutes.
+Deploy Operica on your own infrastructure in minutes.
 
 ## Architecture
 
@@ -10,7 +10,7 @@ Deploy Opercia on your own infrastructure in minutes.
 | **Frontend** | Web application | Next.js 16 |
 | **Database** | Primary data store | PostgreSQL 17 with pgvector |
 
-Each user who runs AI agents locally also installs the **`opercia` CLI** and runs the **agent daemon** on their own machine.
+Each user who runs AI agents locally also installs the **`operica` CLI** and runs the **agent daemon** on their own machine.
 
 ## Quick Install (Recommended)
 
@@ -26,7 +26,7 @@ Two commands to set up everything — server, CLI, and configuration.
 curl -fsSL https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.sh | bash -s -- --with-server
 
 # 2. Configure CLI, authenticate, and start the daemon
-opercia setup self-host
+operica setup self-host
 ```
 </details>
 <details>
@@ -36,14 +36,14 @@ opercia setup self-host
 
 ```powershell
 # 1. Install CLI + provision the self-host server
-$env:OPERCIA_MODE="with-server"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex
+$env:OPERICA_MODE="with-server"; irm https://raw.githubusercontent.com/JTBlink/operica/main/scripts/install.ps1 | iex
 
 # 2. Configure CLI, authenticate, and start the daemon
-opercia setup self-host
+operica setup self-host
 ```
 </details>
 
-This installs the `opercia` CLI, checks out the latest self-host assets, pulls the official Opercia images from GHCR, and configures everything for localhost.
+This installs the `operica` CLI, checks out the latest self-host assets, pulls the official Operica images from GHCR, and configures everything for localhost.
 
 Open http://localhost:3000. To log in, configure `RESEND_API_KEY` in `.env` for email-based codes (recommended), or leave Resend unset and copy the generated code from the backend logs. See [Step 2 — Log In](#step-2--log-in) for details.
 
@@ -52,7 +52,7 @@ Open http://localhost:3000. To log in, configure `RESEND_API_KEY` in `.env` for 
 > **CLI only?** If the self-host server is already running and you only need the CLI on a macOS/Linux machine, install it with Homebrew:
 >
 > ```bash
-> brew install opercia-ai/tap/opercia
+> brew install operica-ai/tap/operica
 > ```
 
 ---
@@ -67,7 +67,7 @@ If you prefer to run each step manually:
 
 ```bash
 git clone https://github.com/JTBlink/operica.git
-cd opercia
+cd operica
 make selfhost
 ```
 
@@ -75,7 +75,7 @@ make selfhost
 
 By default it pulls the latest stable release images from GHCR. To build the backend/web from your current checkout instead, run `make selfhost-build`.
 If the selected GHCR tag has not been published yet, `make selfhost` now tells you to fall back to `make selfhost-build`.
-`make selfhost-build` uses local `opercia-backend:dev` / `opercia-web:dev` tags, so it does not overwrite the pulled `:latest` images.
+`make selfhost-build` uses local `operica-backend:dev` / `operica-web:dev` tags, so it does not overwrite the pulled `:latest` images.
 
 Once ready:
 
@@ -90,11 +90,11 @@ Open http://localhost:3000 in your browser. The Docker self-host stack defaults 
 
 - **Recommended (production):** configure `RESEND_API_KEY` in `.env`, then restart the backend. Real verification codes will be sent to the email address you enter. See [Advanced Configuration → Email](SELF_HOSTING_ADVANCED.md#email-required-for-authentication).
 - **Without email configured:** the verification code is generated server-side and printed to the backend container logs (look for `[DEV] Verification code for ...:`). Useful for one-off testing on a single machine.
-- **Deterministic local/private testing:** set `APP_ENV=development` and `OPERCIA_DEV_VERIFICATION_CODE=888888` in `.env`, then restart the backend. This fixed code is ignored when `APP_ENV=production`.
+- **Deterministic local/private testing:** set `APP_ENV=development` and `OPERICA_DEV_VERIFICATION_CODE=888888` in `.env`, then restart the backend. This fixed code is ignored when `APP_ENV=production`.
 
 Changes to `ALLOW_SIGNUP`, `DISABLE_WORKSPACE_CREATION`, and `GOOGLE_CLIENT_ID` also take effect after restarting the backend / compose stack. The web UI reads all three from `/api/config` at runtime, so no web rebuild is needed. See [Advanced Configuration → Signup Controls](SELF_HOSTING_ADVANCED.md#signup-controls-optional) for the recommended sequence to lock down workspace creation.
 
-> **Warning:** do **not** set `OPERCIA_DEV_VERIFICATION_CODE` on a publicly reachable instance — anyone who knows an email address can then log in with that fixed code.
+> **Warning:** do **not** set `OPERICA_DEV_VERIFICATION_CODE` on a publicly reachable instance — anyone who knows an email address can then log in with that fixed code.
 
 ### Step 3 — Install CLI & Start Daemon
 
@@ -105,7 +105,7 @@ Each team member who wants to run AI agents locally needs to:
 ### a) Install the CLI and an AI agent
 
 ```bash
-brew install opercia-ai/tap/opercia
+brew install operica-ai/tap/operica
 ```
 
 You also need at least one AI agent CLI installed:
@@ -133,7 +133,7 @@ You also need at least one AI agent CLI installed:
 ### b) One-command setup
 
 ```bash
-opercia setup self-host
+operica setup self-host
 ```
 
 This automatically:
@@ -145,13 +145,13 @@ This automatically:
 For on-premise deployments with custom domains:
 
 ```bash
-opercia setup self-host --server-url https://api.example.com --app-url https://app.example.com
+operica setup self-host --server-url https://api.example.com --app-url https://app.example.com
 ```
 
 To verify the daemon is running:
 
 ```bash
-opercia daemon status
+operica daemon status
 ```
 
 > **Alternative:** If you prefer manual steps, see [Manual CLI Configuration](#manual-cli-configuration) below.
@@ -167,30 +167,30 @@ opercia daemon status
 
 ## Kubernetes Deployment (Alternative)
 
-If you already run a Kubernetes cluster, you can deploy Opercia there instead of Docker Compose using the released OCI Helm chart at `oci://ghcr.io/opercia-ai/charts/opercia` or the source chart at [`deploy/helm/opercia/`](deploy/helm/opercia/). It targets a typical k3s / k8s setup with an Ingress controller and a default `ReadWriteOnce` StorageClass — authored against k3s + Traefik + `local-path`, and should work on any cluster with minor tweaks.
+If you already run a Kubernetes cluster, you can deploy Operica there instead of Docker Compose using the released OCI Helm chart at `oci://ghcr.io/operica-ai/charts/operica` or the source chart at [`deploy/helm/operica/`](deploy/helm/operica/). It targets a typical k3s / k8s setup with an Ingress controller and a default `ReadWriteOnce` StorageClass — authored against k3s + Traefik + `local-path`, and should work on any cluster with minor tweaks.
 
 The chart creates the following resources in the target namespace:
 
-- `opercia-postgres` — `pgvector/pgvector:pg17` backed by a 10Gi PVC
-- `opercia-backend` — Go API/WS server. Backed by a 5Gi `ReadWriteOnce` uploads PVC by default; set `backend.uploads.persistence.enabled=false` when you have configured S3 (`backend.config.s3Bucket`) and don't want the chart to declare the PVC at all.
-- `opercia-frontend` — Next.js standalone server
+- `operica-postgres` — `pgvector/pgvector:pg17` backed by a 10Gi PVC
+- `operica-backend` — Go API/WS server. Backed by a 5Gi `ReadWriteOnce` uploads PVC by default; set `backend.uploads.persistence.enabled=false` when you have configured S3 (`backend.config.s3Bucket`) and don't want the chart to declare the PVC at all.
+- `operica-frontend` — Next.js standalone server
 - Two `Ingress` resources: one for the web host, one for the backend host
-- `opercia-config` ConfigMap (rendered from `values.yaml`)
+- `operica-config` ConfigMap (rendered from `values.yaml`)
 
-The `opercia-secrets` Secret is **not** managed by the chart — you create it once with `kubectl` so real values never need to land in git.
+The `operica-secrets` Secret is **not** managed by the chart — you create it once with `kubectl` so real values never need to land in git.
 
-> **Runtime frontend upstreams:** current `opercia-web` images read `REMOTE_API_URL` and `DOCS_URL` when the Next.js server runs, so API/docs upstream changes do not require a web rebuild. The chart defaults `REMOTE_API_URL` to this release's backend Service. `frontend.compatibility.backendAlias` exists only for legacy images that still baked `REMOTE_API_URL=http://backend:8080` at build time.
+> **Runtime frontend upstreams:** current `operica-web` images read `REMOTE_API_URL` and `DOCS_URL` when the Next.js server runs, so API/docs upstream changes do not require a web rebuild. The chart defaults `REMOTE_API_URL` to this release's backend Service. `frontend.compatibility.backendAlias` exists only for legacy images that still baked `REMOTE_API_URL=http://backend:8080` at build time.
 
 > **Prerequisites:** `kubectl` and `helm` (v3.13+ for `--take-ownership`, or v4+) configured for the target cluster, an Ingress controller (Traefik / NGINX), and a default StorageClass.
 
 ### Step 1 — Point hostnames at the cluster
 
-The chart defaults to `opercia.dev.lan` (web) and `api.opercia.dev.lan` (backend). Pick one of:
+The chart defaults to `operica.dev.lan` (web) and `api.operica.dev.lan` (backend). Pick one of:
 
 - **`/etc/hosts`** on every machine that needs access (developer laptops + the machine running the daemon):
 
   ```text
-  192.168.1.206  opercia.dev.lan api.opercia.dev.lan
+  192.168.1.206  operica.dev.lan api.operica.dev.lan
   ```
 
   Replace `192.168.1.206` with any node IP where your Ingress controller's Service is reachable.
@@ -202,21 +202,21 @@ To use different hostnames, override the matching values at install time (see [S
 ### Step 2 — Create the namespace
 
 ```bash
-kubectl create namespace opercia
+kubectl create namespace operica
 ```
 
-### Step 3 — Create the `opercia-secrets` Secret
+### Step 3 — Create the `operica-secrets` Secret
 
 The chart references this Secret by name. Create it once with random values:
 
 ```bash
-kubectl -n opercia create secret generic opercia-secrets \
+kubectl -n operica create secret generic operica-secrets \
   --from-literal=JWT_SECRET="$(openssl rand -hex 32)" \
   --from-literal=POSTGRES_PASSWORD="$(openssl rand -hex 16)" \
   --from-literal=RESEND_API_KEY="" \
   --from-literal=GOOGLE_CLIENT_SECRET="" \
   --from-literal=CLOUDFRONT_PRIVATE_KEY="" \
-  --from-literal=OPERCIA_DEV_VERIFICATION_CODE=""
+  --from-literal=OPERICA_DEV_VERIFICATION_CODE=""
 ```
 
 Leave optional values empty for now — you can fill them in later (see [Step 5 — Log In](#step-5--log-in)).
@@ -224,9 +224,9 @@ Leave optional values empty for now — you can fill them in later (see [Step 5 
 ### Step 4 — Install the chart
 
 ```bash
-helm install opercia oci://ghcr.io/opercia-ai/charts/opercia \
+helm install operica oci://ghcr.io/operica-ai/charts/operica \
   --version <chart-version> \
-  -n opercia
+  -n operica
 ```
 
 Released chart versions strip the leading `v` from the Git tag. For example, release tag `v0.3.5` publishes chart version `0.3.5`; the chart defaults the backend and frontend image tags to `v0.3.5`.
@@ -234,35 +234,35 @@ Released chart versions strip the leading `v` from the Git tag. For example, rel
 To override defaults, export the chart values, edit them, and pass them with `-f`:
 
 ```bash
-helm show values oci://ghcr.io/opercia-ai/charts/opercia \
+helm show values oci://ghcr.io/operica-ai/charts/operica \
   --version <chart-version> > my-values.yaml
 # edit my-values.yaml — e.g. change ingress hosts, image tags, resource limits
-helm install opercia oci://ghcr.io/opercia-ai/charts/opercia \
+helm install operica oci://ghcr.io/operica-ai/charts/operica \
   --version <chart-version> \
-  -n opercia \
+  -n operica \
   -f my-values.yaml
 ```
 
 When developing from a checkout, use the local chart path instead:
 
 ```bash
-helm install opercia deploy/helm/opercia -n opercia
+helm install operica deploy/helm/operica -n operica
 ```
 
 Watch the pods come up:
 
 ```bash
-kubectl -n opercia get pods -w
+kubectl -n operica get pods -w
 ```
 
 On a cold cluster the backend can sit `Running` but not `Ready` for a few minutes while it waits on PostgreSQL and runs migrations — a startupProbe absorbs this, so the pod should not restart. Once the backend reports `Ready`, migrations have completed and `/healthz` returns OK:
 
 ```bash
-curl -H "Host: api.opercia.dev.lan" http://<ingress-ip>/healthz
+curl -H "Host: api.operica.dev.lan" http://<ingress-ip>/healthz
 # {"status":"ok","checks":{"db":"ok","migrations":"ok"}}
 ```
 
-Then open http://opercia.dev.lan in your browser.
+Then open http://operica.dev.lan in your browser.
 
 ### Step 5 — Log In
 
@@ -271,9 +271,9 @@ The chart defaults to `APP_ENV=production` (set in `values.yaml` under `backend.
 - **Recommended (production):** patch the Secret with a real Resend key, then restart the backend:
 
   ```bash
-  kubectl -n opercia patch secret opercia-secrets --type=merge \
+  kubectl -n operica patch secret operica-secrets --type=merge \
     -p '{"stringData":{"RESEND_API_KEY":"re_xxx"}}'
-  kubectl -n opercia rollout restart deploy/opercia-backend
+  kubectl -n operica rollout restart deploy/operica-backend
   ```
 
   Real verification codes will be sent to the email address you enter. See [Advanced Configuration → Email](SELF_HOSTING_ADVANCED.md#email-required-for-authentication).
@@ -281,33 +281,33 @@ The chart defaults to `APP_ENV=production` (set in `values.yaml` under `backend.
 - **Without email configured:** the verification code is generated server-side and printed to the backend pod logs (look for `[DEV] Verification code for ...:`). Useful for one-off testing.
 
   ```bash
-  kubectl -n opercia logs -f deploy/opercia-backend | grep "Verification code"
+  kubectl -n operica logs -f deploy/operica-backend | grep "Verification code"
   ```
 
-- **Deterministic local/private testing:** set `backend.config.appEnv: development` in your values file and `OPERCIA_DEV_VERIFICATION_CODE=888888` in the Secret, then `helm upgrade` and restart. This fixed code is ignored when `APP_ENV=production`.
+- **Deterministic local/private testing:** set `backend.config.appEnv: development` in your values file and `OPERICA_DEV_VERIFICATION_CODE=888888` in the Secret, then `helm upgrade` and restart. This fixed code is ignored when `APP_ENV=production`.
 
   ```bash
-  helm upgrade opercia oci://ghcr.io/opercia-ai/charts/opercia \
+  helm upgrade operica oci://ghcr.io/operica-ai/charts/operica \
     --version <chart-version> \
-    -n opercia \
+    -n operica \
     -f my-values.yaml --set backend.config.appEnv=development
-  kubectl -n opercia patch secret opercia-secrets --type=merge \
-    -p '{"stringData":{"OPERCIA_DEV_VERIFICATION_CODE":"888888"}}'
-  kubectl -n opercia rollout restart deploy/opercia-backend
+  kubectl -n operica patch secret operica-secrets --type=merge \
+    -p '{"stringData":{"OPERICA_DEV_VERIFICATION_CODE":"888888"}}'
+  kubectl -n operica rollout restart deploy/operica-backend
   ```
 
 `ALLOW_SIGNUP`, `DISABLE_WORKSPACE_CREATION`, and `GOOGLE_CLIENT_ID` likewise live under `backend.config.*` in `values.yaml` (as `allowSignup`, `disableWorkspaceCreation`, and `googleClientId`). After `helm upgrade`, the backend pod will roll automatically because the ConfigMap hash changes; the web UI reads all three from `/api/config` at runtime, so no web rebuild is needed.
 
-> **Warning:** do **not** set `OPERCIA_DEV_VERIFICATION_CODE` on a publicly reachable instance — anyone who knows an email address can then log in with that fixed code.
+> **Warning:** do **not** set `OPERICA_DEV_VERIFICATION_CODE` on a publicly reachable instance — anyone who knows an email address can then log in with that fixed code.
 
 ### Step 6 — Install CLI & Start Daemon
 
 The daemon runs on your local machine, not in the cluster. Install the CLI and an AI agent as in [Step 3](#step-3--install-cli--start-daemon) above, then point the CLI at your Ingress hostnames:
 
 ```bash
-opercia setup self-host \
-  --server-url http://api.opercia.dev.lan \
-  --app-url http://opercia.dev.lan
+operica setup self-host \
+  --server-url http://api.operica.dev.lan \
+  --app-url http://operica.dev.lan
 ```
 
 Make sure the machine running the daemon has the same `/etc/hosts` (or DNS) entries from [Step 1](#step-1--point-hostnames-at-the-cluster).
@@ -317,15 +317,15 @@ Make sure the machine running the daemon has the same `/etc/hosts` (or DNS) entr
 To pull the latest images without changing the chart version when your values still use the mutable `latest` image tag:
 
 ```bash
-kubectl -n opercia rollout restart deploy/opercia-backend deploy/opercia-frontend
+kubectl -n operica rollout restart deploy/operica-backend deploy/operica-frontend
 ```
 
-To upgrade to a specific Opercia release, upgrade to the matching chart version. The released chart defaults its app images to the matching Git tag:
+To upgrade to a specific Operica release, upgrade to the matching chart version. The released chart defaults its app images to the matching Git tag:
 
 ```bash
-helm upgrade opercia oci://ghcr.io/opercia-ai/charts/opercia \
+helm upgrade operica oci://ghcr.io/operica-ai/charts/operica \
   --version <chart-version> \
-  -n opercia \
+  -n operica \
   -f my-values.yaml
 ```
 
@@ -342,28 +342,28 @@ images:
 Then run the same upgrade command with `-f my-values.yaml`:
 
 ```bash
-helm upgrade opercia oci://ghcr.io/opercia-ai/charts/opercia \
+helm upgrade operica oci://ghcr.io/operica-ai/charts/operica \
   --version <chart-version> \
-  -n opercia \
+  -n operica \
   -f my-values.yaml
 ```
 
 To roll back if an upgrade goes sideways:
 
 ```bash
-helm -n opercia rollback opercia
+helm -n operica rollback operica
 ```
 
-> **Upgrading from `v0.3.4` to `v0.3.5+` fails with `refusing to drop legacy daily rollups: ...`?** As of MUL-2957 the `migrate up` command runs an idempotent monthly-slice backfill automatically before applying migration `103`, so a clean upgrade is a single `helm upgrade` + backend rollout. If you are still on a pre-MUL-2957 binary or the auto-hook fails, run the standalone backfill against the same database the chart is using (`kubectl -n opercia exec deploy/opercia-backend -- ./backfill_task_usage_hourly --sleep-between-slices=2s`), then restart the backend deployment to re-apply migrations. See [Advanced Configuration → Usage Dashboard Rollup](SELF_HOSTING_ADVANCED.md#usage-dashboard-rollup) for the full recovery flow.
+> **Upgrading from `v0.3.4` to `v0.3.5+` fails with `refusing to drop legacy daily rollups: ...`?** As of MUL-2957 the `migrate up` command runs an idempotent monthly-slice backfill automatically before applying migration `103`, so a clean upgrade is a single `helm upgrade` + backend rollout. If you are still on a pre-MUL-2957 binary or the auto-hook fails, run the standalone backfill against the same database the chart is using (`kubectl -n operica exec deploy/operica-backend -- ./backfill_task_usage_hourly --sleep-between-slices=2s`), then restart the backend deployment to re-apply migrations. See [Advanced Configuration → Usage Dashboard Rollup](SELF_HOSTING_ADVANCED.md#usage-dashboard-rollup) for the full recovery flow.
 
 ### Tearing down
 
 ```bash
 # Remove the workloads but keep the PVCs and the Secret
-helm -n opercia uninstall opercia
+helm -n operica uninstall operica
 
 # Wipe everything, including PostgreSQL data and uploads
-kubectl delete namespace opercia
+kubectl delete namespace operica
 ```
 
 ---
@@ -374,7 +374,7 @@ The Usage / Runtime dashboards read from a derived `task_usage_hourly` table pop
 
 Multiple backend replicas are safe: each replica ticks every 30 seconds and tries to claim the current 5-minute UTC plan, but the unique key `(job_name, scope_kind, scope_id, plan_time)` means only one wins each plan. Inspect steady-state operation:
 
-> **Exception — WeCom (企业微信) smart bot must run single-replica.** Unlike Slack and Lark, whose outbound is stateless HTTP that any replica can perform, the WeCom smart bot's only outbound path is an in-process WebSocket long connection. Agent replies and inbox pushes are delivered only by the replica currently holding a given bot's connection lease. If you run more than one backend replica with WeCom enabled (`OPERCIA_WECOM_SECRET_KEY` set), responses produced on a replica that does not hold the lease are silently dropped and the WeCom user sees nothing. Until cross-replica outbound routing lands, run the WeCom-enabled backend as a single replica. Everything else (including the rollup scheduler above) is multi-replica safe.
+> **Exception — WeCom (企业微信) smart bot must run single-replica.** Unlike Slack and Lark, whose outbound is stateless HTTP that any replica can perform, the WeCom smart bot's only outbound path is an in-process WebSocket long connection. Agent replies and inbox pushes are delivered only by the replica currently holding a given bot's connection lease. If you run more than one backend replica with WeCom enabled (`OPERICA_WECOM_SECRET_KEY` set), responses produced on a replica that does not hold the lease are silently dropped and the WeCom user sees nothing. Until cross-replica outbound routing lands, run the WeCom-enabled backend as a single replica. Everything else (including the rollup scheduler above) is multi-replica safe.
 
 ```sql
 SELECT plan_time, status, attempt, runner_id,
@@ -413,7 +413,7 @@ If you already have a `pg_cron` job in production, the safe sequence to retire i
      FROM cron.job WHERE jobname = 'rollup_task_usage_hourly';
    ```
 
-3. Leave the `pg_cron` extension itself installed unless you are sure no other workload depends on it. The bundled `pgvector/pgvector:pg17` image does **not** ship `pg_cron`, so nothing in Opercia's default install needs it; uninstalling `pg_cron` from a custom image that other workloads still use is a separate decision.
+3. Leave the `pg_cron` extension itself installed unless you are sure no other workload depends on it. The bundled `pgvector/pgvector:pg17` image does **not** ship `pg_cron`, so nothing in Operica's default install needs it; uninstalling `pg_cron` from a custom image that other workloads still use is a separate decision.
 
 External cron / systemd timer / Kubernetes `CronJob` setups that call `SELECT rollup_task_usage_hourly()` directly can be retired the same way — once `sys_cron_executions` shows steady SUCCESS rows from the in-process scheduler, the external job is redundant and can be removed.
 
@@ -432,18 +432,18 @@ If you cloned the repo manually:
 make selfhost-stop
 
 # Stop the local daemon
-opercia daemon stop
+operica daemon stop
 ```
 
-## Switching to Opercia Cloud
+## Switching to Operica Cloud
 
-If you've been self-hosting and want to switch your CLI to [Opercia Cloud](https://opercia.ai):
+If you've been self-hosting and want to switch your CLI to [Operica Cloud](https://operica.ai):
 
 ```bash
-opercia setup
+operica setup
 ```
 
-This reconfigures the CLI for opercia.ai, re-authenticates, and restarts the daemon. You will be prompted before overwriting the existing configuration.
+This reconfigures the CLI for operica.ai, re-authenticates, and restarts the daemon. You will be prompted before overwriting the existing configuration.
 
 > Your local Docker services are unaffected. Stop them separately if you no longer need them.
 
@@ -454,7 +454,7 @@ docker compose -f docker-compose.selfhost.yml pull
 docker compose -f docker-compose.selfhost.yml up -d
 ```
 
-Pin `OPERCIA_IMAGE_TAG` in `.env` to an exact version like `v0.2.4` if you want to stay on a specific release. Migrations run automatically on backend startup.
+Pin `OPERICA_IMAGE_TAG` in `.env` to an exact version like `v0.2.4` if you want to stay on a specific release. Migrations run automatically on backend startup.
 If the selected GHCR tag has not been published yet, fall back to `make selfhost-build` or `docker compose -f docker-compose.selfhost.yml -f docker-compose.selfhost.build.yml up -d --build`.
 
 > **Upgrading from `v0.3.4` to `v0.3.5+` fails with `refusing to drop legacy daily rollups: ...`?** That's migration `103`'s fail-closed guard: it requires `task_usage_hourly` to be seeded before the legacy daily rollups are dropped. As of MUL-2957 `migrate up` runs that backfill automatically right before applying `103`, so the upgrade completes in a single invocation. If you are still on a pre-MUL-2957 binary or the auto-hook fails, run `backfill_task_usage_hourly` manually first, then re-run the upgrade. Full instructions in [Advanced Configuration → Usage Dashboard Rollup](SELF_HOSTING_ADVANCED.md#usage-dashboard-rollup).
@@ -467,7 +467,7 @@ If you prefer running Docker Compose steps manually instead of `make selfhost`:
 
 ```bash
 git clone https://github.com/JTBlink/operica.git
-cd opercia
+cd operica
 cp .env.example .env
 ```
 
@@ -486,27 +486,27 @@ docker compose -f docker-compose.selfhost.yml up -d
 
 ## Manual CLI Configuration
 
-If you prefer configuring the CLI step by step instead of `opercia setup`:
+If you prefer configuring the CLI step by step instead of `operica setup`:
 
 ```bash
 # Point CLI to your local server
-opercia config set server_url http://localhost:8080
-opercia config set app_url http://localhost:3000
+operica config set server_url http://localhost:8080
+operica config set app_url http://localhost:3000
 
 # Login (opens browser)
-opercia login
+operica login
 
 # Start the daemon
-opercia daemon start
+operica daemon start
 ```
 
 For production deployments with TLS:
 
 ```bash
-opercia config set app_url https://app.example.com
-opercia config set server_url https://api.example.com
-opercia login
-opercia daemon start
+operica config set app_url https://app.example.com
+operica config set server_url https://api.example.com
+operica login
+operica daemon start
 ```
 
 ## Advanced Configuration

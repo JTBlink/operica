@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSidebar } from "@opercia/ui/components/ui/sidebar";
+import { useSidebar } from "@operica/ui/components/ui/sidebar";
 import {
   getShortcut,
   isEditableShortcutTarget,
@@ -9,12 +9,12 @@ import {
   SHORTCUT_ACTION_BY_ID,
   useShortcutStore,
   type ShortcutActionId,
-} from "@opercia/core/shortcuts";
-import { useChatStore } from "@opercia/core/chat";
-import { openCreateIssueWithPreference } from "@opercia/core/issues/stores";
-import { useModalStore } from "@opercia/core/modals";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { isImeComposing } from "@opercia/core/utils";
+} from "@operica/core/shortcuts";
+import { useChatStore } from "@operica/core/chat";
+import { openCreateIssueWithPreference } from "@operica/core/issues/stores";
+import { useModalStore } from "@operica/core/modals";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { isImeComposing } from "@operica/core/utils";
 import { isFloatingChatRouteSuppressed } from "../chat/floating-chat-visibility";
 import { useNavigation } from "../navigation";
 import { useSearchStore } from "../search/search-store";

@@ -13,24 +13,24 @@ import {
   RuntimeSettingsPage,
 } from "./pages/runtime-detail-page";
 import { AttachmentPreviewRoute } from "./pages/attachment-preview-page";
-import { IssuesPage } from "@opercia/views/issues/components";
-import { ProjectsPage } from "@opercia/views/projects/components";
-import { DashboardPage } from "@opercia/views/dashboard";
-import { AutopilotsPage } from "@opercia/views/autopilots/components";
-import { MyIssuesPage } from "@opercia/views/my-issues";
-import { SkillsPage } from "@opercia/views/skills";
+import { IssuesPage } from "@operica/views/issues/components";
+import { ProjectsPage } from "@operica/views/projects/components";
+import { DashboardPage } from "@operica/views/dashboard";
+import { AutopilotsPage } from "@operica/views/autopilots/components";
+import { MyIssuesPage } from "@operica/views/my-issues";
+import { SkillsPage } from "@operica/views/skills";
 import { DesktopRuntimesPage } from "./components/desktop-runtimes-page";
 import { DesktopAgentsPage } from "./components/desktop-agents-page";
 import {
   AiCreateAgentPage,
   ChooseCreateMethodPage,
   ManualCreateAgentPage,
-} from "@opercia/views/agents";
-import { SquadsPage, SquadDetailPage as SquadDetailPageView } from "@opercia/views/squads/components";
-import { InboxPage } from "@opercia/views/inbox";
-import { ChatPage } from "@opercia/views/chat";
-import { SettingsPage } from "@opercia/views/settings";
-import { useT } from "@opercia/views/i18n";
+} from "@operica/views/agents";
+import { SquadsPage, SquadDetailPage as SquadDetailPageView } from "@operica/views/squads/components";
+import { InboxPage } from "@operica/views/inbox";
+import { ChatPage } from "@operica/views/chat";
+import { SettingsPage } from "@operica/views/settings";
+import { useT } from "@operica/views/i18n";
 import { Download, Server } from "lucide-react";
 import { DaemonSettingsTab } from "./components/daemon-settings-tab";
 import { UpdatesSettingsTab } from "./components/updates-settings-tab";

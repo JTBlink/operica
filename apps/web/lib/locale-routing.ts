@@ -2,9 +2,9 @@ import {
   matchLocale,
   SUPPORTED_LOCALES,
   type SupportedLocale,
-} from "@opercia/core/i18n";
+} from "@operica/core/i18n";
 
-export const OPERCIA_LOCALE_HEADER = "x-opercia-locale";
+export const OPERICA_LOCALE_HEADER = "x-operica-locale";
 
 export function isSupportedLocale(
   value: string | null,

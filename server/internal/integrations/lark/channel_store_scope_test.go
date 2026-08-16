@@ -22,7 +22,7 @@ func channelScopeTestDB(t *testing.T) *pgxpool.Pool {
 	t.Helper()
 	dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
-		dsn = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dsn = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 	ctx := context.Background()
 	pool, err := pgxpool.New(ctx, dsn)

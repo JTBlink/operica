@@ -11,8 +11,8 @@ import {
   getShortcut,
   isPlainShortcut,
   type ShortcutChord,
-} from "@opercia/core/shortcuts";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/core/shortcuts";
+import { cn } from "@operica/ui/lib/utils";
 import { useT } from "../i18n";
 import { createSubmitShortcutExtension } from "./extensions/submit-shortcut";
 import "./title-editor.css";

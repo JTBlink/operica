@@ -19,7 +19,7 @@ import "regexp"
 //	messages[43].content: content must not be empty
 //
 // Keying on a status code or a provider name means missing the next backend
-// that words it differently — Opercia supports 17 of them and holds only an
+// that words it differently — Operica supports 17 of them and holds only an
 // opaque session id, so it cannot know which CLIs write a truncated
 // transcript. What all of these DO state is the two things that define the
 // defect: that some content is empty, and which message in the history it

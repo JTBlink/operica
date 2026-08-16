@@ -6,9 +6,9 @@ import type {
   IssueTableFacetSpec,
   IssueTableFacetsResponse,
   WorkingAgentSummary,
-} from "@opercia/core/types";
-import { useIssuesScope } from "@opercia/core/issues/stores/issues-scope-store";
-import { useViewStore } from "@opercia/core/issues/stores/view-store-context";
+} from "@operica/core/types";
+import { useIssuesScope } from "@operica/core/issues/stores/issues-scope-store";
+import { useViewStore } from "@operica/core/issues/stores/view-store-context";
 import { PageHeader } from "../../layout/page-header";
 import { useT } from "../../i18n";
 import { IssueSurface } from "../surface/issue-surface";

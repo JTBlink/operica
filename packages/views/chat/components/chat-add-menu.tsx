@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { Check, FolderKanban, Image as ImageIcon, Plus, X } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
+import { Button } from "@operica/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,8 +12,8 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-} from "@opercia/ui/components/ui/dropdown-menu";
-import type { Project } from "@opercia/core/types";
+} from "@operica/ui/components/ui/dropdown-menu";
+import type { Project } from "@operica/core/types";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { useT } from "../../i18n";
 

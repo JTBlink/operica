@@ -50,8 +50,8 @@ import type {
   ChatPendingTask,
   ChatQuickAction,
   TaskMessagePayload,
-} from "@opercia/core/types";
-import type { AgentAvailability } from "@opercia/core/agents";
+} from "@operica/core/types";
+import type { AgentAvailability } from "@operica/core/agents";
 import { taskMessagesOptions } from "@/data/queries/chat";
 import { Text } from "@/components/ui/text";
 import { Markdown } from "@/lib/markdown";

@@ -126,7 +126,7 @@ export const useSquadsViewStore = create<SquadsViewState>()(
       clearFilters: () => set({ filters: EMPTY_SQUAD_FILTERS }),
     }),
     {
-      name: "opercia_squads_view",
+      name: "operica_squads_view",
       storage: createJSONStorage(() =>
         createWorkspaceAwareStorage(defaultStorage),
       ),

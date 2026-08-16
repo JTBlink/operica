@@ -17,7 +17,7 @@
 | 脚本 | 调用方 | 用途 |
 | --- | --- | --- |
 | `operica-tools.sh` / `operica-tools.sh desktop` | `make release` | 默认命令。打包当前平台的 Electron 桌面端（Go CLI 由 `bundle-cli.mjs` 自动编译内嵌），不构建 Web 也不编译服务端二进制；额外参数透传给 desktop package（如 `--mac --arm64`），未显式指定 `--publish` 时自动使用 `--publish never`。 |
-| `operica-tools.sh build` | `make release-server` | 交叉编译 Go 服务端二进制（server/opercia/migrate）并归档到 `OUT_DIR`（默认 `dist/release`）。默认平台跟随本机；需多平台时用 `PLATFORMS="linux/amd64 linux/arm64 …"` 覆盖。另支持 `SKIP_GO=1`、`WITH_FRONTEND=1`（额外构建 Web standalone 归档）。 |
+| `operica-tools.sh build` | `make release-server` | 交叉编译 Go 服务端二进制（server/operica/migrate）并归档到 `OUT_DIR`（默认 `dist/release`）。默认平台跟随本机；需多平台时用 `PLATFORMS="linux/amd64 linux/arm64 …"` 覆盖。另支持 `SKIP_GO=1`、`WITH_FRONTEND=1`（额外构建 Web standalone 归档）。 |
 | `operica-tools.sh start [--server] [--web] [--all]` | `make run` | 默认仅启动 Electron 桌面端 (`pnpm dev:desktop`)。`--server` 会额外加载 env、确保 Postgres、编译本机二进制、执行迁移并启动后端；`--web` 会额外启动 Web；`--all` 同时附加后端和 Web。 |
 | `operica-tools.sh kill [--all]` | 直接调用 | 停止当前 checkout 的桌面端、本地后端和 Web 开发进程；默认即为 `--all`。通过 checkout 路径和 PID 记录限制作用域，不停止其他 worktree，也不停止共享 PostgreSQL。 |
 
@@ -31,14 +31,14 @@
 | `agent-cli-command-names.txt` | `go-test-with-agent-cli-guard.sh` | 数据文件：需守卫的 agent CLI 名称（claude、codex、copilot、cursor-agent、opencode 等）。 |
 | `operica-tools.test.sh` | `check.sh` | `operica-tools.sh` 的启动行为测试，断言桌面端为 `start` 默认目标，后端和 Web 只能通过显式参数附加。 |
 | `test-go.test.sh` | `check.sh` | `test-go.sh` 的单元测试 —— 打桩 `go` 并断言精确的 `go test` 参数序列与 usage/退出码行为。 |
-| `helm-config.test.sh` | CI | 对 `deploy/helm/opercia` 的 chart 执行 `helm lint`，并断言 `templates/configmap.yaml` 渲染出预期的配置值（默认值与覆盖值）。 |
+| `helm-config.test.sh` | CI | 对 `deploy/helm/operica` 的 chart 执行 `helm lint`，并断言 `templates/configmap.yaml` 渲染出预期的配置值（默认值与覆盖值）。 |
 | `selfhost-config.test.sh` | CI | 断言自托管栈的 `docker compose config` 渲染出预期的配置值。 |
 
 ## 安装与自托管
 
 | 脚本 | 调用方 | 用途 |
 | --- | --- | --- |
-| `install.sh` | `curl … \| bash` | Unix 安装器。安装/升级 `opercia` CLI（Homebrew 或回退到发布二进制），加 `--with-server` 时还会配置自托管服务器。 |
+| `install.sh` | `curl … \| bash` | Unix 安装器。安装/升级 `operica` CLI（Homebrew 或回退到发布二进制），加 `--with-server` 时还会配置自托管服务器。 |
 | `install.ps1` | `irm … \| iex` | Windows 安装器。默认安装 CLI，或在 `MULTICA_MODE=local` 时启动本地服务器 + 安装 + 配置。 |
 | `install.test.sh` | CI | `install.sh` 的沙盒测试，用桩 `curl`/`brew` 模拟各种 Homebrew 失败模式与发布二进制回退路径。 |
 | `install.ps1.test.ps1` | CI | `install.ps1` 的 PowerShell 测试。 |

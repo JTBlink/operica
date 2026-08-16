@@ -4,11 +4,11 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronRight, Loader2, Zap } from "lucide-react";
 import { toast } from "sonner";
-import { dispatchReasonCode } from "@opercia/core/api";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { quickActionListOptions, useRunQuickAction } from "@opercia/core/quick-actions";
-import type { Comment, CommentTriggerOutcome, QuickAction } from "@opercia/core/types";
-import { QUICK_ACTION_SIDEBAR_LIMIT } from "@opercia/core/types";
+import { dispatchReasonCode } from "@operica/core/api";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { quickActionListOptions, useRunQuickAction } from "@operica/core/quick-actions";
+import type { Comment, CommentTriggerOutcome, QuickAction } from "@operica/core/types";
+import { QUICK_ACTION_SIDEBAR_LIMIT } from "@operica/core/types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,9 +17,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@opercia/ui/components/ui/alert-dialog";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@opercia/ui/components/ui/tooltip";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/ui/components/ui/alert-dialog";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@operica/ui/components/ui/tooltip";
+import { cn } from "@operica/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useT } from "../../i18n";
 

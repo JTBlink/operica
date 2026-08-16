@@ -1,10 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { issueIdentifierOptions } from "@opercia/core/issues/queries";
-import { useCurrentWorkspace } from "@opercia/core/paths";
-import { isIssueIdentifier } from "@opercia/ui/markdown";
-import type { Issue } from "@opercia/core/types";
+import { issueIdentifierOptions } from "@operica/core/issues/queries";
+import { useCurrentWorkspace } from "@operica/core/paths";
+import { isIssueIdentifier } from "@operica/ui/markdown";
+import type { Issue } from "@operica/core/types";
 
 /**
  * Resolve a bare issue identifier ("MUL-123") to a real issue in the current

@@ -1,10 +1,10 @@
 "use client";
 
-import { STATUS_CONFIG, PRIORITY_CONFIG } from "@opercia/core/issues/config";
-import { formatDateOnly } from "@opercia/core/issues/date";
-import { useActorName } from "@opercia/core/workspace/hooks";
+import { STATUS_CONFIG, PRIORITY_CONFIG } from "@operica/core/issues/config";
+import { formatDateOnly } from "@operica/core/issues/date";
+import { useActorName } from "@operica/core/workspace/hooks";
 import { StatusIcon, PriorityIcon } from "../../issues/components";
-import type { InboxItem, InboxItemType, IssueStatus, IssuePriority } from "@opercia/core/types";
+import type { InboxItem, InboxItemType, IssueStatus, IssuePriority } from "@operica/core/types";
 import { getQuickCreateOutcomeDetail } from "./inbox-display";
 import { useT } from "../../i18n";
 
@@ -37,7 +37,7 @@ export function useTypeLabels(): Record<InboxItemType, string> {
 }
 
 // start_date / due_date are calendar days — format timezone-safely so the day
-// never shifts with the viewer's offset (see @opercia/core/issues/date).
+// never shifts with the viewer's offset (see @operica/core/issues/date).
 function shortDate(dateStr: string): string {
   return formatDateOnly(dateStr, { month: "short", day: "numeric" }, "en-US");
 }

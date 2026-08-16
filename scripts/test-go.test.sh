@@ -2,7 +2,7 @@
 set -eu
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-TEST_DIR=$(mktemp -d "${TMPDIR:-/tmp}/opercia-test-go.XXXXXX")
+TEST_DIR=$(mktemp -d "${TMPDIR:-/tmp}/operica-test-go.XXXXXX")
 BIN_DIR="$TEST_DIR/bin"
 CALLS_FILE="$TEST_DIR/go-calls.log"
 OUTPUT_FILE="$TEST_DIR/output.log"
@@ -13,7 +13,7 @@ cleanup() {
 trap cleanup EXIT
 
 mkdir -p "$BIN_DIR"
-export OPERCIA_TEST_GO_CALLS="$CALLS_FILE"
+export OPERICA_TEST_GO_CALLS="$CALLS_FILE"
 
 cat >"$BIN_DIR/go" <<'EOF'
 #!/usr/bin/env bash
@@ -32,7 +32,7 @@ case "${1:-}" in
       github.com/JTBlink/operica/server/pkg/agent/internal/testutil
     ;;
   test)
-    printf '%s\n' "$*" >>"$OPERCIA_TEST_GO_CALLS"
+    printf '%s\n' "$*" >>"$OPERICA_TEST_GO_CALLS"
     ;;
   *)
     echo "unexpected go command: $*" >&2

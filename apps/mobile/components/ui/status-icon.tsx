@@ -13,7 +13,7 @@
  */
 import * as React from "react";
 import Svg, { Circle, G, Line, Path } from "react-native-svg";
-import type { IssueStatus } from "@opercia/core/types";
+import type { IssueStatus } from "@operica/core/types";
 
 const CX = 7;
 const CY = 7;

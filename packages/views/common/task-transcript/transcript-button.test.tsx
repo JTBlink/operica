@@ -12,18 +12,18 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { api } from "@opercia/core/api";
+import { api } from "@operica/core/api";
 import {
   chatKeys,
   mergeTaskMessagesBySeq,
-} from "@opercia/core/chat/queries";
-import type { AgentTask } from "@opercia/core/types/agent";
-import type { TaskMessagePayload } from "@opercia/core/types/events";
+} from "@operica/core/chat/queries";
+import type { AgentTask } from "@operica/core/types/agent";
+import type { TaskMessagePayload } from "@operica/core/types/events";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TranscriptButton } from "./transcript-button";
 import type { TimelineItem } from "./build-timeline";
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     listTaskMessages: vi.fn(),
   },
@@ -119,7 +119,7 @@ describe("TranscriptButton", () => {
 
     act(() => {
       window.dispatchEvent(
-        new CustomEvent("opercia:navigate", {
+        new CustomEvent("operica:navigate", {
           detail: { path: "/acme/inbox?issue=MUL-123" },
         }),
       );

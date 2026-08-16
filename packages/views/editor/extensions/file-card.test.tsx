@@ -18,7 +18,7 @@ const { getAttachmentTextContentMock, resolveAttachmentMock, openByUrlMock, tryO
     tryOpenMock: vi.fn(),
   }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: { getAttachmentTextContent: getAttachmentTextContentMock },
   PreviewTooLargeError: class extends Error {},
   PreviewUnsupportedError: class extends Error {},
@@ -50,8 +50,8 @@ vi.mock("../../navigation", () => ({
   }),
 }));
 
-vi.mock("@opercia/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@opercia/core/paths")>();
+vi.mock("@operica/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@operica/core/paths")>();
   return {
     ...actual,
     useWorkspaceSlug: () => "acme",

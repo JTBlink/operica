@@ -59,36 +59,36 @@ func TestBriefSurfaceDeliveryPolicy(t *testing.T) {
 	}{
 		// Issue surfaces: files ride the comment.
 		"comment": {
-			mustHave: []string{"`--attachment <path>` to `opercia issue comment add`"},
-			mustNot:  []string{"opercia attachment upload"},
+			mustHave: []string{"`--attachment <path>` to `operica issue comment add`"},
+			mustNot:  []string{"operica attachment upload"},
 		},
 		"assignment": {
-			mustHave: []string{"`--attachment <path>` to `opercia issue comment add`"},
-			mustNot:  []string{"opercia attachment upload"},
+			mustHave: []string{"`--attachment <path>` to `operica issue comment add`"},
+			mustNot:  []string{"operica attachment upload"},
 		},
 		// Direct chat is the ONLY surface where `attachment upload` works.
 		"chat_direct": {
-			mustHave: []string{"`opercia attachment upload <local-path>`"},
+			mustHave: []string{"`operica attachment upload <local-path>`"},
 			mustNot:  []string{"text-only"},
 		},
 		// IM surfaces are text-only. The upload command must not appear: it binds
-		// to a Opercia chat reply, which an IM reply is not, so suggesting it
+		// to a Operica chat reply, which an IM reply is not, so suggesting it
 		// would have the agent upload a file and report it as delivered.
 		"chat_slack": {
 			mustHave: []string{"Slack conversation is text-only", "does NOT apply"},
-			mustNot:  []string{"run `opercia attachment upload"},
+			mustNot:  []string{"run `operica attachment upload"},
 		},
 		"chat_feishu": {
 			mustHave: []string{"Feishu/Lark conversation is text-only", "does NOT apply"},
-			mustNot:  []string{"run `opercia attachment upload"},
+			mustNot:  []string{"run `operica attachment upload"},
 		},
 		"autopilot": {
 			mustHave: []string{"this surface is text-only"},
-			mustNot:  []string{"opercia attachment upload"},
+			mustNot:  []string{"operica attachment upload"},
 		},
 		"quickcreate": {
-			mustHave: []string{"your stdout is text-only", "`opercia issue create` call itself via `--attachment <path>`"},
-			mustNot:  []string{"opercia attachment upload"},
+			mustHave: []string{"your stdout is text-only", "`operica issue create` call itself via `--attachment <path>`"},
+			mustNot:  []string{"operica attachment upload"},
 		},
 	}
 

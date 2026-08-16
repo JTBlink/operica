@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { OperciaIcon } from "@opercia/ui/components/common/opercia-icon";
-import { cn } from "@opercia/ui/lib/utils";
-import { useAuthStore } from "@opercia/core/auth";
+import { OpericaIcon } from "@operica/ui/components/common/operica-icon";
+import { cn } from "@operica/ui/lib/utils";
+import { useAuthStore } from "@operica/core/auth";
 import { docsHrefForLocale, useLocale } from "../i18n";
 import { useDashboardCtaHref } from "../utils/use-dashboard-cta";
 import { formatStarCount, useGithubStars } from "../utils/use-github-stars";
@@ -42,7 +42,7 @@ export function LandingHeader({
       <div className="mx-auto flex h-[76px] max-w-[1320px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-6 lg:gap-8">
           <Link href="/" className="flex shrink-0 items-center gap-3">
-            <OperciaIcon
+            <OpericaIcon
               className={cn(
                 "size-5",
                 variant === "dark" ? "text-white" : "text-[#0a0d12]",
@@ -55,7 +55,7 @@ export function LandingHeader({
                 variant === "dark" ? "text-white/92" : "text-[#0a0d12]",
               )}
             >
-              opercia
+              operica
             </span>
           </Link>
 

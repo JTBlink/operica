@@ -43,7 +43,7 @@ export const useCustomPricingStore = create<CustomPricingState>()(
         }),
     }),
     {
-      name: "opercia_runtime_custom_pricing",
+      name: "operica_runtime_custom_pricing",
       storage: createJSONStorage(() => stateStorage),
     },
   ),

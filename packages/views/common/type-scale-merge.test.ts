@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 
 /**
  * Do the type scale's role-named steps survive `cn()`?

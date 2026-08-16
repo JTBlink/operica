@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.opercia.ai";
+  const baseUrl = "https://www.operica.ai";
 
   return [
     {

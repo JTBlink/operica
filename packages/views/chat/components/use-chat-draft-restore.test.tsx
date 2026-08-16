@@ -48,25 +48,25 @@ const h = vi.hoisted(() => {
   };
 });
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: {
     listChatDraftRestores: h.listChatDraftRestores,
     consumeChatDraftRestore: h.consumeChatDraftRestore,
   },
 }));
-vi.mock("@opercia/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@opercia/core/chat", () => ({
+vi.mock("@operica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@operica/core/chat", () => ({
   useChatStore: Object.assign(
     (sel: (s: typeof h.store) => unknown) => sel(h.store),
     { getState: () => h.store },
   ),
 }));
-vi.mock("@opercia/core/realtime", () => ({ removeChatMessageFromCaches: vi.fn() }));
-vi.mock("@opercia/core/logger", () => ({
+vi.mock("@operica/core/realtime", () => ({ removeChatMessageFromCaches: vi.fn() }));
+vi.mock("@operica/core/logger", () => ({
   createLogger: () => ({ info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() }),
 }));
 
-import type { Attachment } from "@opercia/core/types";
+import type { Attachment } from "@operica/core/types";
 import { useChatDraftRestore } from "./use-chat-draft-restore";
 
 // Every assertion here drives a real react-query fetch and mutation, so each

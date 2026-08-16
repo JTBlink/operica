@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { AiBuilderSessionPage as SharedAiBuilderSessionPage } from "@opercia/views/agents";
+import { AiBuilderSessionPage as SharedAiBuilderSessionPage } from "@operica/views/agents";
 
 export function AiBuilderSessionPage() {
   const { sessionId } = useParams<{ sessionId: string }>();

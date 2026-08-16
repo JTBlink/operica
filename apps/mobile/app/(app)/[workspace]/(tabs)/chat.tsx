@@ -44,12 +44,12 @@ import type {
   Agent,
   ChatMessage,
   ChatPendingTask,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 import {
   enqueuePendingChatTask,
   hideQueuedChatMessages,
   removePendingChatTask,
-} from "@opercia/core/chat/pending";
+} from "@operica/core/chat/pending";
 import { api } from "@/data/api";
 import { useAuthStore } from "@/data/auth-store";
 import { useWorkspaceStore } from "@/data/workspace-store";

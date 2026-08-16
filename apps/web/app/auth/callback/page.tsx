@@ -3,19 +3,19 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { sanitizeNextUrl, useAuthStore } from "@opercia/core/auth";
-import { workspaceKeys } from "@opercia/core/workspace/queries";
-import { paths, resolvePostAuthDestination } from "@opercia/core/paths";
-import { api } from "@opercia/core/api";
-import { validateCliCallback, redirectToCliCallback } from "@opercia/views/auth";
+import { sanitizeNextUrl, useAuthStore } from "@operica/core/auth";
+import { workspaceKeys } from "@operica/core/workspace/queries";
+import { paths, resolvePostAuthDestination } from "@operica/core/paths";
+import { api } from "@operica/core/api";
+import { validateCliCallback, redirectToCliCallback } from "@operica/views/auth";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "@opercia/ui/components/ui/card";
-import { Button } from "@opercia/ui/components/ui/button";
+} from "@operica/ui/components/ui/card";
+import { Button } from "@operica/ui/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 function CallbackContent() {
@@ -48,7 +48,7 @@ function CallbackContent() {
     const nextUrl = sanitizeNextUrl(nextPart ? nextPart.slice(5) : null);
 
     // CLI callback params — carried across the Google OAuth round-trip so
-    // headless/WSL2 `opercia login` can receive the JWT after browser-based
+    // headless/WSL2 `operica login` can receive the JWT after browser-based
     // Google auth completes.
     const cliCallbackPart = stateParts.find((p) => p.startsWith("cli_callback:"));
     const cliStatePart = stateParts.find((p) => p.startsWith("cli_state:"));
@@ -85,7 +85,7 @@ function CallbackContent() {
         .googleLogin(code, redirectUri)
         .then(({ token }) => {
           setDesktopToken(token);
-          window.location.href = `opercia://auth/callback?token=${encodeURIComponent(token)}`;
+          window.location.href = `operica://auth/callback?token=${encodeURIComponent(token)}`;
         })
         .catch((err) => {
           setError(err instanceof Error ? err.message : "Login failed");
@@ -108,7 +108,7 @@ function CallbackContent() {
 
           // 2. Un-onboarded users may have pending invitations on their
           //    email even when no `next=` was carried (came from a fresh
-          //    login on opercia.ai instead of clicking the email link,
+          //    login on operica.ai instead of clicking the email link,
           //    or `state` was lost across the round-trip). Look them up by
           //    email and route to the batch /invitations page if any.
           //    Already-onboarded users skip this lookup — their new invites
@@ -148,9 +148,9 @@ function CallbackContent() {
       <div className="flex min-h-screen items-center justify-center">
         <Card className="w-full max-w-sm">
           <CardHeader className="text-center">
-            <CardTitle className="text-display-sm">Opening Opercia</CardTitle>
+            <CardTitle className="text-display-sm">Opening Operica</CardTitle>
             <CardDescription>
-              You should see a prompt to open the Opercia desktop app. If
+              You should see a prompt to open the Operica desktop app. If
               nothing happens, click the button below.
             </CardDescription>
           </CardHeader>
@@ -158,10 +158,10 @@ function CallbackContent() {
             <Button
               variant="outline"
               onClick={() => {
-                window.location.href = `opercia://auth/callback?token=${encodeURIComponent(desktopToken)}`;
+                window.location.href = `operica://auth/callback?token=${encodeURIComponent(desktopToken)}`;
               }}
             >
-              Open Opercia Desktop
+              Open Operica Desktop
             </Button>
           </CardContent>
         </Card>

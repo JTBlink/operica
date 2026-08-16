@@ -8,8 +8,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/JTBlink/operica/server/internal/attribution"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/featureflags"
@@ -17,6 +15,8 @@ import (
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/featureflag"
+	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 // newResolveOriginatorPool mirrors the local-postgres pattern used in
@@ -27,7 +27,7 @@ func newResolveOriginatorPool(t *testing.T) *pgxpool.Pool {
 	t.Helper()
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://opercia:opercia@localhost:5432/opercia?sslmode=disable"
+		dbURL = "postgres://operica:operica@localhost:5432/operica?sslmode=disable"
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -121,14 +121,14 @@ func seedOriginatorFanout(t *testing.T, pool *pgxpool.Pool) (memberCommentID, ag
 
 	if err := pool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Resolve Originator User', 'resolve-originator-fanout@opercia.test')
+		VALUES ('Resolve Originator User', 'resolve-originator-fanout@operica.test')
 		RETURNING id
 	`).Scan(&userIDStr); err != nil {
 		t.Fatalf("seed user: %v", err)
 	}
 	t.Cleanup(func() {
 		pool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'resolve-originator-fanout@opercia.test'`)
+			`DELETE FROM "user" WHERE email = 'resolve-originator-fanout@operica.test'`)
 	})
 
 	if err := pool.QueryRow(ctx, `
@@ -428,7 +428,7 @@ func TestEnqueueTaskForIssueStoresRuntimeMCPOverlayInQueuedRow(t *testing.T) {
 	ctx := context.Background()
 	q := db.New(pool)
 	suffix := time.Now().UnixNano()
-	email := fmt.Sprintf("runtime-overlay-insert-%d@opercia.test", suffix)
+	email := fmt.Sprintf("runtime-overlay-insert-%d@operica.test", suffix)
 	workspaceSlug := fmt.Sprintf("runtime-overlay-insert-%d", suffix)
 
 	var userIDStr, workspaceIDStr, runtimeIDStr, agentIDStr, issueIDStr string

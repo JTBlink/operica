@@ -350,14 +350,14 @@ describe("useRealtimeSync — workspace:deleted self-initiated suppression", () 
       wrapper: createWrapper(qc),
     });
     qc.setQueryData(workspaceKeys.list(), [{ id: "ws-2", slug: "delete-me" }]);
-    defaultStorage.setItem("opercia_issue_draft:delete-me", "draft");
+    defaultStorage.setItem("operica_issue_draft:delete-me", "draft");
 
     markWorkspaceDeletePending("ws-2");
     dispatchWorkspaceDeleted(ws, "ws-2");
 
     // useDeleteWorkspace.onSuccess owns cleanup for self-initiated deletes;
     // the handler must not have touched storage.
-    expect(defaultStorage.getItem("opercia_issue_draft:delete-me")).toBe("draft");
+    expect(defaultStorage.getItem("operica_issue_draft:delete-me")).toBe("draft");
   });
 
   it("still cleans up for a delete initiated elsewhere", () => {
@@ -366,10 +366,10 @@ describe("useRealtimeSync — workspace:deleted self-initiated suppression", () 
       wrapper: createWrapper(qc),
     });
     qc.setQueryData(workspaceKeys.list(), [{ id: "ws-2", slug: "delete-me" }]);
-    defaultStorage.setItem("opercia_issue_draft:delete-me", "draft");
+    defaultStorage.setItem("operica_issue_draft:delete-me", "draft");
 
     dispatchWorkspaceDeleted(ws, "ws-2");
 
-    expect(defaultStorage.getItem("opercia_issue_draft:delete-me")).toBeNull();
+    expect(defaultStorage.getItem("operica_issue_draft:delete-me")).toBeNull();
   });
 });

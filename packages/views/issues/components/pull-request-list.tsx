@@ -22,9 +22,9 @@ import {
   shouldShowPullRequestStats,
   type PullRequestChecksStatus,
   type PullRequestMergeStatus,
-} from "@opercia/core/github";
-import type { GitHubPullRequest, GitHubPullRequestState } from "@opercia/core/types";
-import { cn } from "@opercia/ui/lib/utils";
+} from "@operica/core/github";
+import type { GitHubPullRequest, GitHubPullRequestState } from "@operica/core/types";
+import { cn } from "@operica/ui/lib/utils";
 import { useT, useTimeAgo } from "../../i18n";
 
 type IssuesT = ReturnType<typeof useT<"issues">>["t"];

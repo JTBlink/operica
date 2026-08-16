@@ -41,11 +41,11 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.opercia.ai/docs/agents",
+      canonical: "https://www.operica.ai/docs/agents",
       languages: {
-        en: "https://www.opercia.ai/docs/agents",
-        zh: "https://www.opercia.ai/docs/zh/agents",
-        "x-default": "https://www.opercia.ai/docs/agents",
+        en: "https://www.operica.ai/docs/agents",
+        zh: "https://www.operica.ai/docs/zh/agents",
+        "x-default": "https://www.operica.ai/docs/agents",
       },
     });
   });
@@ -61,12 +61,12 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.opercia.ai/docs/agents",
+      canonical: "https://www.operica.ai/docs/agents",
       languages: {
-        en: "https://www.opercia.ai/docs/agents",
-        zh: "https://www.opercia.ai/docs/zh/agents",
-        ko: "https://www.opercia.ai/docs/ko/agents",
-        "x-default": "https://www.opercia.ai/docs/agents",
+        en: "https://www.operica.ai/docs/agents",
+        zh: "https://www.operica.ai/docs/zh/agents",
+        ko: "https://www.operica.ai/docs/ko/agents",
+        "x-default": "https://www.operica.ai/docs/agents",
       },
     });
   });
@@ -76,12 +76,12 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.opercia.ai/docs/agents",
+      canonical: "https://www.operica.ai/docs/agents",
       languages: {
-        en: "https://www.opercia.ai/docs/agents",
-        zh: "https://www.opercia.ai/docs/zh/agents",
-        ja: "https://www.opercia.ai/docs/ja/agents",
-        "x-default": "https://www.opercia.ai/docs/agents",
+        en: "https://www.operica.ai/docs/agents",
+        zh: "https://www.operica.ai/docs/zh/agents",
+        ja: "https://www.operica.ai/docs/ja/agents",
+        "x-default": "https://www.operica.ai/docs/agents",
       },
     });
   });
@@ -90,11 +90,11 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates([])).toEqual({
-      canonical: "https://www.opercia.ai/docs",
+      canonical: "https://www.operica.ai/docs",
       languages: {
-        en: "https://www.opercia.ai/docs",
-        zh: "https://www.opercia.ai/docs/zh",
-        "x-default": "https://www.opercia.ai/docs",
+        en: "https://www.operica.ai/docs",
+        zh: "https://www.operica.ai/docs/zh",
+        "x-default": "https://www.operica.ai/docs",
       },
     });
   });

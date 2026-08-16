@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gorilla/websocket"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/gorilla/websocket"
 )
 
 func TestTaskWakeupURL(t *testing.T) {
@@ -38,9 +38,9 @@ func TestTaskWakeupURL(t *testing.T) {
 		},
 		{
 			name:       "base path",
-			baseURL:    "https://api.example.com/opercia",
+			baseURL:    "https://api.example.com/operica",
 			runtimeIDs: []string{"runtime-1"},
-			want:       "wss://api.example.com/opercia/api/daemon/ws?runtime_ids=runtime-1",
+			want:       "wss://api.example.com/operica/api/daemon/ws?runtime_ids=runtime-1",
 		},
 		{
 			name:       "account-only connection",

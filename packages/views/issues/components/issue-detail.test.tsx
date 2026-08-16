@@ -2,14 +2,14 @@ import { forwardRef, useEffect, useRef, useState, useImperativeHandle } from "re
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { Issue, Label, TimelineEntry } from "@opercia/core/types";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import type { Issue, Label, TimelineEntry } from "@operica/core/types";
+import { I18nProvider } from "@operica/core/i18n/react";
 import { toast } from "sonner";
-import { useResolvedExpandStore } from "@opercia/core/issues/stores/resolved-expand-store";
+import { useResolvedExpandStore } from "@operica/core/issues/stores/resolved-expand-store";
 import {
   DEFAULT_SUB_ISSUE_ROW_PROPERTIES,
   useSubIssueDisplayStore,
-} from "@opercia/core/issues/stores/sub-issue-display-store";
+} from "@operica/core/issues/stores/sub-issue-display-store";
 import enCommon from "../../locales/en/common.json";
 import enIssues from "../../locales/en/issues.json";
 
@@ -25,15 +25,15 @@ const contentEditorMounts = vi.hoisted(() => ({ count: 0 }));
 // stable identity. A fresh `[]` per call would loop useSyncExternalStore.
 const emptyDraftAttachments = vi.hoisted(() => [] as unknown[]);
 
-vi.mock("@opercia/ui/hooks/use-mobile", () => ({
+vi.mock("@operica/ui/hooks/use-mobile", () => ({
   useIsMobile: () => mockViewport.isMobile,
 }));
 
 // useWorkspaceId() derives from useCurrentWorkspace (relative import inside
-// @opercia/core/hooks.tsx). vi.mock("@opercia/core/paths") only intercepts
+// @operica/core/hooks.tsx). vi.mock("@operica/core/paths") only intercepts
 // the bare-specifier, not the internal relative import. Mock the hooks module
 // directly so the bridge hook returns the test UUID.
-vi.mock("@opercia/core/hooks", () => ({
+vi.mock("@operica/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
@@ -41,9 +41,9 @@ vi.mock("@opercia/core/hooks", () => ({
 // Mocks
 // ---------------------------------------------------------------------------
 
-// Mock @opercia/core/auth
+// Mock @operica/core/auth
 const mockAuthUser = { id: "user-1", email: "test@test.com", name: "Test User" };
-vi.mock("@opercia/core/auth", () => ({
+vi.mock("@operica/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: any) => {
       const state = { user: mockAuthUser, isAuthenticated: true };
@@ -55,8 +55,8 @@ vi.mock("@opercia/core/auth", () => ({
   createAuthStore: vi.fn(),
 }));
 
-// Mock @opercia/core/workspace/hooks
-vi.mock("@opercia/core/workspace/hooks", () => ({
+// Mock @operica/core/workspace/hooks
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({
     getMemberName: (id: string) => (id === "user-1" ? "Test User" : "Unknown"),
     getAgentName: (id: string) => (id === "agent-1" ? "Claude Agent" : "Unknown Agent"),
@@ -71,7 +71,7 @@ vi.mock("@opercia/core/workspace/hooks", () => ({
 }));
 
 // Mock workspace queries
-vi.mock("@opercia/core/workspace/queries", () => ({
+vi.mock("@operica/core/workspace/queries", () => ({
   memberListOptions: () => ({
     queryKey: ["workspaces", "ws-1", "members"],
     queryFn: () => Promise.resolve([{ user_id: "user-1", name: "Test User", email: "test@test.com", role: "admin" }]),
@@ -94,12 +94,12 @@ vi.mock("@opercia/core/workspace/queries", () => ({
   }),
 }));
 
-// Mock @opercia/core/paths — after the URL-driven workspace refactor,
+// Mock @operica/core/paths — after the URL-driven workspace refactor,
 // useCurrentWorkspace / useWorkspacePaths derive from the workspace slug in
 // URL Context. Tests don't mount a real route, so we short-circuit to fixtures.
-vi.mock("@opercia/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@opercia/core/paths")>(
-    "@opercia/core/paths",
+vi.mock("@operica/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@operica/core/paths")>(
+    "@operica/core/paths",
   );
   return {
     ...actual,
@@ -118,7 +118,7 @@ vi.mock("../../navigation", () => ({
   useNavigation: () => ({
     push: vi.fn(),
     pathname: "/issues/issue-1",
-    getShareableUrl: (p: string) => `https://app.opercia.com${p}`,
+    getShareableUrl: (p: string) => `https://app.operica.com${p}`,
   }),
   useBackOrReplace: () => vi.fn(),
   NavigationProvider: ({ children }: { children: React.ReactNode }) => children,
@@ -305,14 +305,14 @@ const mockApiObj = vi.hoisted(() => ({
   listProjects: vi.fn().mockResolvedValue({ projects: [] }),
 }));
 
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   api: mockApiObj,
   getApi: () => mockApiObj,
   setApiInstance: vi.fn(),
 }));
 
 // Mock issue config
-vi.mock("@opercia/core/issues/config", () => ({
+vi.mock("@operica/core/issues/config", () => ({
   ALL_STATUSES: ["backlog", "todo", "in_progress", "in_review", "done", "blocked", "cancelled"],
   STATUS_ORDER: ["backlog", "todo", "in_progress", "in_review", "done", "blocked", "cancelled"],
   STATUS_CONFIG: {
@@ -337,23 +337,23 @@ vi.mock("@opercia/core/issues/config", () => ({
 
 // Mock recent issues store
 const mockRecordVisit = vi.fn();
-vi.mock("@opercia/core/issues/stores", async () => ({
+vi.mock("@operica/core/issues/stores", async () => ({
   // Real store, not a stub: resolved-thread expand/collapse behavior under
   // test runs through it. Deep import keeps the persisted sibling stores
   // (which need localStorage) out of this mock.
   ...(await vi.importActual<
-    typeof import("@opercia/core/issues/stores/resolved-expand-store")
-  >("@opercia/core/issues/stores/resolved-expand-store")),
+    typeof import("@operica/core/issues/stores/resolved-expand-store")
+  >("@operica/core/issues/stores/resolved-expand-store")),
   // Real store: sub-issue display tests drive it with setState, and the
   // component reads it through the barrel — both must hit the same instance.
   ...(await vi.importActual<
-    typeof import("@opercia/core/issues/stores/sub-issue-display-store")
-  >("@opercia/core/issues/stores/sub-issue-display-store")),
+    typeof import("@operica/core/issues/stores/sub-issue-display-store")
+  >("@operica/core/issues/stores/sub-issue-display-store")),
   // Real store, in-memory (no localStorage): backs the sub-issues section's
   // collapsed state.
   ...(await vi.importActual<
-    typeof import("@opercia/core/issues/stores/sub-issues-collapse-store")
-  >("@opercia/core/issues/stores/sub-issues-collapse-store")),
+    typeof import("@operica/core/issues/stores/sub-issues-collapse-store")
+  >("@operica/core/issues/stores/sub-issues-collapse-store")),
   useRecentIssuesStore: Object.assign(
     (selector?: any) => {
       const state = { byWorkspace: {}, recordVisit: mockRecordVisit, pruneWorkspaces: vi.fn() };
@@ -472,7 +472,7 @@ beforeEach(() => {
 });
 
 // Mock modals
-vi.mock("@opercia/core/modals", () => ({
+vi.mock("@operica/core/modals", () => ({
   useModalStore: Object.assign(
     () => ({ open: vi.fn() }),
     { getState: () => ({ open: vi.fn() }) },
@@ -480,12 +480,12 @@ vi.mock("@opercia/core/modals", () => ({
 }));
 
 // Mock core/hooks/use-file-upload
-vi.mock("@opercia/core/hooks/use-file-upload", () => ({
+vi.mock("@operica/core/hooks/use-file-upload", () => ({
   useFileUpload: () => ({ uploadWithToast: vi.fn().mockResolvedValue("https://example.com/file.png") }),
 }));
 
 // Mock realtime
-vi.mock("@opercia/core/realtime", () => ({
+vi.mock("@operica/core/realtime", () => ({
   useWSEvent: vi.fn(),
   useWSReconnect: vi.fn(),
   useWS: () => ({ subscribe: vi.fn(() => () => {}), onReconnect: vi.fn(() => () => {}) }),
@@ -498,7 +498,7 @@ vi.mock("sonner", () => ({
   toast: { error: vi.fn(), success: vi.fn() },
 }));
 
-// Mock react-resizable-panels (used by @opercia/ui/components/ui/resizable)
+// Mock react-resizable-panels (used by @operica/ui/components/ui/resizable)
 vi.mock("react-resizable-panels", () => ({
   Group: ({ children, ...props }: any) => <div data-testid="panel-group" {...props}>{children}</div>,
   Panel: ({ children, ...props }: any) => <div data-testid="panel" {...props}>{children}</div>,

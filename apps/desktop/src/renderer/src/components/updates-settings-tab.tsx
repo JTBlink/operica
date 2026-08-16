@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { AlertCircle, ArrowDownToLine, Check, Loader2 } from "lucide-react";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Switch } from "@opercia/ui/components/ui/switch";
-import { useT } from "@opercia/views/i18n";
-import { SettingsCard, SettingsRow, SettingsTab } from "@opercia/views/settings";
+import { Button } from "@operica/ui/components/ui/button";
+import { Switch } from "@operica/ui/components/ui/switch";
+import { useT } from "@operica/views/i18n";
+import { SettingsCard, SettingsRow, SettingsTab } from "@operica/views/settings";
 import { toast } from "sonner";
 
 type CheckState =

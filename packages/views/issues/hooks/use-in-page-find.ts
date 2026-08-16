@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getShortcut, shortcutMatchesEvent } from "@opercia/core/shortcuts";
-import { isImeComposing } from "@opercia/core/utils";
+import { getShortcut, shortcutMatchesEvent } from "@operica/core/shortcuts";
+import { isImeComposing } from "@operica/core/utils";
 
 // ---------------------------------------------------------------------------
 // In-page find (Cmd/Ctrl+F) for the issue detail page.
@@ -16,8 +16,8 @@ import { isImeComposing } from "@opercia/core/utils";
 // editors without fighting ProseMirror.
 // ---------------------------------------------------------------------------
 
-const HIGHLIGHT_NAME = "opercia-find";
-const ACTIVE_HIGHLIGHT_NAME = "opercia-find-active";
+const HIGHLIGHT_NAME = "operica-find";
+const ACTIVE_HIGHLIGHT_NAME = "operica-find-active";
 
 // Feature detection, evaluated lazily per call site. On browsers without the
 // CSS Custom Highlight API the bar still opens and navigates, it just paints

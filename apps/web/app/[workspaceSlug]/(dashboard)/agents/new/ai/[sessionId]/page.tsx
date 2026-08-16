@@ -1,7 +1,7 @@
 "use client";
 
 import { use } from "react";
-import { AiBuilderSessionPage } from "@opercia/views/agents";
+import { AiBuilderSessionPage } from "@operica/views/agents";
 
 export default function NewAgentAiSessionRoute({
   params,

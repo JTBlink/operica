@@ -8,7 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { useIssueSelectionStore } from "@opercia/core/issues/stores/selection-store";
+import { useIssueSelectionStore } from "@operica/core/issues/stores/selection-store";
 
 export interface IssueSurfaceSelection {
   selectedIds: Set<string>;

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import type { Issue, IssueAssigneeGroup } from "@opercia/core/types";
+import type { Issue, IssueAssigneeGroup } from "@operica/core/types";
 import {
   applyIssueFilters,
   filterAssigneeGroups,

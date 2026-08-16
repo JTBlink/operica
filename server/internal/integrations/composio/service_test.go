@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/JTBlink/operica/server/internal/util"
 	sdk "github.com/JTBlink/operica/server/pkg/composio"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 // ---- fakes ---------------------------------------------------------------
@@ -206,8 +206,8 @@ func newTestService(t *testing.T, client SDK, store Store) *Service {
 	t.Helper()
 	svc, err := NewService(client, store, Config{
 		StateSecret:     testSecret,
-		CallbackBaseURL: "https://opercia.ai",
-		FrontendBaseURL: "https://opercia.ai",
+		CallbackBaseURL: "https://operica.ai",
+		FrontendBaseURL: "https://operica.ai",
 		Now:             func() time.Time { return time.Unix(1_700_000_000, 0) },
 	})
 	if err != nil {
@@ -251,13 +251,13 @@ func TestBeginConnect_MappingAndState(t *testing.T) {
 	if sdkFake.lastCreateLink.AuthConfigID != "ac_notion" {
 		t.Errorf("auth config = %q", sdkFake.lastCreateLink.AuthConfigID)
 	}
-	// composio_user_id == opercia user id
+	// composio_user_id == operica user id
 	if sdkFake.lastCreateLink.UserID != util.UUIDToString(userID) {
 		t.Errorf("composio user id = %q, want %q", sdkFake.lastCreateLink.UserID, util.UUIDToString(userID))
 	}
 	// callback URL carries the signed state and points at our callback path
 	cb := sdkFake.lastCreateLink.CallbackURL
-	if !strings.HasPrefix(cb, "https://opercia.ai"+callbackPath+"?state=") {
+	if !strings.HasPrefix(cb, "https://operica.ai"+callbackPath+"?state=") {
 		t.Fatalf("callback url = %q", cb)
 	}
 	u, _ := url.Parse(cb)
@@ -709,10 +709,10 @@ func TestCreateMCPSession_PinsConnectedAccounts(t *testing.T) {
 func TestCallbackRedirect(t *testing.T) {
 	t.Parallel()
 	svc := newTestService(t, &fakeSDK{}, newFakeStore())
-	if got := svc.CallbackRedirect("notion", true); got != "https://opercia.ai/settings?tab=integrations&connected=notion" {
+	if got := svc.CallbackRedirect("notion", true); got != "https://operica.ai/settings?tab=integrations&connected=notion" {
 		t.Errorf("success redirect = %q", got)
 	}
-	if got := svc.CallbackRedirect("notion", false); got != "https://opercia.ai/settings?tab=integrations&error=composio_connect_failed" {
+	if got := svc.CallbackRedirect("notion", false); got != "https://operica.ai/settings?tab=integrations&error=composio_connect_failed" {
 		t.Errorf("failure redirect = %q", got)
 	}
 }

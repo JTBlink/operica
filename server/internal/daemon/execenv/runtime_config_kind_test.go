@@ -68,7 +68,7 @@ func TestBuildMetaSkillContentBriefContent(t *testing.T) {
 		AgentID:          "eve-1",
 	})
 
-	if !strings.Contains(out, "- `opercia issue get <id> --output json` — full issue.\n") {
+	if !strings.Contains(out, "- `operica issue get <id> --output json` — full issue.\n") {
 		t.Errorf("brief is missing the `issue get` one-liner\n---\n%s", out)
 	}
 	if strings.Contains(out, "Get full issue details.") {
@@ -131,13 +131,13 @@ func TestBuildMetaSkillContentSlimKindMatrix(t *testing.T) {
 	}
 	issueKinds := map[taskKind]bool{kindIssue: true}
 	checks := []sectionCheck{
-		{"# Opercia Agent Runtime", allKinds},
+		{"# Operica Agent Runtime", allKinds},
 		{"## Background Task Safety", allKinds},
 		{"## Agent Identity", allKinds},
 		{"## Available Commands", allKinds},
 		{"## Issue Body Formatting", allKinds},
 		{"### Workflow", allKinds},
-		{"## Important: Always Use the `opercia` CLI", allKinds},
+		{"## Important: Always Use the `operica` CLI", allKinds},
 		{"## Output", allKinds},
 		{"## Comment Formatting", issueKinds},
 		{"## Repositories", map[taskKind]bool{
@@ -225,8 +225,8 @@ func TestSlimQuickCreateAvailableCommands(t *testing.T) {
 
 	for _, want := range []string{
 		"## Available Commands",
-		"opercia issue create --title",
-		"`opercia --help`",
+		"operica issue create --title",
+		"`operica --help`",
 	} {
 		if !strings.Contains(out, want) {
 			t.Errorf("quick_create slim Available Commands missing %q", want)
@@ -234,18 +234,18 @@ func TestSlimQuickCreateAvailableCommands(t *testing.T) {
 	}
 
 	for _, banned := range []string{
-		"opercia issue get <id>",
-		"opercia issue comment list <issue-id>",
-		"opercia issue update <id>",
-		"opercia issue status <id> <status>",
-		"opercia issue comment add <issue-id>",
-		"opercia issue metadata list <issue-id>",
-		"opercia issue metadata set <issue-id>",
-		"opercia issue metadata delete <issue-id>",
-		"opercia issue children <id>",
-		"opercia repo checkout <url>",
+		"operica issue get <id>",
+		"operica issue comment list <issue-id>",
+		"operica issue update <id>",
+		"operica issue status <id> <status>",
+		"operica issue comment add <issue-id>",
+		"operica issue metadata list <issue-id>",
+		"operica issue metadata set <issue-id>",
+		"operica issue metadata delete <issue-id>",
+		"operica issue children <id>",
+		"operica repo checkout <url>",
 		"### Squad maintenance",
-		"opercia squad member set-role",
+		"operica squad member set-role",
 	} {
 		if strings.Contains(out, banned) {
 			t.Errorf("quick_create slim Available Commands should NOT advertise %q (hard guardrails forbid the call)", banned)

@@ -22,8 +22,8 @@ import { useQuery } from "@tanstack/react-query";
 import type {
   Issue,
   IssuePriority,
-} from "@opercia/core/types";
-import { formatDateOnly } from "@opercia/core/issues/date";
+} from "@operica/core/types";
+import { formatDateOnly } from "@operica/core/issues/date";
 import { Text } from "@/components/ui/text";
 import { StatusIcon } from "@/components/ui/status-icon";
 import { PriorityIcon } from "@/components/ui/priority-icon";

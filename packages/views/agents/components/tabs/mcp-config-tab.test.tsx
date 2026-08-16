@@ -4,9 +4,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { Agent, AgentRuntime } from "@opercia/core/types";
-import { ApiError } from "@opercia/core/api";
-import { I18nProvider } from "@opercia/core/i18n/react";
+import type { Agent, AgentRuntime } from "@operica/core/types";
+import { ApiError } from "@operica/core/api";
+import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../../locales/en/common.json";
 import enAgents from "../../../locales/en/agents.json";
 import { McpConfigTab } from "./mcp-config-tab";
@@ -17,10 +17,10 @@ const mockRuntimeCapabilities = vi.hoisted(() => vi.fn());
 
 // The tab reads discovery through runtimeCapabilitiesOptions; existing tests
 // render with runtime={null} so the query stays disabled and never fires.
-vi.mock("@opercia/core/runtimes", async () => {
+vi.mock("@operica/core/runtimes", async () => {
   const actual =
-    await vi.importActual<typeof import("@opercia/core/runtimes")>(
-      "@opercia/core/runtimes",
+    await vi.importActual<typeof import("@operica/core/runtimes")>(
+      "@operica/core/runtimes",
     );
   return {
     ...actual,
@@ -135,7 +135,7 @@ describe("McpConfigTab", () => {
 
     expect(screen.getByText("fetch")).toBeInTheDocument();
     expect(screen.getByText("docs")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /managed by opercia/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /managed by operica/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /inherited from runtime/i })).toBeInTheDocument();
     expect(screen.queryByLabelText(/MCP config JSON editor/i)).not.toBeInTheDocument();
   });

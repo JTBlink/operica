@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
-import type { QuickAction } from "@opercia/core/types";
+import type { QuickAction } from "@operica/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { QuickActionsSection } from "./quick-actions-section";
 
@@ -23,17 +23,17 @@ vi.mock("@tanstack/react-query", () => ({
   useQuery: () => ({ data: listData, isLoading: false }),
 }));
 
-vi.mock("@opercia/core/paths", () => ({
+vi.mock("@operica/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "ws-1" }),
 }));
 
-vi.mock("@opercia/core/quick-actions", () => ({
+vi.mock("@operica/core/quick-actions", () => ({
   quickActionListOptions: () => ({ queryKey: ["quick-actions"], queryFn: vi.fn() }),
   useRunQuickAction: () => ({ mutateAsync: runMock, isPending: false }),
 }));
 
 let reasonCode: string | undefined;
-vi.mock("@opercia/core/api", () => ({
+vi.mock("@operica/core/api", () => ({
   dispatchReasonCode: () => reasonCode,
 }));
 

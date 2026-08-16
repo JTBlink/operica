@@ -2,7 +2,7 @@
 
 import { cleanup, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { WorkingAgentSummary } from "@opercia/core/types";
+import type { WorkingAgentSummary } from "@operica/core/types";
 import { renderWithI18n } from "../../test/i18n";
 
 const mockState = vi.hoisted(() => ({
@@ -10,7 +10,7 @@ const mockState = vi.hoisted(() => ({
   buttonVariant: undefined as string | undefined,
 }));
 
-vi.mock("@opercia/core/workspace/hooks", () => ({
+vi.mock("@operica/core/workspace/hooks", () => ({
   useActorName: () => ({
     getActorName: (_type: string, id: string) => `Agent ${id}`,
     getActorInitials: () => "AG",
@@ -28,7 +28,7 @@ vi.mock("../../agents/components/agent-avatar-stack", () => ({
 // The real hover card renders its body only while open. Render it inline so the
 // chip's own wiring to the hover body is observable: the MUL-5525 follow-up bug
 // was in that wiring (`agents ?? []`), not in the body's rendering.
-vi.mock("@opercia/ui/components/ui/hover-card", () => ({
+vi.mock("@operica/ui/components/ui/hover-card", () => ({
   HoverCard: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   HoverCardTrigger: ({ render }: { render: React.ReactElement }) => render,
   HoverCardContent: ({ children }: { children: React.ReactNode }) => (
@@ -36,10 +36,10 @@ vi.mock("@opercia/ui/components/ui/hover-card", () => ({
   ),
 }));
 
-vi.mock("@opercia/ui/components/ui/button", async () => {
+vi.mock("@operica/ui/components/ui/button", async () => {
   const actual =
-    await vi.importActual<typeof import("@opercia/ui/components/ui/button")>(
-      "@opercia/ui/components/ui/button",
+    await vi.importActual<typeof import("@operica/ui/components/ui/button")>(
+      "@operica/ui/components/ui/button",
     );
   return {
     ...actual,

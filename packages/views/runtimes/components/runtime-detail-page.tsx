@@ -3,19 +3,19 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertCircle, Cloud, Monitor, Pencil, Plus, Server } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@opercia/core/auth";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import { useWorkspacePaths } from "@opercia/core/paths";
-import { agentTaskSnapshotOptions } from "@opercia/core/agents";
-import { runtimeProfileListOptions } from "@opercia/core/runtimes";
-import { runtimeKeys, runtimeListOptions } from "@opercia/core/runtimes/queries";
-import { useWSEvent } from "@opercia/core/realtime";
+import { useAuthStore } from "@operica/core/auth";
+import { useWorkspaceId } from "@operica/core/hooks";
+import { useWorkspacePaths } from "@operica/core/paths";
+import { agentTaskSnapshotOptions } from "@operica/core/agents";
+import { runtimeProfileListOptions } from "@operica/core/runtimes";
+import { runtimeKeys, runtimeListOptions } from "@operica/core/runtimes/queries";
+import { useWSEvent } from "@operica/core/realtime";
 import {
   agentListOptions,
   memberListOptions,
-} from "@opercia/core/workspace/queries";
-import { Button } from "@opercia/ui/components/ui/button";
-import { Skeleton } from "@opercia/ui/components/ui/skeleton";
+} from "@operica/core/workspace/queries";
+import { Button } from "@operica/ui/components/ui/button";
+import { Skeleton } from "@operica/ui/components/ui/skeleton";
 import { AppLink } from "../../navigation";
 import { buildWorkloadIndex, RuntimeList } from "./runtime-list";
 import {

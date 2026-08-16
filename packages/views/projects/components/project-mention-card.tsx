@@ -1,7 +1,7 @@
 "use client";
 
 import { AppLink } from "../../navigation";
-import { useWorkspacePaths } from "@opercia/core/paths";
+import { useWorkspacePaths } from "@operica/core/paths";
 import { ProjectChip } from "./project-chip";
 
 interface ProjectMentionCardProps {

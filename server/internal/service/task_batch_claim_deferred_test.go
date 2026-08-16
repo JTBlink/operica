@@ -7,12 +7,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/JTBlink/operica/server/internal/events"
 	"github.com/JTBlink/operica/server/internal/util"
 	db "github.com/JTBlink/operica/server/pkg/db/generated"
 	"github.com/JTBlink/operica/server/pkg/protocol"
+	"github.com/jackc/pgx/v5/pgtype"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 // TestClaimTasksForRuntimes_PromotesDeferredAndEmitsQueuedEvent is the
@@ -69,7 +69,7 @@ func deferredBatchFixture(t *testing.T, ctx context.Context, pool *pgxpool.Pool)
 
 	var userID string
 	if err := pool.QueryRow(ctx, `INSERT INTO "user" (name, email) VALUES ($1,$2) RETURNING id`,
-		"Deferred Batch Test", fmt.Sprintf("deferred-batch-%d@opercia.ai", suffix)).Scan(&userID); err != nil {
+		"Deferred Batch Test", fmt.Sprintf("deferred-batch-%d@operica.ai", suffix)).Scan(&userID); err != nil {
 		t.Fatalf("create user: %v", err)
 	}
 	var workspaceID string

@@ -1,5 +1,5 @@
-import type { IssuePriority } from "@opercia/core/types";
-import { PRIORITY_CONFIG } from "@opercia/core/issues/config";
+import type { IssuePriority } from "@operica/core/types";
+import { PRIORITY_CONFIG } from "@operica/core/issues/config";
 
 /**
  * Priority glyphs, two families on purpose:

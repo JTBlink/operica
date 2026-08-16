@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { bucketDiagnosticPath, setDiagnosticRoute } from "@opercia/core/diagnostics";
-import { useAuthStore } from "@opercia/core/auth";
+import { bucketDiagnosticPath, setDiagnosticRoute } from "@operica/core/diagnostics";
+import { useAuthStore } from "@operica/core/auth";
 import { useActiveTabIdentity, useActiveTabUrl } from "@/stores/tab-store";
 import {
   useWindowOverlayStore,

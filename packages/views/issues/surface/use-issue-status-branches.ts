@@ -12,18 +12,18 @@ import {
   useQueryClient,
   type UseQueryResult,
 } from "@tanstack/react-query";
-import { ALL_STATUSES } from "@opercia/core/issues/config";
+import { ALL_STATUSES } from "@operica/core/issues/config";
 import {
   issueKeys,
   issueTableRowPageOptions,
-} from "@opercia/core/issues/queries";
+} from "@operica/core/issues/queries";
 import type {
   Issue,
   IssueStatus,
   IssueTableFacetsResponse,
   IssueTableQuerySpec,
   IssueTableRowsResponse,
-} from "@opercia/core/types";
+} from "@operica/core/types";
 
 export interface IssueStatusPageState {
   total: number;

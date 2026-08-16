@@ -3,21 +3,21 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Loader2, ScrollText } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { cn } from "@opercia/ui/lib/utils";
+import { cn } from "@operica/ui/lib/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@opercia/ui/components/ui/tooltip";
-import { api } from "@opercia/core/api";
+} from "@operica/ui/components/ui/tooltip";
+import { api } from "@operica/core/api";
 import {
   chatKeys,
   isTaskMessageTaskId,
   mergeTaskMessagesBySeq,
   taskMessagesOptions,
-} from "@opercia/core/chat/queries";
-import type { AgentTask } from "@opercia/core/types/agent";
-import type { TaskMessagePayload } from "@opercia/core/types/events";
+} from "@operica/core/chat/queries";
+import type { AgentTask } from "@operica/core/types/agent";
+import type { TaskMessagePayload } from "@operica/core/types/events";
 import { AgentTranscriptDialog } from "./agent-transcript-dialog";
 import { buildTimeline, type TimelineItem } from "./build-timeline";
 
@@ -139,9 +139,9 @@ export function TranscriptButton({
       setOpen(false);
     };
 
-    window.addEventListener("opercia:navigate", handleGlobalNavigate);
+    window.addEventListener("operica:navigate", handleGlobalNavigate);
     return () => {
-      window.removeEventListener("opercia:navigate", handleGlobalNavigate);
+      window.removeEventListener("operica:navigate", handleGlobalNavigate);
     };
   }, [open, setOpen]);
 

@@ -12,7 +12,7 @@
  *     animation polish iteration).
  */
 import Svg, { Line, Rect } from "react-native-svg";
-import type { IssuePriority } from "@opercia/core/types";
+import type { IssuePriority } from "@operica/core/types";
 
 const BARS: Record<IssuePriority, number> = {
   urgent: 4,

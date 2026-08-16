@@ -27,8 +27,8 @@
  */
 
 import { Download, ExternalLink, Maximize2, Trash2 } from "lucide-react";
-import { cn } from "@opercia/ui/lib/utils";
-import { paths, useWorkspaceSlug } from "@opercia/core/paths";
+import { cn } from "@operica/ui/lib/utils";
+import { paths, useWorkspaceSlug } from "@operica/core/paths";
 import { useT } from "../i18n";
 import { useNavigation } from "../navigation";
 import { useAttachmentHtmlText } from "./hooks/use-attachment-html-text";

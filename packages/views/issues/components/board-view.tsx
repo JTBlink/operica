@@ -20,13 +20,13 @@ import type {
   IssueStatus,
   Project,
   IssueProperty,
-} from "@opercia/core/types";
-import { useViewStore } from "@opercia/core/issues/stores/view-store-context";
-import { propertyIdFromViewKey } from "@opercia/core/issues/stores/view-store";
-import { propertyListOptions, useSetIssueProperty, useUnsetIssueProperty } from "@opercia/core/properties";
-import { useWorkspaceId } from "@opercia/core/hooks";
-import type { IssueGrouping } from "@opercia/core/issues/stores/view-store";
-import { useActorName } from "@opercia/core/workspace/hooks";
+} from "@operica/core/types";
+import { useViewStore } from "@operica/core/issues/stores/view-store-context";
+import { propertyIdFromViewKey } from "@operica/core/issues/stores/view-store";
+import { propertyListOptions, useSetIssueProperty, useUnsetIssueProperty } from "@operica/core/properties";
+import { useWorkspaceId } from "@operica/core/hooks";
+import type { IssueGrouping } from "@operica/core/issues/stores/view-store";
+import { useActorName } from "@operica/core/workspace/hooks";
 import { BoardColumn, BOARD_CARD_WIDTH, type BoardColumnGroup } from "./board-column";
 import { BoardCardContent } from "./board-card";
 import { HiddenColumnsPanel, HiddenColumnRow } from "./hidden-columns-panel";
