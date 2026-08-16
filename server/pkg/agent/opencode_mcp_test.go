@@ -510,7 +510,10 @@ func TestOpencodeBackendOmitsMCPEnvWhenEmpty(t *testing.T) {
 // (last occurrence wins) and the warning log is the documented signal of
 // the override.
 func TestOpencodeBackendOverridesUserOpenCodeConfigContent(t *testing.T) {
-	t.Parallel()
+	// Keep this subprocess deadline test serial. Under the race detector, the
+	// package's parallel CLI fixtures can consume the entire five-second
+	// execution window before this fake process drains stdin, producing a
+	// scheduler-dependent timeout unrelated to the env precedence contract.
 	tempDir := t.TempDir()
 	fakePath := filepath.Join(tempDir, "opencode")
 	captureFile := filepath.Join(tempDir, "env-capture.txt")
