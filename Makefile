@@ -275,7 +275,10 @@ build: ## Build the server, CLI, and migrate binaries into server/bin
 	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.date=$(DATE)" -o bin/opercia ./cmd/opercia
 	cd server && go build -o bin/migrate ./cmd/migrate
 
-release: ## Cross-compile multi-platform binaries and build the frontend into dist/release
+release: ## Package the Desktop app for the current platform (default, no Web/Go server)
+	@bash scripts/build.sh
+
+release-server: ## Cross-compile Go server binaries into dist/release (Web skipped unless WITH_FRONTEND=1)
 	@bash scripts/build.sh build
 
 run: ## Compile native binaries and start backend + frontend for the current checkout
