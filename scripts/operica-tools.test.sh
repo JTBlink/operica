@@ -11,6 +11,12 @@ fail() {
 
 help_output="$(bash scripts/operica-tools.sh help)"
 
+if grep -Fq 'Opercia' <<<"$help_output"; then
+  fail "help must use the Operica product name"
+fi
+grep -Fq 'Operica 本地开发与发布工具' <<<"$help_output" ||
+  fail "help must show the Operica product name"
+
 grep -Fq 'start [--server] [--web] [--all]' <<<"$help_output" ||
   fail "start help must list the optional service flags"
 grep -Fq '默认仅启动桌面端' <<<"$help_output" ||
@@ -27,12 +33,26 @@ grep -Fq '本地登录提示:' <<<"$help_output" ||
 grep -Fq '默认账号: 未设置' <<<"$help_output" ||
   fail "help must not imply that a default account always exists"
 grep -Fq '默认密码: 无' <<<"$help_output" ||
-  fail "help must explain that Opercia has no password login"
+  fail "help must explain that Operica has no password login"
 grep -Fq 'OPERCIA_DEV_VERIFICATION_CODE' <<<"$help_output" ||
   fail "help must explain how to find the local verification code"
+grep -Fq 'kill [--all]' <<<"$help_output" ||
+  fail "help must list the kill command"
+grep -Fq '不会停止共享 PostgreSQL' <<<"$help_output" ||
+  fail "help must state that kill preserves shared PostgreSQL"
 
 tmp_dir="$(mktemp -d)"
-trap 'rm -rf "$tmp_dir"' EXIT
+held_launcher_pid=""
+
+cleanup() {
+  if [ -n "$held_launcher_pid" ] && kill -0 "$held_launcher_pid" 2>/dev/null; then
+    kill -TERM "$held_launcher_pid" 2>/dev/null || true
+    wait "$held_launcher_pid" 2>/dev/null || true
+  fi
+  rm -rf "$tmp_dir"
+}
+
+trap cleanup EXIT
 
 fixture="$tmp_dir/repo"
 stub_bin="$tmp_dir/bin"
@@ -59,6 +79,10 @@ EOF
 cat >"$stub_bin/pnpm" <<'EOF'
 #!/usr/bin/env bash
 printf 'pnpm:%s\n' "$*" >>"$TOOLS_TEST_LOG"
+if [ "${TOOLS_TEST_HOLD:-0}" = "1" ]; then
+  trap 'exit 0' INT TERM
+  while :; do sleep 1; done
+fi
 EOF
 
 cat >"$stub_bin/go" <<'EOF'
@@ -77,6 +101,10 @@ if [ -n "$output" ]; then
   cat >"$output" <<'SCRIPT'
 #!/usr/bin/env bash
 printf 'binary:%s:%s\n' "$(basename "$0")" "$*" >>"$TOOLS_TEST_LOG"
+if [ "${TOOLS_TEST_HOLD:-0}" = "1" ] && [ "$(basename "$0")" = "server" ]; then
+  trap 'exit 0' INT TERM
+  while :; do sleep 1; done
+fi
 SCRIPT
   chmod +x "$output"
 fi
@@ -134,5 +162,63 @@ set +e
 invalid_status=$?
 set -e
 [ "$invalid_status" = "2" ] || fail "unknown start flags must exit 2"
+
+: >"$log_file"
+(
+  cd "$fixture"
+  PATH="$stub_bin:$PATH" TOOLS_TEST_LOG="$log_file" TOOLS_TEST_HOLD=1 \
+    bash scripts/operica-tools.sh start --all >/dev/null 2>&1
+) &
+held_launcher_pid=$!
+
+for _ in {1..50}; do
+  if grep -Fxq 'pnpm:dev:desktop' "$log_file" 2>/dev/null &&
+    grep -Fxq 'binary:server:' "$log_file" 2>/dev/null &&
+    grep -Fxq 'pnpm:dev:web' "$log_file" 2>/dev/null; then
+    break
+  fi
+  sleep 0.1
+done
+
+grep -Fxq 'pnpm:dev:desktop' "$log_file" || fail "kill test Desktop did not start"
+grep -Fxq 'binary:server:' "$log_file" || fail "kill test backend did not start"
+grep -Fxq 'pnpm:dev:web' "$log_file" || fail "kill test Web did not start"
+
+kill_output="$(
+  cd "$fixture"
+  PATH="$stub_bin:$PATH" TOOLS_TEST_LOG="$log_file" \
+    bash scripts/operica-tools.sh kill --all
+)"
+
+for _ in {1..50}; do
+  kill -0 "$held_launcher_pid" 2>/dev/null || break
+  sleep 0.1
+done
+if kill -0 "$held_launcher_pid" 2>/dev/null; then
+  fail "kill --all must stop the start launcher and all services"
+fi
+wait "$held_launcher_pid" 2>/dev/null || true
+held_launcher_pid=""
+
+grep -Fq '共享 PostgreSQL 保持运行' <<<"$kill_output" ||
+  fail "kill --all must report that PostgreSQL was preserved"
+
+no_process_output="$(
+  cd "$fixture"
+  PATH="$stub_bin:$PATH" TOOLS_TEST_LOG="$log_file" \
+    bash scripts/operica-tools.sh kill
+)"
+grep -Fq '没有运行中的 Operica 开发进程' <<<"$no_process_output" ||
+  fail "repeated kill must succeed when no processes remain"
+
+set +e
+(
+  cd "$fixture"
+  PATH="$stub_bin:$PATH" TOOLS_TEST_LOG="$log_file" \
+    bash scripts/operica-tools.sh kill --unknown >/dev/null 2>&1
+)
+invalid_kill_status=$?
+set -e
+[ "$invalid_kill_status" = "2" ] || fail "unknown kill flags must exit 2"
 
 echo "operica-tools.test.sh: PASS"

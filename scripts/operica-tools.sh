@@ -12,6 +12,7 @@ set -euo pipefail
 #   bash scripts/operica-tools.sh start --server   # Desktop + local backend
 #   bash scripts/operica-tools.sh start --web      # Desktop + Web
 #   bash scripts/operica-tools.sh start --all      # Desktop + local backend + Web
+#   bash scripts/operica-tools.sh kill              # Stop all services for this checkout
 #   bash scripts/operica-tools.sh help
 #
 # Environment variables for build:
@@ -24,12 +25,12 @@ set -euo pipefail
 #   ENV_FILE        Env file (default: .env, or .env.worktree in a linked worktree)
 # ==========================================================================
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 cd "$REPO_ROOT"
 
 usage() {
   cat <<'EOF'
-Opercia 本地开发与发布工具
+Operica 本地开发与发布工具
 
 用法:
   ./scripts/operica-tools.sh <命令> [参数]
@@ -42,6 +43,8 @@ Opercia 本地开发与发布工具
   build      交叉编译 Go 服务端二进制并归档
   start [--server] [--web] [--all]
              默认仅启动桌面端；可按需附加本地后端和 Web
+  kill [--all]
+             停止当前 checkout 的桌面端、本地后端和 Web
   help       显示帮助信息
 
 start 参数:
@@ -50,9 +53,14 @@ start 参数:
   --all      附加本地后端和 Web，等同于 --server --web
   -h, --help 显示帮助信息
 
+kill 参数:
+  --all      停止当前 checkout 的所有开发进程，也是 kill 的默认行为
+  -h, --help 显示帮助信息
+  kill 不会停止共享 PostgreSQL，也不会停止其他 checkout 的进程
+
 本地登录提示:
   默认账号: 未设置。配置 AUTO_LOGIN_EMAIL 后，本地请求会自动使用该账号登录
-  默认密码: 无。Opercia 使用邮箱验证码登录，不使用账号密码
+  默认密码: 无。Operica 使用邮箱验证码登录，不使用账号密码
   登录验证码: 优先使用 OPERCIA_DEV_VERIFICATION_CODE 配置的 6 位验证码；
               未配置时，从本地后端日志中的 verification code 获取
   安全提示: 固定验证码仅用于本地开发，不要在 production 或公网环境启用
@@ -80,6 +88,9 @@ start 参数:
   ./scripts/operica-tools.sh start --all
       启动桌面端、本地后端和 Web
 
+  ./scripts/operica-tools.sh kill
+      停止当前 checkout 的全部开发进程
+
   ./scripts/operica-tools.sh desktop --mac --arm64
       打包 macOS arm64 桌面端，不发布产物
 
@@ -89,6 +100,39 @@ EOF
 }
 
 # --- helpers ----------------------------------------------------------------
+
+runtime_pid_file() {
+  local runtime_dir="${TMPDIR:-/tmp}"
+  local repo_hash
+  repo_hash="$(printf '%s' "$REPO_ROOT" | cksum | awk '{print $1}')"
+  printf '%s/operica-tools-%s.pids\n' "${runtime_dir%/}" "$repo_hash"
+}
+
+process_belongs_to_checkout() {
+  local pid="$1"
+  local cwd
+
+  [[ "$pid" =~ ^[0-9]+$ ]] || return 1
+  kill -0 "$pid" 2>/dev/null || return 1
+  cwd="$(lsof -a -p "$pid" -d cwd -Fn 2>/dev/null | sed -n 's/^n//p' | head -n 1)"
+
+  case "$cwd" in
+    "$REPO_ROOT" | "$REPO_ROOT"/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+process_is_active() {
+  local pid="$1"
+  local state
+
+  kill -0 "$pid" 2>/dev/null || return 1
+  state="$(ps -p "$pid" -o stat= 2>/dev/null | awk '{print $1}')"
+  case "$state" in
+    "" | Z*) return 1 ;;
+    *) return 0 ;;
+  esac
+}
 
 version_vars() {
   VERSION="${VERSION:-$(git describe --tags --match 'v[0-9]*' --always --dirty 2>/dev/null || echo dev)}"
@@ -112,7 +156,7 @@ cmd_desktop() {
     package_args+=(--publish never)
   fi
 
-  echo "==> 打包 Opercia Desktop"
+  echo "==> 打包 Operica Desktop"
   [ -d node_modules ] || pnpm install --frozen-lockfile
   pnpm -C apps/desktop package -- "${package_args[@]}"
 }
@@ -125,7 +169,7 @@ cmd_build() {
   local out_dir="${OUT_DIR:-dist/release}"
   local go_targets=(server opercia migrate)
 
-  echo "==> 打包 Opercia ${VERSION} (commit ${COMMIT})"
+  echo "==> 打包 Operica ${VERSION} (commit ${COMMIT})"
   echo "    输出目录: ${out_dir}"
   rm -rf "$out_dir"
   mkdir -p "$out_dir"
@@ -257,33 +301,160 @@ cmd_start() {
 
   local child_pids=()
   local exit_status=0
+  local pid_file
+  pid_file="$(runtime_pid_file)"
 
   cleanup_start() {
     local pid
     for pid in "${child_pids[@]}"; do
       kill "$pid" 2>/dev/null || true
     done
+    rm -f -- "$pid_file"
+  }
+
+  record_start_pids() {
+    local tmp_pid_file="${pid_file}.$$"
+    (
+      umask 077
+      printf '%s\n' "${child_pids[@]}" >"$tmp_pid_file"
+      mv -f -- "$tmp_pid_file" "$pid_file"
+    )
   }
 
   trap cleanup_start EXIT INT TERM
 
   pnpm dev:desktop &
   child_pids+=("$!")
+  record_start_pids
 
   if [ "$start_server" = "1" ]; then
     ./server/bin/server &
     child_pids+=("$!")
+    record_start_pids
   fi
 
   if [ "$start_web" = "1" ]; then
     pnpm dev:web &
     child_pids+=("$!")
+    record_start_pids
   fi
 
   wait "${child_pids[@]}" || exit_status=$?
   cleanup_start
   trap - EXIT INT TERM
   return "$exit_status"
+}
+
+# --- kill (local dev) -------------------------------------------------------
+
+cmd_kill() {
+  local arg
+  local pid_file
+  local line pid command
+  local root_pid
+  local iteration alive
+  local kill_targets=()
+  local root_targets=()
+
+  for arg in "$@"; do
+    case "$arg" in
+      --all) ;;
+      -h | --help)
+        usage
+        return
+        ;;
+      *)
+        echo "kill: 未知参数: $arg" >&2
+        usage >&2
+        return 2
+        ;;
+    esac
+  done
+
+  pid_file="$(runtime_pid_file)"
+
+  add_unique_pid() {
+    local candidate="$1"
+    local existing
+    for existing in "${root_targets[@]-}"; do
+      [ -n "$existing" ] || continue
+      [ "$existing" = "$candidate" ] && return
+    done
+    root_targets+=("$candidate")
+  }
+
+  if [ -f "$pid_file" ]; then
+    while IFS= read -r pid; do
+      if process_belongs_to_checkout "$pid"; then
+        add_unique_pid "$pid"
+      fi
+    done <"$pid_file"
+  fi
+
+  # Discover processes from starts created before PID tracking existed, and
+  # direct pnpm/server invocations. The cwd check keeps the scope in this checkout.
+  while IFS= read -r line; do
+    read -r pid command <<<"$line"
+    case "$command" in
+      *"scripts/operica-tools.sh start"* | *"pnpm dev:desktop"* | *"pnpm dev:web"* | \
+        *"turbo dev --filter=@opercia/desktop"* | *"turbo dev --filter=@opercia/web"* | \
+        *"electron-vite"* | *"next-server"* | *"server/bin/server"*)
+        if process_belongs_to_checkout "$pid"; then
+          add_unique_pid "$pid"
+        fi
+        ;;
+    esac
+  done < <(ps -axo pid=,command=)
+
+  if [ "${#root_targets[@]}" -eq 0 ]; then
+    rm -f -- "$pid_file"
+    echo "当前 checkout 没有运行中的 Operica 开发进程。"
+    return
+  fi
+
+  add_process_tree() {
+    local tree_pid="$1"
+    local child
+    local existing
+    while IFS= read -r child; do
+      [ -n "$child" ] && add_process_tree "$child"
+    done < <(pgrep -P "$tree_pid" 2>/dev/null || true)
+    for existing in "${kill_targets[@]-}"; do
+      [ -n "$existing" ] || continue
+      [ "$existing" = "$tree_pid" ] && return
+    done
+    kill_targets+=("$tree_pid")
+  }
+
+  for root_pid in "${root_targets[@]}"; do
+    add_process_tree "$root_pid"
+  done
+
+  echo "==> 停止当前 checkout 的 ${#kill_targets[@]} 个 Operica 开发进程..."
+  for pid in "${kill_targets[@]}"; do
+    kill -TERM "$pid" 2>/dev/null || true
+  done
+
+  for iteration in {1..50}; do
+    alive=0
+    for pid in "${kill_targets[@]}"; do
+      if process_is_active "$pid"; then
+        alive=1
+        break
+      fi
+    done
+    [ "$alive" = "0" ] && break
+    sleep 0.1
+  done
+
+  for pid in "${kill_targets[@]}"; do
+    if process_is_active "$pid"; then
+      kill -KILL "$pid" 2>/dev/null || true
+    fi
+  done
+
+  rm -f -- "$pid_file"
+  echo "✓ 已停止桌面端、本地后端和 Web。共享 PostgreSQL 保持运行。"
 }
 
 # --- dispatch ---------------------------------------------------------------
@@ -297,6 +468,10 @@ case "${1:-desktop}" in
   start)
     shift
     cmd_start "$@"
+    ;;
+  kill)
+    shift
+    cmd_kill "$@"
     ;;
   help | -h | --help) usage ;;
   *)
