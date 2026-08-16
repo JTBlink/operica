@@ -16,9 +16,9 @@
 
 | 脚本 | 调用方 | 用途 |
 | --- | --- | --- |
-| `build.sh` / `build.sh desktop` | `make release` | 默认命令。打包当前平台的 Electron 桌面端（Go CLI 由 `bundle-cli.mjs` 自动编译内嵌），不构建 Web 也不编译服务端二进制；额外参数透传给 desktop package（如 `--mac --arm64`），未显式指定 `--publish` 时自动使用 `--publish never`。 |
-| `build.sh build` | `make release-server` | 交叉编译 Go 服务端二进制（server/opercia/migrate）并归档到 `OUT_DIR`（默认 `dist/release`）。默认平台跟随本机；需多平台时用 `PLATFORMS="linux/amd64 linux/arm64 …"` 覆盖。另支持 `SKIP_GO=1`、`WITH_FRONTEND=1`（额外构建 Web standalone 归档）。 |
-| `build.sh start` | `make run` | 加载 env（自动识别 `.env` / worktree 的 `.env.worktree`）、确保 Postgres、编译本机二进制、跑迁移，然后同时启动后端 (`server/bin/server`) 与前端 (`pnpm dev:web`)。 |
+| `operica-tools.sh` / `operica-tools.sh desktop` | `make release` | 默认命令。打包当前平台的 Electron 桌面端（Go CLI 由 `bundle-cli.mjs` 自动编译内嵌），不构建 Web 也不编译服务端二进制；额外参数透传给 desktop package（如 `--mac --arm64`），未显式指定 `--publish` 时自动使用 `--publish never`。 |
+| `operica-tools.sh build` | `make release-server` | 交叉编译 Go 服务端二进制（server/opercia/migrate）并归档到 `OUT_DIR`（默认 `dist/release`）。默认平台跟随本机；需多平台时用 `PLATFORMS="linux/amd64 linux/arm64 …"` 覆盖。另支持 `SKIP_GO=1`、`WITH_FRONTEND=1`（额外构建 Web standalone 归档）。 |
+| `operica-tools.sh start [--server] [--web] [--all]` | `make run` | 默认仅启动 Electron 桌面端 (`pnpm dev:desktop`)。`--server` 会额外加载 env、确保 Postgres、编译本机二进制、执行迁移并启动后端；`--web` 会额外启动 Web；`--all` 同时附加后端和 Web。 |
 
 ## 校验 / CI
 
@@ -28,7 +28,7 @@
 | `test-go.sh [--race]` | `make test`、`check.sh` | 分两轮运行 Go 测试套件：先跑常规包，再以受限并行度（`-p 2 -parallel 2`）跑 `./pkg/agent/...`，因为那些基于子进程的测试有硬性超时。两轮都在 agent-CLI 守卫下运行。 |
 | `go-test-with-agent-cli-guard.sh -- <cmd...>` | `test-go.sh` | 运行命令时用桩二进制（来自 `agent-cli-command-names.txt`）在 `PATH` 中遮蔽所有真实 agent CLI。若测试调用了真实 agent CLI，桩会记录并使运行失败 —— 防止测试启动外部 agent。 |
 | `agent-cli-command-names.txt` | `go-test-with-agent-cli-guard.sh` | 数据文件：需守卫的 agent CLI 名称（claude、codex、copilot、cursor-agent、opencode 等）。 |
-| `build.test.sh` | `check.sh` | `build.sh` 的沙盒测试 —— 打桩 `go`/`pnpm`，断言 `build` 默认只编译归档 Go 而不触发 Web、`WITH_FRONTEND=1`/`SKIP_GO=1` 生效，以及 `desktop` 的默认 `--publish never` 与参数透传。 |
+| `operica-tools.test.sh` | `check.sh` | `operica-tools.sh` 的启动行为测试，断言桌面端为 `start` 默认目标，后端和 Web 只能通过显式参数附加。 |
 | `test-go.test.sh` | `check.sh` | `test-go.sh` 的单元测试 —— 打桩 `go` 并断言精确的 `go test` 参数序列与 usage/退出码行为。 |
 | `helm-config.test.sh` | CI | 对 `deploy/helm/opercia` 的 chart 执行 `helm lint`，并断言 `templates/configmap.yaml` 渲染出预期的配置值（默认值与覆盖值）。 |
 | `selfhost-config.test.sh` | CI | 断言自托管栈的 `docker compose config` 渲染出预期的配置值。 |

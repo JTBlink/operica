@@ -276,14 +276,13 @@ build: ## Build the server, CLI, and migrate binaries into server/bin
 	cd server && go build -o bin/migrate ./cmd/migrate
 
 release: ## Package the Desktop app for the current platform (default, no Web/Go server)
-	@bash scripts/build.sh
+	@bash scripts/operica-tools.sh
 
 release-server: ## Cross-compile Go server binaries into dist/release (Web skipped unless WITH_FRONTEND=1)
-	@bash scripts/build.sh build
+	@bash scripts/operica-tools.sh build
 
-run: ## Compile native binaries and start backend + frontend for the current checkout
-	$(REQUIRE_ENV)
-	@bash scripts/build.sh start
+run: ## Start Desktop; pass START_ARGS=--server/--web/--all for optional services
+	@bash scripts/operica-tools.sh start $(START_ARGS)
 
 test: ## Run Go tests after ensuring the target DB exists and migrations are applied
 	$(REQUIRE_ENV)
