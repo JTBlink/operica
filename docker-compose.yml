@@ -4,9 +4,9 @@ services:
   postgres:
     image: pgvector/pgvector:pg17
     environment:
-      POSTGRES_DB: opercia
-      POSTGRES_USER: ${POSTGRES_USER:-opercia}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-opercia}
+      POSTGRES_DB: ${POSTGRES_DB:-operica}
+      POSTGRES_USER: ${POSTGRES_USER:-operica}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-operica}
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
