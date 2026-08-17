@@ -28,60 +28,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
-      - name: Filter paths
-        id: filter
-        uses: dorny/paths-filter@v3
         with:
-          # apps/docs is excluded from the frontend turbo run, so a
-          # docs-only change does not need this job. apps/mobile has its
-          # own mobile-verify workflow. Everything else the frontend job
-          # touches is listed here; bias toward over-matching since a
-          # missed path silently skips validation.
-          filters: |
-            frontend:
-              - 'apps/web/**'
-              - 'apps/desktop/**'
-              - 'packages/**'
-              - 'package.json'
-              - '.npmrc'
-              - 'pnpm-lock.yaml'
-              - 'pnpm-workspace.yaml'
-              - 'turbo.json'
-              - '.github/workflows/ci.yml'
-              - 'scripts/generate-reserved-slugs.mjs'
-              - 'server/internal/handler/reserved_slugs.json'
-              - 'scripts/selfhost-config.test.sh'
-              - 'scripts/selfhost-wait.sh'
-              # selfhost-config.test.sh asserts on the installers' side of
-              # the port contract, so a change to either must run it.
-              - 'scripts/install.sh'
-              - 'scripts/install.ps1'
-              - 'scripts/check.sh'
-              - 'scripts/dev.sh'
-              - 'scripts/local-env.sh'
-              - '.env.example'
-              - 'docker-compose.selfhost.yml'
-              - 'docker-compose.selfhost.build.yml'
-              - 'Makefile'
+          # The native path check below compares the PR base / previous push
+          # commit with HEAD, so shallow checkout is not sufficient.
+          fetch-depth: 0
 
       - name: Decide
         id: decide
-        # Always run the frontend job on push to main (full validation);
-        # on pull_request, run only when frontend-relevant paths changed.
-        # The frontend job itself always runs and reports success — its
-        # steps are gated on this output rather than the job being skipped
-        # — so the required "frontend" status check is satisfied with a
-        # genuine green instead of being left pending on filtered PRs.
+        # Always run the frontend job on push and manual dispatch (full
+        # validation); on pull_request, run only when frontend-relevant paths
+        # changed. Keep this dependency-free so a transient GitHub API or
+        # codeload rate limit cannot prevent CI from starting.
         env:
           EVENT_NAME: ${{ github.event_name }}
-          FRONTEND_CHANGED: ${{ steps.filter.outputs.frontend }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        shell: bash
         run: |
-          if [ "$EVENT_NAME" != "pull_request" ] || [ "$FRONTEND_CHANGED" = "true" ]; then
+          if [ "$EVENT_NAME" != "pull_request" ]; then
             echo "frontend=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "frontend=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+
+          frontend=false
+          while IFS= read -r path; do
+            case "$path" in
+              apps/web/*|apps/desktop/*|packages/*|package.json|.npmrc|pnpm-lock.yaml|pnpm-workspace.yaml|turbo.json|.github/workflows/ci.yml|scripts/generate-reserved-slugs.mjs|server/internal/handler/reserved_slugs.json|scripts/selfhost-config.test.sh|scripts/selfhost-wait.sh|scripts/install.sh|scripts/install.ps1|scripts/check.sh|scripts/dev.sh|scripts/local-env.sh|.env.example|docker-compose.selfhost.yml|docker-compose.selfhost.build.yml|Makefile)
+                frontend=true
+                break
+                ;;
+            esac
+          done < <(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+
+          echo "frontend=$frontend" >> "$GITHUB_OUTPUT"
 
   # The frontend validation is split across two runners on purpose. Both
   # `@operica/web:build` (a webpack production build) and `@operica/views:test`
