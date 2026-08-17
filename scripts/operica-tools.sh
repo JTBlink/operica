@@ -8,9 +8,9 @@ set -euo pipefail
 #   bash scripts/operica-tools.sh                  # Package Desktop for the current platform
 #   bash scripts/operica-tools.sh desktop [...]    # Same, forwarding extra package arguments
 #   bash scripts/operica-tools.sh build            # Cross-compile and archive Go server binaries
-#   bash scripts/operica-tools.sh start            # Start Desktop development only
-#   bash scripts/operica-tools.sh start --server   # Desktop + local backend
-#   bash scripts/operica-tools.sh start --web      # Desktop + Web
+#   bash scripts/operica-tools.sh start            # Start Desktop (auto-attaches local backend if not already running)
+#   bash scripts/operica-tools.sh start --server   # Desktop + local backend (force build/migrate)
+#   bash scripts/operica-tools.sh start --web      # Desktop + Web (backend still auto-attached if needed)
 #   bash scripts/operica-tools.sh start --all      # Desktop + local backend + Web
 #   bash scripts/operica-tools.sh kill              # Stop all services for this checkout
 #   bash scripts/operica-tools.sh help
@@ -42,15 +42,16 @@ Operica 本地开发与发布工具
              打包当前平台桌面端，参数透传给 desktop package
   build      交叉编译 Go 服务端二进制并归档
   start [--server] [--web] [--all]
-             默认仅启动桌面端；可按需附加本地后端和 Web
+             默认启动桌面端；若本地后端未运行会自动一并启动以确保可登录，
+             已在运行则直接复用不重复启动；可按需附加 Web
   kill [--all]
              停止当前 checkout 的桌面端、本地后端和 Web
   help       显示帮助信息
 
 start 参数:
-  --server   附加本地后端；启动 PostgreSQL、编译 Go 二进制并执行迁移
-  --web      附加 Web 开发服务器；不会自动启动后端
-  --all      附加本地后端和 Web，等同于 --server --web
+  --server   显式确保/重启本地后端；启动 PostgreSQL、编译 Go 二进制并执行迁移
+  --web      附加 Web 开发服务器；本地后端未运行时仍会自动附加
+  --all      等同于 --server --web
   -h, --help 显示帮助信息
 
 kill 参数:
@@ -317,32 +318,43 @@ cmd_start() {
     esac
   done
 
-  if [ "$start_server" = "1" ] || [ "$start_web" = "1" ]; then
-    if [ -z "$env_file" ]; then
-      [ -f .git ] && env_file=".env.worktree" || env_file=".env"
-    fi
-    if [ ! -f "$env_file" ]; then
-      echo "缺少 env 文件: $env_file" >&2
-      echo "从 .env.example 创建 .env，或运行 'make worktree-env'。" >&2
-      exit 1
-    fi
-
+  local env_loaded=0
+  if [ -z "$env_file" ]; then
+    [ -f .git ] && env_file=".env.worktree" || env_file=".env"
+  fi
+  if [ -f "$env_file" ]; then
     set -a
     # shellcheck disable=SC1090
     . "$env_file"
     set +a
     # shellcheck disable=SC1091
     . scripts/local-env.sh
+    env_loaded=1
 
     echo "==> 使用 env: $env_file"
+  fi
+
+  local backend_port="${PORT:-8080}"
+  local reuse_backend=0
+  if [ "$start_server" = "0" ] && ! port_in_use "$backend_port"; then
+    echo "==> 本地后端 (localhost:${backend_port}) 未运行，自动附加以确保可登录"
+    start_server=1
+  elif [ "$start_server" = "0" ]; then
+    reuse_backend=1
+  fi
+
+  if { [ "$start_server" = "1" ] || [ "$start_web" = "1" ]; } && [ "$env_loaded" = "0" ]; then
+    echo "缺少 env 文件: $env_file" >&2
+    echo "从 .env.example 创建 .env，或运行 'make worktree-env'。" >&2
+    exit 1
   fi
 
   local desktop_port="${DESKTOP_RENDERER_PORT:-5173}"
   local busy_ports=()
 
   port_in_use "$desktop_port" && busy_ports+=("桌面端 (${desktop_port})")
-  if [ "$start_server" = "1" ] && port_in_use "${PORT:-8080}"; then
-    busy_ports+=("本地后端 (${PORT:-8080})")
+  if [ "$start_server" = "1" ] && port_in_use "$backend_port"; then
+    busy_ports+=("本地后端 (${backend_port})")
   fi
   if [ "$start_web" = "1" ] && port_in_use "${FRONTEND_PORT:-3000}"; then
     busy_ports+=("Web (${FRONTEND_PORT:-3000})")
@@ -372,7 +384,11 @@ cmd_start() {
 
   echo ""
   echo "✓ 就绪，启动桌面端..."
-  [ "$start_server" = "1" ] && echo "  后端:  http://localhost:${PORT:-8080}"
+  if [ "$start_server" = "1" ]; then
+    echo "  后端:  http://localhost:${backend_port}"
+  elif [ "$reuse_backend" = "1" ]; then
+    echo "  后端:  http://localhost:${backend_port} (复用已运行的进程)"
+  fi
   [ "$start_web" = "1" ] && echo "  Web:    http://localhost:${FRONTEND_PORT:-3000}"
   echo ""
 
