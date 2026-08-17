@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { WorkspaceSlugProvider } from "@operica/core/paths";
-import {
-  workspaceBySlugOptions,
-  workspaceListOptions,
-} from "@operica/core/workspace";
+import { workspaceListOptions } from "@operica/core/workspace";
 import { setCurrentWorkspace } from "@operica/core/platform";
 import { useAuthStore } from "@operica/core/auth";
 import { useWorkspaceSeen } from "@operica/views/workspace/use-workspace-seen";
@@ -52,15 +49,18 @@ export function WorkspaceRouteLayout() {
   // code and violated MUL-4741 invariant 1 (only the Coordinator navigates).
   // The `!user` early return below keeps the defense without navigating.
 
-  const { data: workspace, isFetched: listFetched } = useQuery({
-    ...workspaceBySlugOptions(workspaceSlug ?? ""),
-    enabled: !!user && !!workspaceSlug,
-  });
-
-  const { data: wsList } = useQuery({
+  // Resolve the active workspace from the same list snapshot used by
+  // useCurrentWorkspace/useWorkspaceId. Keeping a second observer with a
+  // `select` projection can briefly retain the deleted workspace while the
+  // unselected list has already become empty; workspace-scoped children then
+  // render and throw from useWorkspaceId during deletion.
+  const { data: wsList = [], isFetched: listFetched } = useQuery({
     ...workspaceListOptions(),
     enabled: !!user,
   });
+  const workspace = workspaceSlug
+    ? wsList.find((candidate) => candidate.slug === workspaceSlug) ?? null
+    : null;
 
   // Feed the URL slug into the platform singleton so the API client's
   // X-Workspace-Slug header and persist namespace follow the active tab.

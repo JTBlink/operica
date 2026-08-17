@@ -1,3 +1,6 @@
+/**
+ * @vitest-environment jsdom
+ */
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
@@ -105,7 +108,6 @@ function renderLayout() {
   });
   // Seed the workspace queries so the gate inside the layout passes
   // synchronously — the real hook reads from cache.
-  qc.setQueryData(["workspace-by-slug"], state.workspace);
   qc.setQueryData(["workspace-list"], state.wsList);
   return render(
     <QueryClientProvider client={qc}>
@@ -143,5 +145,11 @@ describe("WorkspaceRouteLayout", () => {
     const { queryByTestId } = renderLayout();
     expect(queryByTestId(state.modalAriaLabel)).toBeNull();
     expect(state.modalRenders).toBe(0);
+  });
+
+  it("does not render the workspace subtree when the workspace list is empty", () => {
+    state.wsList = [];
+    const { queryByTestId } = renderLayout();
+    expect(queryByTestId("outlet")).toBeNull();
   });
 });
