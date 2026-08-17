@@ -177,6 +177,9 @@ func TestDetectVersionTimesOutOnHang(t *testing.T) {
 		if err == nil {
 			t.Fatal("expected an error from a hanging --version probe, got nil")
 		}
+		if !strings.Contains(err.Error(), "probe timed out after") {
+			t.Fatalf("expected timeout reason in version probe error, got %v", err)
+		}
 		if elapsed := time.Since(start); elapsed > 5*time.Second {
 			t.Fatalf("detection took %v; expected it to be bounded by the timeout", elapsed)
 		}

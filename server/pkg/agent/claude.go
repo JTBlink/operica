@@ -1120,6 +1120,9 @@ func detectCLIVersion(ctx context.Context, execPath string) (string, error) {
 	cmd.WaitDelay = 2 * time.Second
 	data, err := cmd.Output()
 	if err != nil {
+		if ctx.Err() != nil {
+			return "", fmt.Errorf("detect version for %s: %w (probe timed out after %s)", execPath, err, detectVersionTimeout)
+		}
 		return "", fmt.Errorf("detect version for %s: %w", execPath, err)
 	}
 	return extractVersionLine(string(data)), nil

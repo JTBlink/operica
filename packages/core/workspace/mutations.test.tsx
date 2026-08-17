@@ -8,6 +8,7 @@ import type { ReactNode } from "react";
 import { setApiInstance } from "../api";
 import type { ApiClient } from "../api/client";
 import { defaultStorage } from "../platform/storage";
+import { getCurrentWsId, setCurrentWorkspace } from "../platform/workspace-storage";
 import type { Workspace } from "../types";
 import { useCreateWorkspace, useDeleteWorkspace } from "./mutations";
 import { workspaceKeys } from "./queries";
@@ -118,6 +119,7 @@ describe("useDeleteWorkspace", () => {
     deleteWorkspace = vi.fn().mockResolvedValue(undefined);
     listWorkspaces = vi.fn().mockResolvedValue(serverList());
     setApiInstance({ deleteWorkspace, listWorkspaces } as unknown as ApiClient);
+    setCurrentWorkspace(null, null);
   });
 
   afterEach(() => {
@@ -127,6 +129,7 @@ describe("useDeleteWorkspace", () => {
     // tests stay independent.
     unmarkWorkspaceDeletePending("ws-2");
     localStorage.clear();
+    setCurrentWorkspace(null, null);
     vi.restoreAllMocks();
   });
 
@@ -172,6 +175,20 @@ describe("useDeleteWorkspace", () => {
     });
 
     expect(qc.getQueryState(workspaceKeys.list())?.isInvalidated).toBe(true);
+  });
+
+  it("clears the active workspace identity before the list is invalidated", async () => {
+    seedList();
+    setCurrentWorkspace("delete-me", "ws-2");
+    const { result } = renderHook(() => useDeleteWorkspace(), {
+      wrapper: createWrapper(qc),
+    });
+
+    await act(async () => {
+      await result.current.mutateAsync("ws-2");
+    });
+
+    expect(getCurrentWsId()).toBeNull();
   });
 
   it("clears the deleted slug's workspace-scoped storage on success", async () => {

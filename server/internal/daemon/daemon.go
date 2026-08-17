@@ -1971,6 +1971,8 @@ func (d *Daemon) probeBuiltinRuntime(ctx context.Context, name string, entry Age
 		// failure on the stale path" as a fast failure and retry it, paying the
 		// slow half twice.
 		startedAt := time.Now()
+		d.logger.Debug("agent version probe started",
+			"name", name, "attempt", attempts, "path", entry.Path)
 		// Self-heal a pinned executable path an in-place upgrade deleted
 		// (MUL-4486) so version detection — and thus staying registered/online —
 		// recovers without a daemon restart. resolveAgentEntry already
@@ -2004,6 +2006,13 @@ func (d *Daemon) probeBuiltinRuntime(ctx context.Context, name string, entry Age
 		version, err := detectAgentVersion(ctx, resolved.Path)
 		if err != nil {
 			lastErr = err
+			d.logger.Warn("agent version probe failed",
+				"name", name,
+				"attempt", attempts,
+				"path", resolved.Path,
+				"elapsed_ms", time.Since(startedAt).Milliseconds(),
+				"context_cancelled", ctx.Err() != nil,
+				"error", err)
 			if time.Since(startedAt) >= runtimeVersionProbeRetryWindow {
 				break
 			}
@@ -2048,7 +2057,11 @@ func (d *Daemon) probeBuiltinRuntime(ctx context.Context, name string, entry Age
 			// provider that never had a version stays blank, as before.
 			version = d.agentVersion(name)
 		}
-		d.logger.Debug("agent version detected", "name", name, "version", version, "path", resolved.Path)
+		d.logger.Debug("agent version detected",
+			"name", name,
+			"version", version,
+			"path", resolved.Path,
+			"elapsed_ms", time.Since(startedAt).Milliseconds())
 		return version, "", builtinProbeOK
 	}
 	d.logger.Warn("skip registering runtime", "name", name, "attempts", attempts, "error", lastErr)

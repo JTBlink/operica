@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"log/slog"
@@ -1626,6 +1627,14 @@ type acpDiscoveryProvider struct {
 // ACP mode (e.g. `acp` vs `--acp`).
 func discoverACPModels(ctx context.Context, executablePath string, p acpDiscoveryProvider) ([]Model, error) {
 	fail := func(stage string, err error) ([]Model, error) {
+		// Keep this diagnostic bounded to protocol metadata. ACP errors can carry
+		// provider/account details, so do not log the raw error or response body.
+		slog.Debug("ACP model discovery failed",
+			"binary", executablePath,
+			"stage", stage,
+			"timed_out", errors.Is(err, context.DeadlineExceeded),
+			"error_type", fmt.Sprintf("%T", err),
+		)
 		if p.strictErrors {
 			return nil, fmt.Errorf("ACP model discovery %s failed: %w", stage, err)
 		}

@@ -3,6 +3,7 @@ import type { Workspace } from "../types";
 import { api } from "../api";
 import { defaultStorage } from "../platform/storage";
 import { clearWorkspaceStorage } from "../platform/storage-cleanup";
+import { getCurrentWsId, setCurrentWorkspace } from "../platform/workspace-storage";
 import { workspaceKeys } from "./queries";
 import {
   markWorkspaceDeletePending,
@@ -70,6 +71,13 @@ export function useDeleteWorkspace() {
     // exists and its drafts/view state must survive. The realtime handler
     // skips self-initiated deletes, so cleanup has to happen here.
     onSuccess: (_data, _workspaceId, ctx) => {
+      // Clear the platform identity before invalidating the workspace list in
+      // onSettled. Desktop's global sidebar remains mounted for this brief
+      // window; its workspace-scoped mutations call useWorkspaceId() during
+      // render and must not observe a deleted workspace.
+      if (getCurrentWsId() === _workspaceId) {
+        setCurrentWorkspace(null, null);
+      }
       if (ctx?.slug) clearWorkspaceStorage(defaultStorage, ctx.slug);
     },
     // The workspace still exists after a failed DELETE, so a later external
