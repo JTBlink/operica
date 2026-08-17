@@ -8,7 +8,7 @@ set -euo pipefail
 #   bash scripts/operica-tools.sh                  # Package Desktop for the current platform
 #   bash scripts/operica-tools.sh desktop [...]    # Same, forwarding extra package arguments
 #   bash scripts/operica-tools.sh build            # Cross-compile and archive Go server binaries
-#   bash scripts/operica-tools.sh start            # Start Desktop (auto-attaches local backend if not already running)
+#   bash scripts/operica-tools.sh start            # Clean this checkout, then start Desktop and a backend if needed
 #   bash scripts/operica-tools.sh start --server   # Desktop + local backend (force build/migrate)
 #   bash scripts/operica-tools.sh start --web      # Desktop + Web (backend still auto-attached if needed)
 #   bash scripts/operica-tools.sh start --all      # Desktop + local backend + Web
@@ -42,8 +42,8 @@ Operica 本地开发与发布工具
              打包当前平台桌面端，参数透传给 desktop package
   build      交叉编译 Go 服务端二进制并归档
   start [--server] [--web] [--all]
-             默认启动桌面端；若本地后端未运行会自动一并启动以确保可登录，
-             已在运行则直接复用不重复启动；可按需附加 Web
+             启动前会先停止当前 checkout 的已有开发进程；默认启动桌面端，
+             若本地后端未运行会自动一并启动以确保可登录；可按需附加 Web
   kill [--all]
              停止当前 checkout 的桌面端、本地后端和 Web
   help       显示帮助信息
@@ -81,7 +81,7 @@ kill 参数:
 
 示例:
   ./scripts/operica-tools.sh start
-      仅启动桌面端开发进程
+      清理当前 checkout，再启动桌面端；本地后端未运行时自动启动
 
   ./scripts/operica-tools.sh start --server
       启动桌面端和本地后端
@@ -317,6 +317,9 @@ cmd_start() {
         ;;
     esac
   done
+
+  echo "==> 启动前清理当前 checkout 的已有开发进程..."
+  cmd_kill --all
 
   local env_loaded=0
   if [ -z "$env_file" ]; then
