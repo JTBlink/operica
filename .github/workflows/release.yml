@@ -1,6 +1,12 @@
 name: Release
 
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (for example, v0.1.0 or v0.1.0-rc.1)"
+        required: true
+        type: string
   push:
     tags:
       # GitHub Actions uses glob patterns here, not regex. Match versioned
@@ -24,12 +30,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate tag name
+      - name: Validate release version
         id: release_meta
         shell: bash
+        env:
+          MANUAL_VERSION: ${{ inputs.version }}
         run: |
-          tag="${GITHUB_REF_NAME}"
-          echo "Triggered by tag: $tag"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            tag="$MANUAL_VERSION"
+          else
+            tag="${GITHUB_REF_NAME}"
+          fi
+          echo "Triggered by release version: $tag"
           if [[ ! "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
             echo "::error::Release tags must look like vX.Y.Z or vX.Y.Z-suffix; got '$tag'."
             exit 1
@@ -77,6 +89,19 @@ jobs:
         with:
           go-version-file: server/go.mod
           cache-dependency-path: server/go.sum
+
+      - name: Prepare local release tag
+        env:
+          RELEASE_TAG: ${{ needs.verify.outputs.tag_name }}
+        run: |
+          if existing_commit=$(git rev-list -n 1 "refs/tags/$RELEASE_TAG" 2>/dev/null); then
+            if [[ "$existing_commit" != "$(git rev-parse HEAD)" ]]; then
+              echo "::error::Release tag '$RELEASE_TAG' already points to a different commit."
+              exit 1
+            fi
+          else
+            git tag "$RELEASE_TAG"
+          fi
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
@@ -387,6 +412,20 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Prepare local release tag
+        env:
+          RELEASE_TAG: ${{ needs.verify.outputs.tag_name }}
+        shell: bash
+        run: |
+          if existing_commit=$(git rev-list -n 1 "refs/tags/$RELEASE_TAG" 2>/dev/null); then
+            if [[ "$existing_commit" != "$(git rev-parse HEAD)" ]]; then
+              echo "::error::Release tag '$RELEASE_TAG' already points to a different commit."
+              exit 1
+            fi
+          else
+            git tag "$RELEASE_TAG"
+          fi
 
       - name: Install rpmbuild (Linux)
         if: matrix.target == 'linux'
