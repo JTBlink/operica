@@ -27,6 +27,7 @@ import {
 import { issueKeys } from "@operica/core/issues/queries";
 import { api } from "@operica/core/api";
 import {
+  paths,
   resolvePostAuthDestination,
   useCurrentWorkspace,
   useHasOnboarded,
@@ -114,17 +115,20 @@ export function WorkspaceTab() {
     //     delete) — if the singleton still points at the lost workspace
     //     when the WS event arrives, they fire a parallel full-page
     //     relocate that races this navigation.
-    //  2. Chrome gating (`{slug && <AppSidebar />}` on desktop) — if the
-    //     singleton lingers, the sidebar stays mounted while the deleted
-    //     workspace is no longer in the list, and `useWorkspaceId` throws.
+    //  2. Desktop chrome gates on a resolved workspace, so it unmounts as
+    //     soon as the deleted workspace is no longer in the list.
     //  3. API client's `X-Workspace-Slug` header — stale header post-
     //     delete is at best a 404, at worst leaks into the next query.
     // WorkspaceRouteLayout re-sets the singleton when a new workspace's
     // route mounts; clearing here is safe — either the next workspace
-    // takes over immediately, or the new-workspace overlay takes over
-    // (which has no workspace context, so null is correct).
+    // takes over immediately, or the welcome overlay takes over (which has
+    // no workspace context, so null is correct).
     setCurrentWorkspace(null, null);
-    navigation.push(resolvePostAuthDestination(remaining, hasOnboarded));
+    navigation.push(
+      remaining.length === 0
+        ? paths.onboarding()
+        : resolvePostAuthDestination(remaining, hasOnboarded),
+    );
   };
 
   const [name, setName] = useState(workspace?.name ?? "");

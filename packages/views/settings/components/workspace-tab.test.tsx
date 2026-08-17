@@ -36,6 +36,7 @@ vi.mock("@tanstack/react-query", () => ({
 vi.mock("@operica/core/paths", () => ({
   useCurrentWorkspace: () => workspaceRef.current,
   useHasOnboarded: () => true,
+  paths: { onboarding: () => "/onboarding" },
   resolvePostAuthDestination: () => "/",
 }));
 

@@ -1,14 +1,13 @@
 "use client";
 
-import { useWorkspaceId } from "@operica/core";
+import { useCurrentWorkspace } from "@operica/core/paths";
 import { useWorkspacePresencePrefetch } from "@operica/core/agents";
 
-// Mount once inside any subtree that's already gated on "workspace resolved"
-// (DashboardLayout on web, WorkspaceRouteLayout on desktop). useWorkspaceId
-// throws when called outside a resolved workspace — the gating in those
-// layouts guarantees this component never sees that state.
+// Mount once inside the workspace shell to warm presence data. Route and
+// workspace-list updates can briefly disagree while a workspace is removed,
+// so this component accepts an unresolved workspace and disables its queries.
 export function WorkspacePresencePrefetch() {
-  const wsId = useWorkspaceId();
-  useWorkspacePresencePrefetch(wsId);
+  const workspace = useCurrentWorkspace();
+  useWorkspacePresencePrefetch(workspace?.id);
   return null;
 }

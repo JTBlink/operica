@@ -231,31 +231,47 @@ export function DesktopShell() {
           use useWorkspaceSlug() (nullable) or useRequiredWorkspaceSlug()
           (throws). TabContent MUST always render so the tab router can
           mount WorkspaceRouteLayout, which calls setCurrentWorkspace()
-          to populate the slug. The sidebar gates on slug being present
-          to avoid the useRequiredWorkspaceSlug throw. Zero-workspace
-          users see the window-level overlay (new-workspace flow)
-          triggered by IndexRedirect, not a route. */}
+          to populate the slug. Workspace chrome gates on a resolved
+          workspace, so a stale slug cannot mount components that require
+          workspace context. Zero-workspace users see the window-level
+          welcome overlay, not a route. */}
       <WorkspaceSlugProvider slug={slug}>
-        <DesktopInboxBridge />
-        <div className="flex h-screen bg-app-shell">
-          <SidebarProvider className="flex-1 bg-app-shell">
-            {slug && <GlobalShortcuts />}
-            {slug && <WindowToolbar />}
-            {slug && <AppSidebar topSlot={<SidebarTopSpacer />} searchSlot={<SearchTrigger />} />}
-            {/* Right side: header + content container */}
-            <div className="flex flex-1 min-w-0 flex-col">
-              <MainTopBar />
-              <MainCanvas>
-                <TabContent />
-                {slug && <FloatingChat />}
-              </MainCanvas>
-            </div>
-          </SidebarProvider>
-        </div>
-        {slug && <ModalRegistry />}
-        {slug && <SearchCommand />}
-        <WindowOverlay />
+        <DesktopShellContent />
       </WorkspaceSlugProvider>
     </DesktopNavigationProvider>
+  );
+}
+
+function DesktopShellContent() {
+  const workspace = useCurrentWorkspace();
+  const hasWorkspace = workspace !== null;
+
+  return (
+    <>
+      <DesktopInboxBridge />
+      <div className="flex h-screen bg-app-shell">
+        <SidebarProvider className="flex-1 bg-app-shell">
+          {hasWorkspace && <GlobalShortcuts />}
+          {hasWorkspace && <WindowToolbar />}
+          {hasWorkspace && (
+            <AppSidebar
+              topSlot={<SidebarTopSpacer />}
+              searchSlot={<SearchTrigger />}
+            />
+          )}
+          {/* Right side: header + content container */}
+          <div className="flex flex-1 min-w-0 flex-col">
+            <MainTopBar />
+            <MainCanvas>
+              <TabContent />
+              {hasWorkspace && <FloatingChat />}
+            </MainCanvas>
+          </div>
+        </SidebarProvider>
+      </div>
+      {hasWorkspace && <ModalRegistry />}
+      {hasWorkspace && <SearchCommand />}
+      <WindowOverlay />
+    </>
   );
 }
