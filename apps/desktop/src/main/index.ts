@@ -14,6 +14,7 @@ import { installNavigationGestures } from "./navigation-gestures";
 import { installNavigationGuard } from "./navigation-guard";
 import { getAppVersion } from "./app-version";
 import { loadRuntimeConfig } from "./runtime-config-loader";
+import { appendMissingPaths } from "./path-utils";
 import type { RuntimeConfigResult } from "../shared/runtime-config";
 import {
   RENDERER_ROUTE_CONTEXT_CHANNEL,
@@ -105,15 +106,16 @@ const BUNDLED_ICON_PATH = join(__dirname, "../../resources/icon.png").replace(
 // or any daemon-manager spawn.
 if (process.platform !== "win32") {
   fixPath();
-  // Fallback: prepend common install locations in case fix-path came up
-  // short (broken shell rc, non-interactive $SHELL, missing entries). Safe
-  // to duplicate — PATH lookups short-circuit on first match.
+  // Fallback: append common install locations in case fix-path came up short
+  // (broken shell rc, non-interactive $SHELL, missing entries). Keep the
+  // login shell's ordering intact: npm-installed CLIs use `env node`, and
+  // prepending an old system Node can make an otherwise healthy CLI abort.
   const fallbackPaths = [
     "/opt/homebrew/bin",
     "/usr/local/bin",
     join(homedir(), ".local/bin"),
   ];
-  process.env.PATH = `${fallbackPaths.join(":")}:${process.env.PATH ?? ""}`;
+  process.env.PATH = appendMissingPaths(process.env.PATH, fallbackPaths);
 }
 
 const PROTOCOL = "operica";

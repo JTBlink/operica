@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { getApi } from "../api";
+import { ApiError, getApi } from "../api";
 import { useAuthStore } from "../auth";
 import {
   captureSignupSource,
@@ -116,26 +116,79 @@ export function AuthInitializer({
       return;
     }
 
-    // Token mode: read from localStorage (Electron / legacy). Even without a
-    // stored token, probe the server: local development may authenticate the
-    // request through AUTO_LOGIN_EMAIL.
-    const token = storage.getItem("operica_token");
-    if (token) api.setToken(token);
+    // Token mode: read from localStorage (Electron / legacy). Desktop local
+    // development may have AUTO_LOGIN_EMAIL configured on the server. That
+    // bypass authenticates requests with no bearer token, but the daemon still
+    // needs a real JWT so it can mint its own PAT. Bootstrap that JWT through
+    // the existing CLI-token endpoint before the normal user/workspace fetch.
+    const tryDesktopAutoLogin = async (): Promise<boolean> => {
+      if (identity?.platform !== "desktop" || storage.getItem("operica_token")) {
+        return false;
+      }
+      try {
+        const result = await api.issueCliToken();
+        storage.setItem("operica_token", result.token);
+        api.setToken(result.token);
+        return true;
+      } catch (err) {
+        // A 401 means AUTO_LOGIN_EMAIL is not enabled (normal production
+        // behavior). Other failures are still allowed to fall through to the
+        // standard auth path, which will surface the real server/network error.
+        if (!(err instanceof ApiError && err.status === 401)) {
+          logger.debug("desktop auto-login token unavailable", {
+            error: err instanceof Error ? err.message : String(err),
+          });
+        }
+        return false;
+      }
+    };
 
-    Promise.all([api.getMe(), api.listWorkspaces()])
-      .then(([user, wsList]) => {
+    const initializeTokenMode = async (): Promise<void> => {
+      let token = storage.getItem("operica_token");
+      if (!token) await tryDesktopAutoLogin();
+      token = storage.getItem("operica_token");
+      if (token) api.setToken(token);
+
+      try {
+        const [user, wsList] = await Promise.all([api.getMe(), api.listWorkspaces()]);
         onAuthSuccess(user);
         // Seed React Query cache so the URL-driven layout can resolve the
         // slug without a second fetch.
         qc.setQueryData(workspaceKeys.list(), wsList);
-      })
-      .catch((err) => {
+      } catch (err) {
+        // A stale Desktop JWT is common after a local backend reset. Clear it,
+        // mint the dev auto-login JWT once, and retry the same authoritative
+        // reads before falling back to the normal logged-out state.
+        if (
+          identity?.platform === "desktop" &&
+          err instanceof ApiError &&
+          err.status === 401
+        ) {
+          api.setToken(null);
+          storage.removeItem("operica_token");
+          if (await tryDesktopAutoLogin()) {
+            try {
+              const [user, wsList] = await Promise.all([
+                api.getMe(),
+                api.listWorkspaces(),
+              ]);
+              onAuthSuccess(user);
+              qc.setQueryData(workspaceKeys.list(), wsList);
+              return;
+            } catch (retryErr) {
+              logger.error("auth retry failed", retryErr);
+            }
+          }
+        }
         logger.error("auth init failed", err);
         api.setToken(null);
         setCurrentWorkspace(null, null);
         storage.removeItem("operica_token");
         onAuthFailure();
-      });
+      }
+    };
+
+    void initializeTokenMode();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

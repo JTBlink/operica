@@ -285,6 +285,8 @@ import {
   CreateBillingCheckoutSessionResponseSchema,
   BillingCheckoutSessionStatusSchema,
   CreateBillingPortalSessionResponseSchema,
+  CliTokenResponseSchema,
+  EMPTY_CLI_TOKEN_RESPONSE,
   DingTalkInstallationSchema,
   ListDingTalkInstallationsResponseSchema,
   RedeemDingTalkBindingTokenResponseSchema,
@@ -648,7 +650,12 @@ export class ApiClient {
   }
 
   async issueCliToken(): Promise<{ token: string }> {
-    return this.fetch("/api/cli-token", { method: "POST" });
+    const raw = await this.fetch<unknown>("/api/cli-token", { method: "POST" });
+    const parsed = parseWithFallback(raw, CliTokenResponseSchema, EMPTY_CLI_TOKEN_RESPONSE, {
+      endpoint: "POST /api/cli-token",
+    });
+    if (!parsed.token) throw new Error("API response missing CLI token");
+    return parsed;
   }
 
   async getMe(): Promise<User> {

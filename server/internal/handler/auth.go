@@ -150,14 +150,29 @@ func isSixDigitCode(code string) bool {
 }
 
 func (h *Handler) issueJWT(user db.User) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+	claims := jwt.MapClaims{
 		"sub":   uuidToString(user.ID),
 		"email": user.Email,
 		"name":  user.Name,
-		"exp":   time.Now().Add(auth.AuthTokenTTL()).Unix(),
 		"iat":   time.Now().Unix(),
-	})
+	}
+	// AUTO_LOGIN_EMAIL is a local-development identity. Its bearer token is
+	// persisted by Desktop so the daemon can start without an interactive
+	// login; omit exp for this one explicitly configured account. Production
+	// and all other users retain the normal 30-day (or AUTH_TOKEN_TTL) expiry.
+	if !isPermanentAutoLoginUser(user) {
+		claims["exp"] = time.Now().Add(auth.AuthTokenTTL()).Unix()
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(auth.JWTSecret())
+}
+
+func isPermanentAutoLoginUser(user db.User) bool {
+	if isProductionEnv() {
+		return false
+	}
+	autoEmail := strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL"))
+	return autoEmail != "" && strings.EqualFold(strings.TrimSpace(user.Email), autoEmail)
 }
 
 // findOrCreateUser returns the existing user for an email, or creates one if

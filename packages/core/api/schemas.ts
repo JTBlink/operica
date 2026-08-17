@@ -65,6 +65,12 @@ import type {
 import type { CloudRuntimeNode } from "../runtimes/cloud-runtime";
 import type { CreateFeedbackResponse } from "../feedback/types";
 
+export const CliTokenResponseSchema = z.object({
+  token: z.string().min(1),
+}).loose();
+
+export const EMPTY_CLI_TOKEN_RESPONSE = { token: "" };
+
 export const GitHubInstallationSchema = z.object({
   id: z.string(),
   workspace_id: z.string(),

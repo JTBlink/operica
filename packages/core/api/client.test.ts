@@ -5,6 +5,40 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+describe("ApiClient CLI token response", () => {
+  it("parses a valid token response", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ token: "jwt-dev" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      ),
+    );
+
+    await expect(new ApiClient("https://api.example.test").issueCliToken()).resolves.toEqual({
+      token: "jwt-dev",
+    });
+  });
+
+  it("rejects a malformed token response", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        new Response(JSON.stringify({ token: 42 }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      ),
+    );
+
+    await expect(new ApiClient("https://api.example.test").issueCliToken()).rejects.toThrow(
+      "API response missing CLI token",
+    );
+  });
+});
+
 describe("ApiClient pull-request response schema", () => {
   const validPR = {
     id: "pr-1",
