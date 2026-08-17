@@ -399,6 +399,10 @@ jobs:
         shell: bash
         run: echo "OCI_REGISTRY=oci://ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/charts" >> "$GITHUB_ENV"
 
+      - name: Set chart registry
+        shell: bash
+        run: echo "OCI_REGISTRY=oci://ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/charts" >> "$GITHUB_ENV"
+
       - name: Setup Helm
         uses: azure/setup-helm@v4
 
