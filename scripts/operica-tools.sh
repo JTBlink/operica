@@ -134,6 +134,66 @@ process_is_active() {
   esac
 }
 
+port_in_use() {
+  lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1
+}
+
+# Appends root_pid and all of its descendants (post-order, deduped) to the
+# caller's PIDS_OUT array. Callers must `local PIDS_OUT=()` before use.
+# A single `kill` on a job's top-level pid misses nested children (e.g.
+# pnpm -> turbo -> electron-vite -> electron), which then linger and keep
+# their ports bound — walk the whole tree instead.
+collect_process_tree() {
+  local root_pid="$1"
+  local child existing found
+
+  while IFS= read -r child; do
+    [ -n "$child" ] && collect_process_tree "$child"
+  done < <(pgrep -P "$root_pid" 2>/dev/null || true)
+
+  found=0
+  for existing in "${PIDS_OUT[@]-}"; do
+    [ -n "$existing" ] || continue
+    if [ "$existing" = "$root_pid" ]; then
+      found=1
+      break
+    fi
+  done
+  [ "$found" = "0" ] && PIDS_OUT+=("$root_pid")
+  return 0
+}
+
+# TERM every pid, wait up to 5s for exit, then KILL any survivors.
+terminate_pids() {
+  local pids=("$@")
+  local pid iteration alive
+
+  [ "${#pids[@]}" -eq 0 ] && return 0
+
+  for pid in "${pids[@]}"; do
+    kill -TERM "$pid" 2>/dev/null || true
+  done
+
+  for iteration in {1..50}; do
+    alive=0
+    for pid in "${pids[@]}"; do
+      if process_is_active "$pid"; then
+        alive=1
+        break
+      fi
+    done
+    [ "$alive" = "0" ] && break
+    sleep 0.1
+  done
+
+  for pid in "${pids[@]}"; do
+    if process_is_active "$pid"; then
+      kill -KILL "$pid" 2>/dev/null || true
+    fi
+  done
+  return 0
+}
+
 version_vars() {
   VERSION="${VERSION:-$(git describe --tags --match 'v[0-9]*' --always --dirty 2>/dev/null || echo dev)}"
   COMMIT="${COMMIT:-$(git rev-parse --short HEAD 2>/dev/null || echo unknown)}"
@@ -277,6 +337,23 @@ cmd_start() {
     echo "==> 使用 env: $env_file"
   fi
 
+  local desktop_port="${DESKTOP_RENDERER_PORT:-5173}"
+  local busy_ports=()
+
+  port_in_use "$desktop_port" && busy_ports+=("桌面端 (${desktop_port})")
+  if [ "$start_server" = "1" ] && port_in_use "${PORT:-8080}"; then
+    busy_ports+=("本地后端 (${PORT:-8080})")
+  fi
+  if [ "$start_web" = "1" ] && port_in_use "${FRONTEND_PORT:-3000}"; then
+    busy_ports+=("Web (${FRONTEND_PORT:-3000})")
+  fi
+
+  if [ "${#busy_ports[@]}" -gt 0 ]; then
+    echo "端口已被占用，无法启动: ${busy_ports[*]}" >&2
+    echo "请先运行 './scripts/operica-tools.sh kill' 清理残留进程后重试。" >&2
+    exit 1
+  fi
+
   if [ "$start_server" = "1" ]; then
     version_vars
     bash scripts/ensure-postgres.sh "$env_file"
@@ -305,10 +382,12 @@ cmd_start() {
   pid_file="$(runtime_pid_file)"
 
   cleanup_start() {
+    local PIDS_OUT=()
     local pid
     for pid in "${child_pids[@]}"; do
-      kill "$pid" 2>/dev/null || true
+      collect_process_tree "$pid"
     done
+    terminate_pids "${PIDS_OUT[@]}"
     rm -f -- "$pid_file"
   }
 
@@ -352,7 +431,6 @@ cmd_kill() {
   local pid_file
   local line pid command
   local root_pid
-  local iteration alive
   local protected_pid parent_pid
   local kill_targets=()
   local root_targets=()
@@ -435,46 +513,14 @@ cmd_kill() {
     return
   fi
 
-  add_process_tree() {
-    local tree_pid="$1"
-    local child
-    local existing
-    while IFS= read -r child; do
-      [ -n "$child" ] && add_process_tree "$child"
-    done < <(pgrep -P "$tree_pid" 2>/dev/null || true)
-    for existing in "${kill_targets[@]-}"; do
-      [ -n "$existing" ] || continue
-      [ "$existing" = "$tree_pid" ] && return
-    done
-    kill_targets+=("$tree_pid")
-  }
-
+  local PIDS_OUT=()
   for root_pid in "${root_targets[@]}"; do
-    add_process_tree "$root_pid"
+    collect_process_tree "$root_pid"
   done
+  kill_targets=("${PIDS_OUT[@]}")
 
   echo "==> 停止当前 checkout 的 ${#kill_targets[@]} 个 Operica 开发进程..."
-  for pid in "${kill_targets[@]}"; do
-    kill -TERM "$pid" 2>/dev/null || true
-  done
-
-  for iteration in {1..50}; do
-    alive=0
-    for pid in "${kill_targets[@]}"; do
-      if process_is_active "$pid"; then
-        alive=1
-        break
-      fi
-    done
-    [ "$alive" = "0" ] && break
-    sleep 0.1
-  done
-
-  for pid in "${kill_targets[@]}"; do
-    if process_is_active "$pid"; then
-      kill -KILL "$pid" 2>/dev/null || true
-    fi
-  done
+  terminate_pids "${kill_targets[@]}"
 
   rm -f -- "$pid_file"
   echo "✓ 已停止桌面端、本地后端和 Web。共享 PostgreSQL 保持运行。"
