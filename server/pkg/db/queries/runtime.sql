@@ -3,6 +3,24 @@ SELECT * FROM agent_runtime
 WHERE workspace_id = $1
 ORDER BY created_at ASC;
 
+-- name: DeleteOfflineUnregisteredBuiltinRuntimes :many
+-- A daemon registration enumerates every built-in CLI currently available on
+-- the machine. Remove old offline rows for built-in providers that are no
+-- longer present, but keep rows with any bound agent so their identity and
+-- history remain available to the workspace.
+DELETE FROM agent_runtime ar
+WHERE ar.workspace_id = @workspace_id
+  AND ar.daemon_id = @daemon_id
+  AND ar.profile_id IS NULL
+  AND ar.status = 'offline'
+  AND NOT (ar.provider = ANY(@providers::text[]))
+  AND NOT EXISTS (
+    SELECT 1
+    FROM agent a
+    WHERE a.runtime_id = ar.id
+  )
+RETURNING ar.id, ar.workspace_id;
+
 -- name: GetAgentRuntime :one
 SELECT * FROM agent_runtime
 WHERE id = $1;

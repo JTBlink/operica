@@ -433,6 +433,7 @@ func (h *Handler) DaemonRegister(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp := make([]AgentRuntimeResponse, 0, len(req.Runtimes))
+	registeredBuiltinProviders := make([]string, 0, len(req.Runtimes))
 	for _, runtime := range req.Runtimes {
 		provider := normalizeProvider(runtime.Type)
 		if provider == "" {
@@ -464,6 +465,9 @@ func (h *Handler) DaemonRegister(w http.ResponseWriter, r *http.Request) {
 		var registered db.AgentRuntime
 		var inserted bool
 		isCustom := strings.TrimSpace(runtime.ProfileID) != ""
+		if !isCustom {
+			registeredBuiltinProviders = append(registeredBuiltinProviders, provider)
+		}
 
 		if isCustom {
 			profileUUID, pok := parseUUIDOrBadRequest(w, strings.TrimSpace(runtime.ProfileID), "profile_id")
@@ -690,6 +694,21 @@ func (h *Handler) DaemonRegister(w http.ResponseWriter, r *http.Request) {
 			DaemonID:    prow.DaemonID,
 			CustomName:  prow.CustomName,
 		}, prow.Inserted)
+	}
+
+	// A clean daemon restart first marks its old runtime rows offline, then
+	// sends an authoritative list of the built-in CLIs it still detects. Drop
+	// unbound built-in rows omitted from that list so an uninstalled CLI does
+	// not linger in the Runtime panel. Custom profile rows are intentionally
+	// excluded: discovery registrations only carry built-ins and must not evict
+	// profile runtimes managed by the profile-drift path.
+	if _, err := h.Queries.DeleteOfflineUnregisteredBuiltinRuntimes(r.Context(), db.DeleteOfflineUnregisteredBuiltinRuntimesParams{
+		WorkspaceID: wsUUID,
+		DaemonID:    strToText(req.DaemonID),
+		Providers:   registeredBuiltinProviders,
+	}); err != nil {
+		slog.Warn("daemon register: failed to remove unregistered built-in runtimes",
+			"workspace_id", req.WorkspaceID, "daemon_id", req.DaemonID, "error", err)
 	}
 
 	slog.Info("daemon registered", "workspace_id", req.WorkspaceID, "daemon_id", req.DaemonID, "runtimes_count", len(resp))

@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, fireEvent, cleanup } from "@testing-library/react";
+import { render, fireEvent, cleanup, screen } from "@testing-library/react";
 import type { MemberWithUser, RuntimeDevice } from "@operica/core/types";
 import { I18nProvider } from "@operica/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
@@ -85,6 +85,24 @@ describe("RuntimePicker (creation studio)", () => {
     const { container } = renderPicker();
     fireEvent.click(trigger(container));
     expect(trigger(container).getAttribute("aria-expanded")).toBe("true");
+  });
+
+  it("does not allow selecting an offline runtime", () => {
+    const { container, onSelect } = renderPicker({
+      runtimes: [
+        RUNTIMES[0]!,
+        makeRuntime({ id: "rt-offline", name: "Claude (offline.local)", status: "offline" }),
+      ],
+    });
+
+    fireEvent.click(trigger(container));
+
+    const options = screen.getByRole("dialog").querySelectorAll("button");
+    const offline = options[1] as HTMLButtonElement | undefined;
+    expect(offline).toBeDefined();
+    expect(offline).toBeDisabled();
+    fireEvent.click(offline!);
+    expect(onSelect).not.toHaveBeenCalled();
   });
 
   // A builder session rebinds its execution runtime on the server. While that

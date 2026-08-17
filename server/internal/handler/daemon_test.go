@@ -929,6 +929,52 @@ func TestDaemonRegister_WithDaemonToken(t *testing.T) {
 	testPool.Exec(context.Background(), `DELETE FROM agent_runtime WHERE id = $1`, runtimeID)
 }
 
+func TestDaemonRegister_RemovesUnregisteredOfflineBuiltinRuntime(t *testing.T) {
+	if testHandler == nil {
+		t.Skip("database not available")
+	}
+
+	ctx := context.Background()
+	const daemonID = "test-daemon-restart-cleanup"
+	var staleID string
+	if err := testPool.QueryRow(ctx, `
+		INSERT INTO agent_runtime (
+			workspace_id, daemon_id, name, runtime_mode, provider,
+			status, device_info, metadata, last_seen_at
+		)
+		VALUES ($1, $2, 'Removed CLI', 'local', 'claude', 'offline', 'test-device', '{}'::jsonb, now())
+		RETURNING id
+	`, testWorkspaceID, daemonID).Scan(&staleID); err != nil {
+		t.Fatalf("setup stale runtime: %v", err)
+	}
+	t.Cleanup(func() {
+		_, _ = testPool.Exec(ctx, `DELETE FROM agent_runtime WHERE workspace_id = $1 AND daemon_id = $2`, testWorkspaceID, daemonID)
+	})
+
+	w := httptest.NewRecorder()
+	req := newDaemonTokenRequest("POST", "/api/daemon/register", map[string]any{
+		"workspace_id": testWorkspaceID,
+		"daemon_id":    daemonID,
+		"device_name":  "test-device",
+		"runtimes": []map[string]any{
+			{"name": "Codex", "type": "codex", "version": "1.0.0", "status": "online"},
+		},
+	}, testWorkspaceID, daemonID)
+
+	testHandler.DaemonRegister(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("DaemonRegister: expected 200, got %d: %s", w.Code, w.Body.String())
+	}
+
+	var exists bool
+	if err := testPool.QueryRow(ctx, `SELECT EXISTS (SELECT 1 FROM agent_runtime WHERE id = $1)`, staleID).Scan(&exists); err != nil {
+		t.Fatalf("check stale runtime: %v", err)
+	}
+	if exists {
+		t.Fatalf("unregistered offline built-in runtime %s still exists after registration", staleID)
+	}
+}
+
 func TestDaemonRegister_RecordsRuntimeProfileRegistrationFailure(t *testing.T) {
 	if testHandler == nil {
 		t.Skip("database not available")

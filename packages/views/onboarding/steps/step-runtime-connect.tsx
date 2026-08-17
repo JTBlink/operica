@@ -142,6 +142,7 @@ function FancyView({
   const [scanEpoch, setScanEpoch] = useState(0);
   const [softTimedOut, setSoftTimedOut] = useState(false);
   const [hardTimedOut, setHardTimedOut] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   useEffect(() => {
     if (runtimes.length > 0) return;
     setSoftTimedOut(false);
@@ -160,7 +161,9 @@ function FancyView({
   const phase: Phase =
     runtimes.length > 0
       ? "found"
-      : hardTimedOut || (softTimedOut && runtimesPending !== true)
+      : refreshing
+        ? "scanning"
+        : hardTimedOut || (softTimedOut && runtimesPending !== true)
         ? "empty"
         : "scanning";
 
@@ -168,7 +171,6 @@ function FancyView({
 
   const [submitting, setSubmitting] = useState(false);
   const [model, setModel] = useState("");
-  const [refreshing, setRefreshing] = useState(false);
 
   // Refresh triggers a re-scan: restart the daemon (if the platform
   // wired `onRefresh`) so its PATH probe runs again, invalidate the

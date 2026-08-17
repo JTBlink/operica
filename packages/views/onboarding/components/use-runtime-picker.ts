@@ -17,7 +17,8 @@ import type { AgentRuntime } from "@operica/core/types";
  *     "found" the moment a runtime registers.
  *   - `daemon:register` WS event triggers an instant refetch — no
  *     polling lag for online users.
- *   - Auto-selects online first, falls back to the first runtime.
+ *   - Only exposes online runtimes; offline rows are historical records and
+ *     must not be offered as a newly detected local runtime.
  *     Only runs when the user hasn't picked anything, so a manual
  *     selection survives subsequent refetches.
  */
@@ -30,10 +31,14 @@ export function useRuntimePicker(wsId: string, wsSlug?: string): {
 } {
   const qc = useQueryClient();
 
-  const { data: runtimes = [] } = useQuery({
+  const { data: detectedRuntimes = [] } = useQuery({
     ...runtimeListOptions(wsId, "me", wsSlug),
-    refetchInterval: (q) => (q.state.data?.length ? false : 2000),
+    refetchInterval: (q) =>
+      q.state.data?.some((runtime) => runtime.status === "online")
+        ? false
+        : 2000,
   });
+  const runtimes = detectedRuntimes.filter((runtime) => runtime.status === "online");
 
   const handleDaemonEvent = useCallback(() => {
     qc.invalidateQueries({ queryKey: runtimeKeys.all(wsId) });
@@ -44,8 +49,7 @@ export function useRuntimePicker(wsId: string, wsSlug?: string): {
 
   useEffect(() => {
     if (selectedId) return;
-    const preferred =
-      runtimes.find((r) => r.status === "online") ?? runtimes[0];
+    const preferred = runtimes[0];
     if (preferred) setSelectedId(preferred.id);
   }, [runtimes, selectedId]);
 

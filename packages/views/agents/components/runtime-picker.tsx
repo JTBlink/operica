@@ -91,7 +91,7 @@ export function RuntimePicker({
   useEffect(() => {
     if (selectedRuntimeId !== "") return;
     const firstUsable = filteredRuntimes.find((r) =>
-      isRuntimeUsableForUser(r, currentUserId),
+      isRuntimeSelectableForUser(r, currentUserId),
     );
     if (firstUsable) onSelect(firstUsable.id);
   }, [filteredRuntimes, selectedRuntimeId, currentUserId, onSelect]);
@@ -104,7 +104,7 @@ export function RuntimePicker({
     setFilter(next);
     const nextList = computeFilteredRuntimes(runtimes, next, currentUserId);
     const firstUsable = nextList.find((r) =>
-      isRuntimeUsableForUser(r, currentUserId),
+      isRuntimeSelectableForUser(r, currentUserId),
     );
     onSelect(firstUsable?.id ?? "");
   };
@@ -237,7 +237,7 @@ export function RuntimePicker({
                   </div>
                   {machine.runtimes.map((device) => {
                     const ownerMember = getOwnerMember(device.owner_id);
-                    const disabled = !isRuntimeUsableForUser(
+                    const disabled = !isRuntimeSelectableForUser(
                       device,
                       currentUserId,
                     );
@@ -343,4 +343,11 @@ function computeFilteredRuntimes(
     if (!aUsable && bUsable) return 1;
     return 0;
   });
+}
+
+function isRuntimeSelectableForUser(
+  runtime: RuntimeDevice,
+  currentUserId: string | null,
+): boolean {
+  return runtime.status === "online" && isRuntimeUsableForUser(runtime, currentUserId);
 }

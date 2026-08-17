@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-import { act, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AgentRuntime } from "@operica/core/types";
 import { I18nProvider } from "@operica/core/i18n/react";
@@ -37,7 +37,10 @@ function makeRuntime(overrides: Partial<AgentRuntime> = {}): AgentRuntime {
   } as AgentRuntime;
 }
 
-function renderStep(props: { runtimesPending?: boolean } = {}) {
+function renderStep(props: {
+  runtimesPending?: boolean;
+  onRefresh?: () => void | Promise<void>;
+} = {}) {
   const onNext = vi.fn();
   const qc = new QueryClient({
     defaultOptions: { queries: { retry: false } },
@@ -49,6 +52,7 @@ function renderStep(props: { runtimesPending?: boolean } = {}) {
           wsId="ws_test"
           onNext={onNext}
           runtimesPending={props.runtimesPending}
+          onRefresh={props.onRefresh}
         />
       </I18nProvider>
     </QueryClientProvider>,
@@ -140,5 +144,21 @@ describe("StepRuntimeConnect", () => {
     // The empty view owns one prominent "Skip for now" card; the footer no
     // longer duplicates it.
     expect(screen.getAllByText("Skip for now")).toHaveLength(1);
+  });
+
+  it("restarts scanning when Refresh is clicked after an empty result", async () => {
+    const onRefresh = vi.fn();
+    renderStep({ onRefresh });
+    act(() => vi.advanceTimersByTime(5000));
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Refresh" }));
+    });
+
+    expect(onRefresh).toHaveBeenCalledTimes(1);
+    expect(screen.getByText(/connecting this computer/i)).toBeInTheDocument();
+    expect(
+      screen.queryByText(/no agent runtime found on this computer yet/i),
+    ).not.toBeInTheDocument();
   });
 });
