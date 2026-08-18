@@ -64,22 +64,4 @@ changelog:
       - "^test:"
       - "^chore:"
 
-brews:
-  - name: operica
-    ids:
-      - versioned
-    repository:
-      owner: JTBlink
-      name: homebrew-tap
-      branch: main
-      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    directory: Formula
-    homepage: "https://github.com/JTBlink/operica"
-    description: "Operica CLI — local agent runtime and management tool for the Operica platform"
-    # No license stanza: Operica ships under the Operica License (Apache 2.0
-    # terms with additional conditions, see LICENSE), which has no SPDX
-    # identifier, so declaring "Apache-2.0" here would be a false claim.
-    install: |
-      bin.install "operica"
-    test: |
-      system "#{bin}/operica", "version"
+
