@@ -69,7 +69,7 @@ brews:
     ids:
       - versioned
     repository:
-      owner: operica-ai
+      owner: JTBlink
       name: homebrew-tap
       branch: main
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
