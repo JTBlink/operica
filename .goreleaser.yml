@@ -57,11 +57,13 @@ checksum:
   name_template: "checksums.txt"
 
 changelog:
-  sort: asc
+  # v1.0.0 is the first tag, so GoReleaser has no previous release boundary
+  # and falls back to the full repository history. Show the newest entries
+  # first so the release page surfaces the current dev changes.
+  sort: desc
   filters:
     exclude:
       - "^docs:"
       - "^test:"
       - "^chore:"
-
 
