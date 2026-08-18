@@ -330,23 +330,27 @@ func main() {
 
 	queries := db.New(pool)
 
-	// AUTO_LOGIN_EMAIL: ensure the default user exists so the auth middleware
-	// can auto-inject their identity on unauthenticated requests.
-	if autoEmail := strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL")); autoEmail != "" {
-		_, err := queries.GetUserByEmail(ctx, autoEmail)
-		if err != nil {
-			name := autoEmail
-			if at := strings.Index(autoEmail, "@"); at > 0 {
-				name = autoEmail[:at]
-			}
-			_, err = queries.CreateUser(ctx, db.CreateUserParams{Name: name, Email: autoEmail})
-			if err != nil {
-				slog.Error("AUTO_LOGIN_EMAIL: failed to create user", "email", autoEmail, "error", err)
-			} else {
-				slog.Info("AUTO_LOGIN_EMAIL: created default user", "email", autoEmail)
-			}
+	// AUTO_LOGIN_EMAIL is a local-development convenience. Ensure the
+	// configured identity exists before the auth middleware starts handling
+	// requests, so Desktop can bootstrap a real JWT without interactive login.
+	if autoEmail := strings.ToLower(strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL"))); autoEmail != "" {
+		if strings.EqualFold(strings.TrimSpace(os.Getenv("APP_ENV")), "production") {
+			slog.Warn("AUTO_LOGIN_EMAIL is set but ignored because APP_ENV=production", "email", autoEmail)
 		} else {
-			slog.Info("AUTO_LOGIN_EMAIL: auto-login enabled", "email", autoEmail)
+			_, err := queries.GetUserByEmail(ctx, autoEmail)
+			if err != nil {
+				name := autoEmail
+				if at := strings.Index(autoEmail, "@"); at > 0 {
+					name = autoEmail[:at]
+				}
+				if _, createErr := queries.CreateUser(ctx, db.CreateUserParams{Name: name, Email: autoEmail}); createErr != nil {
+					slog.Error("AUTO_LOGIN_EMAIL: failed to create user", "email", autoEmail, "error", createErr)
+				} else {
+					slog.Info("AUTO_LOGIN_EMAIL: created default user", "email", autoEmail)
+				}
+			} else {
+				slog.Info("AUTO_LOGIN_EMAIL: auto-login enabled", "email", autoEmail)
+			}
 		}
 	}
 

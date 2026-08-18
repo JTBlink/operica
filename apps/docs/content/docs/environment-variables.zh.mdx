@@ -100,8 +100,11 @@ OPERICA_PUBLIC_URL=https://api.operica.example.com
 | `ALLOWED_EMAIL_DOMAINS` | 空 | 允许注册的邮箱域名，逗号分隔 |
 | `DISABLE_WORKSPACE_CREATION` | `false` | 禁止所有用户新建工作区；没有 owner/admin 例外 |
 | `OPERICA_DEV_VERIFICATION_CODE` | 空 | 非 production 环境使用的固定 6 位测试验证码 |
+| `AUTO_LOGIN_EMAIL` | 空 | 非 production 环境的桌面端自动登录账号；留空即可关闭 |
 
 白名单的准确判断顺序见[登录与注册](/auth-setup#注册范围控制)。
+
+在受控的本地开发环境中设置 `AUTO_LOGIN_EMAIL=operica@operica.local` 后，服务端会在需要时创建该用户，并让无凭证请求使用该账号，桌面端也会自动获取 JWT。`APP_ENV=production` 时该配置会被忽略，禁止在公网部署启用。
 
 ## 附件存储
 

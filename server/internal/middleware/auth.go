@@ -49,9 +49,11 @@ func Auth(queries *db.Queries, patCache *auth.PATCache, cloudPAT *auth.CloudPATV
 
 			tokenString, fromCookie := extractToken(r)
 			if tokenString == "" {
-				// AUTO_LOGIN_EMAIL bypass: when set, unauthenticated requests
-				// are silently attributed to the configured user.
-				if autoEmail := strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL")); autoEmail != "" && queries != nil {
+				// AUTO_LOGIN_EMAIL is intentionally limited to non-production
+				// environments. It lets the local Desktop app authenticate during
+				// development without weakening normal deployments.
+				if autoEmail := strings.ToLower(strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL"))); autoEmail != "" &&
+					!strings.EqualFold(strings.TrimSpace(os.Getenv("APP_ENV")), "production") && queries != nil {
 					user, err := queries.GetUserByEmail(r.Context(), autoEmail)
 					if err == nil {
 						r.Header.Set("X-User-ID", uuidToString(user.ID))

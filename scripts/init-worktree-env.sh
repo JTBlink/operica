@@ -33,6 +33,8 @@ DATABASE_URL=postgres://operica:operica@localhost:${postgres_port}/${postgres_db
 PORT=${backend_port}
 JWT_SECRET=change-me-in-production
 OPERICA_DEV_VERIFICATION_CODE=888888
+# Optional local-only shortcut. Leave empty to disable automatic login.
+AUTO_LOGIN_EMAIL=
 OPERICA_SERVER_URL=ws://localhost:${backend_port}/ws
 OPERICA_PUBLIC_URL=http://localhost:${backend_port}
 OPERICA_APP_URL=${frontend_origin}

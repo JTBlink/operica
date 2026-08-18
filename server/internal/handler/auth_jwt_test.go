@@ -58,3 +58,26 @@ func TestIssueJWT_NonAutoLoginUserExpires(t *testing.T) {
 		t.Fatal("regular JWT is missing exp claim")
 	}
 }
+
+func TestIssueJWT_AutoLoginUserExpiresInProduction(t *testing.T) {
+	t.Setenv("APP_ENV", "production")
+	t.Setenv("AUTO_LOGIN_EMAIL", "operica@operica.local")
+
+	tokenString, err := (&Handler{}).issueJWT(db.User{
+		ID:    pgtype.UUID{Bytes: [16]byte{1}, Valid: true},
+		Email: "operica@operica.local",
+	})
+	if err != nil {
+		t.Fatalf("issueJWT: %v", err)
+	}
+
+	claims := jwt.MapClaims{}
+	if _, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (any, error) {
+		return auth.JWTSecret(), nil
+	}); err != nil {
+		t.Fatalf("parse JWT: %v", err)
+	}
+	if _, ok := claims["exp"]; !ok {
+		t.Fatal("production auto-login JWT is missing exp claim")
+	}
+}

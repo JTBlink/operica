@@ -61,6 +61,7 @@ kill 参数:
 
 本地登录提示:
   默认账号: 未设置。配置 AUTO_LOGIN_EMAIL 后，本地请求会自动使用该账号登录
+  关闭自动登录: 清空 AUTO_LOGIN_EMAIL；APP_ENV=production 时也会自动关闭
   默认密码: 无。Operica 使用邮箱验证码登录，不使用账号密码
   登录验证码: 优先使用 OPERICA_DEV_VERIFICATION_CODE 配置的 6 位验证码；
               未配置时，从本地后端日志中的 verification code 获取
@@ -70,7 +71,7 @@ kill 参数:
   ENV_FILE        --server 或 --web 使用的 env 文件
                   默认主 checkout 使用 .env，linked worktree 使用 .env.worktree
   AUTO_LOGIN_EMAIL
-                  本地开发自动登录账号，默认未设置
+                  本地开发自动登录账号，默认未设置；留空即可关闭
   OPERICA_DEV_VERIFICATION_CODE
                   非 production 环境的固定 6 位登录验证码，默认未设置
   PLATFORMS       build 的 GOOS/GOARCH 列表，以空格分隔

@@ -100,8 +100,11 @@ Kubernetes で shutdown hold を設定する場合、`terminationGracePeriodSeco
 | `ALLOWED_EMAIL_DOMAINS` | 空 | 登録を許可するメールドメイン。カンマ区切り |
 | `DISABLE_WORKSPACE_CREATION` | `false` | すべてのユーザーのワークスペース新規作成を禁止。owner/admin の例外はありません |
 | `OPERICA_DEV_VERIFICATION_CODE` | 空 | 非 production 環境で使う固定 6 桁のテスト認証コード |
+| `AUTO_LOGIN_EMAIL` | 空 | production 以外で Desktop が自動ログインするユーザー。空にすると無効 |
 
 allowlist の正確な判定順序は[ログインとサインアップ](/auth-setup#サインアップ制限)を参照してください。
+
+管理されたローカル開発環境で `AUTO_LOGIN_EMAIL=operica@operica.local` を設定すると、必要に応じてユーザーが作成され、認証情報のないリクエストがそのユーザーとして扱われ、Desktop は JWT を自動取得します。`APP_ENV=production` では無視されるため、公開環境では有効にしないでください。
 
 ## 添付ファイルストレージ
 

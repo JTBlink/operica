@@ -171,7 +171,7 @@ func isPermanentAutoLoginUser(user db.User) bool {
 	if isProductionEnv() {
 		return false
 	}
-	autoEmail := strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL"))
+	autoEmail := strings.ToLower(strings.TrimSpace(os.Getenv("AUTO_LOGIN_EMAIL")))
 	return autoEmail != "" && strings.EqualFold(strings.TrimSpace(user.Email), autoEmail)
 }
 
