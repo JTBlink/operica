@@ -629,6 +629,15 @@ func (b *hermesBackend) Execute(ctx context.Context, prompt string, opts ExecOpt
 		// user than the generic one here, so we only supply a reason when
 		// nothing else did. Without this, such a turn reports "completed" with
 		// empty output — a task that silently did nothing at all.
+		if hermesResumeSessionAuthLost(opts.ResumeSessionID, providerErrorOutput) {
+			b.cfg.Logger.Warn("resumed Hermes session lost provider authentication; clearing the session id so the daemon retries fresh",
+				"backend", "hermes",
+				"session_id", sessionID,
+			)
+			sessionID = ""
+			resumeRejected = true
+		}
+
 		if hermesResumeSessionLost(opts.ResumeSessionID, promptStopReason, turnActivity.Load()) {
 			b.cfg.Logger.Warn("resumed session refused with no agent activity; treating it as gone and clearing the session id so the daemon retries fresh",
 				"backend", "hermes",
@@ -1153,6 +1162,18 @@ const hermesResumeLostError = "hermes could not restore the resumed session; it 
 // thought, no tool call) is Hermes telling us it never had the session. The
 // fresh-session retry this unlocks is itself gated on tools == 0 in
 // shouldRetryWithFreshSession, so a turn that acted is never re-run.
+const hermesResumeAuthResolutionMarker = "could not resolve authentication method"
+
+// hermesResumeSessionAuthLost reports the Hermes ACP failure seen when a
+// persisted session retains a provider route but cannot reconstruct its auth
+// client. The provider configuration is still valid for a fresh session, so
+// the daemon should clear the resume id and retry once instead of surfacing a
+// permanent task failure.
+func hermesResumeSessionAuthLost(resumeSessionID, providerError string) bool {
+	return resumeSessionID != "" &&
+		strings.Contains(strings.ToLower(providerError), hermesResumeAuthResolutionMarker)
+}
+
 func hermesResumeSessionLost(resumeSessionID, stopReason string, turnActivity int64) bool {
 	return resumeSessionID != "" && stopReason == "refusal" && turnActivity == 0
 }

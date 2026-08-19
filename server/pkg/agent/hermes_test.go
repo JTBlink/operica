@@ -3778,6 +3778,30 @@ func TestHermesResumeSessionLost(t *testing.T) {
 	}
 }
 
+func TestHermesResumeSessionAuthLost(t *testing.T) {
+	t.Parallel()
+
+	const authError = `hermes provider error: "Could not resolve authentication method. Expected either api_key or auth_token to be set."`
+	cases := []struct {
+		name     string
+		resumeID string
+		errText  string
+		want     bool
+	}{
+		{name: "resumed auth resolution failure", resumeID: "ses-auth", errText: authError, want: true},
+		{name: "fresh auth resolution failure", errText: authError},
+		{name: "other resumed provider failure", resumeID: "ses-other", errText: "rate limit", want: false},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			if got := hermesResumeSessionAuthLost(tc.resumeID, tc.errText); got != tc.want {
+				t.Errorf("hermesResumeSessionAuthLost(%q, %q) = %v, want %v", tc.resumeID, tc.errText, got, tc.want)
+			}
+		})
+	}
+}
+
 // fakeHermesACPRefusedResumeScript reproduces what real Hermes does with a
 // session it cannot load, verified against upstream hermes-agent main by
 // driving `hermes acp` over stdio:
