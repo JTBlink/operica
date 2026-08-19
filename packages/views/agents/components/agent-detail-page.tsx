@@ -539,26 +539,24 @@ function DetailHeader({
                 {t(($) => $.detail.assign_work)}
               </Button>
             )}
-            {!isArchived && canArchive ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              render={<Button variant="ghost" size="icon-sm" />}
-              aria-label={t(($) => $.detail.more_actions_aria)}
-            >
-              <MoreHorizontal
-                className="h-4 w-4 text-muted-foreground"
-                aria-hidden="true"
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-auto">
-              {onArchive && (
-                <DropdownMenuItem variant="destructive" onClick={onArchive}>
-                  <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
-                  {t(($) => $.detail.more_archive)}
-                </DropdownMenuItem>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            {!isArchived && canArchive && onArchive ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  render={<Button variant="ghost" size="icon-sm" />}
+                  aria-label={t(($) => $.detail.more_actions_aria)}
+                >
+                  <MoreHorizontal
+                    className="h-4 w-4 text-muted-foreground"
+                    aria-hidden="true"
+                  />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-auto">
+                  <DropdownMenuItem variant="destructive" onClick={onArchive}>
+                    <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
+                    {t(($) => $.detail.more_archive)}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : null}
           </div>
         </div>
