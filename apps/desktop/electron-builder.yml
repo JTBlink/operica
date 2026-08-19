@@ -8,6 +8,11 @@ files:
   - "!electron.vite.config.*"
   - "!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}"
   - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
+  # Antigravity stores machine-local project metadata here as symlinks to the
+  # user's ~/.gemini directory. It is development state, not application input;
+  # following it during CI packaging leaks an absolute workstation path and
+  # fails when that target does not exist on the runner.
+  - "!.antigravitycli/**"
   # Never repack the electron-builder output directory into the app.
   # Multi-arch release builds (scripts/package.mjs) run each target in the
   # same apps/desktop dir with per-arch output at dist/<platform>-<arch>.

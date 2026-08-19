@@ -470,6 +470,12 @@ describe("electron-builder.yml packaging config", () => {
     return entries;
   }
 
+  it("excludes local Antigravity project metadata from packaged files", () => {
+    expect(configPath, "electron-builder.yml not found").toBeTruthy();
+    const entries = readFilesBlock(readFileSync(configPath, "utf-8"));
+    expect(entries).toContain("!.antigravitycli/**");
+  });
+
   it("excludes the dist output directory from the packaged files", () => {
     expect(configPath, "electron-builder.yml not found").toBeTruthy();
     const entries = readFilesBlock(readFileSync(configPath, "utf-8"));

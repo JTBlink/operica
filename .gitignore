@@ -60,6 +60,7 @@ apps/web/test-results/
 # local settings
 .claude/
 .omo/
+.antigravitycli/
 .tool-versions
 
 # feature tracking
