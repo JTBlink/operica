@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"time"
 
@@ -827,6 +828,23 @@ var supportedLoginShells = map[string]struct{}{
 	"ksh":  {},
 }
 
+// loginShell returns the shell used for PATH fallback resolution. GUI-launched
+// processes on macOS commonly have no SHELL variable at all, even though the
+// user's login shell is zsh. Without this default, binaries installed in
+// ~/.local/bin (such as Hermes) remain invisible to the desktop daemon.
+func loginShell() string {
+	if shell := strings.TrimSpace(os.Getenv("SHELL")); shell != "" {
+		return shell
+	}
+	if runtime.GOOS == "darwin" {
+		return "/bin/zsh"
+	}
+	if runtime.GOOS != "windows" {
+		return "/bin/sh"
+	}
+	return ""
+}
+
 // resolveAgentsViaLoginShell asks the user's login shell to print the canonical
 // (symlink-resolved) absolute path to each name in `names`. It returns a map
 // of name → path for whatever the shell could find, and an empty map if the
@@ -866,7 +884,7 @@ var resolveAgentsViaLoginShell = func(names []string) map[string]string {
 	if len(names) == 0 {
 		return out
 	}
-	shell := strings.TrimSpace(os.Getenv("SHELL"))
+	shell := loginShell()
 	if shell == "" {
 		return out
 	}

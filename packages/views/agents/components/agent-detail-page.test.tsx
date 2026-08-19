@@ -165,6 +165,25 @@ beforeEach(() => {
 });
 
 describe("AgentDetailPage DM button", () => {
+  it("opens the quick-create modal when assigning work", async () => {
+    renderPage();
+    fireEvent.click(await screen.findByRole("button", { name: "Assign work" }));
+    expect(mockModalOpen).toHaveBeenCalledWith("quick-create-issue", {
+      agent_id: "agent-1",
+    });
+  });
+
+  it("does not render an empty actions menu for the built-in Mika agent", async () => {
+    currentUserRef.current = { id: "user-2" };
+    membersRef.current = [{ user_id: "user-2", role: "member" }];
+    agentsRef.current = [{ ...baseAgent, system_key: "mika" }];
+
+    renderPage();
+
+    await screen.findByRole("button", { name: "Assign work" });
+    expect(screen.queryByRole("button", { name: "Agent actions" })).toBeNull();
+  });
+
   it("navigates to the chat deep link when the user can chat with the agent", async () => {
     const { push } = renderPage();
     fireEvent.click(await screen.findByRole("button", { name: "DM" }));

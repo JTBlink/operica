@@ -69,6 +69,24 @@ func TestIsSafeAgentName(t *testing.T) {
 	}
 }
 
+func TestLoginShellDefaultsWhenShellIsUnset(t *testing.T) {
+	t.Setenv("SHELL", "")
+
+	got := loginShell()
+	if runtime.GOOS == "darwin" {
+		if got != "/bin/zsh" {
+			t.Fatalf("loginShell() = %q, want /bin/zsh on macOS", got)
+		}
+		return
+	}
+	if runtime.GOOS != "windows" && got != "/bin/sh" {
+		t.Fatalf("loginShell() = %q, want /bin/sh on Unix", got)
+	}
+	if runtime.GOOS == "windows" && got != "" {
+		t.Fatalf("loginShell() = %q, want empty on Windows", got)
+	}
+}
+
 func TestBuildLoginShellResolveScript_ShapeAndContent(t *testing.T) {
 	got := buildLoginShellResolveScript([]string{"claude", "cursor-agent"})
 	// Must list exactly the names we asked for, in order.
