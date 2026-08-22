@@ -96,6 +96,12 @@ const BUNDLED_ICON_PATH = join(__dirname, "../../resources/icon.png").replace(
   "app.asar",
   "app.asar.unpacked",
 );
+const BUNDLED_MAC_ICON_PATH = join(
+  __dirname,
+  "../../resources/icon-mac.png",
+).replace("app.asar", "app.asar.unpacked");
+const WINDOW_ICON_PATH =
+  process.platform === "darwin" ? BUNDLED_MAC_ICON_PATH : BUNDLED_ICON_PATH;
 
 // macOS/Linux GUI launches inherit a minimal PATH from launchd that omits
 // the user's shell config (~/.zshrc, Homebrew, nvm, ~/.local/bin, etc.).
@@ -341,7 +347,7 @@ function createWindow(): BrowserWindow {
     // does not install a .desktop entry, so the WM has no other path to
     // the bundled icon; without it Ubuntu falls back to the theme default.
     ...(is.dev || process.platform === "linux"
-      ? { icon: BUNDLED_ICON_PATH }
+      ? { icon: WINDOW_ICON_PATH }
       : {}),
     webPreferences: createRendererWebPreferences(systemLocale),
   });
@@ -494,7 +500,7 @@ function createIssueWindow(context: IssueWindowContext): void {
     show: false,
     autoHideMenuBar: true,
     ...(is.dev || process.platform === "linux"
-      ? { icon: BUNDLED_ICON_PATH }
+      ? { icon: WINDOW_ICON_PATH }
       : {}),
     webPreferences: createRendererWebPreferences(systemLocale, [
       encodeIssueWindowArgument(context),
@@ -659,7 +665,7 @@ if (!gotTheLock) {
     // so the Canary dev build is visually distinct from a stock Electron
     // run. `app.dock` is macOS-only — guard the call.
     if (is.dev && process.platform === "darwin" && app.dock) {
-      const icon = nativeImage.createFromPath(BUNDLED_ICON_PATH);
+      const icon = nativeImage.createFromPath(BUNDLED_MAC_ICON_PATH);
       if (!icon.isEmpty()) app.dock.setIcon(icon);
     }
 

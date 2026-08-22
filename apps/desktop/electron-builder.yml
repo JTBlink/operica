@@ -41,6 +41,10 @@ protocols:
 asarUnpack:
   - resources/**
 mac:
+  # macOS applies the rounded-rectangle mask and shadow itself. Keep this
+  # platform asset separate from the Linux/Windows square icon so the mark
+  # does not look oversized or double-rounded in Finder and the Dock.
+  icon: icon.icns
   entitlementsInherit: build/entitlements.mac.plist
   target:
     - dmg
