@@ -1,0 +1,66 @@
+name: Sync Multica main
+
+# Keep this workflow on the default branch (dev), not on the mirrored main.
+# UPSTREAM_SYNC_TOKEN must be a fine-grained PAT for JTBlink/operica with
+# Contents and Workflows read/write permissions. A repository GITHUB_TOKEN
+# cannot push upstream changes that modify workflow files.
+on:
+  schedule:
+    - cron: "0 1 * * *" # Daily at 09:00 Asia/Shanghai.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-multica-main
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'JTBlink/operica' && github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check sync credentials
+        env:
+          SYNC_TOKEN: ${{ secrets.UPSTREAM_SYNC_TOKEN }}
+        run: |
+          if [ -z "$SYNC_TOKEN" ]; then
+            echo "::error::Set UPSTREAM_SYNC_TOKEN with Contents and Workflows read/write permissions for this repository."
+            exit 1
+          fi
+
+      - name: Checkout mirror branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.UPSTREAM_SYNC_TOKEN }}
+
+      # Only inspect Git history; do not execute code from the upstream branch.
+      - name: Fast-forward main to upstream
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags https://github.com/multica-ai/multica.git \
+            refs/heads/main:refs/remotes/upstream/main
+          # Keep Multica release tags namespaced so they do not trigger this
+          # repository's v*.*.* release workflow or collide with Operica tags.
+          git fetch --force --no-tags https://github.com/multica-ai/multica.git \
+            'refs/tags/*:refs/tags/multica/*'
+
+          current=$(git rev-parse HEAD)
+          upstream=$(git rev-parse refs/remotes/upstream/main)
+
+          if ! git merge-base --is-ancestor "$current" "$upstream"; then
+            echo "::error::main has diverged from upstream. Resolve its independent history before retrying; no force push was attempted."
+            exit 1
+          fi
+
+          # Push the mirrored branch and namespaced upstream tags only.
+          git -c push.followTags=false push origin \
+            refs/remotes/upstream/main:refs/heads/main
+          git push --force origin \
+            'refs/tags/multica/*:refs/tags/multica/*'
+          echo "Updated main from $current to $upstream." >> "$GITHUB_STEP_SUMMARY"
