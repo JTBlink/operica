@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Operica">
   <!--
     Apple macOS icon artwork uses a 1024px master canvas. Keep the visual
-    plate at the centered 888px template size (222pt in this 256pt viewBox)
-    and leave its fill opaque; macOS may apply its own outer mask/shadow in
-    Finder and the Dock, but it must not turn the artwork's plate transparent.
+    plate at the centered 830px size (207.5pt in this 256pt viewBox); the
+    surrounding 888px effective boundary is reserved for the system mask and
+    shadow. Leave the plate opaque; Finder and Dock must not make it transparent.
   -->
   <defs>
     <linearGradient id="upper" x1="66" y1="48" x2="205" y2="202" gradientUnits="userSpaceOnUse"><stop stop-color="#9b78ff"/><stop offset=".34" stop-color="#5275ff"/><stop offset=".68" stop-color="#168fe9"/><stop offset="1" stop-color="#20d5ae"/></linearGradient>
@@ -14,9 +14,10 @@
     <radialGradient id="lowerLight" cx="0" cy="0" r="1" gradientTransform="translate(67 151) rotate(-22) scale(102 118)" gradientUnits="userSpaceOnUse"><stop stop-color="#8ddfff" stop-opacity=".24"/><stop offset=".58" stop-color="#9c8fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
     <linearGradient id="task" x1="108" y1="104" x2="151" y2="153" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset=".48" stop-color="#dceaff"/><stop offset="1" stop-color="#a9caff"/></linearGradient>
   </defs>
-  <rect x="17" y="17" width="222" height="222" rx="48" fill="#0f1835"/>
-  <rect x="19" y="19" width="218" height="218" rx="46" fill="none" stroke="#263b67" stroke-width="1.5"/>
-  <g transform="translate(-12.8 -12.8) scale(1.1)">
+  <rect x="24.25" y="24.25" width="207.5" height="207.5" rx="48" fill="#0f1835"/>
+  <rect x="26.25" y="26.25" width="203.5" height="203.5" rx="46" fill="none" stroke="#263b67" stroke-width="1.5"/>
+  <!-- Keep the mark comfortably inside the Chrome-like plate margins. -->
+  <g transform="translate(6.4 3.15) scale(0.95)">
   <g>
     <path fill="url(#upperDepth)" d="M92 51h38c45.287 0 82 36.713 82 82v29c0 8.49-3.372 16.633-9.373 22.637L171 216v-79c0-23.196-18.804-42-42-42H62c-7.081 0-10.768-8.428-5.97-13.636l23.235-25.205C82.637 52.501 87.064 51 92 51Z"/>
     <path fill="url(#upper)" d="M92 44h38c45.287 0 82 36.713 82 82v29c0 8.49-3.372 16.633-9.373 22.637L171 209v-79c0-23.196-18.804-42-42-42H62c-7.081 0-10.768-8.428-5.97-13.636l23.235-25.205C82.637 45.501 87.064 44 92 44Z"/>
